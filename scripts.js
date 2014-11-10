@@ -13,9 +13,18 @@ var sprintFunctions = {
     // your code here
   },
 
-  compareArrays: function(){ 
+  compareArrays: function(arrayOne, arrayTwo){ 
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    if (arrayOne.length !== arrayTwo.length) {
+      return false;
+    } else {
+        arrayOne.forEach(function(elem, index){
+          if(elem !== arrayTwo[index]){
+            return false;
+          }
+        });
+        return true;
+    }
   },
 
   fizzBuzz: function(){  
