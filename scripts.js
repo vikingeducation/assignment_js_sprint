@@ -7,7 +7,9 @@ var sprintFunctions = {
       return a - b
     });
     return input[input.length - 1]; //seriously.js?
+
     // return Math.max.apply(this, input); <-- fancy way
+
   },
 
   reversed: function(string){
@@ -22,18 +24,18 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(string){
-    // strips all punctuation
-    // breaks code into an array
-    // caps the first letter of each word
-    // joins with '_'
 
     String.prototype.toSnakeCase = function() {
       arr = [];
+      // strips all punctuation
+      // breaks code into an array
       arr = this.replace(/[\!\.\'\,\?]/g, "").split(/ +/);
       arr.forEach(function(word, index) {
+        // caps the first letter of each word
         arr[index] = word.replace(word.charAt(0), word.charAt(0).toUpperCase());
       });
 
+      // joins with '_'
       return arr.join("_");
     };
 
@@ -63,14 +65,36 @@ var sprintFunctions = {
       y[i -1] = x
     };
     return y;
-    // your code here
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(arr, callback) {
+    // takes an anonymous function
+    // runs it on each element
+    arr.forEach(function(obj, index){
+      arr[index] = callback(obj);
+    });
+    return arr
   },
 
-  primes: function(){
-    // your code here
+  primes: function(num){
+    // This routine consists of dividing n by each integer
+    // m that is greater than 1 and less than or equal to
+    // the square root of n. If the result of any of these
+    // divisions is an integer, then n is not a prime,
+    // otherwise it is a prime
+
+    result = []
+    function isPrime(n) {
+      var s = Math.sqrt(n);
+      if (n == 2) return true; // hack as F
+      if ( n<2 ||n%2 == 0 ) return false;
+      for (i = 2; i <= s; i++ ) if (n % i == 0) return false;
+      return true;
+    };
+
+    for (m = num; m > 0; m--) {
+      if (isPrime(m)) result.unshift(m);
+    }
+    return result;
   },
 }
