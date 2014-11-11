@@ -59,7 +59,7 @@ var tester = {
 
   testFizzBuzz: function(){
     var input = 16;
-    var exp = [1,2,"FIZZ",4,"BUZZ",6,7,8,"FIZZ","BUZZ",11,"FIZZ",13,14,"FIZZBUZZ",16];
+    var exp = [1,2,"FIZZ",4,"BUZZ","FIZZ",7,8,"FIZZ","BUZZ",11,"FIZZ",13,14,"FIZZBUZZ",16];
     var actual = this.sprintObj.fizzBuzz(16);
     if (typeof actual === 'undefined') { actual = [] };
     this.results.fizzBuzz = ( this.sprintObj.compareArrays(exp,actual) );
@@ -78,7 +78,7 @@ var tester = {
 
   testPrimes: function(){
     var input = 12;
-    var exp = [1,2,3,5,7,11];
+    var exp = [2,3,5,7,11];
     var actual = this.sprintObj.primes(input);
     if (typeof actual === 'undefined') { actual = [] };
     this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
