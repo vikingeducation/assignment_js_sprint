@@ -36,11 +36,21 @@ var sprintFunctions = {
     return resultArray;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(returnArray, mapFunction){
+    returnArray.forEach(function(n, index) { returnArray[index] =mapFunction(n); });
+    return returnArray;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(checkNumber){
+    numeralArray = [];
+    for (var i = 2; i <= checkNumber; ++i) numeralArray.push(i);
+    primesArray = [];
+
+    numeralArray.forEach(function(n, index){
+      if ( numeralArray.every(function(prime) { return n % prime > 0 || n == prime; }) ) {
+        primesArray.push(numeralArray[index]);
+      }
+    });
+    return primesArray;
   },
 };
