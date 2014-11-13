@@ -79,32 +79,54 @@ var sprintFunctions = {
 
   fizzBuzz: function(count){
 
-    var arr = [];
+    var EMPTY_STR = "";
+
+    var ret_arr = [];
+    var item;
+
+    // 2D array holding [target, replacement] elements
+    var target_arr = [ [3, "FIZZ"], [5, "BUZZ"] ];
+
+    // console.log("target arr = "+target_arr[0][0]); //3
+    // console.log("target arr = "+target_arr[0][1]); //"FIZZ"
+
     for (var i = 1; i <= count; i++)
     {
-      if ( (i%3) === 0 && (i%5) === 0 )
-      {
-        arr.push("FIZZBUZZ");
-        continue;
+
+      item = EMPTY_STR; // re-init on every pass
+
+//------------- LOOPY AND EASILY EXTENSIBLE
+      for (var k = 0; k < target_arr.length; k++) {
+        if ( i % (target_arr[k][0]) === 0 ) {
+            item += target_arr[k][1];
+        }
+      }
+//------------- FLAT AND LONGFORM
+      // if ( (i%3) === 0) {
+      //   item += "FIZZ";
+      // }
+
+      // if ( (i%5) === 0 ) {
+      //   item += "BUZZ";
+      // }
+//-------------
+
+      // if nothing has been assigned already
+      if (item === EMPTY_STR) {
+        // just set it to the iterator count
+        item = i;
       }
 
-      if ( (i%3) === 0)
-      {
-        arr.push("FIZZ");
-      }
-      else if ( (i%5) === 0 )
-      {
-        arr.push("BUZZ");
-      }
-      else
-      {
-        arr.push(i);
-      }
-      console.log(arr);
-    }
+      // add it to the tail of the array
+      ret_arr.push( item );
 
-    return arr;
+    } // end for
+
+    console.log("arr value: " + ret_arr);
+    return ret_arr;
   },
+
+//-------------
 
   myMap: function(arr, func){
     // your code here
