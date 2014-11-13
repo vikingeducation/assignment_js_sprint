@@ -132,9 +132,11 @@ var sprintFunctions = {
 
   myMap: function(arr, func){
 
+    for (var i = arr.length - 1; i >= 0; i--) {
+      arr[i] = func(arr[i]);
+    }
 
-
-
+    return arr;
   },
 
   primes: function(prime_ceil){
@@ -143,7 +145,7 @@ var sprintFunctions = {
     for (var k = 0; k < prime_ceil; k++)
     {
       // console.log(" -> checking num: " + k );
-      if (isPrime(k)) { primes_arr.push(k); }
+      if ( isPrime(k) ) { primes_arr.push(k); }
       // else { console.log(k + " is not a prime"); }
       // console.log(" ->  Curr arr: " + primes_arr);
     }
