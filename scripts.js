@@ -96,12 +96,14 @@ var sprintFunctions = {
       item = EMPTY_STR; // re-init on every pass
 
 //------------- LOOPY AND EASILY EXTENSIBLE
+
       for (var k = 0; k < target_arr.length; k++) {
         if ( i % (target_arr[k][0]) === 0 ) {
             item += target_arr[k][1];
         }
       }
 //------------- FLAT AND LONGFORM
+
       // if ( (i%3) === 0) {
       //   item += "FIZZ";
       // }
@@ -122,17 +124,50 @@ var sprintFunctions = {
 
     } // end for
 
-    console.log("arr value: " + ret_arr);
+    // console.log("arr value: " + ret_arr);
     return ret_arr;
   },
 
 //-------------
 
   myMap: function(arr, func){
-    // your code here
+
+
+
+
   },
 
   primes: function(prime_ceil){
-    // your code here
+    primes_arr = [];
+
+    for (var k = 0; k < prime_ceil; k++)
+    {
+      // console.log(" -> checking num: " + k );
+      if (isPrime(k)) { primes_arr.push(k); }
+      // else { console.log(k + " is not a prime"); }
+      // console.log(" ->  Curr arr: " + primes_arr);
+    }
+
+    // helper function - http://studymaths.co.uk/topics/checkIfPrime.php
+    function isPrime(n)
+    {
+       // If n is less than 2 or not an integer then by definition cannot be prime.
+       if (n < 2) {return false;}
+       if (n != Math.round(n)) {return false;}
+
+       // Now assume that n is prime, we will try to prove that it is not.
+       var b_isPrime = true;
+
+       // Now check every whole number from 2 to the square root of n. If any of these divides n exactly, n cannot be prime.
+       for (var i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) {b_isPrime = false;}
+       }
+
+       // Finally return whether n is prime or not.
+      return b_isPrime;
+    }
+
+    // console.log(" => Returned arr: " + primes_arr);
+    return primes_arr;
   },
 };
