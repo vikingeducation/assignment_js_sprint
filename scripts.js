@@ -61,25 +61,26 @@ var sprintFunctions = {
     return output;
   },
 
-  primes: function(max){
-    var output = [];
-    for(i = 1; i < max; i++){
-      if(is_prime(i)){
-        output.push(i);
-      };
-    };
-    return output;
-  },
-
-  is_prime: function(num){
-    if( num == 1) {
+  isPrime: function(num){
+    if( num === 1) {
       return false;
     }
-    for(i = 2; i < num; i++){
-      if( num%i == 0 ){
+    for(var i = 2; i < num; i++){
+      if( num%i === 0 ){
 	return false;
       };
     };
     return true;
+  },
+
+  primes: function(max){
+    var output = [];
+    for(var i = 1; i < max; i++){
+      if(this.isPrime(i)){
+        output.push(i);
+      };
+    };
+    return output;
   }
+
 }
