@@ -1,16 +1,27 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(arr){  
+    return arr.sort().splice(-1);
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(str){  
+    return str.split("").reverse().join("");
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  loudSnakeCase: function(str){  
+    var arr = str.split(/\W+/);
+    if( arr[arr.length-1] == "" ){
+      arr.pop();
+    };
+    var output = [];
+    arr.forEach( function(word){
+      var firstLetter = word.slice(0,1).toUpperCase();
+      var restOfWord = word.slice(1);
+      var capWord = firstLetter + restOfWord;
+      output.push(capWord);
+    });
+    return output.join("_")
   },
 
   compareArrays: function(){ 
