@@ -24,9 +24,17 @@ var sprintFunctions = {
     return output.join("_")
   },
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
+  compareArrays: function(arr1, arr2){ 
+    matched = true
+    if(arr1.length != arr2.length){
+      matched = false;
+    }
+    arr1.forEach( function(el,index){
+      if(el != arr2[index]){
+        matched = false;
+      };
+    });
+    return matched;
   },
 
   fizzBuzz: function(){  
