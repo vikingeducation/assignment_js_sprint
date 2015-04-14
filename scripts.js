@@ -53,8 +53,12 @@ var sprintFunctions = {
     return output;
   },
 
-  myMap: function(){  
-    // your code here
+  myMap: function(arr,inputFunction){  
+    var output = [];
+    arr.forEach( function(el){
+      output.push(inputFunction(el));
+    });
+    return output;
   },
 
   primes: function(){  
