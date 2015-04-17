@@ -11,12 +11,26 @@ var sprintFunctions = {
     return biggest;
   },
 
-  reversed: function(){
-    // your code here
+  reversed: function(myString){
+    var starterSchwad = ""
+    for(i = (myString.length - 1); i >= 0; i--){
+      starterSchwad = starterSchwad + myString[i];
+    }
+    return starterSchwad;
   },
 
-  loudSnakeCase: function(){
-    // your code here
+  loudSnakeCase: function(myString){
+    var finalAnswer = ""
+    for(i = 0; i < myString.length; i++){
+      if (myString[i] === " ") {
+         finalAnswer = finalAnswer + "_";
+         i++;
+         finalAnswer = finalAnswer + myString[i].to_UpperCase();
+      } else if ( myString[i].match(/\w/) ) {
+         finalAnswer = finalAnswer + myString[i];
+      }
+    }
+    return finalAnswer;
   },
 
   compareArrays: function(){
