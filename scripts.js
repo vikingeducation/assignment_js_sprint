@@ -4,11 +4,11 @@ var sprintFunctions = {
   largestEl: function(array){
     var biggest = 0;
     for(i = 0; i < array.length; i++){
-      if (array[i] > suchBiggest){
-        suchBiggest = array[i];
-      };
-    };
-    console.log(biggest);
+      if (array[i] > biggest){
+        biggest = array[i];
+      }
+    }
+    return biggest;
   },
 
   reversed: function(){
