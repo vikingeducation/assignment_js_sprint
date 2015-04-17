@@ -20,12 +20,12 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(myString){
-    var finalAnswer = ""
-    for(i = 0; i < myString.length; i++){
+    var finalAnswer = myString[0].toUpperCase();
+    for(i = 1; i < myString.length; i++){
       if (myString[i] === " ") {
          finalAnswer = finalAnswer + "_";
          i++;
-         finalAnswer = finalAnswer + myString[i].to_UpperCase();
+         finalAnswer = finalAnswer + myString[i].toUpperCase();
       } else if ( myString[i].match(/\w/) ) {
          finalAnswer = finalAnswer + myString[i];
       }
