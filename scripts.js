@@ -41,15 +41,42 @@ var sprintFunctions = {
     }
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(num){
+    var answerArray = [];
+    for (i = 1; i < (num + 1); i++){
+      if (i % 3 === 0 && i % 5 === 0){
+          answerArray.push("FIZZBUZZ");
+      } else if (i % 3 === 0) {
+          answerArray.push("FIZZ");
+      } else if (i % 5 === 0) {
+          answerArray.push("BUZZ");
+      } else {
+          answerArray.push(i);
+      }
+    }
+    return answerArray
   },
 
   myMap: function(){
-    // your code here
+
   },
 
-  primes: function(){
-    // your code here
+  primes: function(num){
+    function isPrime(number){
+      for(i = 2; i < number; i ++){
+        if(number % i === 0){
+          return false;
+          break;
+        }
+      }
+      return true;
+    }
+    aryPrimes = [];
+    for (i = 2; i < (num + 1); i++){
+      if (isPrime(i)){
+      aryPrimes.push(i);
+      }
+    }
+    return aryPrimes
   },
 }
