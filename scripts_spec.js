@@ -9,7 +9,7 @@ var tester = {
     this.testCompareArrays();
     this.testFizzBuzz();
     this.testMyMap();
-    this.testPrimes();
+    this.testprimes();
     this.displayResults();
   },
 
@@ -76,7 +76,7 @@ var tester = {
   },
 
 
-  testPrimes: function(){
+  testprimes: function(){
     var input = 12;
     var exp = [2,3,5,7,11];
     var actual = this.sprintObj.primes(input);
@@ -101,4 +101,3 @@ var tester = {
 
 
 $(document).ready( function(){ tester.init( sprintFunctions )});
-
