@@ -23,6 +23,11 @@ var sprintFunctions = {
   loudSnakeCase: function(sentence){
     var punctuation = ".:;'\"?[]{}|!";
     var result = sentence[0].toUpperCase();
+    var single_spaced = ""
+     if (sentence.includes ("  ")) {
+        single_spaced = sentence.replace("  ", " ")
+     }
+     sentence = single_spaced
     for(var i = 1; i < sentence.length; i++ ) {
       if (sentence[i] === " ") {
         result = result + "_" + sentence[i+1].toUpperCase();
