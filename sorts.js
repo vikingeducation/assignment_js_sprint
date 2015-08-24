@@ -16,14 +16,14 @@ function bubble_sort (array) {
 // console.log( bubble_sort([1,2,3,4,5,6,7,8]) );
 
 function merge_sort (array) {
-  console.log("full array is: " + array);
+  // console.log("full array is: " + array);
   if (array.length <= 1) {
     return array;
   } else {
     var first_half = merge_sort(array.slice(0, Math.floor(array.length / 2) ));
     var second_half = merge_sort(array.slice( Math.floor(array.length / 2), array.length ));
-    console.log("first half is: " + first_half);
-    console.log("second half is: " + second_half);
+    // console.log("first half is: " + first_half);
+    // console.log("second half is: " + second_half);
     return merge(first_half, second_half);
   };
 }
@@ -33,7 +33,7 @@ function merge (array1, array2) {
   array1_index = 0;
   array2_index = 0;
   while (array1_index < array1.length || array2_index < array2.length) {
-    console.log("Comparing: " + array1[array1_index] + " with " + array2[array2_index]);
+    // console.log("Comparing: " + array1[array1_index] + " with " + array2[array2_index]);
     if (array1[array1_index] < array2[array2_index] || array2[array2_index] == undefined) {
       sorted_array.push(array1[array1_index]);
       array1_index++;
@@ -42,7 +42,7 @@ function merge (array1, array2) {
       array2_index++;
     };
   };
-  console.log("we are returning: " + sorted_array);
+  // console.log("we are returning: " + sorted_array);
   return sorted_array;
 }
 
