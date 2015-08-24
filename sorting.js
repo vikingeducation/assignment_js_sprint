@@ -21,41 +21,32 @@ function bubbleSort(array){
 function mergeSort(array){
   if(array.length <= 1){
     return array;
-  } else {
+  }
+  else {
     var mid = Math.floor(array.length/2);
     //slice(starting_index, num_elements)
     var array1 = mergeSort(array.slice(0, mid));
     var array2 = mergeSort(array.slice(mid, array.length));
-    merge(array1,array2);
+    return merge(array1,array2);
   }
 }
 
-function merge(array1, array2){
-  var sortedArray = [];
-  var num1;
-  console.log("before while: array1: "+ array1 +", array2: "+ array2);
-  while (array1.length > 0 || array2.length > 0){
-    console.log("in while loop")
-    if (array1[0] > array2[0]){
-      num1 = array2.shift;
-      sortedArray.push(num1);
-      console.log("in if statement")
-    } else {
-      num1 = array1.shift;
-      sortedArray.push(num1);
-      console.log("in else statement")
+function merge(left, right){
+    var result  = [],
+        il      = 0,
+        ir      = 0;
+
+    while (il < left.length && ir < right.length){
+        if (left[il] < right[ir]){
+            result.push(left[il++]);
+        } else {
+            result.push(right[ir++]);
+        }
     }
-  console.log("end of while: array1: "+ array1 +", array2: "+ array2);
-  }
-  // console.log("array1: " + array1);
-  // console.log("array2: " + array2);
-  if (array1.length > 0){
-    sortedArray.concat(array1);
-  }else if (array2.length > 0){
-    sortedArray.concat(array2);
-  }
-  return sortedArray;
+
+    return result.concat(left.slice(il)).concat(right.slice(ir));
 }
+// console.log(mergeSort([1,2,5,4]));
 
 
 
