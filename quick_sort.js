@@ -1,26 +1,22 @@
 var quickSort = function qSort (arr) {
-  var result = []
+  var result = [];
   var pivot_index = Math.floor((Math.random()*arr.length));
   var pivot_value = arr[pivot_index];
-  var left_arr = [];
-  var right_arr = [];
-
-  console.log(pivot_value);
-
+  var left = [];
+  var right = [];
   if (arr.length <= 1) {
     return arr;
   };
 
   for(var i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
     if (arr[i] < pivot_value) {
-      left_arr.push(arr[i]);
-    } else {
-      right_arr.push(arr[i]);
+      left.push(arr[i]);
+    } else if (arr[i] > pivot_value) {
+      right.push(arr[i]);
     };
   };
 
-  result = qSort(left_arr).concat(qSort(right_arr));
+  result = qSort(left).concat(pivot_value, qSort(right));
   return result;
 };
 
