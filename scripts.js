@@ -56,11 +56,32 @@ var sprintFunctions = {
     return result;
   },
 
-  myMap: function(){
+  myMap: function(inputArr,inputFunc){
     // your code here
+    for (var i = 0; i <= inputArr.length-1; i++){
+      inputArr[i] = inputFunc(inputArr[i]);
+    }
+    return inputArr;
   },
 
-  primes: function(){
+  primes: function(limit){
     // your code here
+    var arr = [];
+    var result = [];
+
+    for(var i = 0; i < limit; i++){
+      arr.push(true)
+    }
+
+    for(var j = 2; j <= Math.sqrt(limit); j++){
+      if (arr[j]) {
+        for(var k = j*j; k < limit; k+=j){arr[k] = false;}
+      }
+    }
+
+    for(var m = 2; m < limit; m++) { 
+      if (arr[m]) {result.push(m);}
+    }
+    return result;
   },
 }
