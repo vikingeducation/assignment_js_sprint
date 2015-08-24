@@ -32,29 +32,29 @@ function mergeSort(array){
 
 function merge(array1, array2){
   var sortedArray = [];
-  var num1;
+
   console.log("before while: array1: "+ array1 +", array2: "+ array2);
   while (array1.length > 0 || array2.length > 0){
     console.log("in while loop")
     if (array1[0] > array2[0]){
-      num1 = array2.shift;
-      sortedArray.push(num1);
+
+      sortedArray.push(array2.shift);
       console.log("in if statement")
     } else {
-      num1 = array1.shift;
-      sortedArray.push(num1);
+
+      sortedArray.push(array1.shift);
       console.log("in else statement")
     }
   console.log("end of while: array1: "+ array1 +", array2: "+ array2);
   }
-  // console.log("array1: " + array1);
-  // console.log("array2: " + array2);
-  if (array1.length > 0){
-    sortedArray.concat(array1);
-  }else if (array2.length > 0){
-    sortedArray.concat(array2);
-  }
-  return sortedArray;
+  // // console.log("array1: " + array1);
+  // // console.log("array2: " + array2);
+  // if (array1.length > 0){
+  //   sortedArray.concat(array1);
+  // }else if (array2.length > 0){
+  //   sortedArray.concat(array2);
+  // }
+  return sortedArray.concat(array1).concat(array2);
 }
 
 
