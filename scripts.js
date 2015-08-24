@@ -108,7 +108,7 @@ var sprintFunctions = {
   mergeBack: function(left, right){
     var smallest = [];
     while (left.length > 0 && right.length > 0){
-      if (left[0] <= right[0]) {smallest.push(left.shift())} 
+      if (left[0] <= right[0]) {smallest.push(left.shift())}
         else {smallest.push(right.shift())};
     };
     return smallest.concat(left).concat(right);
@@ -120,7 +120,25 @@ var sprintFunctions = {
 
       var rightSort = this.mergeSort(right);
       var leftSort = this.mergeSort(left);
- 
+
       return this.mergeBack(leftSort,rightSort );
+  },
+
+  quickSort: function(arr){
+    if (arr.length === 0) {return arr};
+
+    var pivot = arr[0];
+    var left = [];
+    var right = [];
+
+    for (var i = 1; i < arr.length; i++){
+      if (arr[i] <= pivot){
+        left.push(arr[i]);
+      } else {
+        right.push(arr[i]);
+      }
+    }
+
+    return this.quickSort(left).concat(pivot).concat(this.quickSort(right));
   }
 }

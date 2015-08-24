@@ -12,6 +12,7 @@ var tester = {
     this.testPrimes();
     this.testBubbleSort();
     this.testMergeSort();
+    this.testQuickSort();
     this.displayResults();
 
   },
@@ -104,6 +105,14 @@ var tester = {
     this.results.mergeSort = ( this.sprintObj.compareArrays(exp, actual));
   },
 
+  testQuickSort: function(){
+    var input = [1,3,4,5,2];
+    var exp = [1,2,3,4,5];
+    var actual = this.sprintObj.quickSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.quickSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
+
 
   displayResults: function(){
     console.log("Displaying results...");
@@ -117,6 +126,7 @@ var tester = {
     $("#primes").html(String(this.results.primes));
     $("#bubble-sort").html(String(this.results.bubbleSort));
     $("#merge-sort").html(String(this.results.mergeSort));
+    $("#quick-sort").html(String(this.results.quickSort));
   }
 
 }
