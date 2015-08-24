@@ -60,3 +60,29 @@ function merge(array1, array2){
 
 
 //quicksort
+//start is 1, end = array.length-1 to begin
+function quicksort(array, start, last){
+  if (start < last){
+    var pivot = partition(array, start, last);
+    quicksort(array, start, pivot-1);
+    quicksort(array, pivot, last);
+    return array;
+  }
+}
+
+function partition(array, start, last){
+  var pivot = array[last];
+  var p_index = last; //index of pivot
+  //go through entire array to compare with pivot
+  for (var i = start; i < last; i++){
+    if (array[i] > pivot){
+      array[last] = array[i];
+      array[i] = array[p_index-1];
+      p_index--;
+      array[p_index] = pivot;
+    }
+  }
+  return p_index;
+}
+
+
