@@ -34,7 +34,7 @@ function merge(array1, array2){
   var sortedArray = [];
   var num1;
   console.log("before while: array1: "+ array1 +", array2: "+ array2);
-  while (array1.length > 0 && array2.length > 0){
+  while (array1.length > 0 || array2.length > 0){
     console.log("in while loop")
     if (array1[0] > array2[0]){
       num1 = array2.shift;
