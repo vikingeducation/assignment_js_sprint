@@ -49,6 +49,16 @@ var selectPiece = function(){
 	b.cell("each").removeOn("click", selectPiece);
 	b.cell(this).style({ backgroundColor: "red" });
 	b.cell(this).on("click", deselectPiece);
+
+	//Make a piece to move to nearby vacant dark spots
+	var coords = b.cell(this).where() //[row, column] current coordinates
+	var moves = [[coords[0]-1, coords[1]-1],[coords[0]+1, coords[1]+1],[coords[0]-1, coords[1]+1],[coords[0]+1, coords[1]-1]]
+	console.log(moves)
+	for (i = 0; i < moves.length; i++){
+		console.log(i)
+		if (b.cell(moves[i]).get()== null){b.cell(moves[i]).style({ backgroundColor: "yellow" })};
+	}
+	//console.log(moves)
 }
 
 var deselectPiece = function(){
@@ -64,5 +74,6 @@ var deselectPiece = function(){
 	b.cell(this).style({ backgroundColor: "gray" });
 	b.cell(this).removeOn("click", deselectPiece);
 }
+
 
 initialize();
