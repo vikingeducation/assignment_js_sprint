@@ -1,16 +1,26 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(input){  
+    // input is an array
+    return input.sort()[input.length - 1];
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(input){  
+    // input is a string
+    return input.split("").reverse().join("");
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  loudSnakeCase: function(input){  
+    // input is a string
+   
+    var striped = input
+    striped=striped.replace(/[!.?]/g,"");
+    
+    return striped.split(" ").forEach(function(el){ 
+        el = el.charAt(0).toUpperCase()+el.slice(1);
+    }).join("_");
+
   },
 
   compareArrays: function(){ 
