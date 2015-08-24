@@ -31,6 +31,7 @@ function mergeSort(array){
   }
 }
 
+<<<<<<< HEAD
 function merge(left, right){
     var result  = [],
         il      = 0,
@@ -45,9 +46,58 @@ function merge(left, right){
     }
 
     return result.concat(left.slice(il)).concat(right.slice(ir));
+
+//quicksort
+//start is 1, end = array.length-1 to begin
+function quicksort(array, start, last){
+  if (start < last){
+    var pivot = partition(array, start, last);
+    quicksort(array, start, pivot-1);
+    quicksort(array, pivot, last);
+    return array;
+  }
+
+}
+
+function partition(array, start, last){
+  var pivot = array[last];
+  var smallerNum;
+  var swap_index = start; //index of where we swap for lower numbers
+  //go through entire array to compare with pivot
+  for (var i = start; i < last; i++){
+    console.log("pivot: "+ pivot + ", array[i]: " + array[i]);
+    if (array[i] <= pivot){
+      console.log("in if statement");
+      smallerNum = array[i];
+      array[i] = array[swap_index];
+      array[swap_index] = smallerNum;
+      swap_index++;
+      // console.log("p_i: "+ p_index + "array: "+ array);
+    }
+  }
+  array[last] = array[swap_index];
+  array[swap_index] = pivot;
+
+  return swap_index;
 }
 // console.log(mergeSort([1,2,5,4]));
 
+// function partition(array, start, last){
+//   var pivot = array[last];
+//   var p_index = last; //index of pivot
+//   //go through entire array to compare with pivot
+//   for (var i = start; i < last; i++){
+//     console.log("pivot: "+ pivot + ", array[i]: " + array[i]);
+//     if (array[i] > pivot){
+//       console.log("in if statement");
+//       array[last] = array[i];
+//       array[i] = array[p_index-1];
+//       array[p_index] = pivot;
+//       p_index--;
+//       console.log("p_i: "+ p_index + "array: "+ array);
+//     }
+//   }
+//   return p_index;
+// }
 
 
-//quicksort
