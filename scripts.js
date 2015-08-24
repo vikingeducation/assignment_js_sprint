@@ -22,27 +22,37 @@ var sprintFunctions = {
 
   loudSnakeCase: function(sentence){
     var punctuation = ".:;'\"?[]{}|!";
+    var single_spaced = "";
+    if (sentence.includes ("  ")) {
+        single_spaced = sentence.replace("  ", " ");
+        sentence = single_spaced;
+    };
     var result = sentence[0].toUpperCase();
-    var single_spaced = ""
-     if (sentence.includes ("  ")) {
-        single_spaced = sentence.replace("  ", " ")
-     }
-     sentence = single_spaced
+
     for(var i = 1; i < sentence.length; i++ ) {
       if (sentence[i] === " ") {
-        result = result + "_" + sentence[i+1].toUpperCase();
+        result += "_" + sentence[i+1].toUpperCase();
       } else if (punctuation.includes(sentence[i])) {
 
       } else if (sentence[i-1] !== " ") {
-        result = result + sentence[i];
-      }
-    }
+        result += sentence[i];
+      };
+    };
     return result;
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(arr1, arr2){
+    result = true;
+    if (arr1.length !== arr2.length) {
+      result = false;
+    } else {
+      for(var i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+          result = false;
+        };
+      };
+    };
+    return result;
   },
 
   fizzBuzz: function(){
