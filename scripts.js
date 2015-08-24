@@ -35,20 +35,75 @@ var sprintFunctions = {
     return loud;
   },
 
-  compareArrays: function(){
+  compareArrays: function(array1, array2){
     // your code here (replace the return)
-    return "Finish compareArrays first!"
+    if ( array1.length === array2.length ){
+      for( var i = 0; i < array1.length; i++ ){
+        if (array1[i] != array2[i] ){
+          return false;
+        }
+      }
+      return true;
+    }
+    else{
+      return false;
+    }
   },
 
-  fizzBuzz: function(){
+  fizzBuzz: function(num){
     // your code here
+    var arr = [];
+    for( var i = 1; i <= num; i++ ){
+      if( i%3 === 0 && i%5 === 0){
+        arr[i-1] = "FIZZBUZZ";
+      }
+      else if( i%3 === 0){
+        arr[i-1] = "FIZZ";
+      }
+      else if( i%5 === 0){
+        arr[i-1] = "BUZZ";
+      }
+      else{
+        arr[i-1] = i;
+      }
+    }
+    return arr;
   },
 
-  myMap: function(){
+  myMap: function(array, fn){
     // your code here
+    var mapArray = [];
+    for( var i = 0; i < array.length; i++ ){
+      mapArray[i] = fn(array[i]);
+    }
+    return mapArray;
   },
 
-  primes: function(){
+  primes: function(num){
     // your code here
+    var primeArray = [];
+    var primeChecker = true;
+    if(num < 2){
+      return primeArray;
+    }
+    else{
+      for( var i = 2; i < num; i++ ){
+        primeChecker = true;
+        
+        for( var j = 1; j < i; j++ ){
+          if( i%j === 0 && j != 1 ){
+            primeChecker = false;
+          }
+
+        }
+        if(  primeChecker ){
+          primeArray.push(i);
+        }
+      }
+    }
+    return primeArray;
   },
 }
+
+
+
