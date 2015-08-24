@@ -75,11 +75,14 @@ function partition(array, start, last){
   var p_index = last; //index of pivot
   //go through entire array to compare with pivot
   for (var i = start; i < last; i++){
+    console.log("pivot: "+ pivot + ", array[i]: " + array[i]);
     if (array[i] > pivot){
+      console.log("in if statement");
       array[last] = array[i];
       array[i] = array[p_index-1];
-      p_index--;
       array[p_index] = pivot;
+      p_index--;
+      console.log("p_i: "+ p_index + "array: "+ array);
     }
   }
   return p_index;
