@@ -103,5 +103,24 @@ var sprintFunctions = {
       }
     }
     return inputArr;
+  },
+
+  mergeBack: function(left, right){
+    var smallest = [];
+    while (left.length > 0 && right.length > 0){
+      if (left[0] <= right[0]) {smallest.push(left.shift())} 
+        else {smallest.push(right.shift())};
+    };
+    return smallest.concat(left).concat(right);
+  },
+  mergeSort: function(arr){
+    if (arr.length<=1) {return arr}
+      var right = arr.splice(arr.length/2);
+      var left = arr;
+
+      var rightSort = this.mergeSort(right);
+      var leftSort = this.mergeSort(left);
+ 
+      return this.mergeBack(leftSort,rightSort );
   }
 }
