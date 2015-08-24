@@ -79,9 +79,29 @@ var sprintFunctions = {
       }
     }
 
-    for(var m = 2; m < limit; m++) { 
+    for(var m = 2; m < limit; m++) {
       if (arr[m]) {result.push(m);}
     }
     return result;
   },
+
+  bubbleSort: function(inputArr){
+    var swapped = true;
+
+    // Repeat this loop until we have not had to swap values
+    while (swapped){
+      swapped = false;
+      // Iterate through the array
+      for(var i = 0; i < inputArr.length - 1; i++){
+        // If a given value is more than the next, swap them
+        if (inputArr[i] > inputArr[i+1]){
+          swapped = true;
+          var tmp = inputArr[i];
+          inputArr[i] = inputArr[i+1];
+          inputArr[i+1] = tmp;
+        }
+      }
+    }
+    return inputArr;
+  }
 }
