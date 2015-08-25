@@ -54,12 +54,16 @@ var Roulette = function (init) {
           winners.push(i);
         }
         break;
+        case "00":
+        odds = 36;
+        winners = [-1];
+        break;
       default:
         odds = 36;
         winners.push(choice);
     }
 
-    result = Math.floor((Math.random(1)*36) + 1);
+    result = Math.floor((Math.random(1)*38) - 1);
     console.log(winners);
     console.log(result);
     if (winners.indexOf(result) >= 0){
@@ -75,7 +79,7 @@ var Roulette = function (init) {
 
   this.bet = function(){
     var bet_amount = prompt("How much would you like to bet?");
-    var choice = prompt("What would you like to bet on? Evens (A), Odds (B), 1 to 18 (C), 19 to 36 (D), 1st 12 (E), 2nd 12 (F), 3rd 12 (G) or Number 1 to 36 (Num)");
+    var choice = prompt("What would you like to bet on? Evens (A), Odds (B), 1 to 18 (C), 19 to 36 (D), 1st 12 (E), 2nd 12 (F), 3rd 12 (G) or Number 0 to 36 (Num), or 00");
     this.spin(bet_amount, choice);
   };
 
@@ -87,11 +91,7 @@ var Roulette = function (init) {
 };
 
 r = new Roulette (10000);
-// s = new Roulette (20000);
-
-// while (r.bankroll <= 10000){
-//   r.spin(5, 18);
-// }
+r.bet()
 
 
 
