@@ -4,6 +4,7 @@ var Roulette = function (init) {
     var odds;
     var winners = [];
     var i = 0;
+
     switch (choice) {
       case "A":
         odds = 2;
@@ -54,7 +55,7 @@ var Roulette = function (init) {
           winners.push(i);
         }
         break;
-        case "00":
+      case "00":
         odds = 36;
         winners = [-1];
         break;
@@ -91,7 +92,7 @@ var Roulette = function (init) {
 };
 
 r = new Roulette (10000);
-r.bet()
+r.bet();
 
 
 
