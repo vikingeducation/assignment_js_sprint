@@ -75,7 +75,7 @@ var selectPiece = function(){
 		if (b.cell(moves[i]).get() == null){
 			b.cell(moves[i]).style({ backgroundColor: "yellow" });
 			b.cell(moves[i]).on("click", movePiece);
-		} else if (b.cell(moves[i]).get() !== current_turn){
+		} else if (b.cell(moves[i]).get() !== current_turn()){
 			var jump_square = b.cell([coords[0] + (potential_moves[i][0] * 2), coords[1] + (potential_moves[i][1] * 2)])
 			// var offset = [coords[0] - moves[i][0], moves[i][1] + coords[1] ];
 			if (jump_square.get() == null) {
