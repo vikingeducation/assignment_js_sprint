@@ -3,7 +3,7 @@ var x = jsboard.piece({ text: "X", fontSize: "40px", textAlign: "center" });
 var bp = jsboard.piece({ text: "●", fontSize: "40px", textAlign: "center"});
 var wp = jsboard.piece({ text: "○", fontSize: "40px", textAlign: "center"});
 var current_piece = null;
-
+var move_turn = 0;
 /// Black loops
 
 var initialize = function(){
@@ -31,19 +31,26 @@ var initialize = function(){
 		b.cell([2, j]).place(wp.clone());
 	}
 
-	initializePieceEvents();
+	resetSquares();
 }
 
-var initializePieceEvents = function(){
+var resetSquares = function(){
 	for (var i = 0; i <= 7; i++){
 		for (var j = 0; j <= 7; j++){
 			if ((i + j) % 2 == 1){
-				if (b.cell([i, j]).get()){
+				if (b.cell([i, j]).get() === current_turn()){
 					b.cell([i, j]).on("click", selectPiece);
 				}
+				b.cell([i, j]).style({ backgroundColor: "gray" });
 			}
 		}
 	}
+}
+
+
+var current_turn = function(){
+	console.log(move_turn);
+	if (move_turn%2 == 0) {return "●"} else {return "○"}
 }
 
 var selectPiece = function(){
@@ -54,18 +61,29 @@ var selectPiece = function(){
 
 	//Make a piece to move to nearby vacant dark spots
 	var coords = b.cell(this).where() //[row, column] current coordinates
-	var moves = [[coords[0]-1, coords[1]-1],[coords[0]+1, coords[1]+1],[coords[0]-1, coords[1]+1],[coords[0]+1, coords[1]-1]]
+	//build first cicle of moves with vectors
+	//build second cicle of moves with vectors
+
+	var moves = []
+	for(var i=0; i < get_moves.length; i++) {moves.push([coords[0]+get_moves[i][0],coords[1]+get_moves[i][1]])}
+	
 	console.log(moves)
 	for (i = 0; i < moves.length; i++){
-		console.log(i)
 		if (b.cell(moves[i]).get()== null){
 			b.cell(moves[i]).style({ backgroundColor: "yellow" })
 			b.cell(moves[i]).on("click", movePiece);
+		} else if (b.cell(moves[i]).get() !== current_turn){
+			b.cell([moves[i][0]+get_moves[i][0], moves[i][1]+get_moves[i][1]]).style({ backgroundColor: "yellow" })
 		};
 	}
-	//console.log(moves)
 }
 
+var get_moves = function(coords){
+	var vectors = [];
+	if (current_turn === "●"){vectors = [[1, 1], [1, -1]]} 
+		else {vectors = [[-1, 1], [-1, 1]]}
+	return vectors
+}
 var movePiece = function(){
 	// Remove the selected piece from current position
 	var color = b.cell(current_piece).get();
@@ -74,17 +92,9 @@ var movePiece = function(){
 	b.cell(this).place(placePiece(color));
 	b.cell("each").removeOn("click", deselectPiece);
 	b.cell("each").removeOn("click", movePiece);
-	for (var i = 0; i <= 7; i++){
-		for (var j = 0; j <= 7; j++){
-			if ((i + j) % 2 == 1){
-				if (b.cell([i, j]).get()){
-					b.cell([i, j]).on("click", selectPiece);
-				}
-				b.cell([i, j]).style({ backgroundColor: "gray" });
-			}
-		}
-	}
 	current_piece = null;
+	move_turn += 1;
+	resetSquares();
 }
 
 var placePiece = function(color){
@@ -93,16 +103,7 @@ var placePiece = function(color){
 }
 
 var deselectPiece = function(){
-	for (var i = 0; i <= 7; i++){
-		for (var j = 0; j <= 7; j++){
-			if ((i + j) % 2 == 1){
-				if (b.cell([i, j]).get()){
-					b.cell([i, j]).on("click", selectPiece);
-				}
-				b.cell([i, j]).style({ backgroundColor: "gray" });
-			}
-		}
-	}
+	resetSquares();
 	current_piece = null;
 	b.cell(this).removeOn("click", deselectPiece);
 }
