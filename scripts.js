@@ -1,16 +1,21 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(input){  
+     return Math.max.apply(null, input);
+   
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(input){  
+    return input.split("").reverse().join("");
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  loudSnakeCase: function(input){  
+    var array = input.split(" ").filter(function(n){ return n != "" });
+    for(i = 0; i < array.length; i++) {
+      array[i] = array[i].slice(0,1).toUpperCase() + array[i].slice(1,array[i].length)
+    };
+    console.log( array.join("_"));
   },
 
   compareArrays: function(){ 
