@@ -66,6 +66,7 @@ function partition(array, start, last){
   var pivot = array[last];
   var smallerNum;
   var swap_index = start; //index of where we swap for lower numbers
+
   //go through entire array to compare with pivot
   for (var i = start; i < last; i++){
     if (array[i] <= pivot){
@@ -75,10 +76,11 @@ function partition(array, start, last){
       swap_index++;
     }
   }
+  //move pivot to correct position
   array[last] = array[swap_index];
   array[swap_index] = pivot;
 
-  return swap_index;
+  return swap_index; //now index of pivot in array
 }
 
 
