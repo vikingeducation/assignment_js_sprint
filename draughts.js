@@ -50,7 +50,7 @@ var resetSquares = function(){
 
 var current_turn = function(){
 	console.log(move_turn);
-	if (move_turn%2 == 0) {return "●"} else {return "○"}
+	if (move_turn % 2 == 0) {return "●"} else {return "○"}
 }
 
 var selectPiece = function(){
@@ -65,23 +65,31 @@ var selectPiece = function(){
 	//build second cicle of moves with vectors
 
 	var moves = []
-	for(var i=0; i < get_moves.length; i++) {moves.push([coords[0]+get_moves[i][0],coords[1]+get_moves[i][1]])}
-	
+	var potential_moves = get_moves();
+	for(var i=0; i < potential_moves.length; i++) {
+		moves.push([coords[0]+potential_moves[i][0],coords[1]+potential_moves[i][1]])
+	}
+
 	console.log(moves)
 	for (i = 0; i < moves.length; i++){
-		if (b.cell(moves[i]).get()== null){
-			b.cell(moves[i]).style({ backgroundColor: "yellow" })
+		if (b.cell(moves[i]).get() == null){
+			b.cell(moves[i]).style({ backgroundColor: "yellow" });
 			b.cell(moves[i]).on("click", movePiece);
 		} else if (b.cell(moves[i]).get() !== current_turn){
-			b.cell([moves[i][0]+get_moves[i][0], moves[i][1]+get_moves[i][1]]).style({ backgroundColor: "yellow" })
+			var jump_square = b.cell([coords[0] + (potential_moves[i][0] * 2), coords[1] + (potential_moves[i][1] * 2)])
+			// var offset = [coords[0] - moves[i][0], moves[i][1] + coords[1] ];
+			if (jump_square.get() == null) {
+				jump_square.style({ backgroundColor: "yellow"});
+				jump_square.on("click", movePiece);
+			}
 		};
 	}
 }
 
 var get_moves = function(coords){
 	var vectors = [];
-	if (current_turn === "●"){vectors = [[1, 1], [1, -1]]} 
-		else {vectors = [[-1, 1], [-1, 1]]}
+	if (b.cell(current_piece).get() === "○"){vectors = [[1, 1], [1, -1]]}
+		else {vectors = [[-1, -1], [-1, 1]]}
 	return vectors
 }
 var movePiece = function(){
