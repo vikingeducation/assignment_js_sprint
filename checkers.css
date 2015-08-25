@@ -1,0 +1,12 @@
+.col-md-1 {
+  height: 100px;
+  width: 100px;
+  border: solid black 2px;
+}
+.red {
+  background: red;
+}
+
+.black {
+  background: grey;
+}
