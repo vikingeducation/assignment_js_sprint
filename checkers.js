@@ -47,8 +47,15 @@ function Board() {
   }
 
   this.display = function(){
-    for (var x= 1; x<=8; x++){
-      console.log("row " + x + ":" + board[x]);
+    for (var x= 0; x<=7; x++){
+      console.logboard[x];
+      // for (y = 0; y <=7; y++){
+      //   if (board[x][y] === undefined){
+      //     console.log("_"); // prints on new line
+      //   } else {
+      //     console.log(board[x][y]);
+      //   }
+      // }
     }
   };
 }
