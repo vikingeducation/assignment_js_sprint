@@ -1,30 +1,36 @@
 function Roulette(starting) {
   this.bankroll = starting;
+
   this.spin = function(bet, choice) {
+    var bet =  parseInt(prompt("Enter your bet amount"));
+    var choice =  parseInt(prompt("Enter your number guess"));
+
     this.bankroll -= bet;
+
     result = (Math.floor(Math.random() * 35) + 1);
     if (choice === result) {
       this.bankroll += bet * 35;
-      console.log("You win $" + bet*35 + ", the spin was " + result);
+      document.getElementById("spin_results").innerHTML = "You win $" + bet*35 + ", the spin was " + result;
     } else {
-      console.log("You lose, the spin was " + result);
+      document.getElementById("spin_results").innerHTML = "You lose, the spin was " + result;
     };
-    console.log("You now have $" + this.bankroll);
+     document.getElementById("bankroll").innerHTML = "Your current bankroll is: $" + this.bankroll;
   };
   this.buyIn = function(amount) {
+    var amount = parseInt(prompt("Enter your buy-in"));
     this.bankroll += amount;
-    console.log("You bought in $" + amount);
-    console.log("You now have $" + this.bankroll);
+
+    alert("You bought in $" + amount);
+    document.getElementById("bankroll").innerHTML = "Your current bankroll is: $" + this.bankroll;
   };
   this.printBankroll = function() {
-    console.log("You currently have $" + this.bankroll + " left");
+    document.getElementById("bankroll").innerHTML = "Your current bankroll is: $" + this.bankroll;
   }
 }
 
+
+
 r = new Roulette(100);
-r.spin( 10, 24 )
-r.spin( 50, 13 )
-r.printBankroll()
-r.buyIn( 1000 )
+r.printBankroll();
 // You bought in $1000
 // You now have $1390
