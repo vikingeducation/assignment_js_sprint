@@ -22,11 +22,11 @@ function Roulette(starting) {
       this.bankroll += bet * 35;
       document.getElementById("spin_results").innerText = "You win $" + bet*35 + ", the spin was " + result;
       document.getElementById("spin_results").style.color = "green";
-    } else if (result % 2 == 0 && playMode === "even") {
+    } else if (result > 0 && result % 2 == 0 && playMode === "even") {
       this.bankroll += bet * 2;
       document.getElementById("spin_results").innerText = "You win $" + bet*2 + ", the spin was " + result;
       document.getElementById("spin_results").style.color = "green";
-    } else if (result % 2 == 1 && playMode === "odd") {
+    } else if (result > 0 && result % 2 == 1 && playMode === "odd") {
       this.bankroll += bet * 2;
       document.getElementById("spin_results").innerText = "You win $" + bet*2 + ", the spin was " + result;
       document.getElementById("spin_results").style.color = "green";
