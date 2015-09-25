@@ -1,0 +1,40 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <h1 id="bankroll"> </h1>
+
+  <div id="spin_results" class=""></div>
+
+  <hr>
+
+  <FORM NAME="myform" ACTION="" METHOD="GET">
+  Enter your bet amount: <BR>
+  <INPUT TYPE="text" NAME="bet" VALUE="" placeholder = "$100"><br>
+  Enter your number guess: <BR>
+  <INPUT TYPE="text" NAME="choice" VALUE="" placeholder = "00"><br>
+
+  <select name="playMode">
+    <option value="regular">Regular Roulette</option>
+    <option value="even">Even</option>
+    <option value="odd">Odd</option>
+    <option value="first-half">1 to 18</option>
+    <option value="second-half">19 to 36</option>
+    <option value="first-third">1st 12</option>
+    <option value="second-third">2nd 12</option>
+    <option value="third-third">3rd 12</option>
+  </select><br>
+
+  <INPUT TYPE="button" NAME="spin" Value="Spin!!" onClick="r.spin(this.form)">
+  </FORM>
+
+  <hr>
+
+  <button onclick="r.buyIn()">Buy-in</button>
+
+
+  <script src="roulette.js"></script>
+
+  </body>
+</html>
