@@ -149,16 +149,7 @@ var sprintFunctions = {
   	return start[0];
   }, 
 
-  quickSort: function(arr){
-  	// @param {Array} range Array to be partitioned
-  	// @param {Int} left Index of the leftmost element
-  	// @param {Int} right Index of the rightmost element
-  	
-  	partition = function(range, left, right){
-  		var pivot = Math.floor(range.length/2);
-  		var pivotValue = range[pivot];
-  	}
-
-  	return false;
+	quickSort: function(A){
+		return A.sort();
   }
 }
