@@ -10,6 +10,9 @@ var tester = {
     this.testFizzBuzz();
     this.testMyMap();
     this.testPrimes();
+    this.testBubbleSort();
+    this.testMergeSort();
+    this.testQuickSort();
     this.displayResults();
   },
 
@@ -84,6 +87,26 @@ var tester = {
     this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
   },
 
+  testBubbleSort: function(){
+  	var input = [5,6,4,3,1,2,7,8];
+    var exp = [1,2,3,4,5,6,7,8];
+    var actual = this.sprintObj.bubbleSort(input);
+    this.results.bubbleSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
+
+  testMergeSort: function(){
+  	var input = [5,6,4,3,1,2,7,8];
+    var exp = [1,2,3,4,5,6,7,8];
+    var actual = this.sprintObj.mergeSort(input);
+    this.results.mergeSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
+
+  testQuickSort: function(){
+  	var input = [5,6,4,3,1,2,7,8];
+    var exp = [1,2,3,4,5,6,7,8];
+    var actual = this.sprintObj.quickSort(input);
+    this.results.quickSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
 
   displayResults: function(){
     console.log("Displaying results...");
@@ -95,6 +118,9 @@ var tester = {
     $("#fizz-buzz").html(String(this.results.fizzBuzz));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    $("#bubble-sort").html(String(this.results.bubbleSort));
+    $("#merge-sort").html(String(this.results.mergeSort));
+    $("#quick-sort").html(String(this.results.quickSort));
   }
 
 }
