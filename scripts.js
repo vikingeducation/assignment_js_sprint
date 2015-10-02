@@ -14,7 +14,7 @@ var sprintFunctions = {
   
   reversed: function(str){  
     // This also works:
-    //return str.split('').reverse().join('');
+    // return str.split('').reverse().join('');
     
     output = '';
     for(var i = str.length-1;i >= 0;i--){
@@ -133,7 +133,7 @@ var sprintFunctions = {
   	
   	// Get every element into its own small array
   	// initially.
-  	var start = []
+  	var start = [];
   	arr.forEach(function(el){
   		start.push([el]);
   	});
@@ -149,7 +149,23 @@ var sprintFunctions = {
   	return start[0];
   }, 
 
-	quickSort: function(A){
-		return A.sort();
+	quickSort: function(arr){
+	 if(arr.length === 0){
+	 	return [];
+	 }
+
+	 var left = [];
+	 var right = [];
+	 var pivot = arr[0];
+
+	 for(i=1;i<arr.length-1;i++){
+	 	if(arr[i] < pivot){
+	 		left.push(arr[i]);
+	 	} else {
+	 		right.push(arr[i]);
+	 	}
+	 }
+
+	 return this.quickSort(left).concat(pivot, this.quickSort(right));
   }
 }
