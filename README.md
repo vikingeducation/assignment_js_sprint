@@ -1,4 +1,4 @@
 assignment_js_sprint
 ====================
 
-while(1){ go() };
+Created by [Trevor Elwell](http://trevorelwell.me)
