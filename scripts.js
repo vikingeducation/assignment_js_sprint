@@ -36,6 +36,7 @@ var sprintFunctions = {
   },
 
   compareArrays: function(a, b) {
+    console.log(a, b);
     if (a.length !== b.length) {
       return false;
     }
@@ -91,8 +92,80 @@ var sprintFunctions = {
       }
       j++;
     }
-    console.log(retVal);
     return retVal;
+  },
+
+  // 
+
+  bubbleSort: function(array) {
+    var n = array.length;
+    var didSwap = true;
+    while (didSwap) {
+      didSwap = false;
+      for (var i = 0; i <= n; i++) {
+        var a = array[i];
+        var b = array[i + 1];
+        if (
+            (a !== 'undefined' && b !== 'undefined') &&
+            (a > b)
+          ) {
+          array[i] = b;
+          array[i + 1] = a;
+          didSwap = true;
+        }
+      }
+      n--;
+    }
+    return array;
+  },
+
+  mergeSort: function(array) {
+    if (array.length < 2) return array;
+    
+    var middle = Math.floor(array.length / 2);
+    var left = this.mergeSort(array.slice(0, middle));
+    var right = this.mergeSort(array.slice( middle));
+    
+    var result = [];
+    while (left.length > 0 && right.length > 0) {
+      result.push(left[0] < right[0] ? left.shift() : right.shift());
+    }
+    result = result.concat(left.length ? left : right);
+    return result;
+  },
+
+  quickSort: function(array) {
+    var lo = 0;
+    var hi = array.length - 1;
+    this.doQuickSort(array, lo, hi);
+    return array;
+  },
+
+  partition: function(array, lo, hi) {
+    var pivot = array[hi];
+    var i = lo;
+    for (var j = lo; j < hi; j++) {
+      if (array[j] <= pivot) {
+        var a = array[i];
+        var b = array[j];
+        array[i] = b;
+        array[j] = a;
+        i++;
+      }
+    }
+    var a = array[i];
+    var b = array[hi];
+    array[i] = b;
+    array[hi] = a;
+    return i;    
+  },
+
+  doQuickSort: function(array, lo, hi) {
+    if (lo < hi) {
+      var p = this.partition(array, lo, hi);
+      this.doQuickSort(array, lo, p - 1);
+      this.doQuickSort(array, p + 1, hi);
+    }
   }
 }
 

@@ -4,6 +4,9 @@
     <script src="scripts.js"></script>
     <script src="scripts_spec.js"></script>
     <style>
+      body {
+        margin-bottom: 256px;
+      }
       h1,h2,h3,p{
         text-align: center;
       }
@@ -13,12 +16,24 @@
         margin: 20px auto;
         border: 1px solid black;
       }
+      .passing {
+        color: green;
+        border-color: green;
+      }
+      .failing {
+        color: red;
+        border-color: red;
+      }
     </style>
   </head>
   <body>
     <h1> 
       Javascript Sprint Test Suite
     </h1>
+
+    <h2>
+      Basic Syntax
+    </h2>
 
     <h3>
       Largest Element:
@@ -69,6 +84,33 @@
       Primes:
     </h3>
     <div class="output" id="primes">
+      Pending...
+    </div>
+
+    <hr>
+    
+    <h2>
+      Bigger Problems
+    </h2>
+
+    <h3>
+      Bubble Sort
+    </h3>
+    <div class="output" id="bubble-sort">
+      Pending...
+    </div>
+
+    <h3>
+      Merge Sort
+    </h3>
+    <div class="output" id="merge-sort">
+      Pending...
+    </div>
+
+    <h3>
+      Quick Sort
+    </h3>
+    <div class="output" id="quick-sort">
       Pending...
     </div>
   </body>

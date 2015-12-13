@@ -10,6 +10,11 @@ var tester = {
     this.testFizzBuzz();
     this.testMyMap();
     this.testPrimes();
+    //
+    this.testBubbleSort();
+    this.testMergeSort();
+    this.testQuickSort();
+    //
     this.displayResults();
   },
 
@@ -84,6 +89,33 @@ var tester = {
     this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
   },
 
+  //
+
+  testBubbleSort: function(){
+    var input = [10, 6, 9, 7, 8, 5, 1, 4, 2, 3, 0];
+    var exp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var actual = this.sprintObj.bubbleSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.bubbleSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
+
+  testMergeSort: function(){
+    var input = [10, 6, 9, 7, 8, 5, 1, 4, 2, 3, 0];
+    var exp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var actual = this.sprintObj.mergeSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.mergeSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
+
+  testQuickSort: function(){
+    var input = [10, 6, 9, 7, 8, 5, 1, 4, 2, 3, 0];
+    var exp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var actual = this.sprintObj.quickSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.quickSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
+
+  //
 
   displayResults: function(){
     console.log("Displaying results...");
@@ -95,10 +127,38 @@ var tester = {
     $("#fizz-buzz").html(String(this.results.fizzBuzz));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    //
+    $("#bubble-sort").html(String(this.results.bubbleSort));
+    $("#merge-sort").html(String(this.results.mergeSort));
+    $("#quick-sort").html(String(this.results.quickSort));
   }
 
 }
 
 
-$(document).ready( function(){ tester.init( sprintFunctions )});
+$(document).ready(function(){
+  tester.init( sprintFunctions );
+
+  $.each($('.output'), function(i, element) {
+    if ($(element).text() == 'true') {
+      $(element).addClass('passing');
+    } else {
+      $(element).addClass('failing');
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
