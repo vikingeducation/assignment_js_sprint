@@ -10,6 +10,9 @@ var tester = {
     this.testFizzBuzz();
     this.testMyMap();
     this.testPrimes();
+    this.testBubble();
+    this.testMerge();
+    this.testQuick();
     this.displayResults();
   },
 
@@ -84,6 +87,54 @@ var tester = {
     this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
   },
 
+  testBubble: function(){
+    var input = [];
+    var size = 10;
+    var limit = 100;
+    for (var i = 0; i < size; i++) input.push(Math.floor(Math.random() * limit));
+    var copyInput = input.slice();
+    var exp = input.slice().sort(function sortNumber(a,b) {
+      return a - b;
+    });
+    var actual = this.sprintObj.bubble(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.bubble = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.bubble += "<p>INPUT:</p> [" + copyInput + "]";
+    this.results.bubble += "<p>OUTPUT:</p> [" + actual + "]";
+  },
+
+  testMerge: function(){
+    var input = [];
+    var size = 10;
+    var limit = 100;
+    for (var i = 0; i < size; i++) input.push(Math.floor(Math.random() * limit));
+    var copyInput = input.slice();
+    var exp = input.slice().sort(function sortNumber(a,b) {
+      return a - b;
+    });
+    var actual = this.sprintObj.merge(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.merge = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.merge += "<p>INPUT:</p> [" + copyInput + "]";
+    this.results.merge += "<p>OUTPUT:</p> [" + actual + "]";
+  },
+
+  testQuick: function(){
+    var input = [];
+    var size = 10;
+    var limit = 100;
+    for (var i = 0; i < size; i++) input.push(Math.floor(Math.random() * limit));
+    var copyInput = input.slice();
+    var exp = input.slice().sort(function sortNumber(a,b) {
+      return a - b;
+    });
+    var actual = this.sprintObj.quick(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.quick = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.quick += "<p>INPUT:</p> [" + copyInput + "]";
+    this.results.quick += "<p>OUTPUT:</p> [" + actual + "]";
+  },
+
 
   displayResults: function(){
     console.log("Displaying results...");
@@ -95,10 +146,12 @@ var tester = {
     $("#fizz-buzz").html(String(this.results.fizzBuzz));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    $("#bubble").html(String(this.results.bubble));
+    $("#merge").html(String(this.results.merge));
+    $("#quick").html(String(this.results.quick));
   }
 
 }
 
 
 $(document).ready( function(){ tester.init( sprintFunctions )});
-

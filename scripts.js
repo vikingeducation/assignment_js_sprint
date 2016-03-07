@@ -36,18 +36,21 @@ var sprintFunctions = {
     return result.substr(1);
     */
     var result = inputString.replace(/(\W+)/g, "_");
+    var max = result.length;
     result = result.replace(/_./g, function(v) { return "_" + v[1].toUpperCase() });
-    result = result.substr(0, result.length - 1);
+    if (result[max - 1] === "_") result = result.substr(0, max - 1);
     return result;
   },
 
   compareArrays: function(array1, array2){
     var max1 = array1.length;
     var max2 = array2.length;
-    if (max1 !== max2) return false;
-    else {
-      for (var i = 0; i < max1; i++) {
-        if (array1[i] !== array2[i]) return false;
+    if (max1 !== max2) {
+      return false;
+    }
+    for (var i = 0; i < max1; i++) {
+      if (array1[i] !== array2[i]) {
+        return false;
       }
     }
     return true;
@@ -88,4 +91,56 @@ var sprintFunctions = {
     for (var i = 0; i <= limit; i++) if (list[i]) result.push(list[i]);
     return result;
   },
+
+  bubble: function(array) {
+    var temp;
+    var max = array.length;
+    for (var i = 0; i < max; i++) {
+      for (var j = 0; j < max - 1; j++) {
+        if (array[j] > array[j + 1]) {
+          temp = array[j + 1];
+          array[j + 1] = array[j];
+          array[j] = temp;
+        }
+      }
+    }
+    return array;
+  },
+
+  merge: function(array) {
+    if (array.length < 2) return array;
+    var left = this.merge(array.slice(0, Math.floor(array.length/2)));
+    var right = this.merge(array.slice(Math.floor(array.length/2)));
+
+    var result = [];
+    while (left.length > 0 && right.length > 0) {
+      if (left[0] < right[0]) {
+        result.push( left.shift() );
+      } else {
+        result.push( right.shift() );
+      }
+    }
+    if (left.length) {
+      result = result.concat(left);
+    } else {
+      result = result.concat(right);
+    }
+
+    return result;
+  },
+
+  quick: function(array) {
+    if (array.length === 0) return [];
+
+    var left = [];
+    var right = [];
+    var pivot = array[0];
+
+    for (var i = 1; i < array.length; i++) {
+      array[i] < pivot ? left.push(array[i]) : right.push(array[i]);
+    }
+
+    return this.quick(left).concat(pivot, this.quick(right));
+  },
+
 }
