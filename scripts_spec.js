@@ -37,6 +37,7 @@ var tester = {
     var input = "I am a strange code.  I like it though!";
     var exp = "I_Am_A_Strange_Code_I_Like_It_Though";
     var actual = this.sprintObj.loudSnakeCase(input);
+    console.log("Actual is " + actual);
     this.results.loudSnakeCase = ( actual == exp);
   },
 
