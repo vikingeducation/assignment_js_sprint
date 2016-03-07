@@ -4,29 +4,92 @@
 
 function Roulette( startingBankroll ) {
   this.balance = startingBankroll;
+  
   this.spin = function( bet, number ) {
+
     if ( bet <= this.balance ) {
       this.balance -= bet;
       var result = Math.floor( Math.random() * 37 + 1 );
-      if ( number === result ) {
-        var winnings = bet * 35;
-        this.balance += winnings;
-        var message = "You win " + winnings + ", the spin was " + result + "!!!";
-      } else {
-        var message = "You lose! The spin was " + result;
-      }
-
+      
+      
       message += "\nYou now have " + this.balance;
-
       console.log( message );
     } else {
       console.log( "You can't bet more than you have!" );
     }
   };
 
-  this.parseInput = function( input ) {
-    if (typeof(input) == "string") {
+  this.checkNumber = function(input, result) {
+    var multiplier = 0;
+    if ( input === result ) {
+      multiplier = 35;
+    }
+    return multiplier;
+  };
 
+// var message = "You win " + winnings + ", the spin was " + result + "!!!";
+// var message = "You lose! The spin was " + result;
+
+  this.checkString = function(input, result) {
+
+    var multiplier = 0;
+
+    switch(input) {
+      case '00':
+        if (result === 37) {
+          multiplier = 35;
+        }
+        break;
+      case 'even':
+        if (result % 2 === 0) {
+          multiplier = 2;
+        }
+        break;
+      case 'odd':
+        if (result % 2 === 1) {
+          multiplier = 2;
+        }
+        break;
+      case '1 to 18':
+        if (result >= 1 && result <= 18) {
+          multiplier = 2;
+        }
+        break;
+      case '19 to 36':
+        if (result >= 19 && result <= 36) {
+          multiplier = 2;
+        }
+        break;
+      case '1st 12':
+        if (result >= 1 && result <= 12) {
+          multiplier = 3;
+        }
+        break;
+      case '2nd 12':
+        if (result >= 13 && result <= 24) {
+          multiplier = 3;
+        }
+        break;
+      case '3rd 12':
+        if (result >= 25 && result <= 36) {
+          multiplier = 3;
+        }
+        break;
+    }
+    return multiplier;
+  };
+
+
+  this.parseInput = function( input ) {
+
+    if (typeof(input) == "string") {
+      switch(input) {
+        case 'even':
+          return 2;
+          break;
+        case ''
+
+      }
     }
   }
 
