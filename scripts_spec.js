@@ -10,6 +10,7 @@ var tester = {
     this.testFizzBuzz();
     this.testMyMap();
     this.testPrimes();
+    this.bubbleSort();
     this.displayResults();
   },
 
@@ -82,9 +83,18 @@ var tester = {
     var exp = [2,3,5,7,11];
     var actual = this.sprintObj.primes(input);
     if (typeof actual === 'undefined') { actual = [] };
+    console.log(actual);
     this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
   },
 
+  bubbleSort: function(){
+    var input = [5,6,4,3,9];
+    var exp = [3,4,5,6,9];
+    var actual = this.sprintObj.bubbleSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    // this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.bubbleSort = (actual)
+  },
 
   displayResults: function(){
     console.log("Displaying results...");
@@ -96,6 +106,7 @@ var tester = {
     $("#fizz-buzz").html(String(this.results.fizzBuzz));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    $("#bubble-sort").html(String(this.results.bubbleSort));
   }
 
 }

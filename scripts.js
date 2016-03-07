@@ -1,7 +1,7 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(arr){  
+  largestEl: function(arr){
     // your code here
     var largest = arr[0];
     for(var i = 1; i < arr.length; i++) {
@@ -11,8 +11,8 @@ var sprintFunctions = {
     }
     return largest;
   },
-  
-  reversed: function(str){  
+
+  reversed: function(str){
     // your code here
     var len = str.length;
     var arr = [];
@@ -24,12 +24,12 @@ var sprintFunctions = {
     return arr;
   },
 
-  loudSnakeCase: function(str){  
+  loudSnakeCase: function(str){
     // your code here
     //var str = "I am a strange code.  I like it though!";
     var len = str.length;
     var arr = [];
-   
+
     for (var i = 0; i < len; i++) {
 
       if (str[i] == " " && str[i+1] != " ") {
@@ -46,8 +46,8 @@ var sprintFunctions = {
     return arr;
   },
 
-  compareArrays: function(arr1,arr2){ 
-   
+  compareArrays: function(arr1,arr2){
+
     if (arr1.length != arr2.length) {
       return false;
     };
@@ -61,8 +61,8 @@ var sprintFunctions = {
     return true;
   },
 
-  fizzBuzz: function(num){ 
-    
+  fizzBuzz: function(num){
+
     var arr = [];
 
     for (var i = 1; i <= num; i++) {
@@ -75,16 +75,46 @@ var sprintFunctions = {
         arr.push("FIZZ");
       } else {
         arr.push(i);
-      };  
+      };
     };
     return arr;
   },
 
-  myMap: function(){  
-    // your code here
+  myMap: function(arr, func){
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = func(arr[i]);
+    }
+    return arr;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(num){
+    primes_arr = [];
+    for (var i = 2; i < num; i++) {
+      prime_bool = true;
+      for (var j = 2; j <= Math.sqrt(i); j++) {
+        if (i % j == 0) {
+          prime_bool = false;
+        }
+      }
+      if (prime_bool) {
+        primes_arr.push(i);
+      }
+    }
+    return primes_arr;
   },
+
+  bubbleSort: function(arr){
+    max = arr.length;
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = 0; j < max - 1; j++) {
+        if (arr[j] > arr[j+1]) {
+          temp = arr[j];
+          arr[j] = arr[j+1];
+          arr[j+1] = temp;
+        }
+      }
+      max--;
+    }
+    return arr;
+  }
 }
