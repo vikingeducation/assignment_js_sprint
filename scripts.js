@@ -25,25 +25,14 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(str){
-    // your code here
-    //var str = "I am a strange code.  I like it though!";
     var len = str.length;
     var arr = [];
 
-    for (var i = 0; i < len; i++) {
+    snakeString = str.replace(/[^A-Za-z ]+/g,"");
+    snakeString = snakeString.replace(/[^A-Za-z]+/g,"_");
+    snakeString = snakeString.replace(/_./g, function(letter) { return "_" + letter[1].toUpperCase(); });
 
-      if (str[i] == " " && str[i+1] != " ") {
-        arr.push("_");
-        if (++i < len ) {
-          arr.push(str[i].toUpperCase());
-        }
-      } else if (str[i] != "," && str[i] != "." && str[i] != "!" && str[i] != " ")  {
-        arr.push(str[i]);
-      }
-    }
-
-    arr = arr.join("");
-    return arr;
+    return snakeString;
   },
 
   compareArrays: function(arr1,arr2){
@@ -119,19 +108,17 @@ var sprintFunctions = {
   },
 
   mergeSort: function(arr) {
-  
+
     if (arr.length == 1) return arr;
 
     var mid = arr.length / 2;
     var left = this.mergeSort(arr.slice(0,mid));
     var right = this.mergeSort(arr.slice(mid));
 
-    var left_index = 0; 
-    var right_index = 0; 
+    var left_index = 0;
+    var right_index = 0;
 
     var merged_array = [];
-
-    console.log("Left Array: " + left + "    Right Array " + right);
 
     while (left[left_index] && right[right_index]) {
       if (left[left_index] < right[right_index]) {
@@ -141,7 +128,6 @@ var sprintFunctions = {
         merged_array.push(right[right_index]);
         right_index++;
       }
-      console.log("Merged Array: " + merged_array);
     }
 
     for (var i = left_index ; i < left.length ; i++) {
@@ -151,8 +137,27 @@ var sprintFunctions = {
     for (var i = right_index ; i < right.length ; i++) {
       merged_array.push(right[i]);
     }
-  
-    return merged_array;
-  }
 
+    return merged_array;
+  },
+
+  quickSort: function(arr) {
+    if (arr.length === 0) {
+      return [];
+    }
+
+    var left = [];
+    var right = [];
+    var pivot = arr[0];
+
+    for (var i = 1; i < arr.length; ++i) {
+      if ( arr[i] < pivot ) {
+        left.push(arr[i]);
+      } else {
+        right.push(arr[i]);
+      }
+    }
+
+    return this.quickSort(left).concat(pivot, this.quickSort(right));
+  }
 }
