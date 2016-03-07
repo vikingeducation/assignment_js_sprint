@@ -149,6 +149,57 @@ var sprintFunctions = {
     } while (madeSwap);
     return arr;
   },
+
+
+  merge: function( arr1, arr2 ) {
+
+    console.log('merge');
+    console.log(arr1);
+    console.log(arr2);
+
+    var retArray = [];
+    while( arr1.length && arr2.length ) {
+      // if( arr1[0] < arr2[0] ) {
+      //   retArray.push( arr1.shift() );
+      // } else if (arr2[0] < arr1[0]){
+      //   retArray.push( arr2.shift() );
+      // } else {
+      //   retArray.push( arr1.shift() );
+      //   retArray.push( arr2.shift() );
+      // }
+
+      var lowElement = (arr1[0] < arr2[0]) ? arr1.shift() : arr2.shift();
+      retArray.push( lowElement )
+    } 
+
+    var arr_left_over = (arr1.length) ?  arr1 : arr2 ;
+    retArray = retArray.concat( arr_left_over );
+
+    console.log(retArray);
+
+    return retArray
+  },
+
+
+  mergeSort: function(arr) {
+    if( arr.length <= 1 ) { return arr; }
+
+    var halfPoint = Math.floor( arr.length / 2 );
+    var arr1 = sprintFunctions.mergeSort( arr.slice(0, halfPoint) );
+    var arr2 = sprintFunctions.mergeSort( arr.slice(halfPoint) );
+
+    var retArray = [];
+    while( arr1.length && arr2.length ) {
+      var lowElement = (arr1[0] < arr2[0]) ? arr1.shift() : arr2.shift();
+      retArray.push( lowElement )
+    } 
+
+    var arrLeftOver = (arr1.length) ?  arr1 : arr2 ;
+    retArray = retArray.concat( arrLeftOver );
+    return retArray;
+  },
+
+
 };
 
 
