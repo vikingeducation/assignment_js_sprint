@@ -17,9 +17,29 @@ var sprintFunctions = {
     return ret_s
   },
 
-  loudSnakeCase: function(){  
+  loudSnakeCase: function(str){  
     // your code here
-
+    var ret_s = str[0].toUpperCase();
+    var lastCharSpace = false
+    for (var i = 1; i < str.length; i++) {
+      if (str[i] == " ") {
+        if (!lastCharSpace) {
+          ret_s += "_"
+        }
+        lastCharSpace = true
+      } else if (["!", ",", "."].indexOf(str[i]) != -1) {
+        // do nothing
+        lastCharSpace = false
+      } else {
+        if (lastCharSpace) {
+          ret_s += str[i].toUpperCase()
+        } else {
+          ret_s += str[i].toLowerCase()
+        }
+      lastCharSpace = false
+      } 
+    }
+    return ret_s
   },
 
   compareArrays: function(){ 
