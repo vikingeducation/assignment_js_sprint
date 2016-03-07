@@ -32,20 +32,62 @@ var sprintFunctions = {
     return loudSnakeString = wordArr.join("_");
   },
 
-  compareArrays: function(){
+  compareArrays: function(array1, array2){
     // your code here (replace the return)
-    return "Finish compareArrays first!"
+    if ( array1.length != array2.length ) {
+      return false;
+    } else {
+      for ( var i = 0; i < array1.length; i++ ) {
+
+        if ( array1[i] != array2[i] ) {
+          return false;
+        }
+      }
+      return true;
+    }
   },
 
-  fizzBuzz: function(){
+  fizzBuzz: function(number){
     // your code here
+    var fizzbuzz = [];
+
+    for ( var i = 1; i <= number; i++ ) {
+      if ( i % 3 === 0 && i % 5 === 0 ) {
+        fizzbuzz.push("FIZZBUZZ");
+      } else if ( i % 3 === 0 ) {
+        fizzbuzz.push("FIZZ");
+      } else if ( i % 5 === 0 ) {
+        fizzbuzz.push("BUZZ");
+      } else {
+        fizzbuzz.push(i);
+      }
+    }
+    return fizzbuzz;
   },
 
-  myMap: function(){
+  myMap: function(array, func){
     // your code here
+    var returned_array = []
+
+    for ( var i = 0; i < array.length; i++ ) {
+      returned_array.push(func(array[i]));
+    }
+    return returned_array;
   },
 
-  primes: function(){
+  primes: function(number){
     // your code here
+    var primes_array = [];
+    for ( var i = 2; i <= number; i++ ) {
+
+      for ( var j = 2; j <= i; j++ ) {
+        if ( i % j === 0 && i !== j ) {
+          break;
+        } else if ( j === i ) {
+          primes_array.push(i);
+        }
+      }
+    }
+    return primes_array;
   },
 }
