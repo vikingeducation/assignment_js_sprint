@@ -1,8 +1,47 @@
 
 
   function Roulette( startingBank ) {
+    // Player's bank
     this.bank = startingBank;
+    // Setup roulette wheel
+    this.wheel = ["0", "00"];
+    // Bet Types
+    this.zero = this.wheel[0];
+    this.doubleZero = this.wheel[1];
+    this.even = [];
+    this.odd = [];
+    this.firstHalf = [];
+    this.secondHalf = [];
+    this.firstThird = [];
+    this.secondThird = [];
+    this.thirdThird = [];
+    // Fill bet number arrays
+    for (var i = 1; i <= 36, i++) {
+      this.wheel.push(i);
+      i % 2 === 0 ? this.even.push(i) : this.odd.push(i);
+      i / 2 <= 0.5 ? this.firstHalf.push(i) : this.secondHalf.push(i);
+      if (i <= 12) {
+        this.firstThird.push(i);
+      } else if (i <= 24){
+        this.secondThird.push(i);
+      } else {
+        this.thirdThird.push(i);
+      }
+    }
 
+    // Display's current bank
+    this.bankroll = function() {
+      console.log("You now have $" + this.bank);
+    };
+
+    // Add's money to bank
+    this.buyIn = function(money) {
+      this.bank += money;
+      console.log("You bought in $" + money);
+      this.bankroll();
+    };
+
+    // Spins the roulette
     this.spin = function(number, bet) {
       if (bet > this.bank) {
         this.bankroll();
@@ -25,15 +64,6 @@
       }
     };
 
-    this.bankroll = function() {
-      console.log("You now have $" + this.bank);
-    };
-
-    this.buyIn = function(money) {
-      this.bank += money;
-      console.log("You bought in $" + money);
-      this.bankroll();
-    };
   }
 
 
