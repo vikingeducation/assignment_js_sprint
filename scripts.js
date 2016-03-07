@@ -42,17 +42,50 @@ var sprintFunctions = {
     return ret_s
   },
 
-  compareArrays: function(){ 
+  compareArrays: function(arr1, arr2){ 
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    if (arr1.length != arr2.length) return false;
+
+    for (var i = 1; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i] )
+        return false
+    }
+
+    return true;
+    //return "Finish compareArrays first!" 
   },
 
-  fizzBuzz: function(){  
+  fizzBuzz: function( limit ){  
     // your code here
+    var ret_arr = [];
+    for (var i = 1; i <= limit; i++) {
+      if( i % 3 !== 0 && i % 5 !== 0)
+      {
+        ret_arr.push( i );
+      }
+      if( i % 3 === 0 && i % 5 !== 0)
+      {
+        ret_arr.push( "FIZZ" );
+      }
+      if( i % 3 !== 0 && i % 5 === 0)
+      {
+        ret_arr.push( "BUZZ" );
+      }
+      if( i % 3 === 0 && i % 5 === 0)
+      {
+        ret_arr.push( "FIZZBUZZ" );
+      }
+    }
+    return ret_arr;
   },
 
-  myMap: function(){  
+  myMap: function(arr, func){  
     // your code here
+    var ret_arr = [];
+    for (var i = 0; i < arr.length; i++) {
+      ret_arr.push( func(arr[i]) );
+    }
+    return ret_arr;
   },
 
   primes: function(){  
