@@ -64,12 +64,16 @@ var sprintFunctions = {
     return result;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(array, inputFunction){
+    var max = array.length;
+    var result = []
+    for (var i = 0; i < max; i++) result.push( inputFunction(array[i]) )
+
+    return result;
   },
 
   primes: function(limit){
-    //Implementing Sieve of eratosthenes
+    //Implementing Sieve of Eratosthenes
     var list = [null, null];
     var result = [];
     for (var i = 2; i <= limit; i++) list.push(i);
