@@ -97,7 +97,7 @@ var tester = {
     $("#primes").html(String(this.results.primes));
     $("#bubble-sort").html(String(this.sprintObj.bubbleSort([1,-4,3,0,9])));
     $("#merge-sort").html(String(this.sprintObj.mergeSort([1,-4,3,0,9])));
-    // $("#merge-sort").html(String(this.sprintObj.mergeSort([2, 1, 0, 3])));
+    $("#quick-sort").html(String(this.sprintObj.quickSort([2, 1, 0, 3])));
   }
 
 }
