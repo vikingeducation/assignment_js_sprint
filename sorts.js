@@ -50,6 +50,34 @@ function merge( array1, array2 ) {
 
 // console.log( mergeSort( [2,6,1,7,2,6,4] ) );
 
-function quickSort( array ) {
-  
+function quickSort( array, p, r ) {
+  if ( p < r ) {
+    var part = partition( array, p, r );
+    quickSort( array, p, part - 1 );
+    quickSort( array, part + 1, r ); 
+  }
+  return array;
 }
+
+function partition(array, low, high) {
+  var pivot = array[high];
+
+  for ( var i = low; i < high; i++ ) {
+    if ( array[i] < pivot ) {
+      array = swap( array, low, i);
+      low ++;
+    } 
+  }
+
+  array = swap( array, low, high);
+  return low
+}
+
+function swap(array, low, i) {
+  temp = array[low];
+  array[low] = array[i];
+  array[i] = temp;
+  return array;
+}
+array = [2,6,1,7,2,6,4]
+console.log( quickSort( array, 0, array.length - 1) );
