@@ -54,7 +54,7 @@ var sprintFunctions = {
   },
 
   fizzBuzz: function(number){
-    var result = []
+    var result = [];
     for (var i = 1; i <= number; i++) {
       if (i % 15 === 0) result.push("FIZZBUZZ");
       else if (i % 5 === 0) result.push("BUZZ");
@@ -64,11 +64,24 @@ var sprintFunctions = {
     return result;
   },
 
-  myMap: function(array, function){
+  myMap: function(){
     // your code here
   },
 
-  primes: function(){
-    // your code here
+  primes: function(limit){
+    //Implementing Sieve of eratosthenes
+    var list = [null, null];
+    var result = [];
+    for (var i = 2; i <= limit; i++) list.push(i);
+
+    var sqrt = Math.floor(Math.sqrt(limit));
+    for (var i = 2; i <= sqrt; i++) {
+      for (var j = i * i; j <= limit; j += i) {
+        list[j] = null;
+      }
+    }
+
+    for (var i = 0; i <= limit; i++) if (list[i]) result.push(list[i]);
+    return result;
   },
 }
