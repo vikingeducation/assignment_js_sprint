@@ -116,5 +116,43 @@ var sprintFunctions = {
       max--;
     }
     return arr;
+  },
+
+  mergeSort: function(arr) {
+  
+    if (arr.length == 1) return arr;
+
+    var mid = arr.length / 2;
+    var left = this.mergeSort(arr.slice(0,mid));
+    var right = this.mergeSort(arr.slice(mid));
+
+    var left_index = 0; 
+    var right_index = 0; 
+
+    var merged_array = [];
+
+    console.log("Left Array: " + left + "    Right Array " + right);
+
+    while (left[left_index] && right[right_index]) {
+      if (left[left_index] < right[right_index]) {
+        merged_array.push(left[left_index]);
+        left_index++;
+      } else {
+        merged_array.push(right[right_index]);
+        right_index++;
+      }
+      console.log("Merged Array: " + merged_array);
+    }
+
+    for (var i = left_index ; i < left.length ; i++) {
+      merged_array.push(left[i]);
+    }
+
+    for (var i = right_index ; i < right.length ; i++) {
+      merged_array.push(right[i]);
+    }
+  
+    return merged_array;
   }
+
 }

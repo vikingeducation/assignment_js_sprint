@@ -11,6 +11,7 @@ var tester = {
     this.testMyMap();
     this.testPrimes();
     this.bubbleSort();
+    this.mergeSort();
     this.displayResults();
   },
 
@@ -96,6 +97,15 @@ var tester = {
     this.results.bubbleSort = (actual)
   },
 
+  mergeSort: function(){
+    var input = [5,1,6,4,3,9];
+    var exp = [1,3,4,5,6,9];
+    var actual = this.sprintObj.mergeSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    // this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.mergeSort = (actual)
+  },
+
   displayResults: function(){
     console.log("Displaying results...");
     console.log(this.results)
@@ -107,6 +117,7 @@ var tester = {
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
     $("#bubble-sort").html(String(this.results.bubbleSort));
+    $("#merge-sort").html(String(this.results.mergeSort));
   }
 
 }
