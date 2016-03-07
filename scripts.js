@@ -8,7 +8,7 @@ var sprintFunctions = {
       if (el > largest){
         largest = el;
       }
-    })
+    });
     return largest;
   },
 
@@ -21,17 +21,37 @@ var sprintFunctions = {
     return array;
   },
 
-  loudSnakeCase: function(){
-    // your code here
+  loudSnakeCase: function(string){
+    var stripped = string.replace(/[^a-z0-9]/, "");
+    var array = string.split(" ");
+    array.forEach(function(el){
+      el.toUpperCase();
+    });
+    return array.join("_");
+  },
+
+  fizzBuzz: function(number){
+    var array = [];
+    for (var i = 1; i <= number; i++) {
+      if (i % 3 === 0) {
+       array.push("FIZZ");
+      }
+      if (i % 5 === 0) {
+        array.push("BUZZ");
+      }
+      if (i % 5 === 0 && i % 3===0) {
+        array.push("FIZZBUZZ");
+      }
+      else {
+        array.push(i);
+      } 
+    }
+   return array;
   },
 
   compareArrays: function(){
     // your code here (replace the return)
-    return "Finish compareArrays first!"
-  },
-
-  fizzBuzz: function(){
-    // your code here
+    return "Finish compareArrays first!";
   },
 
   myMap: function(){
@@ -41,4 +61,4 @@ var sprintFunctions = {
   primes: function(){
     // your code here
   },
-}
+};
