@@ -22,22 +22,24 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(inputString){
-    /*
-    var words = input_string.split(" ");
-    var max = words.length;
-    var result = "";
-    for (var i = 0; i < max; i++) {
-      if (words[i]){
-        result += "_";
-        result += words[i][0].toUpperCase();
-        result += words[i].substr(1).replace(/(\W+)/g, "");
-      }
-    }
-    return result.substr(1);
-    */
+
+    // var words = input_string.split(" ");
+    // var max = words.length;
+    // var result = "";
+    // for (var i = 0; i < max; i++) {
+    //   if (words[i]){
+    //     result += "_";
+    //     result += words[i][0].toUpperCase();
+    //     result += words[i].substr(1).replace(/(\W+)/g, "");
+    //   }
+    // }
+    // return result.substr(1);
+
     var result = inputString.replace(/(\W+)/g, "_");
     var max = result.length;
-    result = result.replace(/_./g, function(v) { return "_" + v[1].toUpperCase() });
+    result = result.replace(/_./g, function(v) {
+      return "_" + v[1].toUpperCase()
+    });
     if (result[max - 1] === "_") result = result.substr(0, max - 1);
     return result;
   },
