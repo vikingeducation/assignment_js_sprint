@@ -34,6 +34,8 @@ function Roulette( startingBankroll ) {
     } else {
       console.log( "You can't bet more than you have!" );
     }
+
+    return result;
   };
 
   this.bankroll = function() {
