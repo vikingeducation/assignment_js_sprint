@@ -17,6 +17,18 @@ function Roulette(bankroll) {
     var number = this.randomNumber();
     if ( target == "Even" ) {
       this.resolveBet(number % 2 == 0, number, bet, 2 )
+    } else if ( target == "Odd" ) {
+      this.resolveBet(number % 2 != 0, number, bet, 2 )
+    } else if ( target == "To_18" ) {
+      this.resolveBet(number >= 1 && number <= 18, number, bet, 2 )
+    } else if ( target == "To_36" ) {
+      this.resolveBet(number >= 19 && number <= 36, number, bet, 2 ) 
+    } else if ( target == "1st_12" ) {
+      this.resolveBet(number >= 1 && number <= 12, number, bet, 2 )  
+    } else if ( target == "2nd_12" ) {
+      this.resolveBet(number >= 13 && number <= 24, number, bet, 2 )        
+    } else if ( target == "3rd_12" ) {
+      this.resolveBet(number >= 25 && number <= 36, number, bet, 2 )   
     } else {
       this.resolveBet(number == target, number, bet, 35 )
     }
