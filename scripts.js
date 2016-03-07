@@ -1,8 +1,10 @@
+
+
 // FILL IN THE FUNCTIONS BELOW
+
 
 var sprintFunctions = {
   largestEl: function(array){
-    // your code here
     var largest = 0;
     array.forEach(function(el){
       if (el > largest){
@@ -22,12 +24,19 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(str){
-    var stripped = str.replace(/[^a-z0-9]/, "");
+    var stripped = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
     var arr = stripped.split(' ');
-    arr.forEach(function(el){
-      el.toUpperCase();
-    });
-    return arr.join("_");
+    var filtered = arr.filter(function(n){ return n !== "" });
+
+    String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+    }
+    
+    for (var i = 0; i < filtered.length; i++){
+      filtered[i] = filtered[i].capitalize();
+    }
+    console.log(filtered.join("_"));
+    return filtered.join("_");
   },
 
   fizzBuzz: function(number){
@@ -60,13 +69,33 @@ var sprintFunctions = {
     return true;
   },
 
-  myMap: function(array, function(){
-
-  }){
-    // your code here
+  myMap: function(array, maps)
+  {
+    var results = [];
+    array.forEach(function(el){
+      results.push(maps(el));
+    });
+    return results;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(number){
+    var is_prime = function(num){
+      for (var i = 2; i < num; i++){
+        if(num % i === 0){
+          return false;
+        }
+      }
+      return true;
+    }
+    var results = [2];
+    for (var i = 3; i <= number; i++){
+      if (is_prime(i)){
+        results.push(i);
+      }
+    }
+    console.log(results);
+    return results;
   },
 };
+
+console.log(sprintFunctions.largestEl([1,2,3]));
