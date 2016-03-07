@@ -21,40 +21,48 @@ var sprintFunctions = {
     return array;
   },
 
-  loudSnakeCase: function(string){
-    var stripped = string.replace(/[^a-z0-9]/, "");
-    var array = string.split(" ");
-    array.forEach(function(el){
+  loudSnakeCase: function(str){
+    var stripped = str.replace(/[^a-z0-9]/, "");
+    var arr = stripped.split(' ');
+    arr.forEach(function(el){
       el.toUpperCase();
     });
-    return array.join("_");
+    return arr.join("_");
   },
 
   fizzBuzz: function(number){
     var array = [];
     for (var i = 1; i <= number; i++) {
-      if (i % 3 === 0) {
-       array.push("FIZZ");
-      }
-      if (i % 5 === 0) {
-        array.push("BUZZ");
-      }
       if (i % 5 === 0 && i % 3===0) {
         array.push("FIZZBUZZ");
+      }
+      else if (i % 3 === 0) {
+       array.push("FIZZ");
+      }
+      else if (i % 5 === 0) {
+        array.push("BUZZ");
       }
       else {
         array.push(i);
       }
     }
+    console.log(array)
    return array;
   },
 
-  compareArrays: function(){
+  compareArrays: function(array_1, array_2){
     // your code here (replace the return)
-    return "Finish compareArrays first!";
+    for (var i = 0; i < array_1.length; i++) {
+      if (array_1[i] !== array_2[i]) {
+        return false;
+      }
+    }
+    return true;
   },
 
-  myMap: function(){
+  myMap: function(array, function(){
+
+  }){
     // your code here
   },
 
