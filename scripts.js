@@ -18,41 +18,54 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(str){  
-    // your code here
-    var ret_s = str[0].toUpperCase();
-    var lastCharSpace = false
-    for (var i = 1; i < str.length; i++) {
-      if (str[i] == " ") {
-        if (!lastCharSpace) {
-          ret_s += "_"
-        }
-        lastCharSpace = true
-      } else if (["!", ",", "."].indexOf(str[i]) != -1) {
-        // do nothing
-        lastCharSpace = false
-      } else {
-        if (lastCharSpace) {
-          ret_s += str[i].toUpperCase()
-        } else {
-          ret_s += str[i].toLowerCase()
-        }
-      lastCharSpace = false
-      } 
+    // spaces + punctuation
+    str = str.replace(/[^a-zA-Z]+/g, "_");
+    // capitalize first letter of each word
+    str = str.replace(/_./g, function(s) { 
+      return "_" + s[1].toUpperCase();
+    });
+    // remove trailing underscore
+    if (str[str.length-1] === "_") {
+      str = str.substring(0, str.length-1);
     }
-    return ret_s
+    // capitalize first letter
+    return str[0].toUpperCase() + str.substring(1);
+
+    // "I messed. up the sentence."
+    // "Thi.s one too!" ==> Thi_S_One_Too
+
+
+    // var ret_s = str[0].toUpperCase();
+    // var lastCharSpace = false;
+    // for (var i = 1; i < str.length; i++) {
+    //   if (str[i] == " ") {
+    //     if (!lastCharSpace) {
+    //       ret_s += "_";
+    //     }
+    //     lastCharSpace = true;
+    //   } else if (["!", ",", "."].indexOf(str[i]) != -1) {
+    //     // don't add it to new string
+    //     lastCharSpace = false;
+    //   } else {
+    //     if (lastCharSpace) {
+    //       ret_s += str[i].toUpperCase();
+    //     } else {
+    //       ret_s += str[i].toLowerCase();
+    //     }
+    //   lastCharSpace = false;
+    //   } 
+    // }
+    // return ret_s;
   },
 
   compareArrays: function(arr1, arr2){ 
-    // your code here (replace the return)
     if (arr1.length != arr2.length) return false;
 
     for (var i = 1; i < arr1.length; i++) {
       if (arr1[i] !== arr2[i] )
         return false
     }
-
     return true;
-    //return "Finish compareArrays first!" 
   },
 
   fizzBuzz: function( limit ){  
@@ -79,8 +92,23 @@ var sprintFunctions = {
     return ret_arr;
   },
 
+  fizzBuzz2: function(limit) {  
+    var retArr = [];
+    for (var i = 1; i <= limit; i++) {
+      var item = i;
+      if (i % 15 === 0) {
+        item = "FIZZBUZZ";
+      } else if (i % 5 === 0) {
+        item = "BUZZ";
+      } else if (i % 3 === 0) {
+        item = "FIZZ";
+      }
+      retArr.push(item);
+    }
+    return retArr;
+  },
+
   myMap: function(arr, func){  
-    // your code here
     var ret_arr = [];
     for (var i = 0; i < arr.length; i++) {
       ret_arr.push( func(arr[i]) );
@@ -88,7 +116,39 @@ var sprintFunctions = {
     return ret_arr;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(limit){  
+    var prime_nums = [2]
+    for (var i = 3; i < limit; i++) {
+      for (p in prime_nums) {
+        if (i % prime_nums[p] == 0) {
+          break;
+        } else {
+          if (prime_nums[p] > Math.sqrt(i)) {
+            prime_nums.push(i)
+            break;
+          }
+        }
+      }
+    }
+    return prime_nums;
   },
-}
+
+
+  bubbleSort: function(arr) {
+    do {
+      madeSwap = false;
+      for (var i = 0; i < arr.length-1; i++) {
+        left = arr[i];
+        right = arr[i+1];
+        if (left > right) {
+          arr[i] = right;
+          arr[i+1] = left;
+          madeSwap = true;
+        }
+      }
+    } while (madeSwap);
+    return arr;
+  },
+};
+
+
