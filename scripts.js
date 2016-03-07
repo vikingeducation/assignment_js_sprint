@@ -53,11 +53,18 @@ var sprintFunctions = {
     return true;
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(number){
+    var result = []
+    for (var i = 1; i <= number; i++) {
+      if (i % 15 === 0) result.push("FIZZBUZZ");
+      else if (i % 5 === 0) result.push("BUZZ");
+      else if (i % 3 === 0) result.push("FIZZ");
+      else result.push(i);
+    }
+    return result;
   },
 
-  myMap: function(){
+  myMap: function(array, function){
     // your code here
   },
 
