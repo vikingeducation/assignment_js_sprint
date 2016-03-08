@@ -14,6 +14,8 @@ var tester = {
   },
 
 
+
+
   results: {},
 
 
@@ -60,9 +62,9 @@ var tester = {
   testFizzBuzz: function(){
     var input = 16;
     var exp = [1,2,"FIZZ",4,"BUZZ","FIZZ",7,8,"FIZZ","BUZZ",11,"FIZZ",13,14,"FIZZBUZZ",16];
-    var actual = this.sprintObj.fizzBuzz(16);
+    var actual = this.sprintObj.fizzBuzz2(16);
     if (typeof actual === 'undefined') { actual = [] };
-    this.results.fizzBuzz = ( this.sprintObj.compareArrays(exp,actual) );
+    this.results.fizzBuzz2 = ( this.sprintObj.compareArrays(exp,actual) );
   },
 
 
@@ -92,13 +94,17 @@ var tester = {
     $("#reversed").html(String(this.results.reversed));
     $("#loud-snake-case").html(String(this.results.loudSnakeCase));
     $("#compare-arrays").html(String(this.results.compareArrays));
-    $("#fizz-buzz").html(String(this.results.fizzBuzz));
+    $("#fizz-buzz").html(String(this.results.fizzBuzz2));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    $("#bubble-sort").html(String(this.sprintObj.bubbleSort([1,-4,3,0,9])));
+    $("#merge-sort").html(String(this.sprintObj.mergeSort([1,-4,3,0,9])));
+    $("#quick-sort").html(String(this.sprintObj.quickSort([2, 1, 0, 3])));
+    // $("#checkers").html(String(this.sprintObj.board));
   }
 
 }
 
 
 $(document).ready( function(){ tester.init( sprintFunctions )});
-
+// $(document).ready( function(){ tester.init( Checkers )});
