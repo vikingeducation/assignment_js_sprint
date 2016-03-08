@@ -10,6 +10,9 @@ var tester = {
     this.testFizzBuzz();
     this.testMyMap();
     this.testPrimes();
+    this.bubbleSort();
+    this.mergeSort();
+    this.quickSort();
     this.displayResults();
   },
 
@@ -37,6 +40,7 @@ var tester = {
     var input = "I am a strange code.  I like it though!";
     var exp = "I_Am_A_Strange_Code_I_Like_It_Though";
     var actual = this.sprintObj.loudSnakeCase(input);
+    console.log("Actual is " + actual);
     this.results.loudSnakeCase = ( actual == exp);
   },
 
@@ -81,9 +85,36 @@ var tester = {
     var exp = [2,3,5,7,11];
     var actual = this.sprintObj.primes(input);
     if (typeof actual === 'undefined') { actual = [] };
+    console.log(actual);
     this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
   },
 
+  bubbleSort: function(){
+    var input = [5,6,4,3,9];
+    var exp = [3,4,5,6,9];
+    var actual = this.sprintObj.bubbleSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    // this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.bubbleSort = (actual)
+  },
+
+  mergeSort: function(){
+    var input = [5,1,6,4,3,9];
+    var exp = [1,3,4,5,6,9];
+    var actual = this.sprintObj.mergeSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    // this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.mergeSort = (actual)
+  },
+
+  quickSort: function(){
+    var input = [5,1,6,4,3,9];
+    var exp = [1,3,4,5,6,9];
+    var actual = this.sprintObj.quickSort(input);
+    if (typeof actual === 'undefined') { actual = [] };
+    // this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.quickSort = (actual)
+  },
 
   displayResults: function(){
     console.log("Displaying results...");
@@ -95,6 +126,9 @@ var tester = {
     $("#fizz-buzz").html(String(this.results.fizzBuzz));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    $("#bubble-sort").html(String(this.results.bubbleSort));
+    $("#merge-sort").html(String(this.results.mergeSort));
+    $("#quick-sort").html(String(this.results.quickSort));
   }
 
 }
