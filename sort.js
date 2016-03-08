@@ -69,10 +69,35 @@ var merge_sort = function(array){
   console.log("left" + array_left);
   var array_right = merge_sort(array.slice(right_lower_bound));
   console.log("right" + array_right);
-  
+
   //merge sides together
   return merge(array_left, array_right);
 
 }
-  
+
 console.log(merge_sort([1,3,7,-2,0,5,8,-9,2,3,4]));
+
+var quick_sort = function(array){
+  //Base Case
+  if (array.length === 0){
+    return [];
+  }
+
+  //Instantiate Variables
+  var left = [];
+  var right = [];
+  var pivot = array[0];
+
+  //Loop Through array
+  for (var i = 1; i < array.length; i++) {
+    if (array[i] < pivot){
+       left.push(array[i]);
+     }
+    else {
+      right.push(array[i]);
+    }
+  }
+  return quick_sort(left).concat(pivot, quick_sort(right));
+}
+
+console.log(quick_sort([1,3,7,-2,0,5,8,-9,2,3,4]));
