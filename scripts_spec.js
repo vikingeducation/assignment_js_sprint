@@ -14,6 +14,8 @@ var tester = {
   },
 
 
+
+
   results: {},
 
 
@@ -85,23 +87,24 @@ var tester = {
   },
 
 
-  // displayResults: function(){
-  //   console.log("Displaying results...");
-  //   console.log(this.results)
-  //   $("#largest-el").html(String(this.results.largestEl));
-  //   $("#reversed").html(String(this.results.reversed));
-  //   $("#loud-snake-case").html(String(this.results.loudSnakeCase));
-  //   $("#compare-arrays").html(String(this.results.compareArrays));
-  //   $("#fizz-buzz").html(String(this.results.fizzBuzz2));
-  //   $("#my-map").html(String(this.results.myMap));
-  //   $("#primes").html(String(this.results.primes));
-  //   $("#bubble-sort").html(String(this.sprintObj.bubbleSort([1,-4,3,0,9])));
-  //   $("#merge-sort").html(String(this.sprintObj.mergeSort([1,-4,3,0,9])));
-  //   $("#quick-sort").html(String(this.sprintObj.quickSort([2, 1, 0, 3])));
-  // }
+  displayResults: function(){
+    console.log("Displaying results...");
+    console.log(this.results)
+    $("#largest-el").html(String(this.results.largestEl));
+    $("#reversed").html(String(this.results.reversed));
+    $("#loud-snake-case").html(String(this.results.loudSnakeCase));
+    $("#compare-arrays").html(String(this.results.compareArrays));
+    $("#fizz-buzz").html(String(this.results.fizzBuzz2));
+    $("#my-map").html(String(this.results.myMap));
+    $("#primes").html(String(this.results.primes));
+    $("#bubble-sort").html(String(this.sprintObj.bubbleSort([1,-4,3,0,9])));
+    $("#merge-sort").html(String(this.sprintObj.mergeSort([1,-4,3,0,9])));
+    $("#quick-sort").html(String(this.sprintObj.quickSort([2, 1, 0, 3])));
+    // $("#checkers").html(String(this.sprintObj.board));
+  }
 
 }
 
 
-// $(document).ready( function(){ tester.init( sprintFunctions )});
-
+$(document).ready( function(){ tester.init( sprintFunctions )});
+// $(document).ready( function(){ tester.init( Checkers )});
