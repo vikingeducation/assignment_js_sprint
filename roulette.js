@@ -11,9 +11,9 @@ function Roulette( startingBankroll ) {
       var result = Math.floor( Math.random() * 37 + 1 );
 
       if ( typeof( input ) === "number" ) {
-        var multiplier = checkNumber( input, result );
+        var multiplier = this.checkNumber( input, result );
       } else {
-        var multiplier = checkString( input.toLowerCase(), result );
+        var multiplier = this.checkString( input.toLowerCase(), result );
       }
 
       if ( result === 37 ) {
@@ -40,13 +40,15 @@ function Roulette( startingBankroll ) {
 
   this.bankroll = function() {
     console.log( this.balance );
+    return this.balance;
   };
 
   this.buyIn = function( amount ) {
     this.balance += amount;
+    return this.balance;
   }
 
-  function checkNumber(input, result) {
+  this.checkNumber = function(input, result) {
     var multiplier = 0;
     if ( input === result ) {
       multiplier = 35;
@@ -54,7 +56,7 @@ function Roulette( startingBankroll ) {
     return multiplier;
   };
 
-  function checkString(input, result) {
+  this.checkString = function(input, result) {
     var multiplier = 0;
 
     switch(input) {
@@ -101,4 +103,5 @@ function Roulette( startingBankroll ) {
     }
     return multiplier;
   };
+
 }
