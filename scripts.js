@@ -159,14 +159,6 @@ var sprintFunctions = {
 
     var retArray = [];
     while( arr1.length && arr2.length ) {
-      // if( arr1[0] < arr2[0] ) {
-      //   retArray.push( arr1.shift() );
-      // } else if (arr2[0] < arr1[0]){
-      //   retArray.push( arr2.shift() );
-      // } else {
-      //   retArray.push( arr1.shift() );
-      //   retArray.push( arr2.shift() );
-      // }
 
       var lowElement = (arr1[0] < arr2[0]) ? arr1.shift() : arr2.shift();
       retArray.push( lowElement )
