@@ -26,17 +26,18 @@ var game = {
   spin_value: 0,
   win: function(){
     console.log(game.spin_value)
+    console.log(player.selection)
     if(isNaN(parseInt(player.selection()) == false && parseInt(player.selection())) === game.spin_value){
       player.bankroll += parseInt(game.bet)*35;
       alert('You win! Your new bankroll is ' + player.bankroll);
       return true;
     }
-    else if(player.selection == 'evens' && game.spin_value % 2 === 0){
+    else if(player.selection() == 'evens' && game.spin_value % 2 === 0){
       player.bankroll += parseInt(game.bet)*2;
       alert('You win! Your new bankroll is ' + player.bankroll);
       return true;
     }
-    else if (player.selection == 'odds' && game.spin_value % 2 !== 0){
+    else if (player.selection() == 'odds' && game.spin_value % 2 !== 0){
       player.bankroll += parseInt(game.bet)*2;
       alert('You win! Your new bankroll is ' + player.bankroll);
       return true;
@@ -51,7 +52,7 @@ var game = {
     var play = window.confirm('Play?');
     while(play === true && player.bankroll > 0){
       console.log(player.bankroll);
-     
+
       game.bet = player.bet();
       while (game.bet === false){
          game.bet = player.bet();
