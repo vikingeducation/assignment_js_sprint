@@ -13,6 +13,7 @@ var sprintFunctions = {
     }
     return current;
   },
+
   
   reversed: function(str) {
     var retVal = '';
@@ -21,6 +22,7 @@ var sprintFunctions = {
     }
     return retVal;
   },
+
 
   loudSnakeCase: function(str) {
     var str = str.replace(/[\s]+/g, '_')
@@ -34,6 +36,7 @@ var sprintFunctions = {
     }
     return str;
   },
+
 
   compareArrays: function(a, b) {
     console.log(a, b);
@@ -49,23 +52,19 @@ var sprintFunctions = {
     return true;
   },
 
+
   fizzBuzz: function(n) {
     var a = [];
     for (var i = 1; i <= n; i++) {
-      var j = i;
-      if (i % 3 == 0) {
-        j = 'FIZZ';
-      }
-      if (i % 5 == 0) {
-        j = 'BUZZ';
-      }
-      if (i % 3 == 0 && i % 5 == 0) {
-        j = 'FIZZBUZZ';
-      }
+      var str = '';
+      str = (i % 3 === 0) ? 'FIZZ' : str;
+      str += (i % 5 === 0) ? 'BUZZ' : '';
+      var j = (str === '') ? i : str;
       a.push(j);
     }
     return a;
   },
+
 
   myMap: function(array, func) {
     var retVal = [];
@@ -75,6 +74,7 @@ var sprintFunctions = {
     return retVal;
   },
 
+
   primes: function(n) {
     var retVal = [];
     var j = 0;
@@ -82,10 +82,11 @@ var sprintFunctions = {
       var i = 2;
       var isPrime = (j > 1);
       while (i <= Math.sqrt(j)) {
-        if (j % i++ < 1) {
+        if (j % i < 1) {
           isPrime = false;
           break;
         }
+        i++;
       }
       if (isPrime) {
         retVal.push(j);
@@ -95,7 +96,6 @@ var sprintFunctions = {
     return retVal;
   },
 
-  // 
 
   bubbleSort: function(array) {
     var n = array.length;
@@ -119,20 +119,23 @@ var sprintFunctions = {
     return array;
   },
 
+
   mergeSort: function(array) {
     if (array.length < 2) return array;
     
     var middle = Math.floor(array.length / 2);
     var left = this.mergeSort(array.slice(0, middle));
-    var right = this.mergeSort(array.slice( middle));
+    var right = this.mergeSort(array.slice(middle));
     
     var result = [];
     while (left.length > 0 && right.length > 0) {
       result.push(left[0] < right[0] ? left.shift() : right.shift());
     }
     result = result.concat(left.length ? left : right);
+
     return result;
   },
+
 
   quickSort: function(array) {
     var lo = 0;
@@ -140,6 +143,7 @@ var sprintFunctions = {
     this.doQuickSort(array, lo, hi);
     return array;
   },
+
 
   partition: function(array, lo, hi) {
     var pivot = array[hi];
@@ -159,6 +163,7 @@ var sprintFunctions = {
     array[hi] = a;
     return i;    
   },
+
 
   doQuickSort: function(array, lo, hi) {
     if (lo < hi) {

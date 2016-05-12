@@ -3,6 +3,7 @@ var Roulette = function(bankroll) {
   this.result;
 };
 
+
 Roulette.wheel = Array.apply(null, Array(38)).map(function(i, j) {
   if (j  < 2) {
     if (j == 0) j = '00';
@@ -13,9 +14,11 @@ Roulette.wheel = Array.apply(null, Array(38)).map(function(i, j) {
   return j;
 });
 
+
 Roulette.prototype.bankroll = function() {
   return 'You have $' + this.bankroll;
 };
+
 
 Roulette.prototype.buyIn = function(amount) {
   this.bankroll += amount;
@@ -23,10 +26,12 @@ Roulette.prototype.buyIn = function(amount) {
     "\nYou now have $" + this.bankroll;
 };
 
+
 Roulette.prototype.randomResult = function() {
   var randomIndex = ~~(Math.random() * 100 % Roulette.wheel.length);
   this.result = Roulette.wheel[randomIndex];
 };
+
 
 Roulette.prototype.spin = function(bet, number, betType) {
 
@@ -49,6 +54,7 @@ Roulette.prototype.spin = function(bet, number, betType) {
   }
 };
 
+
 Roulette.prototype.spinForQuality = function(bet, number) {
   if (number == 'even' && this.result % 2 == 0) {
     payout = this.calculatePayoutFor(bet, 'quality');
@@ -61,6 +67,7 @@ Roulette.prototype.spinForQuality = function(bet, number) {
   }
 };
 
+
 Roulette.prototype.spinForHalves = function(bet, number) {
   if (number == '1-18' && (~~this.result >= 1 && ~~this.result <= 18)) {
     payout = this.calculatePayoutFor(bet, 'halves');
@@ -72,6 +79,7 @@ Roulette.prototype.spinForHalves = function(bet, number) {
     return this.lose(bet, number);
   }
 };
+
 
 Roulette.prototype.spinForThirds = function(bet, number) {
   if (number == '1-12' && (~~this.result >= 1 && ~~this.result <= 12)) {
@@ -88,6 +96,7 @@ Roulette.prototype.spinForThirds = function(bet, number) {
   }
 };
 
+
 Roulette.prototype.spinForExact = function(bet, number) {
   if (this.result == number) {
     var payout = this.calculatePayoutFor(bet, 'exact');
@@ -96,6 +105,7 @@ Roulette.prototype.spinForExact = function(bet, number) {
     return this.lose(bet, number);
   }
 };
+
 
 Roulette.prototype.calculatePayoutFor = function(bet, betType) {
   var payout;
@@ -111,6 +121,7 @@ Roulette.prototype.calculatePayoutFor = function(bet, betType) {
   return payout;
 };
 
+
 Roulette.prototype.win = function(bet, number, payout) {
   this.bankroll += payout;
   return 'You spun ' + this.result +
@@ -120,6 +131,7 @@ Roulette.prototype.win = function(bet, number, payout) {
       "\nYou're bankroll is now $" + this.bankroll;
 };
 
+
 Roulette.prototype.lose = function(bet, number) {
   this.bankroll -= bet;
   return 'You spun ' + this.result +
@@ -127,6 +139,7 @@ Roulette.prototype.lose = function(bet, number) {
       " on " + number +
       "\nYou lose, you're bankroll is now $" + this.bankroll;
 };
+
 
 
 
