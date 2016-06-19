@@ -54,18 +54,28 @@ var sprintFunctions = {
   },
 
   compareArrays: function (arrayOne, arrayTwo) {
-    var answer = true;
     for (i = 0; i < arrayOne.length; i++) {
       if (arrayOne[i] !== arrayTwo[i]) {
-        answer = false;
-        break;
+        return false;
       };
     };
-    return answer;
+    return true
   },
 
-  fizzBuzz: function(){  
-    // your code here
+  fizzBuzz: function( number ){
+    var array = []
+    for (i = 1; i <= number; i++) {
+      if ((i % 3 === 0) && (i % 5 === 0)) {
+        array.push("FIZZBUZZ")
+      } else if (i % 3 === 0) {
+        array.push("FIZZ")
+      } else if (i % 5 === 0) {
+        array.push("BUZZ")
+      } else {
+        array.push(i)
+      };
+    };
+    return array;
   },
 
   myMap: function(){  
