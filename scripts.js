@@ -114,5 +114,24 @@ var sprintFunctions = {
     };
     // Returning our array of prime numbers.
     return primeNumbers;
+  }, 
+
+  bubbleSort: function ( array ) {
+    // Gotta loop until isSorted is true, hmmmmm, don't think we've learnt that yet...
+    do {
+      var isSorted = true;
+      for (i = 0; i < array.length - 1; i++) {
+        var itemOne = array[i];
+        var itemTwo = array[i + 1];
+        if (itemOne > itemTwo) {
+          isSorted = false;
+          array[i] = itemTwo;
+          array[i + 1] = itemOne;
+        };
+      };
+    } while ( isSorted === false );
+    return array;
   }
 }
+
+
