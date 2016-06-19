@@ -53,9 +53,15 @@ var sprintFunctions = {
     return filteredSplitString.join("_");
   },
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
+  compareArrays: function (arrayOne, arrayTwo) {
+    var answer = true;
+    for (i = 0; i < arrayOne.length; i++) {
+      if (arrayOne[i] !== arrayTwo[i]) {
+        answer = false;
+        break;
+      };
+    };
+    return answer;
   },
 
   fizzBuzz: function(){  
