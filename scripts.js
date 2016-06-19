@@ -86,7 +86,33 @@ var sprintFunctions = {
     return newArray;
   },
 
-  primes: function(){  
-    // your code here
-  },
+  primes: function ( number ) {
+    var primeNumbers = [];
+    if ( number >= 2 ) {
+      primeNumbers.push(2);
+      for (var i = 3; i < number; i ++) {
+        // Getting the square root of a number.
+        var squareRootOfNumber = Math.sqrt(i);
+        var isPrime = true;
+
+        // So if squareRootofNumber is > 1 then it means the number will be 4 or above...
+        if (squareRootOfNumber > 1) {
+          // We wanna check if the number is divisible by 2
+          // We also stop checking whether a number is prime at it's square root as the numbers below that can tell us whether or not the number is a prime or not.
+          for (var j = 2; j <= squareRootOfNumber; j++) {
+            if (i % j === 0) {
+              isPrime = false;
+              break;
+            };
+          };
+        };
+        // Pushing the number into our array if the number is a prime
+        if (isPrime) {
+          primeNumbers.push(i);
+        };
+      };
+    };
+    // Returning our array of prime numbers.
+    return primeNumbers;
+  }
 }
