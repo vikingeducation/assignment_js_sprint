@@ -183,6 +183,29 @@ var sprintFunctions = {
 
     // gotta return that array
     return array;
+  },
+
+  quickSort: function ( array ) {
+    // if array is empty
+    if (array.length === 0) {
+      return [];
+    };
+
+    // setting up the left and right and setting the pivot as the first item in the array. 
+    var left = [];
+    var right = [];
+    var pivot = array[0];
+
+    // go through each element in array
+    for (var i = 1; i < array.length; i++) {
+      if (array[i] < pivot) {
+        left.push(array[i]); 
+      } else {
+        right.push(array[i]);
+      };
+    };
+
+    return quickSort(left).concat(pivot, quickSort(right));
   }
 }
 
