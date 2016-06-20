@@ -234,6 +234,19 @@ function Roulette (startingAmount) {
     };
   };
 
+  this.evenBet = function(bet, randomNumber) {
+    if (randomNumber > 1 && randomNumber < 37 && this.evenOrOdd(randomNumber) === 'even') {
+      var winnings = this.winningAmount( 1, bet );
+      this.winningMessage(winnings, randomNumber);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
+  };
+
   this.evenOrOdd = function(random) {
     if ( random % 2 === 0 ) {
       return "even";
@@ -247,7 +260,8 @@ function Roulette (startingAmount) {
   };
 
   this.randomNumber = function(lowest, highest) {
-    return (Math.floor((Math.random() * highest + lowest)))
+    // You gotta do the the + 1 for the highest number...
+    return (Math.floor((Math.random() * (highest + 1) + lowest)))
   };
 
   this.subtractLoss = function(bet) {
@@ -275,7 +289,26 @@ function Roulette (startingAmount) {
 
     // THIS IS WHERE THE PROBLEM IS
     if (number.NAN) {
-      return 33
+      switch(number) {
+        case "Even":
+          this.evenBet(bet, randomNumber);
+          break;
+        case "Odd":
+          break;
+        case "1 to 18":
+          break;
+        case "19 to 36":
+          break;
+        case "1st 12":
+          break;
+        case "2nd 12":
+          break;
+        case "3rd 12":
+          break;
+        default:
+          console.log("Invalid bet!");
+          break;
+      };
     // So here the user has chosen a number and we're going to see if it won.
     } else if (this.correctNumber(randomNumber, number)) {
       var winnings = this.winningAmount( 35, bet );
@@ -288,6 +321,5 @@ function Roulette (startingAmount) {
       this.subtractLoss(bet);
       this.bankroll();
     };
-    
   };
 };
