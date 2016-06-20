@@ -209,4 +209,85 @@ var sprintFunctions = {
   }
 }
 
+function Roulette (startingAmount) {
+  this.startingAmount = startingAmount;
 
+  this.addWinToBankroll = function (winnings) {
+    this.startingAmount += winnings;
+  };
+
+  this.bankroll = function () {
+    console.log("You now have $" + this.startingAmount);
+  };
+
+  this.buyIn = function (money) {
+    this.startingAmount += money;
+    console.log("You bought in $" + money);
+    console.log("You now have $" + this.startingAmount);
+  };
+
+  this.correctNumber = function(random, chosenNumber) {
+    if ( random === chosenNumber ) {
+      return true;
+    } else {
+      return false;
+    };
+  };
+
+  this.evenOrOdd = function(random) {
+    if ( random % 2 === 0 ) {
+      return "even";
+    } else {
+      return "odd";
+    };
+  };
+
+  this.losingMessage = function(bet, randomNumber) {
+    console.log("You Lose, the spin was " + randomNumber + " :(");
+  };
+
+  this.randomNumber = function(lowest, highest) {
+    return (Math.floor((Math.random() * highest + lowest)))
+  };
+
+  this.subtractLoss = function(bet) {
+    this.startingAmount -= bet;
+  };
+
+  this.winningAmount = function(multiplier, stake) {
+    return (multiplier * stake)
+  };
+
+  this.winningMessage = function(winningAmount, number) {
+    if (number === 37) {
+      number = "00";
+    };
+    console.log("You Win $" + winningAmount + ", the spin was " + number + "!!!");
+  };
+
+  this.spin = function ( bet, number ) {
+    var randomNumber = this.randomNumber(0, 37);
+    if (number === "0") {
+      number = 0;
+    } else if (number === "00") {
+      number = 37;
+    };
+
+    // THIS IS WHERE THE PROBLEM IS
+    if (number.NAN) {
+      return 33
+    // So here the user has chosen a number and we're going to see if it won.
+    } else if (this.correctNumber(randomNumber, number)) {
+      var winnings = this.winningAmount( 35, bet );
+      this.winningMessage(winnings, number);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    // Here we know the user has lost...
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
+    
+  };
+};
