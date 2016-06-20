@@ -78,10 +78,10 @@ var sprintFunctions = {
     return array;
   },
 
-  myMap: function( array, passedfunction ){
+  myMap: function( array, passedFunction ){
     var newArray = []
     for (i = 0; i < array.length; i++) {
-      newArray.push( passedfunction( array[i] ) );
+      newArray.push( passedFunction( array[i] ) );
     };
     return newArray;
   },
@@ -130,6 +130,58 @@ var sprintFunctions = {
         };
       };
     } while ( isSorted === false );
+    return array;
+  },
+
+  mergeSort: function ( array ) {
+    // First we want to just split the numbers in the array into a bunch of different arrays right.
+    // Why not skip the splitting and just turn each number into it's own array... 
+    for (i = 0; i < array.length; i++) {
+      array[i] = [ array[i] ];
+    };
+
+    var arraysToProcess = array.length;
+    var arraysSorted = 0;
+    while (arraysToProcess > 1) {
+      var arrayOne = array.shift();
+      var arrayTwo = array.shift();
+      var sortedArray = [];
+      arraysToProcess -= 2;
+
+      while (arrayOne.length > 0 && arrayTwo.length > 0) {
+        if (arrayOne[0] <= arrayTwo[0]) {
+          sortedArray.push( arrayOne.shift() );
+        } else {
+          sortedArray.push( arrayTwo.shift() );
+        };
+      };
+
+      while (arrayOne.length > 0) {
+        sortedArray.push( arrayOne.shift() );
+      };
+
+      while (arrayTwo.length > 0) {
+        sortedArray.push( arrayTwo.shift() );
+      };
+
+      // Gotta push our sortedArray back on to our array
+      array.push( sortedArray );
+      arraysSorted += 1;
+
+      if (arraysToProcess === 0) {
+        arraysToProcess = arraysSorted;
+        arraysSorted = 0;
+      } else if (arraysToProcess === 1) {
+        array.push(array.shift());
+        arraysSorted += 1;
+        arraysToProcess = arraysSorted;
+        arraysSorted = 0;
+      };
+    };
+
+    array = array[0];
+
+    // gotta return that array
     return array;
   }
 }
