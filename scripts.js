@@ -255,8 +255,86 @@ function Roulette (startingAmount) {
     };
   };
 
+  this.firstTwelve = function(bet, randomNumber) {
+    if (randomNumber > 0 && randomNumber < 13) {
+      var winnings = this.winningAmount( 2, bet );
+      this.winningMessage(winnings, randomNumber);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
+  };
+
+  this.secondTwelve = function(bet, randomNumber) {
+    if (randomNumber > 12 && randomNumber < 25) {
+      var winnings = this.winningAmount( 2, bet );
+      this.winningMessage(winnings, randomNumber);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
+  };
+
+  this.thirdTwelve = function(bet, randomNumber) {
+    if (randomNumber > 24 && randomNumber < 37) {
+      var winnings = this.winningAmount( 2, bet );
+      this.winningMessage(winnings, randomNumber);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
+  };
+
+  this.highNumber = function(bet, randomNumber) {
+    if (randomNumber > 18 && randomNumber < 37) {
+      var winnings = this.winningAmount( 1, bet );
+      this.winningMessage(winnings, randomNumber);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
+  };
+
   this.losingMessage = function(bet, randomNumber) {
     console.log("You Lose, the spin was " + randomNumber + " :(");
+  };
+
+  this.lowNumber = function(bet, randomNumber) {
+    if (randomNumber > 0 && randomNumber < 19) {
+      var winnings = this.winningAmount( 1, bet );
+      this.winningMessage(winnings, randomNumber);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
+  };
+
+  this.oddBet = function(bet, randomNumber) {
+    if (randomNumber > 0 && randomNumber < 36 && this.evenOrOdd(randomNumber) === 'odd') {
+      var winnings = this.winningAmount( 1, bet );
+      this.winningMessage(winnings, randomNumber);
+      this.addWinToBankroll(winnings);
+      this.bankroll();
+    } else {
+      this.losingMessage(bet, randomNumber);
+      this.subtractLoss(bet);
+      this.bankroll();
+    };
   };
 
   this.randomNumber = function(lowest, highest) {
@@ -288,22 +366,28 @@ function Roulette (startingAmount) {
     };
 
     // THIS IS WHERE THE PROBLEM IS
-    if (number.NAN) {
+    if (isNaN(number)) {
       switch(number) {
         case "Even":
           this.evenBet(bet, randomNumber);
           break;
         case "Odd":
+          this.oddBet(bet, randomNumber);
           break;
         case "1 to 18":
+          this.lowNumber(bet, randomNumber);
           break;
         case "19 to 36":
+          this.highNumber(bet, randomNumber);
           break;
         case "1st 12":
+          this.firstTwelve(bet, randomNumber);
           break;
         case "2nd 12":
+          this.secondTwelve(bet, randomNumber);
           break;
         case "3rd 12":
+          this.thirdTwelve(bet, randomNumber);
           break;
         default:
           console.log("Invalid bet!");
