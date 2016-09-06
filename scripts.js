@@ -58,11 +58,29 @@ var sprintFunctions = {
     return ans;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(arr,fn){
+    var output = [];
+    arr.forEach(function(ele) {
+      output.push(fn(ele));
+    });
+    return output;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(num){
+    var output = [];
+    function isPrime(n) {
+      for (var i = 2; i <= Math.floor(Math.sqrt(n)); i++) {
+        if (n % i === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+    for (var j = 2; j < num; j++) {
+      if (isPrime(j)) {
+        output.push(j);
+      }
+    }
+    return output;
   },
-}
+};
