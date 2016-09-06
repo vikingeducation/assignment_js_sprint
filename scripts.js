@@ -164,3 +164,38 @@ var sprintFunctions = {
     return left.concat(right);
   }
 }
+
+function Roulette(start) {
+  var bank = start;
+  
+  this.spin = function(bet, amount, number) {
+    var result = Math.floor(Math.random() * 38 + 1);
+
+
+
+    if (number === result) {
+      console.log("Wow, you win $" + amount * 36 + "! The spin was " + result);
+      bank += amount * 36;
+    } else {
+      console.log("You LOSE! The spin was " + result);
+      bank -= amount;
+    }
+    this.bankroll();
+  };
+
+  this.bankroll = function() {
+    console.log("You now have $" + bank);
+  };
+
+  this.buyIn = function(amount) {
+    bank += amount;
+    this.bankroll();
+  };
+
+  var getChoice = function() {
+    var menu = "Betting Menu:\n1: number\n2: 0\n3: 00\n4: Even\n5: Odd\n6: 1 to 18\n7: 19 to 36\n8: 1st 12\n9: 2nd 12\n10: 3rd 12\n";
+    return prompt("What do you want to bet on?\n" + menu, "Enter bet");
+  };
+
+
+}
