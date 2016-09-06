@@ -23,10 +23,9 @@ var sortFunctions = {
 
 
 var merge = function(leftArray, rightArray) {
-  newArray = []
+  var newArray = [];
   while (leftArray.length > 0 && rightArray.length > 0) {
     if (leftArray[0] <= rightArray[0]) {
-      console.log(leftArray)
       newArray.push(leftArray.shift());
     } else {
       newArray.push(rightArray.shift());
@@ -46,17 +45,11 @@ var mergeSort = function(array) {
     return array
   }
   
-  midPoint = Math.floor(array.length / 2);
-  leftArray = array.slice(0, midPoint);
-  rightArray = array.slice(midPoint, (array.length));
-
-  console.log("Left array is " + leftArray);
-  console.log("Right array is " + rightArray);
+  var midPoint = Math.floor(array.length / 2);
+  var leftArray = array.slice(0, midPoint);
+  var rightArray = array.slice(midPoint, (array.length));
   
-  leftArray = mergeSort(leftArray);
-  rightArray = mergeSort(rightArray);
-  console.log(merge(leftArray, rightArray));
-  
+  return merge( mergeSort(leftArray), mergeSort(rightArray));
 };
 
 var arr1 = [4, 7, 6, 9, 1, 3 ,5, 8]
