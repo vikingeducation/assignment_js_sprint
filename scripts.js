@@ -5,7 +5,7 @@ var sprintFunctions = {
     return Math.max.apply(null, arr);
   },
   
-  reversed: function(str){
+  reversed: funcFtion(str){
     var new_str = [];
     for (var i = 0; i < str.length; i++) {
       new_str.unshift(str[i]);
