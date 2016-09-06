@@ -1,6 +1,13 @@
 var board = [];
+var current_player;
+var player1 = new Player("X");
+var player2 = new Player("O");
+current_player = player1;
 
-var player = "X"
+function Player(symbol) {
+  this.symbol = symbol;
+  this.pieces = 12;
+}
 
 var render = function(board) {
   board.forEach(function(row) {
@@ -17,18 +24,31 @@ var render = function(board) {
 };
 
 var move = function() {
-  var from = prompt("Player " + player + ", choose a piece. (e.g. 2,3)");
-  var to = prompt("Choose the destination. (e.g. 2,3)");
+  var from;
+  var to;
+
+  do {
+    from = prompt("Player " + current_player.symbol + ", choose a piece. (e.g. 2,3)");
+  } while (board[from.split(",")[0]][from.split(",")[1]] !== current_player.symbol);
+
+  do {
+    to = prompt("Choose the destination. (e.g. 2,3)");
+  } while(isValidMove(to.split(",")[0], to.split(",")[1]));
+
   board[from.split(",")[0]][from.split(",")[1]] = undefined;
-  board[to.split(",")[0]][to.split(",")[1]] = player;
+  board[to.split(",")[0]][to.split(",")[1]] = current_player.symbol;
 };
 
 var change_player = function() {
-  if (player === "X") {
-    player = "O";
+  if (current_player === player1) {
+    current_player = player2;
   } else {
-    player = "X";
+    current_player = player1;
   }
+};
+
+var isValidMove = function(row, col) {
+
 };
 
 // view
@@ -45,7 +65,7 @@ var change_player = function() {
 //   getmove
 
 //  board
-function GameBoard() {
+function gameBoard() {
   var rows = new Array(8);
   for (var i = 0; i < 8; i++) {
     rows[i] = new Array(8);
@@ -78,3 +98,21 @@ function GameBoard() {
 //  piece
 //   king?
 //   player
+
+var play = function() {
+  gameBoard();
+  var playing = true;
+
+  while(playing) {
+    render(board);
+    move();
+
+    change_player();
+
+    if (isOver()) {
+      playing = false;
+    }
+  }
+};
+
+play();
