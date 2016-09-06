@@ -120,40 +120,62 @@ var mergeSort = function(array) {
     return array;
   };
   var midPoint = array.length / 2;
-  var firstList = mergeSort(array.slice(0, midPoint))
-  var secondList = mergeSort(array.slice(midPoint, array.length - 1))
-  merge(firstList, secondList);
+  var firstList = mergeSort(array.slice(0, midPoint));
+  var secondList = mergeSort(array.slice(midPoint));
+  return merge(firstList, secondList);
 };
 
 var merge = function(first, second) {
   var finalArray = [];
   var i = 0;
   var j = 0;
-  var length = first.length + second.length;
+  var first_length = first.length;
+  var second_length = second.length;
+  var length = first_length + second_length;
   while (finalArray.length < length) {
     if (i === first.length)  {
-      for(var a = 0; a < second.length; a++ ) {
+      for(var a = j; a < second.length; a++ ) {
         finalArray.push(second[a]);
       };
     }
     else if (j === second.length) {
-      for(var b = 0; b < first.length; b++) {
+      for(var b = i; b < first.length; b++) {
         finalArray.push(first[b]);
       };
     }
     else {
       if (first[i] <= second[j]) {
-        finalArray.push(first[i])
-        i++
+        finalArray.push(first[i]);
+        i++;
       }
       else {
-        finalArray.push(second[j])
-        j++
-      };
-    };
-  };
+        finalArray.push(second[j]);
+        j++;
+      }
+    }
+  }
 return finalArray;
 };
+
+var QuickSort = function(array) {
+  if (array.length <= 1) {
+    return array;
+  }
+  var pivot = array.slice(array.length);
+  var lessThan = [];
+  var greaterThan = [];
+  for (var i = 0; i < array.length - 1; i++) {
+    if (array[i] > pivot) {
+      greaterThan.push(array[i]);
+    }
+    else {
+      lessThan.push(array[i]);
+    }
+  }
+  var sortedLessThan = QuickSort(lessThan);
+  var sortedGreaterThan = QuickSort(greaterThan);
+  return sortedLessThan.concat(pivot).concat(sortedGreaterThan);
+}
 
 
 
