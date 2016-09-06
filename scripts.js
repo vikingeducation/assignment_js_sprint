@@ -103,8 +103,8 @@ var sprintFunctions = {
     var merge = function(left, right){
       var mergedArray = [];
       while(left.length > 0 || right.length > 0){
-        console.log(left);
-        console.log(right);
+
+
         if (left.length === 0){
           mergedArray.push(right.shift());
         }
@@ -120,13 +120,14 @@ var sprintFunctions = {
       }
       return mergedArray;
     };
-   if (arr.length === 1){
-    return arr;
-   }
-   console.log(arr.length);
-   var midpoint = arr.length/2;
-   left = arr.slice(0,midpoint);
-   right = arr.slice(midpoint, arr.length);
+
+   if (arr.length <= 1) { return arr; }
+
+   var midpoint = Math.floor(arr.length/2);
+
+   var left = arr.slice(0, midpoint);
+   var right = arr.slice(midpoint, arr.length);
+
    return merge(mergeSort(left), mergeSort(right));
   }
 }

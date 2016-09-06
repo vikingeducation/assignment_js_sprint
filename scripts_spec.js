@@ -95,8 +95,8 @@ var tester = {
   },
 
    testMergeSort: function(){
-    var arr = [3, 1, 5, 2, 6];
-    var exp = [1, 2, 3, 5, 6];
+    var arr = [3, 1, 5, 2, 6, 10, 9, 8, 7];
+    var exp = [1, 2, 3, 5, 6, 7, 8, 9, 10];
     var actual = this.sprintObj.mergeSort(arr);
     if (typeof actual === 'undefined') { actual = [] };
     this.results.mergeSort = ( this.sprintObj.compareArrays(exp, actual));
