@@ -86,19 +86,18 @@ function Checkers() {
     // check if marker in-between is an enemy.
     function checkEnemyMarker() {
       // row decrements if X's turn, and increments on O's turn
-      var row_coords = this.turn == 'X' ? from_row + 1 : from_row - 1;
+      var rowCoords = this.turn == 'X' ? from_row + 1 : from_row - 1;
+      var enemyMarker = this.turn == 'X' ? 'O' : 'X';
       // going left
-      if ((this.board[row_coords][from_col - 1]) == 'O') {
-        this.board[row_coords][from_col - 1] = '';
-        return true;
+      if ((this.board[rowCoords][from_col - 1]) == enemyMarker) {
+        this.board[rowCoords][from_col - 1] = '';
       // going right
-    } else if ((this.board[row_coords][from_col + 1]) == 'O') {
-        this.board[row_coords][from_col + 1] = '';
-        return true;
+      } else if ((this.board[rowCoords][from_col + 1]) == enemyMarker) {
+        this.board[rowCoords][from_col + 1] = '';
       }
     }
 
-    function validateTo() {
+    function movementCheck() {
       // Check if within bounds.
       checkWithinBounds.call(this);
       // Check if empty space.
@@ -114,19 +113,13 @@ function Checkers() {
         }
       }
     }
+
     //check if own piece
     if (this.board[from_row][from_col] === this.turn) {
-      // if X's then only move in (+) row direction
-      validateTo.call(this);
+      movementCheck.call(this);
       this.turn = this.turn === 'X' ? 'O' : 'X';
       console.log(this.turn);
     }
-
-
-
-    // if O'x then only move in (-) row direction
-
-
   };
 }
 
