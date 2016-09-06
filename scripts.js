@@ -14,13 +14,21 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(str){  
-    var new_str = str;
-    var first_chars = new RegExp(/ \w/);
     var match, matches = [];
-
-    while( (match = first_chars.exec(str)) != null ) {
-      matches.push(match.index);
-    }
+    var spaces = new RegExp(/\W+/);
+    while (str.match(spaces)) {
+      str = str.replace(spaces, "_");
+    };
+    var firstChars = new RegExp(/_[a-z]/);
+    while (str.match(firstChars)) {
+      var someMatch = str.match(firstChars);
+      var replacementChar = str[someMatch.index + 1].toUpperCase();
+      str = str.replace(someMatch, "_" + replacementChar);
+    };
+    if (str[str.length -1] === "_") {
+      str = str.substring(0, str.length-1);
+    };
+    return str
   },
 
   compareArrays: function(){ 
