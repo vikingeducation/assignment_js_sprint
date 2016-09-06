@@ -6,11 +6,12 @@ function Roulette (bankRoll) {
   };
   this.spin = function(bet, num) {
     var rouletteNum = Math.floor((Math.random() * 38)+1);
-    if (num === rouletteNum) {
-      this.value = this.value + (bet * 35);
-    } else {
-      this.value = this.value - bet;
-    }
+    switch (rouletteNum) {
+      (num === rouletteNum) {
+        this.value = this.value + (bet * 35);
+      } else {
+        this.value = this.value - bet;
+      }
     return this.value;
   };
   this.buyIn = function(num) {
