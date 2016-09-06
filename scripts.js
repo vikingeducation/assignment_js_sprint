@@ -25,21 +25,21 @@ var sprintFunctions = {
     for (var i = 0; i < string.length; i++) {
       var letter = string[i].toLowerCase();
       if (letter.match(/[a-z]/)) {
-        if (i == 0 || return_string.slice(-1) === "_") {
+        if (i === 0 || return_string.slice(-1) === "_") {
           return_string += string[i].toUpperCase();
         }
         else{
           return_string += string[i].toLowerCase();
-        };
+        }
       }
       else {
         if (return_string.slice(-1) !== "_") {
           if (i !== string.length - 1) {
             return_string += "_"; 
-          };
-        };
-      };
-    };
+          }
+        }
+      }
+    }
     return return_string;
   },
 
@@ -52,20 +52,20 @@ var sprintFunctions = {
         return false;
       };
     };
+    console.log("Finish compareArrays first!");
     return true;
-    return "Finish compareArrays first!" 
   },
 
   fizzBuzz: function(max){
   var finalFizzBuzz = [];
-  for(var i = 1; i <= max; i++) {
-    if(i % 15 === 0) {
+  for (var i = 1; i <= max; i++) {
+    if (i % 15 === 0) {
       finalFizzBuzz.push("FIZZBUZZ");
     }
     else if (i % 3 === 0) {
       finalFizzBuzz.push("FIZZ");
     }
-    else if(i % 5 === 0) {
+    else if (i % 5 === 0) {
       finalFizzBuzz.push("BUZZ");
     }
     else {
@@ -115,6 +115,45 @@ var BubbleSort = function(array) {
   return array;
 };
 
+var mergeSort = function(array) {
+  if (array.length <= 1) {
+    return array;
+  };
+  var midPoint = array.length / 2;
+  var firstList = mergeSort(array.slice(0, midPoint))
+  var secondList = mergeSort(array.slice(midPoint, array.length - 1))
+  merge(firstList, secondList);
+};
+
+var merge = function(first, second) {
+  var finalArray = [];
+  var i = 0;
+  var j = 0;
+  var length = first.length + second.length;
+  while (finalArray.length < length) {
+    if (i === first.length)  {
+      for(var a = 0; a < second.length; a++ ) {
+        finalArray.push(second[a]);
+      };
+    }
+    else if (j === second.length) {
+      for(var b = 0; b < first.length; b++) {
+        finalArray.push(first[b]);
+      };
+    }
+    else {
+      if (first[i] <= second[j]) {
+        finalArray.push(first[i])
+        i++
+      }
+      else {
+        finalArray.push(second[j])
+        j++
+      };
+    };
+  };
+return finalArray;
+};
 
 
 
