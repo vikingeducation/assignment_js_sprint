@@ -78,4 +78,23 @@ var sprintFunctions = {
     };
     return primes;
   },
+
+  bubbleSort: function(arr) {
+    var swapped = true;
+
+    while(swapped){
+      swapped = false;
+
+      var i = 0;
+      while(i < arr.length - 1){
+        if(arr[i] > arr[i + 1]){
+          arr[i], arr[i + 1] = arr[i + 1], arr[i];
+          swapped = true;
+        };
+        i++;
+      };
+      i++;
+    };
+    return arr;
+  }
 }
