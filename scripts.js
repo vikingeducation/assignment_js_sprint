@@ -50,7 +50,7 @@ var sprintFunctions = {
   },
 
   fizzBuzz: function(last){  
-    results = [];
+    var results = [];
 
     for (var i = 1; i <= last; i++) {
       if (i % 3 === 0 && i % 5 === 0) {
@@ -78,7 +78,7 @@ var sprintFunctions = {
   },
 
   primes: function(number){  
-    results = [];
+    var results = [];
 
     var prime = function(integer) {
       if (integer === 2) return true;
@@ -93,5 +93,54 @@ var sprintFunctions = {
       if (prime(i)) results.push(i);
     }
     return results;
+  },
+
+  bubbleSort: function(original_array) {
+    var array = original_array;
+    var again = true;
+    while(again) {
+      again = false;
+
+      for(var i = 0; i < array.length - 1; i++) {
+        if (array[i] > array[i + 1]) {
+          var temp = array[i];
+          array[i] = array[i + 1];
+          array[i + 1] = temp;
+          again = true;
+        }
+      }
+    }
+
+    return array;
+  },
+
+  mergeSort: function(original_array) {
+    var array = original_array;
+    var middle = array.length / 2;
+
+    if (array.length === 1) return array;
+
+    var left = mergeSort(array.slice(0, middle));
+    var right = mergeSort(array.slice(middle));
+
+    var left_index = 0, right_index = 0;
+    for (var i = 0; i < array.length; i++) {
+      if (left_index >= left.length) {
+        array[i] = right[right_index];
+        right_index++;
+      } else if (right_index >= right.length) {
+        array[i] = left[left_index];
+        left_index++;
+      }
+      else if (left[left_index] < right[right_index]) {
+        array[i] = left[left_index];
+        left_index++;
+      } else {
+        array[i] = right[right_index];
+        right_index++;
+      }
+    }
+
+    return array;
   },
 }
