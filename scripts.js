@@ -31,20 +31,63 @@ var sprintFunctions = {
     return str
   },
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
+  compareArrays: function(arr1, arr2) { 
+    if (arr1.length != arr2.length) {
+      return false
+    }
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] != arr2[i]) {
+        return false
+      }
+    }
+    return true
   },
 
-  fizzBuzz: function(){  
-    // your code here
+  fizzBuzz: function(num) {
+    var arr = [];
+    var index = 0;
+    for (var i = 1; i <= num; i++) {
+      if ( ((i % 3) === 0) && ((i % 5) === 0 )) {
+        arr[index] = "FIZZBUZZ";
+      } 
+      else if ( (i % 3) === 0 ) {
+        arr[index] = "FIZZ";
+      }
+      else if ( (i % 5) === 0 ) {
+        arr[index] = "BUZZ";
+      }
+      else {
+        arr[index] = i;
+      }
+      index++;
+    }
+    return arr
   },
 
-  myMap: function(){  
-    // your code here
+  myMap: function(arr, func) {
+    var newArr = [];
+    arr.forEach(function(val, index) {
+      newArr[index] = func(val);
+    });
+    return newArr
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(num){  
+    var arr = [];
+    var isPrime = function(value) {
+      for(var i = 2; i < value; i++) {
+        if(value % i === 0) {
+            return false;
+        }
+      }
+    }
+    for (var i = 2; i <= num; i++) {
+      if (isPrime(i) != false)
+      {
+        arr.push(i);
+      }
+    }
+    console.log(arr);
+    return arr
   },
 }
