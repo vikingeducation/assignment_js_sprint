@@ -88,13 +88,45 @@ var sprintFunctions = {
       var i = 0;
       while(i < arr.length - 1){
         if(arr[i] > arr[i + 1]){
-          arr[i], arr[i + 1] = arr[i + 1], arr[i];
+          var temp = arr[i];
+          arr[i] = arr[i + 1];
+          arr[i + 1] = temp;
           swapped = true;
         };
         i++;
       };
-      i++;
     };
     return arr;
+  },
+
+  mergeSort: function mergeSort(arr){
+    var merge = function(left, right){
+      var mergedArray = [];
+      while(left.length > 0 || right.length > 0){
+        console.log(left);
+        console.log(right);
+        if (left.length === 0){
+          mergedArray.push(right.shift());
+        }
+        else if (right.length === 0){
+          mergedArray.push(left.shift());
+        }
+        else if (left[0] <= right[0]){
+          mergedArray.push(left.shift());
+        }
+        else{
+          mergedArray.push(right.shift());
+        }
+      }
+      return mergedArray;
+    };
+   if (arr.length === 1){
+    return arr;
+   }
+   console.log(arr.length);
+   var midpoint = arr.length/2;
+   left = arr.slice(0,midpoint);
+   right = arr.slice(midpoint, arr.length);
+   return merge(mergeSort(left), mergeSort(right));
   }
 }
