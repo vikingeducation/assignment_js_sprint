@@ -1,27 +1,45 @@
-function Board(){
-  this.board = function() {
-    var newArray = new Array(8);
-    for(var i = 0; i < newArray.length; i++){
-      newArray[i] = new Array(8);
-    }
-    return newArray;
-  };
-}
+// function Board(){
+//   this.board = function() {
+//     var newArray = new Array(8);
+//     for(var i = 0; i < newArray.length; i++){
+//       newArray[i] = new Array(8);
+//     }
+//     return newArray;
+//   };
+// }
 
 function Move() {
-  this.allowed = {
-
-  }
+  this.legalMove = function(move, player) {
+    if (player.color === "b")
+  };
 
   this.spaceTaken = {
 
   }
 }
 
-function Player() {
+function Player(color) {
   this.pieceCount = 12;
 
-  this.redPiecePositions = {
+  this.color = color;
+
+  this.askForMove = function() {
+  };
+
+  this.positions = function() {
+    if (this.color === "b") {
+      return blackPiecePositions;
+    } else {
+      return redPiecePositions;
+    };
+  };
+
+  this.changePosition = function(piece, move) {
+    pos = this.positions();
+    pos[piece] += move;
+  }
+
+  var redPiecePositions = {
     "1": 0,
     "2": 2,
     "3": 4,
@@ -34,9 +52,9 @@ function Player() {
     "10": 18,
     "11": 20,
     "12": 22
-  }
+  };
 
-  this.blackPiecePositions = {
+  var blackPiecePositions = {
     "1": 62 + 1,
     "2": 60 + 1,
     "3": 58 + 1,
@@ -49,10 +67,11 @@ function Player() {
     "10": 44 + 1,
     "11": 42 + 1,
     "12": 40 + 1
-  }
+  };
 }
 
 function Game() {
+
   var gameOver = function(player1, player2){
     if (player1.pieceCount === 0){
       console.log("Player 2 wins");
@@ -67,9 +86,22 @@ function Game() {
     }
   };
 
-  this.play = function(redPlayer, blackPlayer){
-    while ( gameOver(redPlayer, blackPlayer) === false ){
+  var getMove = function(player) {
+    player.askForMove
+  }
 
+  this.play = function(redPlayer, blackPlayer) {
+
+    var turnMap = {
+      1: redPlayer,
+      2: blackPlayer
+    }
+
+    var turn = "1"
+
+    while ( gameOver(redPlayer, blackPlayer) === false ) {
+      getMove(turnMap[turn]);
+      turn = turn === "1" ? "2" : "1";
     }
   }
 }
