@@ -34,23 +34,48 @@ var sprintFunctions = {
         }
       }
     }
-      // console.log(new_word[0]);
-      // new_word[0] = new_word[0].toUpperCase();
     
     return words.join("_");
   },
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
+  compareArrays: function(array1, array2){ 
+    if (array1.length !== array2.length)
+      return false;
+
+    for (var i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i])
+        return false;
+    }
+
+    return true; 
   },
 
-  fizzBuzz: function(){  
-    // your code here
+  fizzBuzz: function(last){  
+    results = [];
+
+    for (var i = 1; i <= last; i++) {
+      if (i % 3 === 0 && i % 5 === 0) {
+        results.push("FIZZBUZZ");
+      } else if (i % 3 === 0) {
+        results.push("FIZZ");
+      } else if (i % 5 === 0) {
+        results.push("BUZZ");
+      } else {
+        results.push(i);
+      }
+    }
+
+    return results;
   },
 
-  myMap: function(){  
-    // your code here
+  myMap: function(array, method){  
+    var result = [];
+
+    array.forEach(function(element) {
+      result.push(method(element));
+    });
+
+    return result;
   },
 
   primes: function(){  
