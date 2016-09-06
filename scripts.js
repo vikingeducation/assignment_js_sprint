@@ -83,7 +83,42 @@ var sprintFunctions = {
     return finalArray;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(max){  
+    var primeArray = [];
+    for (var i = 2; i <= max; i++) {
+      if (i === 2 || i === 3 || i === 5) {
+        primeArray.push(i);
+      }
+      if (i % 2 !== 0 && i % 3 !== 0 && i % 5 !== 0) {
+        primeArray.push(i);
+      };
+    };
+    return primeArray;
   },
 }
+
+var BubbleSort = function(array) {
+  var timesThrough = 0;
+  do {
+    var swaps = 0;
+    for (var i = 0; i < array.length - 1 - timesThrough; i++) {
+      if (array[i] > array[i + 1]) {
+        var temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp; 
+        swaps += 1;
+      };
+    };
+    timesThrough += 1
+  }
+  while (swaps === 1);
+  return array;
+};
+
+
+
+
+
+
+
+
