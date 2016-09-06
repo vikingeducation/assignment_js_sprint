@@ -53,26 +53,35 @@ var mergeSort = function(array) {
 };
 
 var quickSort = function(arr) {
-  var pivot = arr[arr.length - 1];
-  
   var sorted = [];
+  var count = 0;
   var unsorted = arr;
   
-  for (var i = 0; i < unsorted.length - 1; i++) {
-    if (unsorted[i] < pivot) {
-      //switching first element with element with value < pivot 
-      var temp = unsorted[0];
-      unsorted[0] = unsorted[i];
-      unsorted[i] = temp;
-      
-      sorted.push(unsorted.shift());
+  while (count < arr.length - 1 ) {
+    var pivot = arr[arr.length - 1];
+
+
+    
+
+    for (var i = 0; i < unsorted.length - 1; i++) {
+      if (unsorted[i] < pivot) {
+        //switching first element with element with value < pivot 
+        var temp = unsorted[0];
+        unsorted[0] = unsorted[i];
+        unsorted[i] = temp;
+
+        sorted.push(unsorted.shift());
+      }
     }
-  }
-  
-  console.log(sorted);
-  console.log(unsorted);
-  
+    var temp = unsorted[0];
+    unsorted[0] = pivot;
+
+    unsorted[unsorted.length-1] = temp;
+    count ++;
+  };
+  sorted.push(unsorted.shift());
+  return sorted;
 }
 
 var arr1 = [6,5,1,3,8,4,7,9,2];
-quickSort(arr1)
+console.log(quickSort(arr1))
