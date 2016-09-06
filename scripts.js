@@ -1,12 +1,22 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(array){  
+    var largest = array[0];
+    for (var i = 1; i < array.length; i++) {
+      if (array[i] >= largest) {
+        largest = array[i];
+      };
+    };
+    return largest;
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(string){  
+    var reverse = "";
+    for (var i = string.length - 1; i > 0; i--) {
+      var reverse = reverse.concat(string[i]);
+    };
+    return reverse;
   },
 
   loudSnakeCase: function(){  
