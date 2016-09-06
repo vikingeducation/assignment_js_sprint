@@ -88,12 +88,18 @@ function Checkers() {
       // row decrements if X's turn, and increments on O's turn
       var rowCoords = this.turn == 'X' ? from_row + 1 : from_row - 1;
       var enemyMarker = this.turn == 'X' ? 'O' : 'X';
+      function clearPlayerMarker () {
+        this.board[to_row][to_col] = this.turn;
+        this.board[from_row][from_col] = '';
+      }
       // going left
       if ((this.board[rowCoords][from_col - 1]) == enemyMarker) {
         this.board[rowCoords][from_col - 1] = '';
+        clearPlayerMarker.call(this);
       // going right
       } else if ((this.board[rowCoords][from_col + 1]) == enemyMarker) {
         this.board[rowCoords][from_col + 1] = '';
+        clearPlayerMarker.call(this);
       }
     }
 
@@ -127,4 +133,6 @@ c.display();
 c.move(2, 7, 3, 6);
 c.display();
 c.move(5, 4, 4, 5);
+c.display();
+c.move(3, 6, 5, 4);
 c.display();
