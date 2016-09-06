@@ -108,9 +108,9 @@ var tester = {
     var exp = [1, 2, 3, 5, 6, 7, 8, 9, 10];
     var actual = this.sprintObj.quickSort(arr);
     if (typeof actual === 'undefined') { actual = [] };
-    this.results.quickSort = ( this.sprintObj.compareArrays(exp, actual));
+    this.results.quickSort = ( this.sprintObj.compareArrays(exp, actual) );
   },
-
+//
   displayResults: function(){
     console.log("Displaying results...");
     console.log(this.results)
@@ -128,7 +128,6 @@ var tester = {
   }
 
 }
-
 
 $(document).ready( function(){ tester.init( sprintFunctions )});
 

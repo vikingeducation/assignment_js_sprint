@@ -137,10 +137,11 @@ var sprintFunctions = {
     var temp = arr[idx_1];
     arr[idx_1] = arr[idx_2];
     arr[idx_2] = temp;
+    return arr
    }
 
    var partition = function(arr, low, high){
-    var pivot = Math.floor((high-low)/2);
+    var pivot = Math.floor(low + (high - low)/2);
     var left = low;
     var right = high;
 
@@ -152,7 +153,7 @@ var sprintFunctions = {
         right--;
       }
 
-      swap(arr, left, right);
+      arr = swap(arr, left, right);
       left++;
       right--;
     }
@@ -172,5 +173,5 @@ var sprintFunctions = {
       quickSort(arr, splitPoint, high)
     }
     return arr
-  } 
+  }
 }
