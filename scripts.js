@@ -14,7 +14,7 @@ var sprintFunctions = {
     // your code here
     words = sentence.replace(/[^\w\s]|_/g, "")
          .replace(/\s+/g, " ").split(" ");
-    new_words = words.map(function(word) { 
+    new_words = words.map(function(word) {
                 return word[0].toUpperCase() + word.substring(1).toLowerCase();
               });
 
@@ -54,12 +54,28 @@ var sprintFunctions = {
   },
 
   myMap: function(arr, callback){
-    //var result = [];
-    arr = arr.forEach(callback);
-    return arr;
+    var result = [];
+    for(i in arr){
+      result[i] = callback(arr[i]);
+    }
+    return result
   },
 
-  primes: function(){
+  primes: function(n){
     // your code here
+    var primes = [];
+
+    var is_prime = function(num) {
+      for(var i = 2; i <= Math.sqrt(num); i++){
+        if(num % i === 0) { return false };
+      };
+      return true;
+    };
+
+
+    for(var i = 2; i <= n ; i++ ){
+      if(is_prime(i)){ primes.push(i) };
+    };
+    return primes;
   },
 }
