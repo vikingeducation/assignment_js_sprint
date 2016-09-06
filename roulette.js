@@ -1,19 +1,51 @@
 function Roulette(bank) {
 
   var balance = bank;
+  var choices = {
+    "even": function(bet, num) {
+      if (num % 2 === 0) {
+        balance += bet;
+        console.log("You win! The number was" + num);
+      } else {
+        balance -= bet;
+        console.log("You lost... The number was" + num);
+      }
+    }
+
+    "odd": function(bet, num) {
+      if (num % 2 === 0) {
+        balance -= bet;
+        console.log("You lost.. The number was" + num);
+      } else {
+        balance += bet;
+        console.log("You win! The number was" + num);
+      }
+    }
+
+    "1 to 18": function(bet, num) {
+      if (num < 19) {
+        balance += bet;
+        console.log("You win! The number was" + num);
+      } else {
+        balance -= bet;
+        console.log("You lost.. The number was" + num);
+      }
+    }
+
+    "19 to 36": function(bet, num) {
+      if (num < )
+    }
+  }
+
 
   this.bankroll = function() {
     return balance;
   };
 
-  "even": function(num, bet) {
-
-  }
-
   this.spin = function(bet, spot) {
     var num = Math.floor(Math.random() * 38);
     spot = spot.toLowerCase();
-    Roulette.call(this, spot, num, bet);
+    choices[spot](bet, num);
 
     // if (Number(spot) === num) {
     //   balance += bet * 35;

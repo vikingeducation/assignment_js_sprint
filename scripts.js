@@ -3,7 +3,7 @@
 var sprintFunctions = {
   largestEl: function(arr){
     var el = arr[0];
-    for(var i=1; i < arr.length; i++){
+    for(var i = 1; i < arr.length; i++){
       if (arr[i] >= el ){
         el = arr[i];
       };
@@ -27,7 +27,7 @@ var sprintFunctions = {
           snaked = snaked.concat("_");
         }
       }
-      else if ( (/\W/).test(str[i]) )
+      else if ( (/\W/).test(str[i]))
       {
         continue;
       }
