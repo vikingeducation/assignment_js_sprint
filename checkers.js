@@ -1,51 +1,44 @@
 function Checkers() {
   this.turn = 'X';
-  this.move = function(from,to) {
-    if (this.board[from] === this.turn) {
-      if (this.board[to]) === 
-    }
-  };
   this.board = [];
   this.init = function() {
-    for (var i = 0; i < 8; i++) {
-      this.board.push(new Array(8));
-    }
-    var color = 'X';
-    for (var topIndex = 0; topIndex < 3; topIndex++) {
-      for (var topRow = 0; topRow < this.board[topIndex].length; topRow++) {
-        if (topIndex % 2 === 0 && topRow % 2 !== 0) {
-          this.board[topIndex][topRow] = color;
-        } else if (topIndex % 2 !== 0 && topRow % 2 === 0) {
-          this.board[topIndex][topRow] = color;
-        }
-      }
-    }
-    var color = 'O';
-    for (var bottomIndex = 5; bottomIndex < 8; bottomIndex++) {
-      for (var bottomRow = 0; bottomRow < this.board[bottomIndex].length; bottomRow++) {
-        if (bottomIndex % 2 === 0 && bottomRow % 2 !== 0) {
-          this.board[bottomIndex][bottomRow] = color;
-        } else if (bottomIndex % 2 !== 0 && bottomRow % 2 === 0) {
-          this.board[bottomIndex][bottomRow] = color;
+    function makeBoard() {
+      for (var i = 0; i < 8; i++) {
+        this.board.push(new Array(8));
+        for (var j = 0; j < 8; j++) {
+          this.board[i][j] = " ";
         }
       }
     }
 
-    // var changeColor = function(ele, index) {
-    //   console.log(index);
-      // if (i % 2 === 0 && index % 2 !== 0) {
-      //   return color;
-      // } else if (i % 2 !== 0 && index % 2 === 0) {
-      //   return color;
-      // }
-    // };
-    // for (var topIndex = 0; topIndex < 3; topIndex++) {
-    //   this.board[topIndex] = this.board[topIndex].map(changeColor);
-    // }
-    // color = 'O';
-    // for (var bottomIndex = 5; bottomIndex < 8; bottomIndex++) {
-    //   this.board[bottomIndex] = this.board[bottomIndex].map(changeColor);
-    // }
+    function arrangeMarkers() {
+      var color = 'X';
+      function changeColor (row) {
+        return function(ele, index) {
+          if (row % 2 === 0 && index % 2 !== 0) {
+            return color;
+          } else if (row % 2 !== 0 && index % 2 === 0) {
+            return color;
+          } else {
+            return ele;
+          }
+        };
+      }
+
+      for (var topIndex = 0; topIndex < 3; topIndex++) {
+        var boardTopRow = this.board[topIndex];
+        this.board[topIndex] = boardTopRow.map(changeColor(topIndex));
+      }
+
+      color = 'O';
+      for (var bottomIndex = 5; bottomIndex < 8; bottomIndex++) {
+        var boardBottomRow = this.board[bottomIndex];
+        this.board[bottomIndex] = boardBottomRow.map(changeColor(bottomIndex));
+      }
+    }
+
+    makeBoard.call(this);
+    arrangeMarkers.call(this);
   };
 
   this.display = function() {
