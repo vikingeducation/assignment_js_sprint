@@ -168,19 +168,116 @@ var sprintFunctions = {
 function Roulette(start) {
   var bank = start;
   
-  this.spin = function(bet, amount, number) {
+  this.spin = function() {
     var result = Math.floor(Math.random() * 38 + 1);
 
+    if (result === 37) result = '0'
+    if (result === 38) result = '00'
 
+    var amount = getAmount();
 
-    if (number === result) {
-      console.log("Wow, you win $" + amount * 36 + "! The spin was " + result);
-      bank += amount * 36;
-    } else {
-      console.log("You LOSE! The spin was " + result);
-      bank -= amount;
+    var choice = getChoice();
+
+    if (choice === '1') {
+      var number = getNumber();
     }
+
+    var results = {
+      '1': function() {
+        if (number === result) {
+          console.log("Wow, you win $" + amount * 35 + "! The spin was " + result);
+          bank += amount * 35;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '2': function() {
+        if (result === '0') {
+          console.log("Wow, you win $" + amount * 35 + "! The spin was " + result);
+          bank += amount * 35;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '3': function() {
+        if (result === '00') {
+          console.log("Wow, you win $" + amount * 35 + "! The spin was " + result);
+          bank += amount * 35;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '4': function() {
+        if (result !== '0' && result !== '00' && result % 2 === 0) {
+          console.log("Wow, you win $" + amount + "! The spin was " + result);
+          bank += amount;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '5': function() {
+        if (result !== '0' && result !== '00' && result % 2 !== 0) {
+          console.log("Wow, you win $" + amount + "! The spin was " + result);
+          bank += amount;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '6': function() {
+        if (result !== '0' && result !== '00' && result < 19) {
+          console.log("Wow, you win $" + amount + "! The spin was " + result);
+          bank += amount;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '7': function() {
+        if (result !== '0' && result !== '00' && result > 18) {
+          console.log("Wow, you win $" + amount + "! The spin was " + result);
+          bank += amount;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '8': function() {
+        if (result !== '0' && result !== '00' && result >= 1 && result <= 12) {
+          console.log("Wow, you win $" + amount * 2 + "! The spin was " + result);
+          bank += amount * 2;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '9': function() {
+        if (result !== '0' && result !== '00' && result >= 13 && result <= 24) {
+          console.log("Wow, you win $" + amount * 2 + "! The spin was " + result);
+          bank += amount * 2;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      },
+      '10': function() {
+        if (result !== '0' && result !== '00' && result >= 25 && result <= 36) {
+          console.log("Wow, you win $" + amount * 2 + "! The spin was " + result);
+          bank += amount * 2;
+        } else {
+          console.log("You LOSE! The spin was " + result);
+          bank -= amount;
+        }
+      }
+    }
+
+    results[choice]();
     this.bankroll();
+    
   };
 
   this.bankroll = function() {
@@ -197,5 +294,12 @@ function Roulette(start) {
     return prompt("What do you want to bet on?\n" + menu, "Enter bet");
   };
 
+  var getAmount = function() {
+    return prompt("How much do you want to bet?")
+  };
+
+  var getNumber = function() {
+    return prompt("What number do you want to bet on?")
+  };
 
 }
