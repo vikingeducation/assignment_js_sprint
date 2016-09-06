@@ -140,7 +140,7 @@ var sprintFunctions = {
    }
 
    var partition = function(arr, low, high){
-    var pivot = Math.floor(arr.length/2);
+    var pivot = Math.floor((high-low)/2);
     var left = low;
     var right = high;
 
@@ -159,13 +159,10 @@ var sprintFunctions = {
 
     return left;
    } // end partition
-    console.log(high)
-    console.log(low)
 
     if (high <= low) { return arr; }
 
     var splitPoint = partition(arr, low, high)
-    console.log(splitPoint)
 
     if(low < splitPoint - 1) {
       quickSort(arr, low, splitPoint - 1)
@@ -175,7 +172,5 @@ var sprintFunctions = {
       quickSort(arr, splitPoint, high)
     }
     return arr
-  } // end  quickSort
+  } 
 }
-// [1 1 1 1 1]
-// [6 5 4 2 3 3 3]
