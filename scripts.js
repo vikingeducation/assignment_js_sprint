@@ -120,8 +120,8 @@ var sprintFunctions = {
 
     if (array.length === 1) return array;
 
-    var left = mergeSort(array.slice(0, middle));
-    var right = mergeSort(array.slice(middle));
+    var left = sprintFunctions.mergeSort(array.slice(0, middle));
+    var right = sprintFunctions.mergeSort(array.slice(middle));
 
     var left_index = 0, right_index = 0;
     for (var i = 0; i < array.length; i++) {
@@ -143,4 +143,24 @@ var sprintFunctions = {
 
     return array;
   },
+
+  quickSort: function(original_array) {
+    var array = original_array;
+    var pivot = array[array.length - 1];
+    var left = [], right = [];
+
+    if (array.length < 2) return array;
+
+    for(var i = 0; i < array.length - 1; i++) {
+      if (array[i] <= pivot) {
+        left.push(array[i]);
+      } else {
+        right.push(array[i]);
+      }
+    }
+    left = sprintFunctions.quickSort(left);
+    right = sprintFunctions.quickSort(right);
+    left.push(pivot);
+    return left.concat(right);
+  }
 }
