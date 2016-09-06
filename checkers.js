@@ -1,17 +1,39 @@
-// function Board(){
-//   this.board = function() {
-//     var newArray = new Array(8);
-//     for(var i = 0; i < newArray.length; i++){
-//       newArray[i] = new Array(8);
-//     }
-//     return newArray;
-//   };
-// }
+function Board(){
+  var board = new Array(64);
+
+  this.populateBoard = function( redPlayer, blackPlayer ){
+    for(prop in redPlayer.positions()){
+      board[redPlayer.positions()[prop]] = "r"
+    };
+
+    for(prop in blackPlayer.positions()){
+      board[blackPlayer.positions()[prop]] = "b";
+    }
+  };
+
+  this.updateBoard = function () {
+
+  };
+}
 
 function Move() {
-  this.legalMove = function(move, player) {
-    if (player.color === "b")
+  this.legalMove = function(piece, move, player, opponent) {
+    if (player.color === "b"){
+      //% 7 === 0 then no right move, and if % 8 === 0
+      if (player.positions()[piece] % 7 === 0 && move === "left" && piece !== "0"){
+        var player.positions()[piece] - 9;
+      }
+      else if (player.positions()[piece] % 8 === 0 && move === "right"){
+        player.positions()[piece] -= 7;
+      }
+      else{
+        //valid move in middle of board
+
+      }
+    }
   };
+
+  // this.boundary
 
   this.spaceTaken = {
 
@@ -23,8 +45,33 @@ function Player(color) {
 
   this.color = color;
 
-  this.askForMove = function() {
+  this.askForMove = function(opponent) {
+    var move = ""
+    do {
+      piece = prompt("Which piece would you like to move?");
+      move = prompt("What is your move? (left or right)");
+    } while ( Move.legalMove(piece, move, this, opponent) );
+    var movement = makeMove(move);
   };
+
+  var makeMove = function(move) {
+    if (this.color === "b"){
+      if ( move === "left" ){
+        return -9
+      }
+      else {
+        return -7
+      }
+    }
+    else {
+      if ( move === "left" ){
+        return 7
+      }
+      else {
+        return 9
+      }
+    }
+  }
 
   this.positions = function() {
     if (this.color === "b") {
@@ -87,7 +134,7 @@ function Game() {
   };
 
   var getMove = function(player) {
-    player.askForMove
+    player.askForMove();
   }
 
   this.play = function(redPlayer, blackPlayer) {
@@ -100,7 +147,9 @@ function Game() {
     var turn = "1"
 
     while ( gameOver(redPlayer, blackPlayer) === false ) {
-      getMove(turnMap[turn]);
+      var current_player = turnMap[turn]
+      var opponent = turnMap[turn === "1" ? "2" : "1";]
+      turnMap[turn].askForMove(opponent);
       turn = turn === "1" ? "2" : "1";
     }
   }
