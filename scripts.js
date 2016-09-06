@@ -18,18 +18,26 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(sentence){  
-    var words = sentence.split(" ");
-
-    words.forEach( function(word, index) {
-      var new_word = "";
-      for (var i = 0; i < word.length; i++) {
-        if ('A' <= word[i] <= 'Z' ||  'a' <= word[i] <= 'z')
-          new_word += word[i];
+    var words = [];
+    var new_word = "";
+    for (var i = 0; i < sentence.length; i++) {
+      if (sentence[i].match(/[a-zA-Z]/)) {
+        if (new_word)
+          new_word += sentence[i];
+        else
+          new_word += sentence[i].toUpperCase();
       }
-      words[index] = new_word;
-    })
+      else {
+        if (new_word) {
+          words.push(new_word);
+          new_word = "";
+        }
+      }
+    }
+      // console.log(new_word[0]);
+      // new_word[0] = new_word[0].toUpperCase();
     
-    return words.join("_")
+    return words.join("_");
   },
 
   compareArrays: function(){ 
