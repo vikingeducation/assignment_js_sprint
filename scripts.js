@@ -1,32 +1,38 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
+  largestEl: function(arr){
     // your code here
-  },
-  
-  reversed: function(){  
-    // your code here
+    return Math.max(...arr);
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  reversed: function(str){
+    return str.split('').reverse().join('');
   },
 
-  compareArrays: function(){ 
+  loudSnakeCase: function(sentence){
+    // your code here
+    words = sentence.replace(/[^\x00-\x7F]/g, "").split(" ");
+    words.map(function(word) { toUpperCase(word[0]); });
+
+    return words.join("_")
+
+  },
+
+  compareArrays: function(){
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    return "Finish compareArrays first!"
   },
 
-  fizzBuzz: function(){  
+  fizzBuzz: function(){
     // your code here
   },
 
-  myMap: function(){  
+  myMap: function(){
     // your code here
   },
 
-  primes: function(){  
+  primes: function(){
     // your code here
   },
 }
