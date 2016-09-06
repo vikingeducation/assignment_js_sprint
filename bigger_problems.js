@@ -81,13 +81,10 @@ function quickSort(arr) {
       i++;
     }
     if (i === len-1) {
-      var temp = arr[wallPointer]
+      var finalTemp = arr[wallPointer];
       arr[wallPointer] = arr[len-1];
-      arr[len-1] = temp;
+      arr[len-1] = finalTemp;
     }
   }
   return arr;
 }
-
-var arr = [1,4,2,5,3,33,55,-1]
-console.log(quickSort(arr));
