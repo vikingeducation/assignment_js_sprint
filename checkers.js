@@ -63,68 +63,63 @@ function Checkers() {
     var row_diff = from_row - to_row;
     var col_diff = from_col - to_col;
 
+    function checkWithinBounds() {
+      return (to_row > this.board.length && to_row < 0) && (to_col > this.board[0].length && to_col < 0);
+    }
+
+    function checkEmptySpace() {
+      return this.board[to_row][to_col];
+    }
+
+    function checkExcessiveDistance() {
+      return Math.abs(row_diff) > 2 || Math.abs(col_diff) > 2;
+    }
+
+    function checkOneSpace() {
+      return Math.abs(row_diff) === 1 && Math.abs(col_diff) === 1;
+    }
+
+    function checkTwoSpace() {
+      return Math.abs(row_diff) === 2 && Math.abs(col_diff) === 2;
+    }
+
+    // check if marker in-between is an enemy.
+    function checkEnemyMarker() {
+      // row decrements if X's turn, and increments on O's turn
+      var row_coords = this.turn == 'X' ? from_row + 1 : from_row - 1;
+      // going left
+      if ((this.board[row_coords][from_col - 1]) == 'O') {
+        this.board[row_coords][from_col - 1] = '';
+        return true;
+      // going right
+    } else if ((this.board[row_coords][from_col + 1]) == 'O') {
+        this.board[row_coords][from_col + 1] = '';
+        return true;
+      }
+    }
+
     function validateTo() {
       // Check if within bounds.
-      if ((to_row > this.board.length && to_row < 0) && (to_col > this.board[0].length && to_col < 0)) {
-        return false;
-        // Check if empty space.
-      } else if (this.board[to_row][to_col]) {
-        return false;
-        // Check if it's within movable range.
-      } else if (Math.abs(row_diff) > 2 || Math.abs(col_diff) > 2) {
-        return false;
-      } else if (Math.abs(row_diff) === 1 && Math.abs(col_diff) === 1) {
+      checkWithinBounds.call(this);
+      // Check if empty space.
+      checkEmptySpace.call(this);
+      checkExcessiveDistance.call(this);
+      if (checkOneSpace.call(this)) {
         this.board[from_row][from_col] = '';
         this.board[to_row][to_col] = this.turn;
-      } else if (Math.abs(row_diff) === 2 && Math.abs(col_diff) === 2) {
-        if (this.turn == 'X') {
-          // row will always increment.
-          // going left
-          if (Math.abs(col_diff) === (col_diff)) {
-            // check if checker in between is an enemy.
-            if ((this.board[from_row + 1][from_col - 1]) == 'O') {
-              this.board[from_row + 1][from_col - 1] = '';
-              return true;
-              // going right
-            } else {
-              // check if checker in between is an enemy.
-              if ((this.board[from_row + 1][from_col + 1]) == 'O') {
-                this.board[from_row + 1][from_col + 1] = '';
-                return true;
-              }
-            }
-          }
-        } else if (this.turn == 'O') {
-          // row will always decrement.
-          // going left
-          if (Math.abs(col_diff) === (col_diff)) {
-            // check if checker in between is an enemy.
-            if ((this.board[from_row - 1][from_col - 1]) == 'X') {
-              this.board[from_row - 1][from_col - 1] = '';
-              return true;
-              // going right
-            } else {
-              // check if checker in between is an enemy.
-              if ((this.board[from_row - 1][from_col + 1]) == 'X') {
-                this.board[from_row - 1][from_col + 1] = '';
-                return true;
-              }
-            }
-          }
+      }
+      if (checkTwoSpace.call(this)) {
+        if (Math.abs(col_diff) === (col_diff)) {
+          checkEnemyMarker.call(this);
         }
       }
-      return false;
     }
     //check if own piece
     if (this.board[from_row][from_col] === this.turn) {
       // if X's then only move in (+) row direction
-      if (this.turn === 'X') {
-        validateTo.call(this);
-        this.turn = this.turn === 'X' ? 'O' : 'X';
-        console.log(this.turn)
-      }
-    } else {
-      console.log("can't move that piece");
+      validateTo.call(this);
+      this.turn = this.turn === 'X' ? 'O' : 'X';
+      console.log(this.turn);
     }
 
 
