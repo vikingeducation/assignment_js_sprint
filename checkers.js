@@ -48,7 +48,7 @@ function Checkers() {
       var rowString = '';
       for (var j = 0; j < this.board[i].length; j++) {
         if (this.board[i][j]) {
-          rowString += '|'+this.board[i][j]+'|';
+          rowString += '|' + this.board[i][j] + '|';
         } else {
           rowString += '|_|';
         }
@@ -59,64 +59,77 @@ function Checkers() {
   };
 
   this.move = function(from_row, from_col, to_row, to_col) {
+    // var alpha = { 'a':7, 'b':6, 'c':5, 'd':4, 'e':3, 'f':2, 'g':1, 'h':0 }
+    var row_diff = from_row - to_row;
+    var col_diff = from_col - to_col;
+
     function validateTo() {
       // Check if within bounds.
-      if((to_row > this.board.length && to_row < 0) && (to_col > this.board[0].length && to_col < 0)) {
+      if ((to_row > this.board.length && to_row < 0) && (to_col > this.board[0].length && to_col < 0)) {
         return false;
-      // Check if empty space.
-      } else if(this.board[to_row][to_col]) {
+        // Check if empty space.
+      } else if (this.board[to_row][to_col]) {
         return false;
-      // Check if it's within movable range.
-      } else if (Math.abs(from_row - to_row) > 2 || Math.abs(from_col - to_col) > 2) {
+        // Check if it's within movable range.
+      } else if (Math.abs(row_diff) > 2 || Math.abs(col_diff) > 2) {
         return false;
-      } else if (Math.abs(from_row - to_row) == 2 || Math.abs(from_col - to_col) == 2) {
+      } else if (Math.abs(row_diff) === 1 && Math.abs(col_diff) === 1) {
+        this.board[from_row][from_col] = '';
+        this.board[to_row][to_col] = this.turn;
+      } else if (Math.abs(row_diff) === 2 && Math.abs(col_diff) === 2) {
         if (this.turn == 'X') {
           // row will always increment.
           // going left
-          if (Math.abs(from_col - to_col) === (from_col - to_col)) {
+          if (Math.abs(col_diff) === (col_diff)) {
             // check if checker in between is an enemy.
-            if ((this.board[from_row+1][from_col-1]) == 'O') {
-              this.board[from_row+1][from_col-1] = '';
-            } else if (this.board[from_row+1][from_col-1] === '') {
-              this.board[from_row+1][from_col-1] = 'X';
-              this.board[from_row][from_col] = '';
+            if ((this.board[from_row + 1][from_col - 1]) == 'O') {
+              this.board[from_row + 1][from_col - 1] = '';
               return true;
+              // going right
             } else {
-              return false;
-            }
-          // going right
-          } else {
-            // check if checker in between is an enemy.
-            if ((this.board[from_row+1][from_col+1]) == 'O') {
-              this.board[from_row+1][from_col+1] = '';
+              // check if checker in between is an enemy.
+              if ((this.board[from_row + 1][from_col + 1]) == 'O') {
+                this.board[from_row + 1][from_col + 1] = '';
+                return true;
+              }
             }
           }
         } else if (this.turn == 'O') {
           // row will always decrement.
+          // going left
+          if (Math.abs(col_diff) === (col_diff)) {
+            // check if checker in between is an enemy.
+            if ((this.board[from_row - 1][from_col - 1]) == 'X') {
+              this.board[from_row - 1][from_col - 1] = '';
+              return true;
+              // going right
+            } else {
+              // check if checker in between is an enemy.
+              if ((this.board[from_row - 1][from_col + 1]) == 'X') {
+                this.board[from_row - 1][from_col + 1] = '';
+                return true;
+              }
+            }
+          }
         }
-        // if ()
-        // |_|_|x|
-        // |_|o|_| from_row++; from_col-- || from_row++; from_col++
-        // |_|_|_| [0,2] => [1,1] => [2,0]
-        //
-        // |_|_|_|
-        // |_|x|_| from_row--; from_col-- || from_row--; from_col--
-        // |_|_|o| [0,2] => [1,1] => [0,0]
       }
+      return false;
     }
     //check if own piece
     if (this.board[from_row][from_col] === this.turn) {
       // if X's then only move in (+) row direction
       if (this.turn === 'X') {
         validateTo.call(this);
+        this.turn = this.turn === 'X' ? 'O' : 'X';
+        console.log(this.turn)
       }
     } else {
-      console.log ("can't move that piece");
+      console.log("can't move that piece");
     }
 
 
 
-// if O'x then only move in (-) row direction
+    // if O'x then only move in (-) row direction
 
 
   };
@@ -125,5 +138,7 @@ function Checkers() {
 var c = new Checkers();
 c.init();
 c.display();
-c.move(2,7,3,6);
+c.move(2, 7, 3, 6);
+c.display();
+c.move(5, 4, 4, 5);
 c.display();
