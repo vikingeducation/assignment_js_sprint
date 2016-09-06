@@ -52,5 +52,27 @@ var mergeSort = function(array) {
   return merge( mergeSort(leftArray), mergeSort(rightArray));
 };
 
-var arr1 = [4, 7, 6, 9, 1, 3 ,5, 8]
-console.log(mergeSort(arr1))
+var quickSort = function(arr) {
+  var pivot = arr[arr.length - 1];
+  
+  var sorted = [];
+  var unsorted = arr;
+  
+  for (var i = 0; i < unsorted.length - 1; i++) {
+    if (unsorted[i] < pivot) {
+      //switching first element with element with value < pivot 
+      var temp = unsorted[0];
+      unsorted[0] = unsorted[i];
+      unsorted[i] = temp;
+      
+      sorted.push(unsorted.shift());
+    }
+  }
+  
+  console.log(sorted);
+  console.log(unsorted);
+  
+}
+
+var arr1 = [6,5,1,3,8,4,7,9,2];
+quickSort(arr1)
