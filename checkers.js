@@ -1,5 +1,10 @@
 function Checkers() {
-
+  this.turn = 'X';
+  this.move = function(from,to) {
+    if (this.board[from] === this.turn) {
+      if (this.board[to]) === 
+    }
+  };
   this.board = [];
   this.init = function() {
     for (var i = 0; i < 8; i++) {
