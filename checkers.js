@@ -108,9 +108,7 @@ function Checkers() {
         this.board[to_row][to_col] = this.turn;
       }
       if (checkTwoSpace.call(this)) {
-        if (Math.abs(col_diff) === (col_diff)) {
-          checkEnemyMarker.call(this);
-        }
+        checkEnemyMarker.call(this);
       }
     }
 
