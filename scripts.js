@@ -161,7 +161,7 @@ var QuickSort = function(array) {
   if (array.length <= 1) {
     return array;
   }
-  var pivot = array.slice(array.length);
+  var pivot = array.slice(array.length - 1);
   var lessThan = [];
   var greaterThan = [];
   for (var i = 0; i < array.length - 1; i++) {
