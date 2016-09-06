@@ -3,7 +3,7 @@
 var sprintFunctions = {
   largestEl: function(array){  
     // your code here
-    return array.sort()[array.length - 1];
+    return array.sort(function(a, b) { return a - b; })[array.length - 1];
   },
   
   reversed: function(string){  
@@ -39,8 +39,7 @@ var sprintFunctions = {
   },
 
   compareArrays: function(array1, array2){ 
-    if (array1.length !== array2.length)
-      return false;
+    if (array1.length !== array2.length) return false;
 
     for (var i = 0; i < array1.length; i++) {
       if (array1[i] !== array2[i])
@@ -78,7 +77,21 @@ var sprintFunctions = {
     return result;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(number){  
+    results = [];
+
+    var prime = function(integer) {
+      if (integer === 2) return true;
+      if (integer % 2 === 0) return false;
+      for (var i = 3; i <= Math.sqrt(integer); i += 2) {
+        if (integer % i === 0) return false;
+      }
+      return true;
+    };
+
+    for (var i = 2; i <= number; i++) {
+      if (prime(i)) results.push(i);
+    }
+    return results;
   },
 }
