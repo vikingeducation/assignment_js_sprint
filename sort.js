@@ -20,3 +20,44 @@ var sortFunctions = {
     return arr
   }, 
 }
+
+
+var merge = function(leftArray, rightArray) {
+  newArray = []
+  while (leftArray.length > 0 && rightArray.length > 0) {
+    if (leftArray[0] <= rightArray[0]) {
+      console.log(leftArray)
+      newArray.push(leftArray.shift());
+    } else {
+      newArray.push(rightArray.shift());
+    }
+  };
+  while (leftArray.length > 0) {
+    newArray.push(leftArray.shift());
+  };
+  while (rightArray.length > 0) {
+    newArray.push(rightArray.shift());
+  };
+  return newArray;
+};
+
+var mergeSort = function(array) {
+  if (array.length <= 1) {
+    return array
+  }
+  
+  midPoint = Math.floor(array.length / 2);
+  leftArray = array.slice(0, midPoint);
+  rightArray = array.slice(midPoint, (array.length));
+
+  console.log("Left array is " + leftArray);
+  console.log("Right array is " + rightArray);
+  
+  leftArray = mergeSort(leftArray);
+  rightArray = mergeSort(rightArray);
+  console.log(merge(leftArray, rightArray));
+  
+};
+
+var arr1 = [4, 7, 6, 9, 1, 3 ,5, 8]
+console.log(mergeSort(arr1))
