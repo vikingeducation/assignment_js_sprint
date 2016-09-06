@@ -21,9 +21,10 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(str){
+    // str = str.replace(/[\W\S]/g,"");
     str = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     str = toTitleCase(str);
-    str = str.replace(/\s+/g, '_')
+    str = str.replace(/\s+/g, '_');
 
     function toTitleCase(str) {
       return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -84,26 +85,3 @@ var sprintFunctions = {
     return output;
   },
 };
-
-function bubbleSort(arr) {
-  var counter = 1;
-  while (counter !== 0) {
-    // Boolean. Stop swapping when true.
-    counter = 0;
-    // Go through array
-    for (var i = 0; i < arr.length-1; i++) {
-      var j = i+1;
-      if (arr[j] < arr[i]) {
-        // Swap and set boolean to true.
-        var temp = arr[j];
-        arr[j] = arr[i];
-        arr[j] = temp;
-        counter++;
-      }
-    }
-  }
-  return arr;
-}
-
-var array = [5,2,3,4,1];
-console.log(bubbleSort(array));
