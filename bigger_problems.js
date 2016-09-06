@@ -20,7 +20,7 @@ function bubbleSort(arr) {
 
 // Sort helper.
 function sorted(left,right) {
-  var output;
+  var output = [];
   var lPtr = 0;
   var rPtr = 0;
 
@@ -48,11 +48,14 @@ function sorted(left,right) {
 }
 
 function mergeSort(arr) {
+  if (arr.length <= 1) {
+    return arr
+  }
   var len = arr.length;
-  var mid = parseInt(len / 2);
+  var mid = Math.floor(len / 2);
 
-  var leftSlice = arr.slice(0,mid);
-  var rightSlice = arr.slice(mid,len-1);
+  var leftSlice = arr.slice(0, mid);
+  var rightSlice = arr.slice(mid, len);
 
   var slicedLeft = mergeSort(leftSlice);
   var slicedRight = mergeSort(rightSlice);
@@ -60,4 +63,31 @@ function mergeSort(arr) {
   return sorted(slicedLeft,slicedRight);
 }
 
-console.log(mergeSort([5,2,1,3,4]));
+
+//quick sort
+
+function quickSort(arr) {
+  var len = arr.length;
+  for (var wallPointer = 0; wallPointer < len; wallPointer++) {
+    var searching = true;
+    var i = wallPointer;
+    while(i < len-1 && searching) {
+      if (arr[i] < arr[len-1]) {
+        var temp = arr[wallPointer];
+        arr[wallPointer] = arr[i];
+        arr[i] = temp;
+        searching = false;
+      }
+      i++;
+    }
+    if (i === len-1) {
+      var temp = arr[wallPointer]
+      arr[wallPointer] = arr[len-1];
+      arr[len-1] = temp;
+    }
+  }
+  return arr;
+}
+
+var arr = [1,4,2,5,3,33,55,-1]
+console.log(quickSort(arr));
