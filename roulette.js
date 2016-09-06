@@ -5,27 +5,119 @@
 function Roulette(bankroll) {
   this.bankroll = bankroll;
   this.spin = function(bet, choice) {
+    if (bet > this.bankroll) {
+      return console.log("You don't have enough money to make that bet. Your bankroll is " + this.bankroll);
+    }
     this.bankroll -= bet
     var spinResult = Math.floor((Math.random()* 38));
     switch(choice) {
       case("00"):
         if (spinResult === 37) {
-          this.bankroll += bet * 36
-          console.log("You win! You now have " + this.bankoll)
+          spinResult = "00";
+          this.bankroll += bet * 36;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
           break;
         }
         else {
-          console.log("You win! You now have " + this.bankoll)
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
           break;
         }
       case("Even"):
         if (spinResult % 2 === 0) {
-          this.bankroll += bet * 2
-          console.log("You win! You now have " + this.bankoll)
+          this.bankroll += bet * 2;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
           break;
         }
         else {
-          console.log("You win! You now have " + this.bankoll)
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
+          break;
+        }
+      case("Odd"):
+        if (spinResult % 2 !== 0) {
+          this.bankroll += bet * 2;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
+          break;
+        }
+        else {
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
+          break;
+        }
+      case("1 to 18"):
+        if (spinResult > 0 && spinResult < 19) {
+          this.bankroll += bet * 2;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
+          break;
+        }
+        else {
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
+          break;
+        }
+      case("19 to 36"):
+        if (spinResult > 18 && spinResult < 37) {
+          this.bankroll += bet * 2;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
+          break;
+        }
+        else {
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
+          break;
+        }
+      case("1st 12"):
+        if (spinResult > 0 && spinResult < 13) {
+          this.bankroll += bet * 3;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
+          break;
+        }
+        else {
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
+          break;
+        }
+      case("2nd 12"):
+        if (spinResult > 12 && spinResult < 25) {
+          this.bankroll += bet * 3;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
+          break;
+        }
+        else {
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
+          break;
+        }
+      case("3rd 12"):
+        if (spinResult > 25 && spinResult < 37) {
+          this.bankroll += bet * 3;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
+          break;
+        }
+        else {
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
+          break;
+        }
+      default:
+        if (choice == spinResult) {
+          this.bankroll += bet * 36;
+          console.log("The spin was " + spinResult);
+          console.log("You win! You now have " + this.bankroll);
+          break;
+        }
+        else {
+          console.log("The spin was " + spinResult);
+          console.log("You lose! You now have " + this.bankroll);
           break;
         }
     }
