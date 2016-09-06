@@ -129,5 +129,32 @@ var sprintFunctions = {
    var right = arr.slice(midpoint, arr.length);
 
    return merge(mergeSort(left), mergeSort(right));
+  },
+  quickSort: function quickSort(arr, low=0, high=arr.length-1){
+   if (high<=low){
+    return arr;
+   }
+   var swap = function(arr, idx_1, idx_2){
+    var temp = arr[idx_1];
+    arr[idx_1] = arr[idx_2];
+    arr[idx_2] = temp;
+   }
+   var partition = function(arr, low, high){
+    var pivot = Math.floor(arr.length/2);
+    var left = low;
+    var right = high;
+    while(left <= right){
+      while (arr[left] <= arr[pivot]){
+        left++;
+      }
+      while (arr[right] >= arr[pivot]){
+        right--;
+      }
+      swap(arr, left, right);
+      left++;
+      right--;
+    }
+    return left; 
+   }
   }
 }
