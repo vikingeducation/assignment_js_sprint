@@ -25,7 +25,7 @@ var sprintFunctions = {
     for (var i = 0; i < string.length; i++) {
       var letter = string[i].toLowerCase();
       if (letter.match(/[a-z]/)) {
-        if (return_string[-1] === "_") {
+        if (i == 0 || return_string.slice(-1) === "_") {
           return_string += string[i].toUpperCase();
         }
         else{
@@ -33,7 +33,7 @@ var sprintFunctions = {
         };
       }
       else {
-        if (return_string[-1] !== "_") {
+        if (return_string.slice(-1) !== "_") {
           if (i !== string.length - 1) {
             return_string += "_"; 
           };
@@ -43,17 +43,44 @@ var sprintFunctions = {
     return return_string;
   },
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
+  compareArrays: function(array1, array2){ 
+    if (array1.length !== array2.length) {
+      return false;
+    };
+    for (var i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i]) {
+        return false;
+      };
+    };
+    return true;
     return "Finish compareArrays first!" 
   },
 
-  fizzBuzz: function(){  
-    // your code here
+  fizzBuzz: function(max){
+  var finalFizzBuzz = [];
+  for(var i = 1; i <= max; i++) {
+    if(i % 15 === 0) {
+      finalFizzBuzz.push("FIZZBUZZ");
+    }
+    else if (i % 3 === 0) {
+      finalFizzBuzz.push("FIZZ");
+    }
+    else if(i % 5 === 0) {
+      finalFizzBuzz.push("BUZZ");
+    }
+    else {
+      finalFizzBuzz.push(i);
+    };
+  };  
+  return finalFizzBuzz;  
   },
 
-  myMap: function(){  
-    // your code here
+  myMap: function(array, func){  
+    var finalArray = [];
+    for(var i = 0; i < array.length; i++) {
+      finalArray.push(func(array[i]));
+    };
+    return finalArray;
   },
 
   primes: function(){  
