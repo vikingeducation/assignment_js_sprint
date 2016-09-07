@@ -44,7 +44,7 @@ function Checkers() {
   };
 
   this.display = function() {
-    var alpha = ['h', 'g', 'f', 'e', 'd', 'c', 'b', 'a']
+    var alpha = ['h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'];
     var stringified = '';
     for (var i = 0; i < this.board.length; i++) {
       var rowString = alpha[i] + ' ';
@@ -57,7 +57,7 @@ function Checkers() {
       }
       stringified += rowString + "\n";
     }
-    stringified += "   1  2  3  4  5  6  7  8 \n"
+    stringified += "   1  2  3  4  5  6  7  8 \n";
     return stringified;
   };
 
@@ -71,7 +71,8 @@ function Checkers() {
       'f': 2,
       'g': 1,
       'h': 0
-    }
+    };
+    
     var from_row = alpha[alpha_from_row];
     var to_row = alpha[alpha_to_row];
     from_col -= 1;
