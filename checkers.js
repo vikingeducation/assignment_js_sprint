@@ -4,6 +4,8 @@ var player1 = new Player("X");
 var player2 = new Player("O");
 current_player = player1;
 
+var isOver = false;
+
 function Player(symbol) {
   this.symbol = symbol;
   this.pieces = 12;
@@ -32,11 +34,11 @@ var move = function() {
   } while (board[from.split(",")[0]][from.split(",")[1]] !== current_player.symbol);
 
   do {
-    to = prompt("Choose the destination. (e.g. 2,3)");
-  } while(isValidMove(to.split(",")[0], to.split(",")[1]));
+    to = prompt("To the left or the right? (L or R)");
+  } while(!makeMove(from.split(",")[0], from.split(",")[1], to);
 
-  board[from.split(",")[0]][from.split(",")[1]] = undefined;
-  board[to.split(",")[0]][to.split(",")[1]] = current_player.symbol;
+  // board[from.split(",")[0]][from.split(",")[1]] = undefined;
+  // board[to.split(",")[0]][to.split(",")[1]] = current_player.symbol;
 };
 
 var change_player = function() {
@@ -47,8 +49,26 @@ var change_player = function() {
   }
 };
 
-var isValidMove = function(row, col) {
-
+var makeMove = function(row, col, direction) {
+  row = Number(row);
+  col = Number(col);
+  var x_change, y_change;
+  if (direction === "R") {
+    x_change = 1;
+  } else {
+    x_change = -1;
+  }
+  if (current_player === player1) {
+    y_change = 1;
+  } else {
+    y_change = -1;
+  }
+  if (board[row + y_change][col + x_change] === undefined) {
+    board[row][col] = undefined;
+    board[row + y_change][col + x_change] = current_player.symbol;
+    return true;
+  }
+  return false;
 };
 
 // view
