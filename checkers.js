@@ -3,25 +3,37 @@ function Board(){
 
   this.populateBoard = function( redPlayer, blackPlayer ){
     for(prop in redPlayer.positions()){
-      board[redPlayer.positions()[prop]] = "r"
+      board[redPlayer.positions()[prop]] = "r";
     };
 
     for(prop in blackPlayer.positions()){
       board[blackPlayer.positions()[prop]] = "b";
-    }
+    };
   };
 
   this.updateBoard = function () {
 
+  };
+
+  this.render = function() {
+    var html_board = document.getElementById('board');
+    var result = prompt('Give me a number');
+    result = parseInt(result);
+
+    for (var i = 0; i < board.length; i++) {
+      html_board.innerHTML += board[i] + "-";
+      if ((i + 1) % 8 === 0 && i !== 0) {
+        html_board.innerHTML += "\n"
+      };
+    };
   };
 }
 
 function Move() {
   this.legalMove = function(piece, move, player, opponent) {
     if (player.color === "b"){
-      //% 7 === 0 then no right move, and if % 8 === 0
       if (player.positions()[piece] % 7 === 0 && move === "left" && piece !== "0"){
-        var player.positions()[piece] - 9;
+        player.positions()[piece] - 9;
       }
       else if (player.positions()[piece] % 8 === 0 && move === "right"){
         player.positions()[piece] -= 7;
@@ -74,7 +86,7 @@ function Player(color) {
   }
 
   this.positions = function() {
-    if (this.color === "b") {
+    if (this.color === "black") {
       return blackPiecePositions;
     } else {
       return redPiecePositions;
@@ -147,13 +159,20 @@ function Game() {
     var turn = "1"
 
     while ( gameOver(redPlayer, blackPlayer) === false ) {
-      var current_player = turnMap[turn]
-      var opponent = turnMap[turn === "1" ? "2" : "1";]
+      var current_player = turnMap[turn];
+      var opponent = turnMap[turn === "1" ? "2" : "1"];
       turnMap[turn].askForMove(opponent);
       turn = turn === "1" ? "2" : "1";
     }
   }
 }
+
+b = new Player("black");
+r = new Player("red");
+board = new Board;
+board.populateBoard(r,b);
+board.render();
+
 
 // board > Checker
 // pieces on board tiles > Player (12 pieces starting)
