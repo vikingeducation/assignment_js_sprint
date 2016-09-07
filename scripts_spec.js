@@ -10,6 +10,9 @@ var tester = {
     this.testFizzBuzz();
     this.testMyMap();
     this.testPrimes();
+    this.testBubbleSort();
+    this.testMergeSort();
+    this.testQuickSort();
     this.displayResults();
   },
 
@@ -84,7 +87,30 @@ var tester = {
     this.results.primes = ( this.sprintObj.compareArrays(exp, actual));
   },
 
+  testBubbleSort: function(){
+    var arr = [3, 1, 5, 2, 6];
+    var exp = [1, 2, 3, 5, 6];
+    var actual = this.sprintObj.bubbleSort(arr);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.bubbleSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
 
+   testMergeSort: function(){
+    var arr = [3, 1, 5, 2, 6, 10, 9, 8, 7];
+    var exp = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+    var actual = this.sprintObj.mergeSort(arr);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.mergeSort = ( this.sprintObj.compareArrays(exp, actual));
+  },
+
+  testQuickSort: function(){
+    var arr = [3, 1, 5, 2, 6, 10, 9, 8, 7];
+    var exp = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+    var actual = this.sprintObj.quickSort(arr);
+    if (typeof actual === 'undefined') { actual = [] };
+    this.results.quickSort = ( this.sprintObj.compareArrays(exp, actual) );
+  },
+//
   displayResults: function(){
     console.log("Displaying results...");
     console.log(this.results)
@@ -95,10 +121,13 @@ var tester = {
     $("#fizz-buzz").html(String(this.results.fizzBuzz));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    $("#bubble-sort").html(String(this.results.bubbleSort));
+    $("#merge-sort").html(String(this.results.mergeSort));
+    $("#quick-sort").html(String(this.results.quickSort));
+
   }
 
 }
-
 
 $(document).ready( function(){ tester.init( sprintFunctions )});
 
