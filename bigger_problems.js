@@ -49,7 +49,7 @@ function sorted(left,right) {
 
 function mergeSort(arr) {
   if (arr.length <= 1) {
-    return arr
+    return arr;
   }
   var len = arr.length;
   var mid = Math.floor(len / 2);
