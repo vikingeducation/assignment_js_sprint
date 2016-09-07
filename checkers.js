@@ -59,29 +59,29 @@ function playGame(board) {
   changeBoard(board);
   printBoard(board);
   var current_player = "b";
-  var player_coords = null;
+  var piece_coords = null;
   var player_move = null;
   while (black_pieces > 0 && red_pieces > 0) {
     // ask current player for move
     do {
-      var player_piece = prompt("Player " + current_player +". What piece do you want to move? Enter in the format: 0,1")
-      var piece_coords = player_piece.split(",");
+      var player_piece = prompt("Player " + current_player +". What piece do you want to move? Enter in the format: row#,column#")
+      piece_coords = player_piece.split(",");
       if (board[piece_coords[0]][piece_coords[1]] !== current_player) {
         console.log("That's not your piece");
         player_piece = false;
       }
     }
-    while (player_piece);
+    while (player_piece === false);
       // validate to see if piece is actually theirs
     do {
-      var player_move = prompt("Player " + current_player + ". Where do you want to go?")
-      var player_move = player_move.split(",");
+      player_move = prompt("Player " + current_player + ". Where do you want to go? Enter in the format: row#,column#")
+      player_move = player_move.split(",");
       //move move for red player
       if (current_player === "r") {
         // validate move for game rules
         //check for x coordinate and check for y coordinate, check for underscore
         // make current player's move
-        if ((player_coords[0] + 1 === player_move[0] || player_coords[0] - 1 === player_move[0]) && player_coords[1] + 1 === player_move[1] && board[player_move[0]][player_move[1]] === "_") {
+        if ((Number(piece_coords[1]) + 1 == player_move[1] || Number(piece_coords[1]) - 1 == player_move[1]) && Number(piece_coords[0]) + 1 == player_move[0] && board[player_move[0]][player_move[1]] === "_") {
            // move piece
           board[player_move[0]][player_move[1]] = "r";
           current_player = "b"
@@ -93,7 +93,7 @@ function playGame(board) {
       }
       //make move for black player
       else {
-        if ((player_coords[0] + 1 === player_move[0] || player_coords[0] - 1 === player_move[0]) && player_coords[1] - 1 === player_move[1] && board[player_move[0]][player_move[1]] === "_") {
+        if ((Number(piece_coords[1]) + 1 == player_move[1] || Number(piece_coords[1]) - 1 == player_move[1]) && Number(piece_coords[0]) - 1 == player_move[0] && board[player_move[0]][player_move[1]] === "_") {
            // move piece
           board[player_move[0]][player_move[1]] = "b";
           current_player = "r"
