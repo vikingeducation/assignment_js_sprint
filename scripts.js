@@ -204,18 +204,25 @@ return [];
 }
 
 
-function Roulette( bankroll ){
+function Roulette( startMoney ){
+  this.yourMoney = startMoney;
+  this.bankroll = function(){
+    console.log("You now have $" + this.yourMoney)
+  };
   this.spin = function(bet, num){
     var spinNum = Math.floor((Math.random() * 38) + 1)
     if (num === spinNum){
-      console.log("You Win $" + bet + ", the spin was " + spinNum + "!!!");
-      console.log("You now have $" + )
-    }
+      this.yourMoney += bet
+      console.log("You Win, the spin was " + spinNum + "!!!");
+      this.bankroll();
+    } else {
+      this.yourMoney -= bet
+      console.log("You lose, the spin was " + spinNum + ": D");
+      this.bankroll();
+    };
   };
-  this.bankroll = function(){
-
-  };
-  this.buyIn( money ){
-
+  this.buyIn = function( money ){
+    this.yourMoney += money;
+    this.bankroll();
   };
 }
