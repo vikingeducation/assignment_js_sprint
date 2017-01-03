@@ -5,7 +5,7 @@ var sprintFunctions = {
     largest = array[0];
     for (var i = 0; i < array.length; i++) {
       if (array[i] > largest) {
-        largest = array[i]
+        largest = array[i];
       }
     }
     return largest;
@@ -18,7 +18,7 @@ var sprintFunctions = {
 
   loudSnakeCase: function(phrase){
     phrase = phrase.replace(/[^\w\s]/g, '');
-    phrase = phrase.replace(/\s+/g, ' ')
+    phrase = phrase.replace(/\s+/g, ' ');
     phrase_array = phrase.split('');
     phrase_array[0] = phrase_array[0].toUpperCase();
     while (phrase_array.indexOf(' ') > -1) {
@@ -29,20 +29,57 @@ var sprintFunctions = {
     return phrase_array.join('');
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(arr1, arr2){
+    if (arr1.length != arr2.length) {
+      return false;
+    }
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] != arr2[i]) {
+        return false;
+      }
+    }
+    return true;
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(length){
+    array = [];
+    for (var i = 1; i <= length; i++) {
+      output = "";
+      if (i % 3 == 0) {
+        output = output.concat("FIZZ");
+      }
+      if (i % 5 == 0) {
+        output = output.concat("BUZZ");
+      }
+      if (output === "") {
+        output = i;
+      }
+      array.push(output);
+    }
+    return array;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(arr, func){
+    arr.forEach(func);
+    newArr = arr.slice();
+    for (var i = 0; i < arr.length; i++) {
+      newArr[i] = func(arr[i]);
+    }
+    return newArr;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(length){
+    // function isPrime(number) {
+    // }
+    array = [];
+    for (var i = 2; i < length; i++) {
+      array.push(i);
+    }
+    for (var j = 0; j < array.length; j++) {
+      current = array[j];
+      if (current % array[j] == 0) {
+        array[j] = null;
+      }
+    }
   },
-}
+};
