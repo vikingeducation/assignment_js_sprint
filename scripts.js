@@ -19,8 +19,26 @@ var sprintFunctions = {
     return result;
   },
 
-  loudSnakeCase: function(){
-    // your code here
+  loudSnakeCase: function(sentence){
+    // strip out punctuation
+    var newSentence = sentence.replace(/[^\w\s]|_/g, "");
+    // strip punctuation .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+
+    // split words into array (" ")
+    var words = newSentence.split(" ");
+
+    var titlizedArray = [];
+    console.log(words);
+    for (var i = 0; i < words.length; i++ ) {
+      var word = words[i];
+      var restOfWord = word.length - 1;
+      // word[0] returns undefined for an empty string
+      titlizedArray.push(word.substr(0,1).toUpperCase() + word.substr(1, restOfWord));
+    }
+
+    // join the words by '_'
+    var titlizedSentence = titlizedArray.join("_");
+    return titlizedSentence;
   },
 
   compareArrays: function(){
