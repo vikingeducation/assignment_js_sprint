@@ -1,4 +1,6 @@
-function Roulette(bankrollStart, houseOdds) {
+// Roulette
+
+function Roulette(bankrollStart) {
   this.money = bankrollStart;
 
   this.wheel = [0,28,9,26,30,11,7,20,32,17,5,22,34,15,3,24,36,13,1,"00",27,
@@ -84,5 +86,3 @@ function Roulette(bankrollStart, houseOdds) {
     this.money += amount;
   };
 }
-
-r = new Roulette(1000, 1);
