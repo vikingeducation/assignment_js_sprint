@@ -9,9 +9,16 @@ function Roulette(startingAmount) {
     this.bankrollAmount += amount;
   };
 
-  this.spin = function(bet, input) {
-    var spinResult = Math.floor(Math.random() * 35) + 1
+  this.arrayBuilder = function(start, stop, by) {
+    matchArr = [];
+    for (var i = start; i <= stop; i += by) {
+      matchArr.push(i);
+    }
 
+    return matchArr;
+  };
+
+  this.setGameConditions = function(input) {
     var multiplier,
         match;
     switch( input ){
@@ -21,36 +28,49 @@ function Roulette(startingAmount) {
         break;
       case "00":
         multiplier = 35;
-        match = [37];
+        match = [37, "00"];
         break;
       case "1 to 18":
         multiplier = 1;
-        match = this.arrayBuilder(1,18);
+        match = this.arrayBuilder(1,18,1);
         break;
       case "19 to 36":
         multiplier = 1;
+        match = this.arrayBuilder(19,36,1);
         break;
       case "Even":
         multiplier = 1;
+        match = this.arrayBuilder(2,36,2);
         break;
       case "Odd":
         multiplier = 1;
+        match = this.arrayBuilder(1,36,2);
         break;
       case "1st 12":
         multiplier = 2;
+        match = this.arrayBuilder(1,12,1);
         break;
       case "2nd 12":
         multiplier = 2;
+        match = this.arrayBuilder(13,24,1);
         break;
       case "3rd 12":
         multiplier = 2;
+        match = this.arrayBuilder(25,36,1);
         break;
       default:
         multiplier = 35;
+        match = [parseInt(input)];
     }
-    if (input === spinResult) {
-      payoutAmnt = this.payout(bet, input)
-      this.result( payoutAmnt, spinResult, "win");
+    return [match, multiplier];
+  };
+
+  this.spin = function(bet, input) {
+    var spinResult = Math.floor(Math.random() * 36) + 1,
+        gameConditions = this.setGameConditions(input);
+    if (gameConditions[0].indexOf(spinResult) >= 0) {
+      if (spinResult === 37) spinResult = "00";
+      this.result(bet*gameConditions[1], spinResult, "win");
     } else {
       this.result(-bet, spinResult, "lose");
     }
