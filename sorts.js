@@ -37,9 +37,6 @@ var sorts = {
         left = array.slice(0, midpoint),
         right = array.slice(midpoint, array.length);
 
-    console.log("left: " + left);
-    console.log("right: " + right);
-
     return this.mergeArrays( this.mergeSort(left), this.mergeSort(right));
   },
 
@@ -52,7 +49,7 @@ var sorts = {
     if (arrL === undefined) { return arrR };
     if (arrR === undefined) { return arrL };
 
-    while (indexL < arrL.length && indexR < arrR.length) {
+    while (indexL < arrL.length || indexR < arrR.length) {
       if (indexL === arrL.length) {
         mergedArr = mergedArr.concat(arrR.slice(indexR, arrR.length));
         indexR = arrR.length;
@@ -70,14 +67,37 @@ var sorts = {
       }
     }
 
+    console.log( "mergedArr is " + mergedArr);
     return mergedArr;
   },
 
-  quickSort: function() {
+  quickSort: function(array) {
+    // if array.length is one, return array
+    if (array.length <= 1) return array;
 
+    // set pivot to first element of array
+    var pivot = array[0],
+        left = [],
+        right = [];
+
+    // go thru the rest of array, populating left and right
+    for (i = 1; i < array.length; i++) {
+      if (array[i] < pivot) {
+        left.push(array[i]);
+      } else {
+        right.push(array[i]);
+      }
+    }
+
+    // call quickSort on the left and right
+    var l = this.quickSort(left),
+        r = this.quickSort(right);
+
+    return  l.concat( pivot, r);
   },
 }
 
 
 // sorts.bubbleSort([6,5,3,1,8,2,4]);
-sorts.mergeSort([6,5,3,1,8,2,4]);
+// sorts.mergeSort([6,5,3,1,8,2,4]);
+// sorts.quickSort([6,5,3,1,8,2,4]);
