@@ -7,70 +7,36 @@
       h1,h2,h3,p{
         text-align: center;
       }
-      .output{
-        padding: 20px;
-        width: 300px;
-        margin: 20px auto;
-        border: 1px solid black;
-      }
+    
       html, body {width:100%; height:100%; margin:0; padding:0;}
       body {background:-webkit-radial-gradient(center,ellipse cover,#fff 0%,#888 100%); -webkit-perspective:1000;}
 
-      section {
-        width:400px;
-        height:225px;
-        margin:-225px 0 0 -200px;
-        font:100px/225px Helvetica,Arial;
-        text-align:center;
-        color:#FFF;
-        position:absolute;
-        top:50%;
-        left:50%;
-        -webkit-transform-origin:left bottom;
-        -webkit-transition:-webkit-transform 1s ease-out;
-      }
 
+      .wheel {
+        width:400px;
+        margin:auto;
+
+      }
       .wheel img{
         -webkit-transition: all 2s ease-out;
         transition: all 2s ease-out;
       }
-
-      #s1 {background:#900; -webkit-transform:rotateX(0deg);}
-      #s2 {background:#090; -webkit-transform:rotateX(270deg);}
-      #s3 {background:#009; -webkit-transform:rotateX(180deg);}
-      #s4 {background:#990; -webkit-transform:rotateX(90deg);}
-
-      body.s1 #s1 {-webkit-transform:rotateX(180deg);}
-      body.s1 #s2 {-webkit-transform:rotateX(450deg);}
-      body.s1 #s3 {-webkit-transform:rotateX(360deg);}
-      body.s1 #s4 {-webkit-transform:rotateX(270deg);}
-
-      body.s2 #s2 {-webkit-transform:rotateX(180deg);}
-      body.s2 #s3 {-webkit-transform:rotateX(450deg);}
-      body.s2 #s4 {-webkit-transform:rotateX(360deg);}
-      body.s2 #s1 {-webkit-transform:rotateX(270deg);}
-
-      body.s3 #s3 {-webkit-transform:rotateX(180deg);}
-      body.s3 #s4 {-webkit-transform:rotateX(450deg);}
-      body.s3 #s1 {-webkit-transform:rotateX(360deg);}
-      body.s3 #s2 {-webkit-transform:rotateX(270deg);}
-
-      body.s4 #s4 {-webkit-transform:rotateX(180deg);}
-      body.s4 #s1 {-webkit-transform:rotateX(450deg);}
-      body.s4 #s2 {-webkit-transform:rotateX(360deg);}
-      body.s4 #s3 {-webkit-transform:rotateX(270deg);}
     </style>
   </head>
   <body>
     <h1><a href="index.html">JS tests</a></h1>
     <div class="wheel">
       <img width="400" height="400" src="wheel.svg" />
+      <input id="bet-input" type="range" min="1" max="36" step="1" value="1">
+      <span> Betting On </span>
+      <span id="bet-screen"> 1 </span>
+      <button id="bet-btn"> Bet </button>
+      <hr>
+      <input id="bank-input" type="number" min="5" step="5">
+      <span> Current Bank Account </span>
+      <span id="bank-screen"> 100 </span>
     </div>
-
-    <section id="s1">1</section>
-    <section id="s2">2</section>
-    <section id="s4">4</section>
-    <section id="s3">3</section>
+    
 
   </body>
   <script src="roulette.js"></script>
