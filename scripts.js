@@ -32,29 +32,75 @@ var sprintFunctions = {
     for (var i = 0; i < words.length; i++ ) {
       var word = words[i];
       var restOfWord = word.length - 1;
-      // word[0] returns undefined for an empty string
-      titlizedArray.push(word.substr(0,1).toUpperCase() + word.substr(1, restOfWord));
-    }
+
+      if ( word ) {
+        // word[0] returns undefined for an empty string
+        titlizedArray.push(word[0].toUpperCase() + word.substr(1, restOfWord));
+      };
+    };
 
     // join the words by '_'
-    var titlizedSentence = titlizedArray.join("_");
-    return titlizedSentence;
+    return titlizedArray.join("_");
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(arr1, arr2){
+    var equal = false;
+
+    if ( arr1.length === arr2.length ) {
+      equal = true;
+      for ( var i = 0; i < arr1.length; i++ ) {
+        if (arr1[i] !== arr2[i]) {
+          equal = false;
+          break;
+        };
+      };
+    };
+
+    return equal;
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(number){
+    var output = [];
+
+    for ( var i = 1; i <= number; i++) {
+      str = ""
+      if (i%3 === 0) {
+        str += "FIZZ";
+      };
+      if (i%5 === 0) {
+        str += "BUZZ";
+      };
+
+      output.push(str || i);
+    };
+
+    return output;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function( arr, mapFunc){
+    new_arr = [];
+
+    arr.forEach( function(el) {
+      new_arr.push( mapFunc(el) );
+    });
+
+    return new_arr;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(number){
+    primes = []
+    for (var i = 2; i <= number; i++) {
+      is_prime = true;
+      primes.forEach ( function(prime) {
+        if (i%prime === 0) {
+          is_prime = false;
+        };
+      });
+      if (is_prime) {
+        primes.push(i);
+      };
+    };
+
+    return primes;
   },
 }
