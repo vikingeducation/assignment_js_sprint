@@ -135,7 +135,7 @@ sprintFunctions.mergeSort.merge = function(left, right){
   while(left[0] && right[0]){
     if(left[0] <= right[0])
       arr.push(left.shift());
-    else 
+    else
       arr.push(right.shift());
   }
 
@@ -153,12 +153,12 @@ sprintFunctions.mergeSort.merge = function(left, right){
 sprintFunctions.mergeSort.sort = function(arr){
   if(arr.length <= 1)
     return arr;
-  else{  
+  else{
     var half = Math.floor(arr.length/2);
     var left = arr.slice(0,half);
     var right = arr.slice(half);
     return sprintFunctions.mergeSort.merge(this(left),this(right));
-  } 
+  }
 }
 
 /*
@@ -198,22 +198,21 @@ sprintFunctions.quickSort = function(arr) {
     var pivot = arr.length - 1;
     var compare = 0;
     do{
-      console.log(arr)
       if (arr[pivot] < arr[compare]){
-        temp = arr[pivot]
-        temp2 = arr[compare]
-        temp3 = arr[pivot - 1]
+        temp = arr[pivot];
+        temp2 = arr[compare];
+        temp3 = arr[pivot - 1];
 
-        arr[compare] =  temp3
-        arr[pivot-1] = temp
-        arr[pivot] = temp2
+        arr[compare] =  temp3;
+        arr[pivot-1] = temp;
+        arr[pivot] = temp2;
 
-        pivot -= 1
+        pivot -= 1;
       }
       else{
-        compare += 1
+        compare += 1;
       }
     }while(pivot !== compare)
-    return sprintFunctions.quickSort(arr.slice(0, pivot + 1)).concat(sprintFunctions.quickSort(arr.slice(pivot + 1)))
+    return sprintFunctions.quickSort(arr.slice(0, pivot)).concat(sprintFunctions.quickSort(arr.slice(pivot)))
   }
 }
