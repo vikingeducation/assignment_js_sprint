@@ -1,4 +1,15 @@
 function Roulette(startingAmount) {
+  (function() {
+    console.log("Welcome to Roulette!");
+    console.log("Check your bankroll with .bankroll()");
+    console.log("Add money to your bankroll with .buyIn( amountToAdd ) ");
+    console.log("Enter a bet and spin the wheel using .spin(betAmount, 'betNumber')");
+    console.log(`betNumber options and their payouts are:
+                  Any number 1-36 (35:1), "0" (35:1), "00" (35:1), "Even" (1:1),
+                  "Odd" (1:1), "1 to 18" (1:1), "19 to 36" (1:1),
+                  "1st 12" (2:1), "2nd 12" (2:1), or "3rd 12" (2:1)`);
+  })();
+
   this.bankrollAmount = startingAmount;
 
   this.bankroll = function() {
