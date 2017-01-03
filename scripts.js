@@ -2,8 +2,8 @@
 
 var sprintFunctions = {
   largestEl: function(array){
-    largest = array[0];
-    for (var i = 0; i < array.length; i++) {
+    var largest = array[0];
+    for (var i = 1; i < array.length; i++) {
       if (array[i] > largest) {
         largest = array[i];
       }
@@ -12,7 +12,7 @@ var sprintFunctions = {
   },
 
   reversed: function(string){
-    string_array = string.split('');
+    var string_array = string.split('');
     return string_array.reverse().join('');
   },
 
@@ -42,36 +42,32 @@ var sprintFunctions = {
   },
 
   fizzBuzz: function(length){
-    array = [];
+    var array = [];
     for (var i = 1; i <= length; i++) {
       output = "";
-      if (i % 3 == 0) {
+      if (i % 3 === 0) {
         output = output.concat("FIZZ");
       }
-      if (i % 5 == 0) {
+      if (i % 5 === 0) {
         output = output.concat("BUZZ");
       }
-      if (output === "") {
-        output = i;
-      }
-      array.push(output);
+      array.push(output || i);
     }
     return array;
   },
 
   myMap: function(arr, func){
-    arr.forEach(func);
-    newArr = arr.slice();
+    var newArr = [];
     for (var i = 0; i < arr.length; i++) {
-      newArr[i] = func(arr[i]);
+      newArr.push(func(arr[i]));
     }
     return newArr;
   },
 
   primes: function(length){
-    array = [];
+    var array = [];
     for (var i = 2; i <= length; i++) {
-      if (this.isPrime(i)) { array.push(i) }
+      if (this.isPrime(i)) { array.push(i); }
     }
     return array;
   },

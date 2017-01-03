@@ -25,7 +25,7 @@ var bubbleSort = function(arr) {
         arr[i+1] = [arr[i], arr[i] = arr[i+1]][0]; // swap elements
       }
     }
-  } while (swapped == true);
+  } while (swapped === true);
   return arr;
 };
 
@@ -39,9 +39,9 @@ var testBubbleSort = function() {
 };
 
 var mergeSort = function(arr) {
-  if (arr.length == 1) { return arr; }
+  if (arr.length === 1) { return arr; }
   var midpoint = Math.floor(arr.length / 2);
-  if (midpoint == 0) { return arr; }
+  if (midpoint === 0) { return arr; }
   var arr1 = arr.slice(0,midpoint);
   var arr2 = arr.slice(midpoint);
 
