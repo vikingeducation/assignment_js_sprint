@@ -99,38 +99,15 @@ var sprintFunctions = {
 }
 
 sprintFunctions.bubbleSort = function(arr){
-  /*
 
-def bubble_sort(input)
-
-  begin
-
-    idx = 1
-    swapped = false
-
-    begin
-
-      if arr[idx] < arr[idx-1]
-
-        arr[idx - 1], arr[idx] = arr[idx], arr[idx - 1]
-        swapped = true
-
-      end
-
-      idx += 1
-
-    end until idx == arr.length
-
-  end until !swapped
-
-  arr
-end
-
-  */
-  var swapped = false;
+  var swapped;
+  var start = 0;
   do {
+    swapped = false
     var s, s2;
-    for(i = 1; i < arr.length; i++) {
+    start += 1
+    for(i = start; i < arr.length; i++) {
+      console.log(arr)
       if(arr[i] < arr[i-1]){
         swapped = true;
         s = arr[i];
@@ -138,95 +115,53 @@ end
         arr[i] = s2;
         arr[i-1] = s;
       }
+      else{
+        start += 1
+      }
     }
   } while (swapped);
   return arr;
 }
 
 
+sprintFunctions.mergeSort = function(arr){
+  return sprintFunctions.mergeSort.sort(arr)
+
+}
+
+
+sprintFunctions.mergeSort.merge = function(left, right){
+  var arr = [];
+  while(left[0] && right[0]){
+    if(left[0] <= right[0])
+      arr.push(left.shift());
+    else 
+      arr.push(right.shift());
+  }
+
+  left.forEach(function(elem){
+    arr.push(elem)
+  })
+
+  right.forEach(function(elem){
+    arr.push(elem)
+  })
+
+  return arr
+}
+
+sprintFunctions.mergeSort.sort = function(arr){
+  if(arr.length <= 1)
+    return arr;
+  else{  
+    var half = Math.floor(arr.length/2);
+    var left = arr.slice(0,half);
+    var right = arr.slice(half);
+    return sprintFunctions.mergeSort.merge(this(left),this(right));
+  } 
+}
+
 /*
-def insertion_sort(arr)
-  arr = arr.dup
-  sorted = 0
-  begin
-
-    idx = sorted
-
-    until idx == 0
-
-      if arr[idx] < arr[idx - 1]
-
-        arr[idx - 1], arr[idx] = arr[idx], arr[idx - 1]
-        idx -= 1
-
-      else
-        break
-      end
-
-    end
-
-    sorted += 1
-
-  end until sorted == arr.length
-  arr
-end
-
-def bubble_sort(input)
-  arr = input.dup
-
-  begin
-
-    idx = 1
-    swapped = false
-
-    begin
-
-      if arr[idx] < arr[idx-1]
-
-        arr[idx - 1], arr[idx] = arr[idx], arr[idx - 1]
-        swapped = true
-
-      end
-
-      idx += 1
-
-    end until idx == arr.length
-
-  end until !swapped
-
-  arr
-end
-
-def merge_sort(arr)
-
-  return arr if arr.length <= 1
-
-  half = arr.length/2
-  left_half = arr[0...half]
-  right_half = arr[half..-1]
-
-  merge(merge_sort(left_half), merge_sort(right_half))
-
-end
-
-def merge(left_arr, right_arr)
-
-  left, right = left_arr.dup, right_arr.dup
-  merged = []
-
-  while !left.empty? && !right.empty?
-    if left[0] <= right[0]
-      merged << left.shift
-    else
-      merged << right.shift
-    end
-  end
-
-  merged << left << right
-  merged.flatten
-
-end
-
 def quick_sort(arr)
 
   return arr if arr.length <= 1
@@ -254,3 +189,31 @@ def quick_sort(arr)
 
 end
 */
+
+sprintFunctions.quickSort = function(arr) {
+  if(arr.length <= 1) {
+    return arr
+  }
+  else{
+    var pivot = arr.length - 1;
+    var compare = 0;
+    do{
+      console.log(arr)
+      if (arr[pivot] < arr[compare]){
+        temp = arr[pivot]
+        temp2 = arr[compare]
+        temp3 = arr[pivot - 1]
+
+        arr[compare] =  temp3
+        arr[pivot-1] = temp
+        arr[pivot] = temp2
+
+        pivot -= 1
+      }
+      else{
+        compare += 1
+      }
+    }while(pivot !== compare)
+    return sprintFunctions.quickSort(arr.slice(0, pivot + 1)).concat(sprintFunctions.quickSort(arr.slice(pivot + 1)))
+  }
+}
