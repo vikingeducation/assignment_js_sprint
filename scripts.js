@@ -69,17 +69,18 @@ var sprintFunctions = {
   },
 
   primes: function(length){
-    // function isPrime(number) {
-    // }
     array = [];
-    for (var i = 2; i < length; i++) {
-      array.push(i);
+    for (var i = 2; i <= length; i++) {
+      if (this.isPrime(i)) { array.push(i) }
     }
-    for (var j = 0; j < array.length; j++) {
-      current = array[j];
-      if (current % array[j] == 0) {
-        array[j] = null;
-      }
-    }
+    return array;
   },
+
+  isPrime: function(number){
+    if (number < 2) { return false; }
+    for (var j = 2; j <= Math.floor(Math.sqrt(number)); j++) {
+      if (number % j === 0) { return false; }
+    }
+    return true;
+  }
 };
