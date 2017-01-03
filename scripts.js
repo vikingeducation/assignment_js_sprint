@@ -20,37 +20,51 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(string){
-    var arr = string.split(/\s+/)
-    // var lsc = string.replace(/\W/g, "")
-
+    var lsc = [];
+    var arr = string.split(/\s+/);
     arr.forEach(function(element) {
-      element = element.replace(/\W/g, "")
-      var letter = element[0].toUpperCase()
-      var rest = element.slice(1)
-      var word = letter + rest
-      console.log(arr)
+      var word = element.replace(/\W/, "")
+      var letter = word[0].toUpperCase()
+      var rest = word.slice(1)
+      var result = letter + rest
+      lsc.push(result)
     })
-    // for (i = 0; i < lsc.length; i++) {
-    //   if (lsc[i] === '_'){
-    //     console.log(lsc[i+1])
-    //     lsc = lsc.replace(lsc[i+1], lsc[i + 1].toUpperCase())
-    //   }
-    // };
-    lsc = arr.join('_')
-    console.log(lsc);
+    return lsc.join("_");
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(array1, array2){
+    if (array1.length !== array2.length) {
+      return false;
+    };
+    for (i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i]) {
+        return false;
+      };
+    };
+    return true
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(number){
+    var result = [];
+    for (i = 1; i <= number; i++) {
+      if (i % 15 === 0) {
+        result.push("FIZZBUZZ");
+      } else if (i % 3 === 0){
+        result.push("FIZZ");
+      } else if (i % 5 === 0){
+        result.push("BUZZ");
+      } else {
+        result.push(i);
+      };
+    };
+    return result;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(array, fun){
+    for (i = 0; i < array.length; i++) {
+      array[i] = fun(array[i]);
+    };
+    return array;
   },
 
   primes: function(){
