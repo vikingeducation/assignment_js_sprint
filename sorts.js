@@ -29,8 +29,35 @@ var sorts = {
     return array;
   },
 
-  mergeSort: function() {
+  mergeSort: function(array) {
+    if (array.length <= 1) return array;
 
+    // break array in to 2, call mergeSort on each half
+    var midpoint = Math.floor(array.length/2),
+        left = array.slice(0, midpoint),
+        right = array.slice(midpoint, array.length);
+
+    return this.mergeArrays( this.mergeSort(left), this.mergeSort(right));
+  },
+
+  mergeArrays: function (arrL, arrR) {
+    console.log("mergeArrays called with " + arrL +", "+ arrR);
+    var mergedArr = [],
+        indexL = 0,
+        indexR = 0,
+        counter = 0;
+
+    while (indexL < arrL.length && indexR < arrR.length) {
+      if (arrL[counter] < arrR[counter]) {
+        mergedArr.push( arrL[counter] );
+        indexL++;
+      } else {
+        mergedArr.push( arrR[counter] );
+        indexR++;
+      }
+    }
+
+    return mergedArr;
   },
 
   quickSort: function() {
@@ -39,4 +66,5 @@ var sorts = {
 }
 
 
-sorts.bubbleSort([6,5,3,1,8,2,4]);
+// sorts.bubbleSort([6,5,3,1,8,2,4]);
+sorts.mergeSort([6,5,3,1,8,2,4]);
