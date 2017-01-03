@@ -37,6 +37,9 @@ var sorts = {
         left = array.slice(0, midpoint),
         right = array.slice(midpoint, array.length);
 
+    console.log("left: " + left);
+    console.log("right: " + right);
+
     return this.mergeArrays( this.mergeSort(left), this.mergeSort(right));
   },
 
@@ -44,16 +47,26 @@ var sorts = {
     console.log("mergeArrays called with " + arrL +", "+ arrR);
     var mergedArr = [],
         indexL = 0,
-        indexR = 0,
-        counter = 0;
+        indexR = 0;
+
+    if (arrL === undefined) { return arrR };
+    if (arrR === undefined) { return arrL };
 
     while (indexL < arrL.length && indexR < arrR.length) {
-      if (arrL[counter] < arrR[counter]) {
-        mergedArr.push( arrL[counter] );
-        indexL++;
+      if (indexL === arrL.length) {
+        mergedArr = mergedArr.concat(arrR.slice(indexR, arrR.length));
+        indexR = arrR.length;
+      } else if (indexR == arrR.length) {
+        mergedArr = mergedArr.concat(arrL.slice(indexL, arrL.length));
+        indexL = arrL.length;
       } else {
-        mergedArr.push( arrR[counter] );
-        indexR++;
+        if (arrL[indexL] < arrR[indexR]) {
+          mergedArr.push( arrL[indexL] );
+          indexL++;
+        } else {
+          mergedArr.push( arrR[indexR] );
+          indexR++;
+        }
       }
     }
 
