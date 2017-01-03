@@ -20,19 +20,23 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(string){
-    var lsc = ""
-    for (i = 0; i < string.length; i++) {
-      if (string[i].match(/W/)) {
-        lsc[i] = "";
-      } else if (string[i] === " ") {
-        lsc[i] = "_";
-      } else {
-        lsc[i] = string[i];
-      };
-      if (string[i - 1] === "_") {
-        lsc[i] = lsc[i].toUpperCase();
-      };
-    };
+    var arr = string.split(/\s+/)
+    // var lsc = string.replace(/\W/g, "")
+
+    arr.forEach(function(element) {
+      element = element.replace(/\W/g, "")
+      var letter = element[0].toUpperCase()
+      var rest = element.slice(1)
+      var word = letter + rest
+      console.log(arr)
+    })
+    // for (i = 0; i < lsc.length; i++) {
+    //   if (lsc[i] === '_'){
+    //     console.log(lsc[i+1])
+    //     lsc = lsc.replace(lsc[i+1], lsc[i + 1].toUpperCase())
+    //   }
+    // };
+    lsc = arr.join('_')
     console.log(lsc);
   },
 
