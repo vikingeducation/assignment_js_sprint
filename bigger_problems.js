@@ -26,11 +26,8 @@ var combine = function(array1, array2) {
 
   while (array1[0] && array2[0]) {
     if (array1[0] <= array2[0]) {
-      console.log(`combined array ${combinedArray}`)
       combinedArray.push(array1.shift())
     } else {
-      console.log(`combined array ${combinedArray}`)
-
       combinedArray.push(array2.shift())
     }
   }
@@ -40,21 +37,33 @@ var combine = function(array1, array2) {
   array2.forEach(function(num) {
     combinedArray.push(num)
   })
-  console.log(`combined array ${combinedArray}`)
   return combinedArray
 };
 
 var split_arr = function(array) {
   if (array.length <= 1) {
-    console.log(array)
     return array
   } else {
     var array1 = array.splice(0, Math.floor(array.length / 2))
     var array2 = array
-    console.log(`array1: ${array1}`)
-    console.log(`array2: ${array2}`)
     var result = combine(split_arr(array1), split_arr(array2))
-    console.log(result);
     return result
   }
+};
+
+var quickSort = function(arr) {
+  var left = []
+  var right = []
+  var pivot = arr[0]
+  if (arr.length <= 1) {
+    return arr;
+  }
+  for (i = 1; i < arr.length; i++) {
+    if (arr[i] <= pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
+    };
+  };
+  return quickSort(left).concat(pivot, quickSort(right))
 };
