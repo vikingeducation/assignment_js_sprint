@@ -1,32 +1,123 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
-  },
-  
-  reversed: function(){  
-    // your code here
+  largestEl: function(input){
+      // spread method (not all browsers support)
+    // return Math.max( ...input );
+
+      // built in Math.max operator
+    // return Math.max.apply(null, input);
+
+      // for loop (only works for positive numbers)
+    var topNum = 0;
+    for (var i = 0; i < input.length; i++) {
+      if (input[i] > topNum) {
+        topNum = input[i];
+      }
+    }
+    return topNum;
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  reversed: function(str){
+      // using three built in methods
+    // var splitStr = str.split("")
+    // var reverseStr = splitStr.reverse()
+    // var joinStr = reverseStr.join("")
+    // return joinStr
+
+      // Chained methods
+    // return str.split("")
+    //           .reverse()
+    //           .join("")
+
+      // for loop
+    var returnString = "";
+    for (var i = str.length - 1; i >= 0; i--) {
+      returnString += str[i];
+    }
+    return returnString;
+
+      // recursive  TODO ask how to recursively call this
+    // if (str === "")
+    //   return "";
+    // else
+    //   return this.sprintObj.reversed(str.substr(1)) + str.charAt(0);
   },
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
+  loudSnakeCase: function(s){
+      // regex
+    // var sNoSym = s.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    // var sCase = sNoSym.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    // var sScores = sCase.replace(/\s/g, "_");
+    // var sSingleScores = sScores.replace(/__/g, "_");
+    // return sSingleScores;
+
+      // split and join
+    sNoPeriods = s.replace(/\. /g, "");
+    return sNoPeriods.split(" ")
+                     .map(function(word) {
+                     return (word.charAt(0)
+                     .toUpperCase() + word.slice(1));})
+                     .join('_')
+                     .substr(0, sNoPeriods.length - 1);
   },
 
-  fizzBuzz: function(){  
-    // your code here
+  compareArrays: function(firstArr, secondArr){
+    if (firstArr.length != secondArr.length)
+      return false;
+    else
+      for (var i = 0; i < firstArr.length -1; i++) {
+        if (firstArr[i] != secondArr[i])
+          return false;
+      }
+    return true;
   },
 
-  myMap: function(){  
-    // your code here
+  fizzBuzz: function(num){
+    returnArr = [];
+    for (var i = 1; i <= num; i++) {
+      if ((i % 3 === 0) && (i % 5 === 0))
+        returnArr.push("FIZZBUZZ");
+      else if (i % 3 === 0)
+        returnArr.push("FIZZ");
+      else if (i % 5 === 0)
+        returnArr.push("BUZZ");
+      else
+        returnArr.push(i);
+    }
+    return returnArr;
   },
 
-  primes: function(){  
-    // your code here
+  myMap: function(arr, func){
+    returnArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      returnArr.push(func(arr[i]));
+    }
+    return returnArr;
+  },
+
+  primes: function(num){
+    var arr = [], upperLimit = Math.sqrt(num), primes = [];
+
+    // Make an array of true values from 2 to (num - 1)
+    for (var i = 0; i < num; i++) {
+      arr.push(true);
+    }
+
+    // Set multiples to false
+    for (var i = 2; i <= upperLimit; i++) {
+      if (arr[i]) {
+        for (var j = i * i; j < num; j += i) {
+            arr[j] = false;
+        }
+      }
+    }
+    // All arr[i] set to true are primes
+    for (var i = 2; i < num; i++) {
+      if(arr[i]) {
+          primes.push(i);
+      }
+    }
+    return primes;
   },
 }
