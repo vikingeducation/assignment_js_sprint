@@ -8,39 +8,81 @@ var roulette = {
     this.betInput = document.getElementById("bet-input");
     this.bankScreen = document.getElementById("bank-screen");
     this.bankInput = document.getElementById("bank-input");
-    this.betInput.addEventListener("change", this.showBet)
+    this.lostScreen = document.getElementById("lost-screen");
+    this.resultScreen = document.getElementById("result");
+    this.betInput.addEventListener("change", function(){this.showBet()}.bind(this));
+  },
+
+  restart: function(){
+    this.lostScreen.classList.remove();
+    this.init();
   },
 
   showBet: function(){
     this.betScreen.innerHTML = this.betInput.value
   },
 
+  setBet: function(){
+    if(+this.bankInput.value > this.bank)
+      return this.bank;
+    else
+      return +this.bankInput.value;
+
+  },
+
+  payOut: function(amount){
+    this.bank += amount * 36;
+  },
+
+  lose: function(amount){
+    this.bank -= amount;
+    if(this.bank <= 0){
+      this.bank = 0;
+      this.gameOver();
+    }
+  },
+
+  gameOver(){
+    this.lostScreen.classList.add("active");
+  },
+
   collectBet: function(){
     var betValue = this.betInput.value;
-    var result = this.spin();  
-    return this.checkResults(betValue, result);
+    var betAmount = this.setBet();
+    if(this.checkResults(betValue, this.spin())){
+      this.payOut(betAmount);
+    } else {
+      this.lose(betAmount);
+    }
+
+    this.bankScreen.innerHTML = this.bank;
   },
 
   checkResults: function(choice, outcome){
     if(choice == outcome)
       return true;
-    else 
+    else
       return false;
   },
 
 
   spin: function(){
-    $('.wheel img').css('transition', 'all 0s');
-    $('.wheel img').css('transform', 'rotate(' + (deg % 360) + 'deg)');
     var pos = Math.round(Math.random()*37);
-    setTimeout(roulette.animateWheel(pos), 100);
+    $('.wheel img.board').css('transition', 'all 0s');
+    $('.wheel img.board').css('transform', 'rotate(-' + (deg % 360) + 'deg)');
+    setTimeout(function(){roulette.animateWheel(pos)}, 100);
+    setTimeout(function(){this.updateScreen(this.positions[pos])}.bind(this), 2000)
     return this.positions[pos];
   },
 
   animateWheel: function(pos){
-    deg = (Math.round(360/38)*pos + Math.round(Math.random() * 4)*360);
-    $('.wheel img').css('transition', 'all 2s ease');
-    $('.wheel img').css('transform', 'rotate(' + deg + 'deg)');
+    deg = (Math.round((360/37)*pos) + (Math.round(Math.random() * 3)+2)*360);
+    $('.wheel img.board').css('transition', 'all 2s ease');
+    $('.wheel img.board').css('transform', 'rotate(-' + deg + 'deg)');
+  },
+
+  updateScreen: function(num){
+    this.resultScreen.innerHTML = num;
   },
 
   betScreen: null,
@@ -48,51 +90,55 @@ var roulette = {
   bank: 100,
   bankScreen: null,
   bankInput: null,
+  resultScreen: null,
 
   positions: {
-    0: 00,
-    1: 27,
-    2: 10,
-    3: 35,
-    4: 39,
-    5: 12,
-    6: 8,
-    7: 19,
-    8: 31,
-    9: 18,
+    0: 0,
+    1: 32,
+    2: 15,
+    3: 19,
+    4: 4,
+    5: 21,
+    6: 2,
+    7: 25,
+    8: 17,
+    9: 34,
     10: 6,
-    11: 21,
-    12: 33,
-    13: 16,
-    14: 4,
-    15: 23,
-    16: 35,
-    17: 14,
-    18: 2,
-    19: 0,
-    20: 28,
-    21: 9,
-    22: 26,
-    23: 30,
-    24: 11,
-    25: 7,
-    26: 20,
-    27: 32,
-    28: 17,
-    29: 5,
-    30: 22,
-    31: 34,
-    32: 15,
-    33: 3,
-    34: 24,
-    35: 36,
-    36: 13,
-    37: 1
+    11: 27,
+    12: 13,
+    13: 36,
+    14: 11,
+    15: 30,
+    16: 8,
+    17: 23,
+    18: 10,
+    19: 5,
+    20: 24,
+    21: 16,
+    22: 33,
+    23: 1,
+    24: 20,
+    25: 14,
+    26: 31,
+    27: 9,
+    28: 22,
+    29: 18,
+    30: 29,
+    31: 7,
+    32: 28,
+    33: 12,
+    34: 35,
+    35: 3,
+    36: 26,
   }
 }
 
 $(function(){
-$('#bet-btn').on('click', function(){
-  roulette.collectBet();
-})
+  roulette.init();
+  $('#bet-btn').on('click', function(){
+    roulette.collectBet();
+  })
+  $('.restart').on('click', function(){
+    roulette.restart();
+  })
 })
