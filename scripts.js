@@ -13,7 +13,7 @@ var sprintFunctions = {
 
   reversed: function(string){
     var rstring = "";
-    for (i = string.length - 1; i >= 0; i--) {
+    for (var i = string.length - 1; i >= 0; i--) {
       rstring += string[i];
     };
     return rstring;
@@ -36,7 +36,7 @@ var sprintFunctions = {
     if (array1.length !== array2.length) {
       return false;
     };
-    for (i = 0; i < array1.length; i++) {
+    for (var i = 0; i < array1.length; i++) {
       if (array1[i] !== array2[i]) {
         return false;
       };
@@ -46,7 +46,7 @@ var sprintFunctions = {
 
   fizzBuzz: function(number){
     var result = [];
-    for (i = 1; i <= number; i++) {
+    for (var i = 1; i <= number; i++) {
       if (i % 15 === 0) {
         result.push("FIZZBUZZ");
       } else if (i % 3 === 0){
@@ -61,7 +61,7 @@ var sprintFunctions = {
   },
 
   myMap: function(array, fun){
-    for (i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
       array[i] = fun(array[i]);
     };
     return array;
@@ -79,7 +79,6 @@ var sprintFunctions = {
         }
       }
     };
-    // primes.sort()
     console.log(primes)
     return primes
   },
