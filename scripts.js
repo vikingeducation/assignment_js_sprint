@@ -120,4 +120,62 @@ var sprintFunctions = {
     }
     return primes;
   },
+
+  bubbleSort: function(arr) {
+    var changed;
+    do {
+      changed = false;
+      for (var i = 0; i < arr.length -1; i++) {
+        if (arr[i] > arr[i + 1]){
+          var temp = arr[i];
+          arr[i] = arr[i + 1];
+          arr[i + 1] = temp;
+          changed = true;
+        }
+      }
+    } while (changed);
+    return arr;
+  },
+
+  mergeSort: function(arr) {
+    if (arr.length < 2)
+      return arr;
+    var middle = Math.floor(arr.length / 2);
+    var left = arr.slice(0, middle);
+    var right = arr.slice(middle, arr.length);
+
+    return merge(mergeSort(left), mergeSort(right));
+  },
+
+  merge: function(left, right) {
+    var returnArr = [];
+    while (left.length && right.length) {
+      if (left[0] <= right[0]) {
+          returnArr.push(left.shift());
+      } else {
+          returnArr.push(right.shift());
+      }
+    }
+    while (left.length)
+      returnArr.push(left.shift());
+    while (right.length)
+      returnArr.push(right.shift());
+    return returnArr;
+  },
+
+  quickSort: function(arr) {
+    if (arr.length === 0)
+      return [];
+    var left = [];
+    var right = [];
+    var pivot = arr[0];
+    for (var i = 1; i < arr.length; i++) {
+      if (arr[i] < pivot) {
+        left.push(arr[i]);
+      } else {
+        right.push(arr[i]);
+      }
+    }
+    return quickSort(left).concat(pivot, quickSort(right));
+  }
 }
