@@ -1,4 +1,8 @@
 assignment_js_sprint
-====================
+<hr>
 
-while(1){ go() };
+Kenny Kottenstette
+
+<hr>  
+To Dos:
+-double check style guide
