@@ -29,15 +29,6 @@ var bubbleSort = function(arr) {
   return arr;
 };
 
-
-// Tests
-
-var testBubbleSort = function() {
-  testArray1 = [6,3,8,3,1,4,12,3];
-  expectedResult1 = [1,3,3,3,4,6,8,12];
-  return compareArrays(bubbleSort(testArray1), expectedResult1);
-};
-
 var mergeSort = function(arr) {
   if (arr.length === 1) { return arr; }
   var midpoint = Math.floor(arr.length / 2);
@@ -81,4 +72,12 @@ var quickSort = function(arr) {
   }
 
   return quickSort(left).concat(pivot, quickSort(right));
+};
+
+// Tests
+
+var testBubbleSort = function() {
+  testArray1 = [6,3,8,3,1,4,12,3];
+  expectedResult1 = [1,3,3,3,4,6,8,12];
+  return compareArrays(bubbleSort(testArray1), expectedResult1);
 };
