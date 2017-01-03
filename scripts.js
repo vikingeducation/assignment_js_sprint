@@ -100,11 +100,10 @@ var sprintFunctions = {
 
 sprintFunctions.bubbleSort = function(arr){
 
-  var swapped;
+  var swapped, s, s2;
   var start = 0;
   do {
-    swapped = false
-    var s, s2;
+    swapped = false;
     start += 1
     for(i = start; i < arr.length; i++) {
       console.log(arr)
@@ -125,8 +124,7 @@ sprintFunctions.bubbleSort = function(arr){
 
 
 sprintFunctions.mergeSort = function(arr){
-  return sprintFunctions.mergeSort.sort(arr)
-
+  return sprintFunctions.mergeSort.sort(arr);
 }
 
 
@@ -213,6 +211,8 @@ sprintFunctions.quickSort = function(arr) {
         compare += 1;
       }
     }while(pivot !== compare)
-    return sprintFunctions.quickSort(arr.slice(0, pivot)).concat(sprintFunctions.quickSort(arr.slice(pivot)))
+    return sprintFunctions.quickSort(arr.slice(0, pivot))
+                          .concat(sprintFunctions
+                                    .quickSort(arr.slice(pivot)))
   }
 }

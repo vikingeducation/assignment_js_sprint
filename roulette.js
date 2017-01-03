@@ -8,11 +8,11 @@ var roulette = {
   },
   vertical: function(){
     $("body").removeClass();
-    $('body').toggleClass('s' + (Math.round(Math.random()*4) + 1));
+    $('body').toggleClass('s' + (Math.round(Math.random()*4)));
   },
   animateWheel: function(){
-    deg = (Math.round(Math.random()*1080) + 720) + (deg % 360);
-    $('.wheel img').css('transition', 'all 2s ease-out');
+    deg = (Math.round(Math.random()*2160) + 720);
+    $('.wheel img').css('transition', 'all 2s ease');
     $('.wheel img').css('transform', 'rotate(' + deg + 'deg)');
   }
 }
