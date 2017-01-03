@@ -17,9 +17,10 @@ function Roulette(bankrollStart) {
   };
 
   this.getOdds = function(betSpace) {
-    var wheelIndex = this.wheel.indexOf(betSpace), betOdds;
+    var wheelIndex = this.wheel.indexOf(betSpace),
+      betOdds;
     if (wheelIndex > -1) {
-      betOdds = 36;
+      betOdds = 35;
     } else if (Object.keys(this.odds).indexOf(betSpace) > -1 ) {
       betOdds = this.odds[betSpace];
     } else {
