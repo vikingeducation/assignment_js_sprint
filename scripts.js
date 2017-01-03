@@ -67,7 +67,20 @@ var sprintFunctions = {
     return array;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(number){
+    var primes = [2]
+    for (var i = 2; i <= number; i++) {
+      for (var j = 2; j < i; j++) {
+        if (i % j === 0) {
+          break
+        }
+        if (j === i - 1) {
+          primes.push(i)
+        }
+      }
+    };
+    // primes.sort()
+    console.log(primes)
+    return primes
   },
 }
