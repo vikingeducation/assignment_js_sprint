@@ -31,17 +31,17 @@ var sprintFunctions = {
     //           .join("")
 
       // for loop
-    var returnString = "";
-    for (var i = str.length - 1; i >= 0; i--) {
-      returnString += str[i];
-    }
-    return returnString;
+    // var returnString = "";
+    // for (var i = str.length - 1; i >= 0; i--) {
+    //   returnString += str[i];
+    // }
+    // return returnString;
 
-      // recursive  TODO ask how to recursively call this
-    // if (str === "")
-    //   return "";
-    // else
-    //   return this.sprintObj.reversed(str.substr(1)) + str.charAt(0);
+      // recursive
+    if (str === "")
+      return "";
+    else
+      return this.reversed(str.substr(1)) + str.charAt(0);
   },
 
   loudSnakeCase: function(s){
