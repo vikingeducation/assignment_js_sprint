@@ -82,11 +82,17 @@
       <br>
       <label>Bet Amount: <input id="bank-input" type="number" min=5 step=5 value=5></label>
       <hr>
-      <button id="bet-btn"> Bet </button>
+      <button id="bet-btn"> Bet On Number </button>
+      <button data-color="red" class="bet-color"> Bet On Red </button>
+      <button data-color="black" class="bet-color"> Bet On Black </button>
+      <button data-parity=0 class="bet-parity"> Bet On Even </button>
+      <button data-parity=1 class="bet-parity"> Bet On Odd </button>
+      <br>
       <span> Current Bank Account </span>
       <span id="bank-screen"> 100 </span>
 
       <button class="restart">Reset Game</button>
+
     </div>
 
 
