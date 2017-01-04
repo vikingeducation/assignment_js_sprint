@@ -55,11 +55,30 @@ var sprintFunctions = {
     return output;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(array, functionPassed){
+    var output = [];
+
+    for (var i = 0; i < array.length; i++){
+      var el = array[i];
+      var newEl = functionPassed(el);
+      output.push(newEl);
+    }
+    return output;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(input){
+    var range = [];
+    for (var i = 2; i < input; i++){ range.push(i) }
+
+    return range.filter(sprintFunctions.isPrime);
   },
+
+  isPrime: function(n){
+    for(var i = 2; i < n; i++){
+      if (n % i === 0){
+        return;
+      }
+    }
+      return n;
+    },
 }
