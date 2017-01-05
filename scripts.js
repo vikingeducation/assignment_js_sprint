@@ -1,4 +1,60 @@
+function roulette(startingAmount){
+  this.bankRoll = startingAmount;
+  this.spin = function(){
+    var placedBet = Number(prompt("Enter Bet amount"));
+    var guess = Number(prompt("Enter Guess (1 - 36)"));
+
+    var winningNumber = Math.floor((Math.random() * 36) + 1);
+
+    var message = 'Sorry, you lost';
+
+    if (guess === winningNumber){
+      this.bankRoll += (placedBet * 35);
+      message = 'Congrats, you won!'
+    } else {
+      this.bankRoll -= placedBet;
+    }
+    console.log(message)
+  };
+
+  this.buyIn = function(amount){
+    this.bankRoll += amount;
+  };
+
+}
+
 var sprintFunctions = {
+
+  bubbleSort: function(array){
+    var start = true;
+
+  	while (start) {
+  	  var triggered = false;
+  		for (var i = 0; i < (array.length - 1); i++){
+  	    var pointer1 = array[i];
+  	    var pointer2 = array[i + 1];
+
+  	    if (pointer2 < pointer1){
+  	      array[i] = pointer2;
+  	      array[i + 1] = pointer1;
+  	      triggered = true;
+  	      break;
+  	    }
+
+  		}
+  		if (!triggered) { start = false; }
+  	}
+  	return array;
+  },
+
+  mergeSort: function(array){
+
+  },
+
+  quickSort: function(array){
+
+  },
+
   largestEl: function(array){
     var descSorted = array.sort(function(a, b) {
       return b - a;

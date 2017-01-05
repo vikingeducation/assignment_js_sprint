@@ -11,3 +11,4 @@ To Dos:
 
 
 -1 liners acceptable? lines 50/51
+bublesort line 20 alternative,
