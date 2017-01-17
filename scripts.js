@@ -1,12 +1,12 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(myArray){
+    return Math.max.apply(Math, myArray);
   },
-  
-  reversed: function(){  
-    // your code here
+
+  reversed: function(string){
+    return string.split("").reverse().join("");
   },
 
   loudSnakeCase: function(){  
