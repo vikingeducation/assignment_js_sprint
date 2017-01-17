@@ -36,8 +36,20 @@ var sprintFunctions = {
     return true;
   },
 
-  fizzBuzz: function(){  
-    // your code here
+  fizzBuzz: function(number){
+    var result = [];
+    for (var i = 1; i <= number; i++) {
+      if (i % 3 === 0 && i % 5 === 0) {
+        result.push("FIZZBUZZ");
+      } else if (i % 3 === 0) {
+        result.push("FIZZ");
+      } else if (i % 5 === 0) {
+        result.push("BUZZ");
+      } else {
+        result.push(i);
+      }
+    }
+    return result;
   },
 
   myMap: function(){  
