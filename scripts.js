@@ -1,6 +1,20 @@
 function roulette(startingAmount){
   this.bankRoll = startingAmount;
   this.spin = function(){
+    var validInputs = false;
+
+    this.validBet = function(input){
+      
+    };
+
+    this.validGuess = function(input){
+
+    };
+
+    this.validBet = function(input){
+
+    };
+
     var placedBet = Number(prompt("Enter Bet amount"));
     var guess = Number(prompt("Enter Guess (1 - 36)"));
 
