@@ -2,10 +2,10 @@
 
 var sprintFunctions = {
   largestEl: function(array){
-    let largest = null;
-    array.forEach( function(element) {
-      if (largest < element) largest = element;
-    })
+    let largest = array[0];
+    for (i = 1; i < array.length - 1; i++) {
+      if (largest < array[i]) largest = array[i];
+    }
     return largest;
   },
   
@@ -33,11 +33,10 @@ var sprintFunctions = {
   fizzBuzz: function(num){
     array = [];
     for (i = 1; i <= num; i++) {
-      if (i % 3 === 0) {
-        if (i % 5 === 0) array.push("FIZZBUZZ");
-        else array.push("FIZZ");
-      } else if (i % 5 === 0) array.push("BUZZ");
-      else array.push(i);
+      let word = "";
+      if (i % 3 === 0) word = "FIZZ";
+      if (i % 5 === 0) word += "BUZZ";
+      array.push(word || i)
     }
     return array;
   },
