@@ -65,11 +65,40 @@ var sprintFunctions = {
   return answer;
   },
 
-  myMap: function(){
+  myMap: function(inputArr, inputFunc){
     // your code here
+    outputArr = [];
+    for(var i = 0; i < inputArr.length; i++) {
+      outputArr.push(inputFunc(inputArr[i]));
+    }
+    return outputArr;
   },
 
-  primes: function(){
+  primes: function(input){
     // your code here
-  },
+    var isPrime = function(n) {
+       if (n < 2) {
+          return false;
+        } else if (n === 2) {
+          return true;
+        } else if (n % 2 === 0) {
+          return false;
+        } else {
+          j = 3
+          while(j < ((Math.pow(n, 0.5)) + 1)) {
+            if (n % j === 0) {
+              return false;
+            }j += 2;
+          }
+          return true;
+        }
+      }
+    primeArr = [];
+    for(var i = 1; i <= input; i++) {
+      if (isPrime(i)) {
+        primeArr.push(i);
+      }
+    }
+    return primeArr;
+},
 }
