@@ -48,8 +48,21 @@ var sprintFunctions = {
   return true;
   },
 
-  fizzBuzz: function(){
+  fizzBuzz: function(input){
     // your code here
+    var answer = [];
+    for(var i = 1; i <= input; i++) {
+      if (i % 3 === 0 && i % 5 === 0) {
+        answer.push("FIZZBUZZ");
+      } else if (i % 3 === 0) {
+        answer.push("FIZZ");
+      } else if (i % 5 === 0) {
+        answer.push("BUZZ");
+      } else {
+        answer.push(i);
+      }
+    }
+  return answer;
   },
 
   myMap: function(){
