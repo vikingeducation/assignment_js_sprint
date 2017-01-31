@@ -1,4 +1,4 @@
-var tester = {
+ var tester = {
 
   init: function(sprintObj){
     console.log("Initializing test...");
