@@ -43,14 +43,6 @@ var sprintFunctions = {
   	return array;
   },
 
-  mergeSort: function(array){
-
-  },
-
-  quickSort: function(array){
-
-  },
-
   largestEl: function(array){
     var descSorted = array.sort(function(a, b) {
       return b - a;
