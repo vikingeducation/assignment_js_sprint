@@ -45,6 +45,7 @@ var sprintFunctions = {
   loudSnakeCase: function loudSnakeCase(str) {
     var regex = /[^A-Za-z]+/g; //Finds one or more consecutive non-English alphabet characters
     var snaked = str.replace(regex, " ");//Replaces these occurance with spaces
+    snaked = snaked.trim(); //Remove whitespace from ends. Polyfill if necessary
     snaked = snaked.split(" "); //Split string into array at each space
     snaked.forEach(function lowerUpper(element, index, arr) {
       let str = element.charAt(0).toUpperCase() + element.slice(1).toLowerCase(); //Build new string which Uppercase first Char and lowercase rest of string
