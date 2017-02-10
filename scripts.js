@@ -112,6 +112,13 @@ var sprintFunctions = {
    * @params [Array]
    **/
   myMap : function myMap(arr, fn) {
+          if (Array.isArray(arr) && typeof fn === "function") {
+            for (let i = 0; i < arr.length; i++) {
+              arr[i] = fn.call(this, arr[i]);
+            }
+          }
+          //may need to hard bind "this" if a reference to this is important
+          return arr;
   },
     
   /**
