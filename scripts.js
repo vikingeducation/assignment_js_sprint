@@ -11,7 +11,7 @@ var sprintFunctions = {
               if (arr.length === 0) {
                   return "none";
               }
-              if (arr.length === 1) {
+              else if (arr.length === 1) {
                   return arr[0];
               }
               else {
@@ -32,10 +32,7 @@ var sprintFunctions = {
  * @return [String]
  **/
   reversed: function reversed(str) {
-            str.split();
-            str.reverse();
-            str.join("");
-            return str;
+            return str.split("").reverse.join("");
 
   },
   
