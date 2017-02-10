@@ -20,9 +20,9 @@ var sprintFunctions = {
                   if (largest < arr[i]) {
                     largest = arr[i];
                   }
+                }
                   /*could use a sort algorithm. Need to be aware of strings*/
                 return largest;
-                }
               }
   },
     
