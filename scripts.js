@@ -32,7 +32,7 @@ var sprintFunctions = {
  * @return [String]
  **/
   reversed: function reversed(str) {
-            return str.split("").reverse.join("");
+            return str.split("").reverse().join("");
 
   },
   
