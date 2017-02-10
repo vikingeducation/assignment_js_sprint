@@ -52,7 +52,7 @@ var sprintFunctions = {
 
 
       });
-    snaked.join("_"); //join the array with underscores
+    snaked = snaked.join("_"); //join the array with underscores
     return snaked;
   },
 
