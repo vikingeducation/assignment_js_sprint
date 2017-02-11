@@ -128,6 +128,26 @@ var sprintFunctions = {
    *
    **/
   primes: function primes(num) {
-
+        if (Number.isInteger(num) && num > 1) {
+          var arrOfPrimes = [];
+          for (let i = 2; i <= num; i++) {
+            if (isPrime(i)) {
+              arrOfPrimes.push(i);
+            }
+          }
+        return arrOfPrimes;
+        }
+        else {
+          return "No primes";
+        }
+        function isPrime(num) {
+          for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) { //num is not prime
+              return false;
+            }
+          }
+          return true;
+        }
   }
-}
+
+};
