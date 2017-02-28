@@ -42,8 +42,8 @@ var tester = {
 
 
   testCompareArrays: function(){
-    var startArr = [1,2,4,3];
-    var diffArr = [1,2,3,4];
+    var startArr = [3,2,1,2,4,3];
+    var diffArr = [1,2,3,4,5];
 
     // Happy path
     var actual1 = this.sprintObj.compareArrays(startArr, startArr);
