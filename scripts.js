@@ -12,13 +12,20 @@ var sprintFunctions = {
           return num;
   },
   
-  reversed: function(string){  
-    var string = string.split("").reverse().join("");
-    return string;
+  reversed: function(myString){  
+    myString = myString.split("").reverse().join("");
+    return myString;
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  loudSnakeCase: function(string){  
+    string = string.split("");
+    for(var i = 0; i < string.length; i++){
+        string[i] = string[i].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()/]/g, '').trim();
+        string[i] = string[i];
+    }
+    console.log(string);
+    string = string.join("_");
+    return console.log(string);
   },
 
   compareArrays: function(){ 
