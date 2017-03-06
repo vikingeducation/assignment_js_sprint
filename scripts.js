@@ -1,12 +1,13 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(array){
+    let sortedArray = array.sort()
+    return sortedArray[sortedArray.length - 1]
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(myString){  
+    return myString.split("").reverse().join("")
   },
 
   loudSnakeCase: function(){  
@@ -15,7 +16,7 @@ var sprintFunctions = {
 
   compareArrays: function(){ 
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    return "Finished compareArrays first!" 
   },
 
   fizzBuzz: function(){  
