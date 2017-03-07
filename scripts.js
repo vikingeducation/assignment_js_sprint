@@ -12,14 +12,12 @@ var sprintFunctions = {
 
   loudSnakeCase: function(myString){  
     let myArray = myString.replace(/[^\w\s]/gi, "").replace(/\s+/g, " ").split(" ")
-    let myArray2 = myArray.map(function(el) {
+    return myArray.map(function(el) {
       return el.charAt(0).toUpperCase() + el.substr(1, el.length - 1)
     }).join("_")
-    return myArray2
   },
 
   compareArrays: function(array1, array2){ 
-    
     return array1.toString() === array2.toString()
   },
 
@@ -36,15 +34,13 @@ var sprintFunctions = {
         myArray.push(i)
       }
     }
-
    return myArray
   },
 
   myMap: function(myArray, myFunction){  
-    myArray2 = myArray.map(function(el) {
+    return myArray.map(function(el) {
       return myFunction(el)
     })
-    return myArray2
   },
 
   primes: function(num){  
