@@ -74,20 +74,20 @@ var sprintFunctions = {
     return return_array;
   },
 
-  primes: function(input){ 
-    let prime_array = [];
-    for (i=2; i<input; i++) {
-      let is_prime = true
-        for (n=2; n<i; n++) {
-          if (i%n===0) {
-            is_prime = false;
-          }
+    primes: function(input){ 
+      let prime_array = [];
+      for (i=2; i<input; i++) {
+        let is_prime = true
+          for (n=2; n<i; n++) {
+            if (i%n===0) {
+              is_prime = false;
+            }
+          };
+        if (is_prime) {
+          prime_array.push(i);
         };
-      if (is_prime) {
-        prime_array.push(i);
       };
-    };
-    return prime_array;
-  }
+      return prime_array;
+    }
 };
 
