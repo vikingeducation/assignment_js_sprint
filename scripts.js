@@ -13,15 +13,24 @@ var sprintFunctions = {
   },
 
   reversed: function(array){
-    var reverseArray = [];
-    for (var i = array.length - 1; i >= 0; i--) {
-      reverseArray.push(array[i]);
-    }
-    return reverseArray;
+    return array.split("").reverse().join("");
   },
 
-  loudSnakeCase: function(){
-    // your code here
+  loudSnakeCase: function(string){
+    var otherOtherSnakeString = string.replace("  ", " ");
+    var otherSnakeString = otherOtherSnakeString.replace(/[&\/\\#,+()$~%.'":*?!<>{}]/g, '');
+    var snakeString = otherSnakeString.split(" ");
+    var snakeArray = function (array) {
+      for (var i = 0; i < array.length; i++) {
+        array[i] = array[i].charAt(0).toUpperCase() + array[i].slice(1).toLowerCase();
+      }
+    }
+
+    snakeArray(snakeString);
+    var snakeStringTwo = snakeString.join("_");
+    return snakeStringTwo;
+
+
   },
 
   compareArrays: function(){
