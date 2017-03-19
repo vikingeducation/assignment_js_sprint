@@ -1,75 +1,86 @@
-<html>
-  <head>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="scripts.js"></script>
-    <script src="scripts_spec.js"></script>
-    <style>
-      h1,h2,h3,p{
-        text-align: center;
+// FILL IN THE FUNCTIONS BELOW
+
+var sprintFunctions = {
+  largestEl: function(someArray){
+    return someArray.sort()
+                    .pop();
+  },
+
+  reversed: function(someString){
+    return someString.split("")  // to array
+                     .reverse()  // reversed
+                     .join("");  // join, no pesky commas
+  },
+
+  loudSnakeCase: function(someString){
+    // This is not very elegant indeed :( I miss Python 
+    gamma = someString.split(/\s+/);
+    epsilon = "";
+    delta = "";
+    for (var i = 0; i < gamma.length; i++){
+      epsilon += gamma[i].replace(gamma[i].charAt(0), gamma[i].charAt(0).toUpperCase()) + "_";
+    }
+    delta += epsilon.replace(/\W/g, "");
+    return delta.substring(0, delta.length -1 );
+  },
+
+  compareArrays: function(firstArray, secondArray){
+    // oh, how I love you Ruby
+    if (firstArray.length !== secondArray.length){
+      return false;
+    } else {
+      for (var i = 0; i < firstArray.length; i++){
+        if(firstArray[i] !== secondArray[i]){
+          return false;
+          break;
+        } 
+    }
+    return true;
+  }
+  },
+
+  fizzBuzz: function(myInt){    
+    var myArray = Array(myInt);
+    for (i=0; i < myArray.length; i++){
+      var replaceStr = "";
+      if ((i+1) % 3 == 0){
+        replaceStr += "FIZZ";
       }
-      .output{
-        padding: 20px;
-        width: 300px;
-        margin: 20px auto;
-        border: 1px solid black;
+      if ((i+1) % 5 == 0){
+        replaceStr += "BUZZ";
       }
-    </style>
-  </head>
-  <body>
-    <h1> 
-      Javascript Sprint Test Suite
-    </h1>
+      if (replaceStr.length > 0){
+        myArray[i] = replaceStr;
+      } else {
+        myArray[i] = i+1;
+      }
+    }
+    return myArray;
+  },
 
-    <h3>
-      Largest Element:
-    </h3>
-    <div class="output" id="largest-el">
-      Pending...
-    </div>
+  myMap: function(myArray, myFunction){
+    var secondArray = Array(myArray.length);
+    for (i=0; i <myArray.length; i++){
+      secondArray[i] = myFunction(myArray[i]);
+    }
+    return secondArray;
+  },
 
-    <h3>
-      Reversed String:
-    </h3>
-    <div class="output" id="reversed">
-      Pending...
-    </div>
+  primes: function(myInt){
+    var myArray = [];
+    for (i=2; i<myInt; i++){
+      var prime = true;
+      for (j=2; j<i-1; j++){
 
-    <h3>
-      Loud Snake Case:
-    </h3>
-    <div class="output" id="loud-snake-case">
-      Pending...
-    </div>
-
-    <h3>
-      Compare Arrays:
-    </h3>
-    <p>
-      <em>Note: The rest of the test suite depends on getting this right!</em>
-    </p>
-    <div class="output" id="compare-arrays">
-      Pending...
-    </div>
-
-    <h3>
-      Fizz Buzz:
-    </h3>
-    <div class="output" id="fizz-buzz">
-      Pending...
-    </div>
-
-    <h3>
-      My Map:
-    </h3>
-    <div class="output" id="my-map">
-      Pending...
-    </div>
-
-    <h3>
-      Primes:
-    </h3>
-    <div class="output" id="primes">
-      Pending...
-    </div>
-  </body>
-</html>
+        if (i % j == 0){
+          prime = false;
+          break;
+        }
+      }
+      if (prime == true){
+        myArray.push(i);
+      }
+    }
+    return myArray;
+  },
+}
