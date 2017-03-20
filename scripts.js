@@ -33,13 +33,37 @@ var sprintFunctions = {
 
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(array1, array2){
+    for (var i = 0; i < array1.length; i++) {
+      for (var j = 0; j <array2.length; j++) {
+        if (array1[i] != array2[j]) {
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+    }
   },
 
-  fizzBuzz: function(){
-    // your code here
+
+  fizzBuzz: function(n){
+    var array = [];
+    for (var i = 1; i <= n; i++) {
+      if ((i % 3 === 0) && (i % 5 === 0)) {
+        array.push("FIZZBUZZ")
+      }
+      else if (i % 3 === 0) {
+        array.push("FIZZ")
+      }
+      else if (i % 5 === 0) {
+        array.push("BUZZ")
+      }
+      else {
+         array.push(i)
+      }
+    }
+      return array;
   },
 
   myMap: function(){
