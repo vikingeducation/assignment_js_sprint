@@ -15,50 +15,43 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(str){
-    //Step 1: Convert string to lower case
-    str.toLowerCase();
-    //Step 2: Convert string to an array
-    var arr = str.split(' ');
-    /* Step 3: Apply a map method to array to convert each word to title case
-    Reference: medium.freecodecamp.com/three-ways-to-title-case-a-sentence-in-javascript-676a9175eb27#.856cpm7sh */
-    var newArr = arr.map(function(word) {
-      return (word.charAt(0).toUpperCase() + word.slice(1));
-    });
-    //Step 4: Convert array to string using underscore as connector
-    var newStr = newArr.join('_');
-    /*Step 5: Remove all non-characters from the string
+    /*Step 1: Replace all non-characters from the string
               \w is any digit, letter, or underscore.
               \s is any whitespace.
               [^\w\s] is anything that's not a digit, letter, whitespace, or underscore.
               Reference: stackoverflow.com/questions/4328500/how-can-i-strip-all-punctuation-from-a-string-in-javascript-using-regex */
-    var finalStr = newStr.replace(/[^\w\s]/g, "").replace(/\s+/g, " ");
+    var str2 = str.replace(/[^\w\s]/g, "").replace(/\s+/g, " ");
+    //Step 2: Convert string to lower case
+    str2.toLowerCase();
+    //Step 3: Convert string to an array
+    var arr = str2.split(' ');
+    //Step 4: convert each word to title case
+    for(var i=0; i<arr.length; i++){
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    //Step 5: Convert array to string using underscore as connector
+    //var newStr = newArr.join('_');
+    var newStr = arr.join('_');
     //Step 6: Return the final string
-    return finalStr;
+    return newStr;
   },
 
   compareArrays: function(input1, input2){
-    var inputArr1 = input1;
-    var inputArr2 = input2;
-    var len1 = inputArr1.length;
-    var len2 = inputArr2.length;
-    var areEqual = false;
-    if(len1 != len2){
-      areEqual = true;
+    var len1 = input1.length;
+    var len2 = input2.length;
+    var areEqual = true;
+    if(len1 != len2) {
+      areEqual = false;
     }
-    else{
+    else {
       for(var i=0; i<len1; i++){
-        if(inputArr1[i] != inputArr2[i]){
+        if(input1[i] != input2[i]){
           areEqual = false;
           break;
         }
       }
     }
-    if (areEqual){
-      return "Arrays are equal";
-    }
-    else{
-      return"Arrays are NOT equal";
-    }
+    return areEqual;
   },
 
   fizzBuzz: function(input){
@@ -87,10 +80,8 @@ var sprintFunctions = {
     return output;
   },
 
-  myMap: function(inputArr){
-    var newArr = inputArr.map(function(word) {
-      return (word.charAt(0).toUpperCase() + word.slice(1));
-    });
+  myMap: function(inputArr, callBackFunction){
+    var newArr = inputArr.map(callBackFunction);
     return newArr;
   },
 
@@ -115,6 +106,6 @@ var sprintFunctions = {
         }
       }
     }
-    console.log(outputArr);
+    return outputArr;
   },
 }
