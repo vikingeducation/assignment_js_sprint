@@ -1,14 +1,11 @@
 function Roulette(startingAmount){
   this.bankRoll = startingAmount;
   this.spin = function(){
+  var placedBet = Number(prompt("Enter Bet amount"));
+  var guess = Number(prompt("Enter Guess (1 - 36)"));
+  var winningNumber = Math.floor((Math.random() * 36) + 1);
+  var message = 'Sorry, you lost';
 
-
-    var placedBet = Number(prompt("Enter Bet amount"));
-    var guess = Number(prompt("Enter Guess (1 - 36)"));
-
-    var winningNumber = Math.floor((Math.random() * 36) + 1);
-
-    var message = 'Sorry, you lost';
   this.spin = function(betAmount, guess){
     var message,
         winningNumber = Math.floor((Math.random() * 36) + 1);
@@ -26,6 +23,7 @@ function Roulette(startingAmount){
   this.buyIn = function(amount){
     this.bankRoll += amount;
   };
+}
 }
 
 var sprintFunctions = {
@@ -78,15 +76,7 @@ var sprintFunctions = {
       }
     }
 
-    while (leftArr.length) {
-      returnArray.push(leftArr.shift());
-    }
-
-    while (rightArr.length) {
-      returnArray.push(rightArr.shift());
-    }
-
-    return returnArray;
+    return returnArray.concat(leftArr).concat(rightArr)
   },
 
   quickSort: function(array){
@@ -177,3 +167,8 @@ var sprintFunctions = {
       return n;
     },
 }
+
+var arr = [3, 1, 2]
+
+console.log('mergesort', sprintFunctions.mergeSort(arr))
+// console.log('quicksort', sprintFunctions.quickSort(arr))
