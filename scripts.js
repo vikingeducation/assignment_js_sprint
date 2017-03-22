@@ -80,8 +80,30 @@ var sprintFunctions = {
   },
 
   quickSort: function(array){
+    var leftArr,
+        rightArr,
+        pivot,
+        current;
 
-    return array;
+    if (array.length === 0) {
+      return [];
+    }
+
+    leftArr = [];
+    rightArr = [];
+    pivot = array[0];
+
+    for (var i = 1; i < array.length; i++) {
+      current = array[i];
+
+      if (current < pivot) {
+        leftArr.push(current);
+      } else {
+        rightArr.push(current);
+      }
+    }
+
+    return this.quickSort(leftArr).concat(pivot).concat(this.quickSort(rightArr))
   },
 
   largestEl: function(array){
@@ -167,8 +189,3 @@ var sprintFunctions = {
       return n;
     },
 }
-
-var arr = [3, 1, 2]
-
-console.log('mergesort', sprintFunctions.mergeSort(arr))
-// console.log('quicksort', sprintFunctions.quickSort(arr))
