@@ -1,4 +1,4 @@
-function roulette(startingAmount){
+function Roulette(startingAmount){
   this.bankRoll = startingAmount;
   this.spin = function(){
 
@@ -9,12 +9,16 @@ function roulette(startingAmount){
     var winningNumber = Math.floor((Math.random() * 36) + 1);
 
     var message = 'Sorry, you lost';
+  this.spin = function(betAmount, guess){
+    var message,
+        winningNumber = Math.floor((Math.random() * 36) + 1);
 
     if (guess === winningNumber){
-      this.bankRoll += (placedBet * 35);
-      message = 'Congrats, you won!'
+      this.bankRoll += (betAmount * 35);
+      message = 'Win! Updated Bankroll: ' + this.bankRoll;
     } else {
-      this.bankRoll -= placedBet;
+      this.bankRoll -= betAmount;
+      message = 'Loss! Updated Bankroll: ' + this.bankRoll;
     }
     console.log(message)
   };
@@ -22,7 +26,6 @@ function roulette(startingAmount){
   this.buyIn = function(amount){
     this.bankRoll += amount;
   };
-
 }
 
 var sprintFunctions = {
@@ -174,9 +177,3 @@ var sprintFunctions = {
       return n;
     },
 }
-
-var arr = [3, 1, 2]
-
-console.log("mergesort", sprintFunctions.mergeSort(arr))
-console.log()
-console.log("quicksort", sprintFunctions.quickSort(arr))
