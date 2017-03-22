@@ -1,19 +1,7 @@
 function roulette(startingAmount){
   this.bankRoll = startingAmount;
   this.spin = function(){
-    var validInputs = false;
 
-    this.validBet = function(input){
-      
-    };
-
-    this.validGuess = function(input){
-
-    };
-
-    this.validBet = function(input){
-
-    };
 
     var placedBet = Number(prompt("Enter Bet amount"));
     var guess = Number(prompt("Enter Guess (1 - 36)"));
@@ -62,11 +50,45 @@ var sprintFunctions = {
   },
 
   mergeSort: function(array){
+    var midIdx, leftHalf, rightHalf;
+    if (array.length < 2) {
+      return array;
+    }
 
+    midIdx = Math.floor(array.length / 2);
+    leftArr = array.slice(0, midIdx);
+    rightArr = array.slice(midIdx, array.length);
+
+
+    return this.merge(this.mergeSort(leftArr), this.mergeSort(rightArr));
+
+  },
+
+  merge: function(leftArr, rightArr){
+    var returnArray = [];
+
+    while ((leftArr.length) && (rightArr.length)) {
+      if (leftArr[0] <= rightArr[0]) {
+        returnArray.push(leftArr.shift());
+      } else {
+        returnArray.push(rightArr.shift());
+      }
+    }
+
+    while (leftArr.length) {
+      returnArray.push(leftArr.shift());
+    }
+
+    while (rightArr.length) {
+      returnArray.push(rightArr.shift());
+    }
+
+    return returnArray;
   },
 
   quickSort: function(array){
 
+    return array;
   },
 
   largestEl: function(array){
@@ -152,3 +174,9 @@ var sprintFunctions = {
       return n;
     },
 }
+
+var arr = [3, 1, 2]
+
+console.log("mergesort", sprintFunctions.mergeSort(arr))
+console.log()
+console.log("quicksort", sprintFunctions.quickSort(arr))
