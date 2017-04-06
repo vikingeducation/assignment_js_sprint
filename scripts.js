@@ -34,8 +34,27 @@ var sprintFunctions = {
     // return "Finish compareArrays first!" 
   },
 
-  fizzBuzz: function(){  
+  fizzBuzz: function(number){  
     // your code here
+    var i = 1;
+    var arr = [];
+
+    while(i <= number) {
+      if(i % 3 === 0 && i % 5 === 0){
+        arr.push("FIZZBUZZ");
+      }
+      else if(i % 3 === 0){
+        arr.push("FIZZ");
+      }
+      else if(i % 5 === 0){
+        arr.push("BUZZ");
+      }
+      else {
+        arr.push(i);
+      }
+      i++;
+    }
+    return(arr);
   },
 
   myMap: function(){  
