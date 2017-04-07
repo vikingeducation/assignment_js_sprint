@@ -16,8 +16,18 @@ var sprintFunctions = {
     return string.split('').reverse('').join('');
   },
 
-  loudSnakeCase: function(){  
+  loudSnakeCase: function(str){  
     // your code here
+    str = str.replace(/\W/g,'_');
+    var arr = [];
+
+    str.split('_').forEach(function(element){
+      if (element.match(/\w/)) {
+        arr.push(element.charAt(0).toUpperCase()+element.slice(1).toLowerCase());
+      };
+    });
+
+    return arr.join('_');
   },
 
   compareArrays: function(arr1, arr2){
@@ -59,8 +69,11 @@ var sprintFunctions = {
 
   myMap: function(myArray, myFunction){  
     // your code here
-    
-
+    var returnArray = [];
+      for (var i = 0; i < myArray.length; i++) {
+        returnArray.push(myFunction(myArray[i]));
+      }
+    return returnArray;
   },
 
   primes: function(number){
