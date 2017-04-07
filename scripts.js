@@ -57,11 +57,26 @@ var sprintFunctions = {
     return(arr);
   },
 
-  myMap: function(){  
+  myMap: function(myArray, myFunction){  
     // your code here
+    
+
   },
 
-  primes: function(){  
-    // your code here
-  },
+  primes: function(number){
+    var arr = [];
+    for(var i = 2; i < number; i++){
+      var isPrime = true;
+      for(var j = 2; j < i; j++){
+        if(i % j === 0){
+          isPrime = false;
+          break;
+        }
+      }
+      if(isPrime){
+        arr.push(i);
+      }
+    }
+    return arr;
+    },
 }
