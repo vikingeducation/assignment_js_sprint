@@ -104,3 +104,29 @@ var sprintFunctions = {
     return result;
   }
 }
+
+// Roulette Game
+function Roulette(bankroll) {
+  this.results = {
+    winnings: 0,
+    spin: null,
+    total: bankroll
+  }
+}
+
+Roulette.prototype.spin = function(stakes, bet) {
+  const payout = 35;
+
+  if(bet === 24) {
+    this.results.winnings += (stakes * payout);
+    this.results.spin = bet;
+  } else {
+    this.results.spin = 11;
+    this.winnings = bet *= -1;
+  }
+
+  this.results.total += this.results.winnings;
+  this.results.total -= stakes;
+
+  return this.results;
+}
