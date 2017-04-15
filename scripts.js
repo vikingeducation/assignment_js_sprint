@@ -12,7 +12,7 @@ var sprintFunctions = {
   loudSnakeCase: function(str){
     var arr = str.replace(/\s\s|\s/g, "_").replace(/[^\w]/g, "").split("");
     arr.forEach(function (el, index, array) {
-      if (arr[index-1] == "_") {
+      if (index == 0 || arr[index-1] == "_") {
         array[index] = el.toUpperCase();
       }
     });
