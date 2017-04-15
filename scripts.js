@@ -21,9 +21,15 @@ var sprintFunctions = {
 
   compareArrays: function(leftArr, rightArr){
     var equal = true;
-    leftArr.forEach(function(leftEl, leftIndex) {
-      equal = leftEl === rightArr[leftIndex];
-    });
+    var BreakException = {};
+    try {
+      leftArr.forEach(function(leftEl, leftIndex) {
+        equal = leftEl === rightArr[leftIndex];
+        if (!equal) { throw BreakException; }
+      });
+    } catch (e) {
+      if (e !== BreakException) { throw e; }
+    }
     return equal;
   },
 
