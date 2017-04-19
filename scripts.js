@@ -31,9 +31,13 @@ var sprintFunctions = {
     return splitOutputString.join("_");
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(firstArray, secondArray){
+    for (i=0; i<firstArray.length; i++) {
+      if (firstArray[i] != secondArray[i]) {
+        return false;
+      };
+    }
+    return true;
   },
 
   fizzBuzz: function(){
