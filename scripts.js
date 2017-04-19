@@ -40,8 +40,23 @@ var sprintFunctions = {
     return true;
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(upperLimit){
+    var outputArray = [];
+    for (i=0; i<=upperLimit; i++) {
+      if (i%3 == 0) {
+        if (i%5 == 0) {
+          outputArray[i] = "FIZZBUZZ";
+        } else {
+          outputArray[i] = "FIZZ";
+        };
+      } else if (i%5 == 0) {
+        outputArray[i] = "BUZZ";
+      } else {
+        outputArray[i] = i;
+      };
+    };
+    outputArray.splice(0,1);
+    return outputArray;
   },
 
   myMap: function(){
