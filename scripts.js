@@ -67,7 +67,21 @@ var sprintFunctions = {
     return outputArray;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(inputNumber){
+    //for each number up to the input
+    var isPrime;
+    var outputPrimes = [];
+    for (i = 2; i < inputNumber; i++) {
+      isPrime = true;
+      for (j = i-1; j>1; j--) {
+        if (i % j == 0) {
+          isPrime = false;
+        }
+      }
+      if (isPrime == true) {
+        outputPrimes.push(i);
+      }
+    }
+    return outputPrimes;
   },
 }
