@@ -85,3 +85,37 @@ var sprintFunctions = {
     return outputPrimes;
   },
 }
+
+class Roulette {
+  constructor(startingBankroll) {
+    this.bankrollAmount = startingBankroll;
+  }
+
+  spin(betAmount, betNumber) {
+    //Generate random number
+    var payout;
+    var spinNumber = Math.floor(Math.random() * 35) + 1;
+    console.log(spinNumber);
+    //Compare random number to bet number
+    if (betNumber == spinNumber) {
+      payout = betAmount*35;
+      console.log("You Win $" + payout +", the spin was " + spinNumber);
+    }
+    else {
+      payout = -betAmount;
+      console.log("You Lose, the spin was " + spinNumber + " :(");
+    }
+    this.bankrollAmount += payout;
+    this.bankroll();
+  }
+
+  bankroll() {
+    console.log("You now have $" + this.bankrollAmount);
+  }
+
+  buyIn(buyInAmount) {
+    this.bankrollAmount += buyInAmount;
+    console.log("You bought in $" + buyInAmount);
+    this.bankroll();
+  }
+}
