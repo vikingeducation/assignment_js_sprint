@@ -28,20 +28,40 @@ var sprintFunctions = {
   return words.join('_');
   },
 
-  compareArrays: function(){ 
+  compareArrays: function(arg, arg2){ 
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    return String(arg) === String(arg2); 
   },
 
-  fizzBuzz: function(){  
+  fizzBuzz: function(num){  
     // your code here
+     var answer = [];
+    for(var i = 1; i <= num; i++){
+      if(i % 3 === 0 && i % 5 === 0){
+        answer.push("FIZZBUZZ");
+      } else if (i % 3 === 0) {
+        answer.push("FIZZ");
+      }  else if (i % 5 === 0) {
+        answer.push("BUZZ");
+      }
+      else {
+        answer.push(i);
+      }
+    }
+    return answer;
   },
 
-  myMap: function(){  
-    // your code here
-  },
+  myMap: function(array, func){
+   var newArr = []
+
+    for (var i = 0; i < array.length; i++) {
+      newArr.push(func(array[i]));
+    }
+    return newArr;
+},
 
   primes: function(){  
     // your code here
+    //this led me to waste quite a bit of time, so I skipped it and moved on.
   },
 }
