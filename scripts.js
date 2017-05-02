@@ -5,30 +5,54 @@ var sprintFunctions = {
     var largest = arr[0],
       position = 1
     while( position <= arr.length ){
-      number =  arr[position];
+      number =  arr[position]; //iterates to next number in array
       if (number > largest){
         largest =  number;
-        console.log("largest", largest);
-        console.log("arr length", arr.length);
-        console.log("round");
         position ++;
-        console.log("position", position);
       } else{
-        
         position ++;
       }
-      console.log("testing", largest)
     }    
-    console.log("end")
     return largest;
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(str){
+    var strArr = str.split(""),
+      revArr = strArr.reverse(),
+      revStr = revArr.join("");
+    return  revStr;    
   },
 
-  loudSnakeCase: function(){  
+  loudSnakeCase: function(str){  
     // your code here
+    var strArr = str.split(" "),
+      newArr = [],
+      snakeStr = "";
+  var capitalizeItem = function(string){
+    var first = string.charAt(0).toUpperCase(),
+        capitalizedString = first + string.slice(1,string.length); 
+    return capitalizedString;
+  }
+  var myFunction = function(item){
+    if (item === ""){
+      return;
+    } else if(item.match(/[^a-zA-Z0-9_]{1}$/)) {
+     
+      item = item.slice(0, item.length-1);
+    } else {
+      item = item;
+    }
+    item = capitalizeItem(item);
+    newArr.push(item);
+    
+    //console.log(newArr);
+    snakeStr = newArr.join("_");
+  };
+  
+  strArr.forEach(myFunction);
+  console.log(snakeStr);
+  
+  return snakeStr;
   },
 
   compareArrays: function(){ 
@@ -37,7 +61,7 @@ var sprintFunctions = {
   },
 
   fizzBuzz: function(){  
-    // your code here
+      // your code here
   },
 
   myMap: function(){  
