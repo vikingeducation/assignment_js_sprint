@@ -1,8 +1,26 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(arr){  
+    var largest = arr[0],
+      position = 1
+    while( position <= arr.length ){
+      number =  arr[position];
+      if (number > largest){
+        largest =  number;
+        console.log("largest", largest);
+        console.log("arr length", arr.length);
+        console.log("round");
+        position ++;
+        console.log("position", position);
+      } else{
+        
+        position ++;
+      }
+      console.log("testing", largest)
+    }    
+    console.log("end")
+    return largest;
   },
   
   reversed: function(){  
