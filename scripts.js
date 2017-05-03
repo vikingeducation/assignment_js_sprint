@@ -55,9 +55,22 @@ var sprintFunctions = {
   return snakeStr;
   },
 
-  compareArrays: function(){ 
+  compareArrays: function(arr1, arr2){ 
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    if (arr1.length === arr2.length){
+      var position = 0;
+      
+      while (position  <= arr1.length){
+        if (arr1[position] === arr2[position]){         
+          position ++; //iterates to next items
+        } else {
+          return false; //different lengths
+        }
+      }
+      return true;
+    } else {
+      return false; //different elements in array
+    }
   },
 
   fizzBuzz: function(){  
