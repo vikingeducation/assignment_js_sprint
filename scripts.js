@@ -73,12 +73,38 @@ var sprintFunctions = {
     }
   },
 
-  fizzBuzz: function(){  
-      // your code here
+  fizzBuzz: function(num){ 
+    var returnArr = [],
+        start = 1;
+    
+    while (returnArr.length < num){
+      
+      if (start % 3 === 0 && start % 5 === 0){
+        returnArr.push("FIZZBUZZ");
+      }else if(start % 3 === 0){
+        
+        returnArr.push("FIZZ");
+      } else if(start % 5 === 0 ){
+        returnArr.push("BUZZ");
+      } else {
+        returnArr.push(start);
+      }
+      start ++;
+    }    
+    console.log(returnArr);
+    return returnArr;
   },
 
-  myMap: function(){  
-    // your code here
+  myMap: function(arr, func){ 
+    var position = 0,
+        newArr = [];
+  
+    while(position < arr.length){
+      newArr.push(func.call('undefined', arr[position]));
+      position ++;
+      }
+    console.log(newArr);
+    return newArr;
   },
 
   primes: function(){  
