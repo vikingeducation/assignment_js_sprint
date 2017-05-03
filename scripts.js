@@ -107,7 +107,33 @@ var sprintFunctions = {
     return newArr;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(num){ 
+    var newArr = [],
+        startNum = 1;
+    var testPrime = function(item){
+        if(item === 1){
+          return false;
+        } else if (item === 2){
+          return true;
+        } else {
+          for(i = 2; i < item; i++){
+            if (item % i === 0){
+              return false;
+            } 
+          } // end for
+          return true;
+        } // end else 
+    }
+
+    while(startNum < num){
+      if(testPrime(startNum)){
+        newArr.push(startNum);
+        startNum ++;
+      } else{
+        startNum++;
+      }
+    }
+    console.log(newArr);
+    return newArr;
   },
 }
