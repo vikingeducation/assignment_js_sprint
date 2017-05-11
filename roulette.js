@@ -4,8 +4,11 @@ function Roulette(startAmt) {
     console.log('You now have $' + this.funds);
   }
   this.spin = function(amt, choice) {
-    var result = Math.floor(Math.random() * 36);
+    if (this.invalidBet(choice)) {
+      return console.log('Please enter a valid bet');
+    }
     choice = choice.toString().toLowerCase();
+    var result = Math.floor(Math.random() * 36);
     if (this.isWin(choice, result)) {
       console.log(this.payOut(choice, amt) + ', the spin was ' + result + '!!');
     } else {
@@ -13,7 +16,6 @@ function Roulette(startAmt) {
       console.log('You Lose, the spin was ' + result);
     }
     this.bankroll();
-
   };
   this.buyIn = function(amt) {
     this.funds += amt;
@@ -46,6 +48,9 @@ function Roulette(startAmt) {
   };
   this.isWin = function(choice, result) {
     switch (choice) {
+      case '0':
+      case '00':
+        return (result === 0);
       case '1st 12':
         return (result >= 0 && result <= 12);
       case '1 to 18':
@@ -62,5 +67,13 @@ function Roulette(startAmt) {
         return (result >= 26 && result <= 36);
     }
     return false;
+  }
+  this.invalidBet = function(choice) {
+    if (typeof choice === 'number') {
+      return (choice < 0 || choice > 36);
+    } else {
+      var choices = ['1st 12', '1 to 18', '19 to 36', 'even', 'odd', '2nd 12', '3rd 12'];
+      return (choices.indexOf(choice) < 0);
+    }
   }
 }
