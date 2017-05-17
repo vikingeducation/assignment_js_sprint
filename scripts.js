@@ -60,12 +60,32 @@ var sprintFunctions = {
     return true;
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(number){
+    var a = new Array;
+    for( var i = 1; i <= number; i++ ) {
+      if ( i % 3 == 0 && i % 5 == 0 ) {
+        a.push("FIZZBUZZ");
+      }
+      else if ( i % 5 == 0 ) {
+        a.push("BUZZ");
+      }
+      else if ( i % 3 == 0 ) {
+        a.push("FIZZ");
+      }
+      else {
+        a.push(i);
+      }
+    }
+    console.log(a);
+    return a;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(a, f){
+    var a2 = new Array;
+    for ( i = 0; i < a.length; i++ ) {
+      a2.push(f(a[i]));
+    }
+    return a2;
   },
 
   primes: function(){
