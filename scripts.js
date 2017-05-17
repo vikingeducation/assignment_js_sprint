@@ -46,9 +46,18 @@ var sprintFunctions = {
     return s3;
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(a1, a2){
+    if ( a1.length > a2.length ) {
+      return false;
+    }
+    else {
+      for ( var i = 0; i < a1.length; i++) {
+        if(a1[i] != a2[i]) {
+          return false
+        }
+      }
+    }
+    return true;
   },
 
   fizzBuzz: function(){
