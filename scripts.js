@@ -88,7 +88,21 @@ var sprintFunctions = {
     return a2;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(number){
+    var a = new Array;
+    var test = true;
+    for (var i = 2; i < number; i++) {
+      for (var j = 2; j <= i/2; j++) {
+        if (i % j == 0) {
+          test = false;
+        }
+      }
+      if (test) {
+        a.push(i);
+      }
+      test = true;
+    }
+    console.log(a);
+    return a;
   },
 }
