@@ -65,11 +65,6 @@
         padding-bottom: 70px;
       }
 
-      a:active img {
-        -webkit-transform: rotate(3000deg);
-        -webkit-transition: -webkit-transform 10s ease-out;
-
-      }
     </style>
   </head>
 
@@ -88,7 +83,7 @@
         <td><input type='text' id='buyInAmount' value="100.00"></input></td>
         <td><input type='text'></input></td>
         <td><input type='text'></input></div></td>
-        <td><button class='button' id='confBuyIn' onclick='buyIn();'>purchase</button></td>
+        <td><button class='button' id='confBuyIn' onclick='buyIn();'>Purchase</button></td>
       </tr>
     </table>
 
@@ -193,16 +188,39 @@
       </table>
     </td>
     <td id=spinner>
-      <h4>Click &amp; Hold to Spin</h4>
-      <a href="#"><img width="180" height="180" align="center" src="http://www.gambling-hall-online.com/img/roulette/american_roulette_whell_diagram.gif" /></a>
+      <h3>Click to Spin</h3>
+      <a href="#"><img class="rouletteWheel" width="180" height="180" align="center" src="http://www.gambling-hall-online.com/img/roulette/american_roulette_whell_diagram.gif" /></a>
     </td>
   </tr>
 </table>
     <script>
 
-    $( "a" ).mouseup(function() {
-      spin();
+
+
+    $( "a" ).mousedown(function() {
+      if(doneRotate){
+        checkBetValid();
+        if (betValid){
+          doneRotate= false
+          rotateFunct();
+          setTimeout(spin, 4000);
+        }
+      };
     });
+
+    var randomRotate= 0;
+    var doneRotate= true
+
+    function rotateFunct(){
+      console.log(randomRotate);
+      randomRotate= (Math.floor(Math.random() * 3000) + 1000) + Number(randomRotate);
+      console.log(randomRotate);
+      $('.rouletteWheel').css({
+      '-webkit-transform': 'rotate(' + randomRotate + 'deg)',
+      'transform': 'rotate(' + randomRotate + 'deg)',
+      'transition-duration': '4s'
+      });
+    };
 
       document.getElementById("cash").value = "0"
       var selectedButton = "00"
@@ -240,14 +258,10 @@
       }
 
       function spin(){
-        checkBetValid();
-        if (betValid){
-          rouletteGetResults();
-          displayRouletteResults()
-          rouletteWinnings();
-        } else {
-        console.log("Invalid bet");
-        }
+        rouletteGetResults();
+        displayRouletteResults()
+        rouletteWinnings();
+        doneRotate= true
       };
 
       function rouletteGetResults() {
@@ -285,13 +299,13 @@
 
       function checkBetValid(){
         updateBetCash();
-        if (betCash > 0)
+        if (betCash >= 0)
         {
           if(cash - betCash >= 0){
             betValid= true;
           } else {
             betValid= false;
-            document.getElementById('winningStatement').innerHTML= ("Can't bet with money you don't have...")
+            document.getElementById('winningStatement').innerHTML= ("Can't bet money you don't have...")
             document.getElementById('rouletteResults').innerHTML= ("")
           }
         }else{
@@ -377,3 +391,4 @@
 
   </body>
 </html>
+
