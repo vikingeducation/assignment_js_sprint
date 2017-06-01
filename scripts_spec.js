@@ -1,8 +1,9 @@
 var tester = {
 
-  init: function(sprintObj){
+  init: function(sprintObj, rouletteObj){
     console.log("Initializing test...");
     this.sprintObj = sprintObj;
+    this.rouletteObj = rouletteObj;
     this.testLargestEl();
     this.testReversed();
     this.testLoudSnakeCase();
@@ -10,6 +11,7 @@ var tester = {
     this.testFizzBuzz();
     this.testMyMap();
     this.testPrimes();
+    this.testRoulette();
     this.displayResults();
   },
 
@@ -85,9 +87,22 @@ var tester = {
   },
 
 
+  testRoulette: function() {
+    var initialBankroll = 100;
+    this.rouletteObj = new Roulette(100);
+    this.rouletteObj.spin(10, 24);
+    this.rouletteObj.spin(50, 13);
+    this.rouletteObj.bankroll();
+    this.rouletteObj.buyIn(1000);
+    this.rouletteObj.spin(20, "0");
+
+    this.results.roulette = "Ran methods without errors";
+  },
+
+
   displayResults: function(){
     console.log("Displaying results...");
-    console.log(this.results)
+    console.log(this.results);
     $("#largest-el").html(String(this.results.largestEl));
     $("#reversed").html(String(this.results.reversed));
     $("#loud-snake-case").html(String(this.results.loudSnakeCase));
@@ -95,10 +110,13 @@ var tester = {
     $("#fizz-buzz").html(String(this.results.fizzBuzz));
     $("#my-map").html(String(this.results.myMap));
     $("#primes").html(String(this.results.primes));
+    $("#roulette").html(String(this.results.roulette));
   }
 
-}
+};
 
 
-$(document).ready( function(){ tester.init( sprintFunctions )});
+$(document).ready( function(){
+  tester.init( sprintFunctions, Roulette )
+});
 
