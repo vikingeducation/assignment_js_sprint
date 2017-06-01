@@ -10,3 +10,7 @@ A separate project is included here for the same assignment, which involved crea
 The game users JavaScript prompts rather than an HTML interface. Aside from the main game prompts, the game also asks the user if they would like to continue playing after each spin and prohibits a user from playing further if their bankroll drops to zero. See in code comments for further.
 
 The roulette game is accessed through a plain roulette.html page that simply runs the roulette.js file.
+
+View the html page for the algorithms here: http://js-algs-roulette.surge.sh/
+
+Play the roulette game here: http://js-algs-roulette.surge.sh/roulette.html
