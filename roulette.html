@@ -1,0 +1,394 @@
+<!<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <style>
+      .main table{
+        width: 900px;
+        table-layout: fixed;
+      }
+      .main td{
+        Height: 10px;
+        table-layout:fixed
+      }
+      #betTable {
+        width: 280px;
+        table-layout: fixed;
+      }
+      #buttons {
+        width: 280px;
+        padding-top: 40px;
+        table-layout: fixed;
+        border-collapse: collapse;
+        background-color: red;
+      }
+      #buttons button {
+        width: 100%;
+        padding: 3px 2px
+      }
+      #buttons button:focus{
+        background-color: #fff9f9;
+      }
+
+      #ccnBuyout table {
+        width: 20%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+      #ccnBuyout  th {
+        padding: 10px 15px;
+        background: #395870;
+        color: #fff;
+      }
+      #ccnBuyout td {
+        background: #f0f0f2;
+        padding: 10px 15px;
+        border-bottom: 1px solid #cecfd5;
+        border-right: 1px solid #cecfd5;
+      }
+      #spinner {
+        padding-top: 20px;
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      #betTable {
+        Height: 10px;
+        table-layout: fixed;
+      }
+      #resultTable{
+        Height: 10px;
+        width: 280px;
+        table-layout: fixed;
+        padding-left: 50px;
+        padding-bottom: 70px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Roulette</h1>
+    <br>
+
+    <table id=ccnBuyout>
+      <tr>
+        <th>Buy-In Amount</th>
+        <th>Credit Card Number </th>
+        <th>CCV</th>
+        <th>Confirm</th>
+      </tr>
+      <tr>
+        <td><input type='text' id='buyInAmount' value="100.00"></input></td>
+        <td><input type='text'></input></td>
+        <td><input type='text'></input></div></td>
+        <td><button class='button' id='confBuyIn' onclick='buyIn();'>Purchase</button></td>
+      </tr>
+    </table>
+
+<br>
+<table class=main>
+  <tr>
+    <td>
+      <table id=betTable>
+        <tr>
+          <td>Current Funds:</td>
+          <td><input type='text' id='cash' disabled="disabled"></input></td>
+        </tr>
+        <tr>
+          <td>Wager:</td>
+          <td><input type='text' id='bet' value="10"></input></td>
+        </tr>
+        <tr>
+          <td>Placement:</td>
+          <td><input type='text' id='selectedButton' value="00" disabled="disabled"></input></td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <div id=resultTable>
+        <table>
+          <tr>
+            <td><p><b>RESULTS</b></p></td>
+          </tr>
+          <tr>
+            <td><div id='rouletteResults'>&nbsp;</div></td>
+          </tr>
+          <tr>
+            <td><div id='winningStatement'>&nbsp;</div></input></td>
+          </tr>
+        </table>
+      </div>
+    </td>
+    <tr>
+      <td>
+      <table id=buttons>
+        <tr>
+          <td><button class='button' onclick=buttonSelect(1);>1</button>
+          <td><button class='button' onclick=buttonSelect(2)>2</button>
+          <td><button class='button' onclick=buttonSelect(3)>3</button>
+          <td><button class='button' onclick=buttonSelect(4)>4</button>
+          <td><button class='button' onclick=buttonSelect(5)>5</button>
+          <td><button class='button' onclick=buttonSelect(6)>6</button>
+        </tr>
+        <tr>
+          <td><button class='button' onclick=buttonSelect(7)>7</button>
+          <td><button class='button' onclick=buttonSelect(8)>8</button>
+          <td><button class='button' onclick=buttonSelect(9)>9</button>
+          <td><button class='button' onclick=buttonSelect(10)>10</button>
+          <td><button class='button' onclick=buttonSelect(11)>11</button>
+          <td><button class='button' onclick=buttonSelect(12)>12</button>
+        </tr>
+        <tr>
+          <td><button class='button' onclick=buttonSelect(13)>13</button>
+          <td><button class='button' onclick=buttonSelect(14)>14</button>
+          <td><button class='button' onclick=buttonSelect(15)>15</button>
+          <td><button class='button' onclick=buttonSelect(16)>16</button>
+          <td><button class='button' onclick=buttonSelect(17)>17</button>
+          <td><button class='button' onclick=buttonSelect(18)>18</button>
+        </tr>
+        <tr>
+          <td><button class='button' onclick=buttonSelect(19)>19</button>
+          <td><button class='button' onclick=buttonSelect(20)>20</button>
+          <td><button class='button' onclick=buttonSelect(21)>21</button>
+          <td><button class='button' onclick=buttonSelect(22)>22</button>
+          <td><button class='button' onclick=buttonSelect(23)>23</button>
+          <td><button class='button' onclick=buttonSelect(24)>24</button>
+        </tr>
+        <tr>
+          <td><button class='button' onclick=buttonSelect(25)>25</button>
+          <td><button class='button' onclick=buttonSelect(26)>26</button>
+          <td><button class='button' onclick=buttonSelect(27)>27</button>
+          <td><button class='button' onclick=buttonSelect(28)>28</button>
+          <td><button class='button' onclick=buttonSelect(29)>29</button>
+          <td><button class='button' onclick=buttonSelect(30)>30</button>
+        </tr>
+        <tr>
+          <td><button class='button' onclick=buttonSelect(31)>31</button>
+          <td><button class='button' onclick=buttonSelect(32)>32</button>
+          <td><button class='button' onclick=buttonSelect(33)>33</button>
+          <td><button class='button' onclick=buttonSelect(34)>34</button>
+          <td><button class='button' onclick=buttonSelect(35)>35</button>
+          <td><button class='button' onclick=buttonSelect(36)>36</button>
+        </tr>
+        <tr>
+          <td><button class='button' onclick=buttonSelect(0)>0</button>
+          <td><button class='button' onclick=buttonSelect("00")>00</button>
+          <td><button class='button' onclick=buttonSelect("Even")>Even</button>
+          <td><button class='button' onclick=buttonSelect("Odd")>Odd</button>
+          <td><button class='button' onclick=buttonSelect("1-18")>1-18</button>
+          <td><button class='button' onclick=buttonSelect("19-36")>19-36</button>
+        </tr>
+        <tr>
+          <td colspan="2"><button class='button' onclick=buttonSelect("1st12")>First 12</button>
+          <td colspan="2"><button class='button' onclick=buttonSelect("2nd12")>Second 12</button>
+          <td colspan="2"><button class='button' onclick=buttonSelect("3rd12")>Third 12</button>
+        </tr>
+      </table>
+    </td>
+    <td id=spinner>
+      <h3>Click to Spin</h3>
+      <a href="#"><img class="rouletteWheel" width="180" height="180" align="center" src="http://www.gambling-hall-online.com/img/roulette/american_roulette_whell_diagram.gif" /></a>
+    </td>
+  </tr>
+</table>
+    <script>
+
+
+
+    $( "a" ).mousedown(function() {
+      if(doneRotate){
+        checkBetValid();
+        if (betValid){
+          doneRotate= false
+          rotateFunct();
+          setTimeout(spin, 4000);
+        }
+      };
+    });
+
+    var randomRotate= 0;
+    var doneRotate= true
+
+    function rotateFunct(){
+      console.log(randomRotate);
+      randomRotate= (Math.floor(Math.random() * 3000) + 1000) + Number(randomRotate);
+      console.log(randomRotate);
+      $('.rouletteWheel').css({
+      '-webkit-transform': 'rotate(' + randomRotate + 'deg)',
+      'transform': 'rotate(' + randomRotate + 'deg)',
+      'transition-duration': '4s'
+      });
+    };
+
+      document.getElementById("cash").value = "0"
+      var selectedButton = "00"
+      var betCash
+      var cashWon
+      var cash = document.getElementById('cash').value;
+      var betValid= false
+
+
+      function buyIn() {
+        var moneyIn = document.getElementById('buyInAmount').value;
+        cash= Number(cash) + Number(moneyIn);
+        updateCash();
+      };
+
+      function buttonSelect(buttonId){
+        selectedButton = buttonId
+        if (selectedButton== "1st12"){
+          selectedButton= "1st 12"
+        }
+        if (selectedButton== "2nd12"){
+          selectedButton= "2nd 12"
+        }
+        if (selectedButton== "3rd12"){
+          selectedButton= "3rd 12"
+        }
+        if (selectedButton== "1-18"){
+          selectedButton= "1 to 18"
+        }
+        if (selectedButton== "19-36"){
+          selectedButton= "19 to 36"
+        }
+
+        document.getElementById('selectedButton').value= selectedButton
+      }
+
+      function spin(){
+        rouletteGetResults();
+        displayRouletteResults()
+        rouletteWinnings();
+        doneRotate= true
+      };
+
+      function rouletteGetResults() {
+        var min = Math.ceil(-1);
+        var max = Math.floor(36);
+        results= Math.floor(Math.random() * (max - min + 1)) + min;
+        if (results== -1){
+          results = "00"
+        };
+      };
+
+      function updateCash(){
+        document.getElementById("cash").value = cash
+      };
+
+      function updateBetCash(){
+        betCash= document.getElementById('bet').value;
+      };
+
+      function displayRouletteResults(){
+        document.getElementById('rouletteResults').innerHTML= (`The ball landed on ${results}`)
+
+      };
+
+      function displayLoseResults(){
+        document.getElementById('winningStatement').innerHTML= (`You Lose $${betCash}`)
+      };
+
+      function displayWinResults(){
+        document.getElementById('winningStatement').innerHTML= (`You Win $${cashWon}!!!`)
+        console.log("win results?")
+      };
+
+
+
+      function checkBetValid(){
+        updateBetCash();
+        if (betCash >= 0)
+        {
+          if(cash - betCash >= 0){
+            betValid= true;
+          } else {
+            betValid= false;
+            document.getElementById('winningStatement').innerHTML= ("Can't bet money you don't have...")
+            document.getElementById('rouletteResults').innerHTML= ("")
+          }
+        }else{
+          document.getElementById('winningStatement').innerHTML= ("Invalid bet")
+          document.getElementById('rouletteResults').innerHTML= ("")
+          betValid= false;
+        }
+      };
+
+      function addWinnings(){
+        cash+= Number(cashWon)
+      }
+
+      function procWinnings(){
+        cash+= Number(cashWon)
+        updateCash();
+        displayWinResults()
+      }
+
+      rouletteWinnings= function() {
+        if ((Number.isInteger(selectedButton) && selectedButton > 0 && selectedButton <=36) || selectedButton=== "0" || selectedButton=== "00") {
+          if (selectedButton===results) {
+            cashWon= Number(betCash * 35)
+            procWinnings();
+            return;
+           }
+        }
+        if (selectedButton=== "Even"){
+          if ((results % 2===0)&& (results > 0)) {
+            cashWon= Number(betCash)
+            procWinnings();
+            return;
+          }
+        }
+        if (selectedButton=== "Odd"){
+          if ((results % 2!==0)&& (results > 0)) {
+            cashWon= Number(betCash)
+            procWinnings();
+            return;
+          }
+        }
+        if (selectedButton=== "1 to 18"){
+          if ((results < 19) && (results > 0)) {
+            cashWon= Number(betCash)
+            procWinnings();
+            return;
+          }
+        }
+        if (selectedButton=== "19 to 36"){
+          if ((results > 18) && (results > 0)) {
+            cashWon= Number(betCash)
+            procWinnings();
+            return;
+          }
+        }
+        if (selectedButton=== "1st 12"){
+          if ((results < 13) && (results > 0)) {
+            cashWon= Number(betCash * 2)
+            procWinnings();
+            return;
+          }
+        }
+        if (selectedButton=== "2nd 12"){
+          if ((results < 25)  && (results > 12)) {
+            cashWon= Number(betCash * 2)
+            procWinnings();
+            return;
+          }
+        }
+        if (selectedButton=== "3rd 12"){
+          if (results > 24) {
+            cashWon= Number(betCash * 2)
+            procWinnings();
+            return;
+          }
+        }
+        cash-= Number(betCash)
+        updateCash();
+        displayLoseResults()
+      }
+
+    </script>
+
+  </body>
+</html>
+
