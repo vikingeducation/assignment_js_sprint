@@ -1,15 +1,16 @@
 //Roulette
-//STATUS : seems-operational, needs a little more testing
-          //red-black not complete 
-
-
 
 function Roulette(bankroll){
   //implementation note:
     //I could've went more Object-Oriented and made all the slots as objects that contained the win-conditions
-      //but for a
-  this.cash = bankroll
-  this.winning_slot;
+      //but for a short exercise I decided this approach was sufficient.
+
+  //remember if they don't supply a bankroll parameter then this.cash would be set to undefined
+    //and that'll mess everything up, so if bankroll is undefined set cash to 0
+  this.cash = (typeof(bankroll) == "undefined") ? 0 : bankroll
+  this.red_slots = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
+  this.black_slots = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
+  this.winning_slot;    //note that this is a string so that "0" and "00" are different
   //Allowed Bets:                   //Payouts:
     //0, 00, 1-36                   35:1
     //1st 2nd or 3rd 12             2:1
@@ -27,24 +28,32 @@ function Roulette(bankroll){
   }
 
   //print out the results of the spin
-    //TODO : make this function private
   this.print_spin = function(win, payout){
     console.log(`The winning_slot is ${this.winning_slot}`)
-    this.bankroll()
-    console.log("typeof payout = " + (typeof(payout)))
     /*WHO'S PASSING ME A STRING!!????!!!!*/
     payout = Number(payout)
     if (win) {
       this.cash += payout
       this.win = true
-      console.log(`You WIN ${payout}, now you have ${this.cash}`)
+      console.log(`You WIN $${payout}, now you have ${this.cash}`)
     }else{
       this.cash -= payout
       this.win = false
-      console.log(`You LOSE ${payout}, now you have ${this.cash} `)
+      console.log(`You LOSE $${payout}, now you have ${this.cash} `)
     }
 
   }
+  this.instructions = function() {
+    console.log(
+                "Please use format .spin([Amount you're betting], [a string of your bet])\n"+
+                "Possible bets:\n"+
+                "A slot number (1-36)\n"+
+                "A range of slots ('1st 12', '2nd 12', '3rd 12', 'low' (the first 1-18 slots), or high (the last 19-36 slots))\n"+
+                "Whether the winning slot is even or odd"
+               )
+  }
+  //run this so the player knows how to play the game
+  this.instructions()
 
   this.spin = function(amount, bet){
     //check that you can bet that much and announce the bet
@@ -53,7 +62,8 @@ function Roulette(bankroll){
       return
     }else if (typeof(amount) == "string" || typeof(bet) == "number"){
       //the user possibly switched the inputs, print out an error and instructions
-      //TODO: code this later
+      console.log("I believe you may have switched the inputs there\n");
+      this.instructions()
       return
     }
     console.log(`Taking bet on ${bet} for ${amount}`)
@@ -104,7 +114,21 @@ function Roulette(bankroll){
         }
       }
     }else if (bet == "red" || bet == "black"){
-      //not implemented yet
+
+      if (bet == "red"){       //bet is "red"
+        if (this.red_slots.includes(+this.winning_slot) ){
+          this.print_spin(true, amount * 1)
+        }else {
+          this.print_spin(false, amount)
+        }
+      }else {                  //bet is "black"
+        if (this.black_slots.includes(+this.winning_slot)){
+          this.print_spin(true, amount * 1)
+        }else{
+          this.print_spin(false, amount)
+        }
+      }
+
     }else if (bet == "even" || bet == "odd"){
       //you lose if slot == '0' or '00'
       if (+this.winning_slot == 0){
@@ -130,91 +154,9 @@ function Roulette(bankroll){
     }else{                                                                //if some problem with the input
       //print betting input instructions
       console.log("ERROR")
+      this.instructions();
     }
     return this.win
   }
 
 }
-//TEST CODE
-var a = new Roulette(100)
-/*a.bankroll()
-a.buyIn(1000)
-a.bankroll()
-a.cash
-a.spin(1100, 13)
-a.spin(100, 13)
-a.buyIn(1500)
-a.spin(2000, 13)
-*/
-//a.spin( 200, "Even")
-var test = function(test_func, param1, param2){
-  var we_won = false
-  var total_spins = 0
-  var net_profit = 0
-  var starting_cash = a.cash
-  do {
-    if (a.cash < 200){
-      a.buyIn(2000)
-      net_profit -= 2000
-    }
-    //we_won = test_func(param1, param2)
-    we_won = test_func.call(a, param1, param2)
-    //we_won = a.test_func(param1, param2)    //?
-    total_spins++
-  }while(!we_won)
-  net_profit += a.cash - starting_cash
-  console.log("We just spun " + total_spins + " times and 'won/lost' " + net_profit)
-}
-test(a.spin, 200, "Even")
-test(a.spin, 200, "odd")
-test(a.spin, 200, "high")
-for(i = 1; i < 35; i++) {
-  test(a.spin, 200, String(i))
-}
-a.spin("1st 12", 200)
-a.spin("2nd 12", 200)
-a.spin("3rd 12", 200)
-a.spin("Even", 200)
-a.spin("odd", 200)
-a.spin("high", 200)
-a.spin("low", 200)
-
-
-//can any object call a function residing on another object and have it run on itself??
-  //testing
-
-
-//error, unexpected this in this.speak
-var obj1 = {
-  name: "obj1",
-  this.speak = function() {
-    console.log("My name is " + this.name)
-  }
-}
-//error, unexpected . in this.name
-var obj2 = {
-  this.name = "obj2",
-  this.speak = function() {
-    console.log("My name is " + this.name)
-  }
-}
-//correct way to specify an individual object's code
-var obj3 = {
-  name: "Karlito",
-  speak: function() {
-    console.log("My name is " + this.name)
-  }
-}
-var ghost_of_karlito = obj3.speak
-var obj4 = {
-  name: "MochaL",
-  speak: function() {
-    console.log("My name is " + this.name)
-  },
-  multiple_personalities: function() {
-    ghost_of_karlito()
-  }
-}
-//the test, can we pass obj3's speak function to obj4? And if so, will it call itself Karlito
-      //?
-//yep, got it, the 'this' definitely refers to the caller of the function.
