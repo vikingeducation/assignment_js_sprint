@@ -35,6 +35,9 @@
       //m bleft / m left / m right/ m bright
       //it's oriented to the piece itself so if black is top m left goes down the board
 
+
+//TODO: EXTEND THE 'options menu'
+
 //TODO: implement this later
 //generate names for the pieces and players
 var random_name_generator = function(){
@@ -88,7 +91,7 @@ var Checker = function(color, started_at_origin, board) {
       //it's on the board at least, now is there a checker piece already there?
       if ( this.board.board[location[0]][location[1]] != null ){
         //ohhh nooo... there's a piece there
-        //TODO: fix this from printing when you're jumping a piece 
+        //TODO: fix this from printing when you're jumping a piece
         console.log("There's a piece there")
         //console.log(this.board.board[location[0]][location[1]] )
         //console.log(location)
@@ -384,8 +387,6 @@ board.print_board()
 //END OF TEST CODE
 */
 
-//TODO: make the game recognize that you can't move white pieces on black's turn
-
 
 var Game = function() {
   this.turn = 0
@@ -394,6 +395,22 @@ var Game = function() {
   this.black_score = 0
   this.board = new Board()
   this.current_move = "White"
+  this.print_after_move = false //note later I'm just keeping this as 1 || 0
+  this.players = ["White", "Black"]
+  this.player_i = 0
+  this.current_player = this.players[this.player_i]
+
+  //little helper functions...cause i'm lazy
+  this.get_current_player = function() {
+    return this.players[this.player_i]
+  }
+  this.get_other_player = function() {
+    return this.players[ (this.player_i ^ 1) ]
+  }
+  this.next_player = function() {
+    this.player_i ^= 1  //flips the index back and forth from 0 to 1, and 1 to 0
+    return true
+  }
 
   this.instructions = function() {
     //instructions
@@ -425,8 +442,6 @@ var Game = function() {
   //maybe include this?? ->              //it's oriented to the piece itself so if black is top m left goes down the board
   this.board.print_board()
 
-        //maybe I should make them call separate functions...
-        //TODO: change the instructions to reflect this
   this.play = function(input){
     //parse the input
     if (input == undefined){
@@ -453,16 +468,29 @@ var Game = function() {
           this.display_best_units()
           return true
           break;
+        case ("options"):
+          this.options()
+          return true
+          break;
         default:
           console.log("I'm sorry I don't recognize that command.")
       }
     }
-      //TODO: FIX THE HASSLE OF HAVING TO SPECIFY appropriate coordinates WHEN YOU JUST WANNA PRINT THE BOARD
+
+
     var piece = this.board.board[+s[1] - 1 ][+s[2] - 1]       //input is 1-indexed, board is stored in 0-index
+    //check to make sure that the current player isn't trying to move the other player's checkers
+    if (piece.color != this.get_current_player()){
+      console.log(`I'm sorry but that's ${piece.color}'s piece'`)
+      return true //remember not to execute the rest of the turn
+    }
     var direction = s[3]
     switch (s[0]) {
       case "m":
         piece.move(direction)
+        if (this.print_after_move){
+          this.board.print_board()
+        }
         break;
       case "j":
         //problem, how do we do multiple jumps ?, I was originally thinking sequentially but
@@ -494,6 +522,10 @@ var Game = function() {
         //white won
         this.you_won("white")
       }
+
+      //print who's turn it is now
+      this.next_player()
+      console.log(`It's ${this.get_current_player()}'s turn.`)
 
   }
   this.you_won = function(winner){
@@ -548,6 +580,19 @@ var Game = function() {
                 `Black's best unit is ${best_black_piece.name}, has jumped ${best_black_piece.kill_count} pieces ` +
                 ` and has moved ${best_black_piece.times_moved} times.\n`)
   }
+  //consider later passing an arg to options or something if you want multiple options
+  this.options = function() {
+    var s = (this.print_after_move) ? "on" : "off"
+    console.log(`Currently the only extra option is to print the board after every move, this is currently ${s}.`)
+
+    //this.print_after_move = !this.print_after_move    //god that seems so verbose, why no boolean flip operator
+      //aha! bool flip via XOR bby
+    this.print_after_move ^= 1
+
+    s = (this.print_after_move) ? "on" : "off"
+    console.log(`Since this is the only available options I'm going to switch that to ${s} now.`)
+    return this.print_after_move
+  }
   this.display_turn = function() {
     console.log(`We're are currently on turn ${this.turn}`)
   }
@@ -555,5 +600,7 @@ var Game = function() {
 
 var p = new Game()
 p.play("m 6 1 right")
+p.play("options")
+p.play("print")
 p.play()
 p.play("m 1,2 left")
