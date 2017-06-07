@@ -58,6 +58,7 @@ var Checker = function(color, started_at_origin, board) {
   this.name = random_name_generator()
   this.started_at_origin = started_at_origin    //true if that color started at the [0,0] side of the board
   this.board = board
+  this.king = false
   if (this.started_at_origin){
     this.left = [1,-1]
     this.right = [1,1]
@@ -78,6 +79,41 @@ var Checker = function(color, started_at_origin, board) {
   }
   this.you_moved = function(){
     this.times_moved++
+  }
+  this.should_be_king = function() {
+    if (this.king){
+      return false
+    }
+    //if this is now on the 'back row' (the row opposite of where you started)
+    if ( (this.position[0] == 7 && started_at_origin) || (this.position[0] == 0 && !started_at_origin ) ){
+      return true
+    }
+    return false
+  }
+  this.king_me = function() {
+    this.king = true
+    //redefine the find_direction to allow for backwards movement
+    this.find_direction = function(direction){
+      var move = undefined
+      switch (direction) {
+        case "left":
+          move = this.left
+          break;
+        case "right":
+          move = this.right
+          break;
+        case "bleft":
+          move = this.bleft
+          break;
+        case "bright":
+          move = this.bright
+          break;
+        default:
+          console.log("Error")
+      }
+      return move
+    }
+
   }
 
     //input : [move or jump] [coordinates(row, column)] [direction]
@@ -197,6 +233,7 @@ var Checker = function(color, started_at_origin, board) {
     }
   }
 }
+/*
 //TODO: consider changing this to just change the checker to a king instead of replacing it with a king
 
 var King = function(color) {
@@ -214,6 +251,7 @@ var King = function(color) {
                     //then you'd create a new King() that's a clone of the previous checker with some added stuff
 
 }
+*/
 var Board = function(){
   //Board
     //2d array
@@ -330,6 +368,7 @@ var Board = function(){
   //PRINT OUT THE BOARD
   this.print_board = function() {
     console.log("White Pieces = 'O'; Black Pieces = 'X'")
+    console.log("White King = 'Q'; Black King = 'Y'")
 
     //make a string
     var string = "    1"
@@ -342,27 +381,27 @@ var Board = function(){
 
     //print out checker positions
     for(i = 0; i < 8; i++){
-      //string.concat("| ")
       string += `${i+1} `
       string += "| "
       for(j = 0; j < 8; j++){
         if (this.board[i][j] == null){
           string += " "
         }else if (this.board[i][j].color == "black"){
-          //string.concat("X")
-          string += "X"
+          if (this.board[i][j].king){
+            string += "Y"
+          }else{
+            string += "X"
+          }
         }else if (this.board[i][j].color == "white"){
-          //string.concat("O")
-          string += "O"
+          if (this.board[i][j].king){
+            string += "Q"
+          }else{
+            string += "O"
+          }
         }
-        //string.concat(" |")
         string += " | "
       }
-      //string.concat("\n")
       string += '\n'
-      //string += '__________'  //ten long '_'
-      //string += '__________'
-      //string += '_______'     //seven long '_'
     }
     console.log(string)
   }
@@ -460,6 +499,10 @@ var Game = function() {
     if (input == undefined){
       this.instructions()
     }
+    //input will always be one char for m/j
+    //then two numbers
+    //then at least one word, but possibly more
+
     var s = input.toLowerCase().split(" ")
       //call the pieces appropriate function
       //first check for inputs that don't specify coordinates
@@ -486,6 +529,7 @@ var Game = function() {
           this.options()
           return true
           break;
+        //case ("pieces left")
         default:
           console.log("I'm sorry I don't recognize that command.")
       }
@@ -503,42 +547,22 @@ var Game = function() {
     switch (s[0]) {
       case "m":
         piece.move(direction)
-        if (this.print_after_move){
-          this.board.print_board()
-        }
         break;
       case "j":
-        //problem, how do we do multiple jumps ?, I was originally thinking sequentially but
-          //then if you input a long series of jumps and mess up on some input it'll only do up to the one you accidentally
-            //messed up
-          //we should probably check the legality of the jumps separately then do them all at once
-
-          //TODO: FIGURE OUT A SOLUTION TO MULTIPLE JUMPS
-            //SOLUTION IN THE BLACK PROGRAMMING NOTEBOOK
-          //it seems like repurposing the existing code would be a pain for some weird edge cases
-            //alt option: create an alternate board and run all the jumps
-        //var direction = s[3]
-        /*var possibly_dead = []  //list of jumped pieces
-        for(i = 3; i < s.length; i++){
-          if (this.board.is_tile_empty()){
-
-          }else{
-            //Illegal move, print error and break out
-          }
-
-        }*/
         piece.jump(direction)
-        if (this.print_after_move){
-          this.board.print_board()
-        }
         break;
       default:
         console.log("I'm sorry I don't recognize that command.")
     }
-      //will always be one char for m/j
-      //then two numbers
-      //then at least one word, but possibly more
-
+      //test to see if the moved checker has become a king
+      if (piece.should_be_king()){
+        piece.king_me()
+        console.log(`The piece at row ${piece.position[0] + 1}, column ${piece.position[1]+1} has become a KING!\n` +
+                    `I can see the ${this.get_other_player()} pieces shaking in their boots.`)
+      }
+      if (this.print_after_move){
+        this.board.print_board()
+      }
       //TODO: test this later
       //check the board to see if anyone won yet
       if(this.board.dead_white_pieces.length == 12){
@@ -636,3 +660,50 @@ p.play("m 5 4 left")
 p.play("m 3 6 left")
 //two jumps
 p.play("j 7 2 right right")
+p.play("m 2 1 right")
+p.play("j 4 3 left")
+p.play("m 2 3 left")
+p.play("m 8 1 right")
+//king me
+p.play("m 1 2 right")
+p.play("m 3 4 left")
+
+
+
+/* squirrely output
+White Pieces = 'O'; Black Pieces = 'X'
+VM5789:332 White King = 'Q'; Black King = 'Y'
+VM5789:367     1   2   3   4   5   6   7   8
+1 |   | Q |   | X |   | X |   | X |
+2 |   |   | X |   | X |   | X |   |
+3 |   | X |   |   |   | O |   | X |
+4 |   |   | X |   |   |   |   |   |
+5 |   |   |   |   |   |   |   |   |
+6 |   |   |   |   | O |   | O |   |
+7 |   | O |   | O |   | O |   | O |
+8 |   |   | O |   | O |   | O |   |
+
+VM5789:542 It's white's turn.
+undefined
+p.play("j 1 2 right left")
+VM5789:104 Can't move pieces off the board!!
+VM5789:331 White Pieces = 'O'; Black Pieces = 'X'
+VM5789:332 White King = 'Q'; Black King = 'Y'
+VM5789:367     1   2   3   4   5   6   7   8
+1 |   | Q |   | X |   | X |   | X |
+2 |   |   | X |   | X |   | X |   |
+3 |   | X |   |   |   | O |   | X |
+4 |   |   | X |   |   |   |   |   |
+5 |   |   |   |   |   |   |   |   |
+6 |   |   |   |   | O |   | O |   |
+7 |   | O |   | O |   | O |   | O |
+8 |   |   | O |   | O |   | O |   |
+
+VM5789:526 The piece at row 1, column 2 has become a KING!
+I can see the black pieces shaking in their boots.
+VM5789:542 It's black's turn.
+undefined
+p.play("j 1 2 bright bleft")
+VM5789:502 I'm sorry but that's white's piece'
+true
+*/
