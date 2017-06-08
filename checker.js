@@ -1,51 +1,31 @@
-//checkers
+//Checkers 
 
+//Objects: Game, Checker, and Board
+  //Game: deals with inputs, keeps track of stats, and deals with outputs
+  //Checker: deals with moving itself, checking legality of moves
+  //Board: keeps track of the locations of the pieces, handles printing out the board state
 
-// Things to display:
-//score
-//move/turn count
-//times
-//board
-//best piece per player (their kill count)
-
-
-//Things that happen in the game:
-  //moves, normal and king's backward movement
-  //jumps, multiple and single jumps
-  //king a piece
-
-//Data representation
-  //2 types of objects (normal checkers & kings )
-  //The board is a 2-D array of null or an object
-  //All objects need some sense of direction
-
-//objects
-  //Checker
-    //White / Black
-    //Kill count
-    //Alive / Dead
-    //Movement ? Thing to differentiate king from normal
-  //King
-    //White / Black
-    //Kill count
-    //Alive / Dead
-    //Movement ? Thing to differentiate king from normal
-
-      //input : [move or jump] [coordinates(row, column)] [direction]
-      //m bleft / m left / m right/ m bright
-      //it's oriented to the piece itself so if black is top m left goes down the board
-
+  //input : [move or jump] [coordinates(row, column)] [direction]
+  //m bleft / m left / m right/ m bright
+  //it's oriented to the piece itself so if black is top m left goes down the board
 
 //TODO: EXTEND THE 'options menu'
-
 //BUG: it won't allow a king to jump in a diamond shape (anything so that he re-enters the tile where he started)
   //
+//BUG: if you give an invalid move input it will skip your turn
+//NOTE: the object relationships are poorly structured in this:
+        //for instance the checkers themselves do the majority of the work
 
-//TODO: implement this later
+
 //generate names for the pieces and players
-var random_name_generator = function(){
-  let name = "Dank Memez"     //filler text
-  return name
+var russian_names = ["Anastasia", "Nikita", "Nastya", "Dima", "Dasha", "Alex", "Maria", "Sergey", "Anna", "Alexander", "Kate", "Vlad"]
+var french_names = ["Marie", "Thomas", "Camille", "Julien", "Chloé", "Antoine", "Marine", "Pierre", "Justine", "Florian", "Elodie", "Louis"]
+var name_generator = function(color){
+  if (color == "black"){
+    return russian_names.pop()
+  }else {
+    return french_names.pop()
+  }
 }
 
 //constructor function for making checker objects
@@ -55,7 +35,7 @@ var Checker = function(color, started_at_origin, board) {
   this.position = [null, null]
   this.kill_count = 0
   this.times_moved = 0
-  this.name = random_name_generator()
+  this.name = name_generator(color)
   this.started_at_origin = started_at_origin    //true if that color started at the [0,0] side of the board
   this.board = board
   this.king = false
@@ -124,9 +104,9 @@ var Checker = function(color, started_at_origin, board) {
   this.new_position = function(position1, position2){
     return [ position1[0] + position2[0], position1[1] + position2[1] ]
   }
+  //helper function used by checker.jump and checker.move
+    //jump will pass possibly_dead[] which is an array of checkers to consider as not in the game
   this.is_tile_empty = function(location, possibly_dead){
-    //console.log(location)
-    //console.log(possibly_dead)
     if (location[0] <= 7 && location[0] >= 0 && location[1] <= 7 && location[1] >= 0){
       //it's on the board at least, now is there a checker piece already there?
       if ( this.board.board[location[0]][location[1]] != null ){
@@ -179,9 +159,7 @@ var Checker = function(color, started_at_origin, board) {
 
 
   //j bleft / j left / j right / j bright
-  //direction is a string arg
-  //if you wish to check the legality of multiple jumps
-  //OK so this is pretty hacky but, I'm using the possibly_dead array as a flag for
+  //can be sent multiple jumps (example input : p.play("j 7 2 right right"); full_instruction = ["right", "right"] )
   this.jump = function(full_instruction){
       var direction;
 
@@ -194,6 +172,8 @@ var Checker = function(color, started_at_origin, board) {
       //check that you can move to this new location
       //a jump is double the distance of a normal move
       while (full_instruction.length > 0){
+        //use move to track half the displacement of the total jump
+        //me + move = position of what I'm jumping; me + move + move = position that I'm jumping to
         var my_position = (jump_locations_arr.length > 0) ? jump_locations_arr[jump_locations_arr.length - 1] : this.position
         direction = full_instruction.shift()
         var move = this.find_direction(direction)
@@ -221,6 +201,7 @@ var Checker = function(color, started_at_origin, board) {
         jump_locations_arr.push(new_location)
       }
 
+    //all the jump inputs have been checked, now execute them sequentially
     while( jump_locations_arr.length > 0){
       //discard jumped piece(s)
       var jumped_piece_location = jumped_locations_arr.shift()
@@ -233,40 +214,11 @@ var Checker = function(color, started_at_origin, board) {
     }
   }
 }
-/*
-//TODO: consider changing this to just change the checker to a king instead of replacing it with a king
 
-var King = function(color) {
-  //TODO: implement kings
-  //make checker
-  //change name
-  //add bleft
-  //add bright
-  //TODO : FIGURE THE BELOW STUFFS OUT
-  //I'd like to have it be seen as a king when you inspect it in Chrome or whatever
-    //but since if you just change a normal checker to a king by adding some values it'll be seen as a Checker
-    //I assume this is because you used 'new Checker()' to create it
-      //options : 1) find a way to rename the kind of object
-              //  2) find a way to duplicate an object's values when you create a new object
-                    //then you'd create a new King() that's a clone of the previous checker with some added stuff
-
-}
-*/
 var Board = function(){
   //Board
     //2d array
     //white on right (so white tile on rightmost tile of the bottom row and on the leftmost tile of the top row)
-    //do I need some sort of indicator of whether a tile is black or white??
-    //should tiles be objects???
-      //advantages:
-      //disadvantages:
-
-      //I'll have the board handle the input parsing
-      //parse out the separate moves
-        //example [black's turn] j 1,2 right left right
-          //jump1 : 1,2 -> jump checker at 2,3 -> land at 3,4
-          //jump2 : jump checker at 4,3 -> land at 5,2
-          //jump2 : jump checker at 6,3 -> land at 7,4
 
   //make board
   this.board = []
@@ -284,21 +236,20 @@ var Board = function(){
   var white_pieces = []
   var black_pieces = []
   for(i = 0; i < 12; i++){
-    //call constructor function
+    //call constructor function Checker(color, started_at_origin, a reference to the board)
     var white_piece = new Checker("white", false, this)
     var black_piece = new Checker("black", true, this)
     white_pieces.push(white_piece)
     black_pieces.push(black_piece)
   }
 
-  //note an easy way to find if a sqaure is black or white is :
+  //NOTE: an easy way to find if a sqaure is black or white is :
     //(x - y) % 2 == 0 then white
     //(x - y) % 2 != 0 then black
 
   //place pieces
   //starting with i = 0 j = 0 is the topleft of the board which is white
-    //TODO: later make it so the color you choose is closer to you
-    //for now black is on the top of the board and white is on the bottom
+    //black is on the top of the board and white is on the bottom
   for(i = 0; i < 8; i++){
     if (i == 3 || i == 4){
       //skip
@@ -317,34 +268,12 @@ var Board = function(){
     }
   }
 
-  //modify to disinclude possibly_dead checkers from this
-  this.is_tile_empty = function(location, possibly_dead){
-    //console.log(location)
-    //console.log(possibly_dead)
-    if (location[0] <= 7 && location[0] >= 0 && location[1] <= 7 && location[1] >= 0){
-      //it's on the board at least, now is there a checker piece already there?
-      if ( this.board[location[0]][location[1]] != null ){
-        //ohhh nooo... there's a piece there
-        console.log("There's a piece there")
-        if (possibly_dead && possibly_dead.includes(this.board[location[0]][location[1]] ) ) {
-           //undefined and null are falsy, && evaluation will be lazy
-            //if the tile is occupied by a checker in the possibly_dead array we ignore it and report it empty
-           return true
-        }
-        return false
-      }
-    }else{
-      console.log("Can't move pieces off the board!!")
-      return false
-    }
-    return true
-  }
-
+  //board updates the position of a checker in it's 2d array
   this.move = function(from, to){
-    //TODO: remember how to do this with E6 fanciness
     this.board[to[0]][to[1]] = this.board[from[0]][from[1]]
     this.board[from[0]][from[1]] = null
   }
+
 
   this.jump = function (jumping_piece_location, jumped_piece_location){
     var jumping_piece = this.board[jumping_piece_location[0]][jumping_piece_location[1]]
@@ -406,50 +335,6 @@ var Board = function(){
     console.log(string)
   }
 }
-/*
-//TEST CODE
-var board = new Board()
-//does the board print? and are the pieces placed properly?
-board.print_board()
-var b = board.board
-var p = b[2][7]
-//Testing Move:
-  //legal moves
-p.move("left")
-board.print_board()
-p.move("left")
-board.print_board()
-  //illegal moves
-p.move("left")
-p.move("right")
-board.print_board()
-var w = b[5][4]
-  //illegal move
-w.move("right")
-  //legal jump
-w.jump("right")
-board.print_board()
-b[1][6].move("right")
-board.print_board()
-  //illegal jump
-w.jump("right")
-  //illegal jump
-p.jump("right")
-p.jump("left")
-  //test illegal jump b/c there's no piece to jump
-b[6][3] = null
-p.jump("left")
-board.print_board()
-b[5][4] = new Checker("black", true, board)
-board.print_board()
-  //illegal jump over same color piece
-p.jump("left")
-board.print_board()
-b[5][4] = null
-board.print_board()
-//END OF TEST CODE
-*/
-
 
 var Game = function() {
   this.turn = 0
@@ -457,12 +342,10 @@ var Game = function() {
   this.white_score = 0
   this.black_score = 0
   this.board = new Board()
-  this.current_move = "white"
-  this.print_after_move = false //note later I'm just keeping this as 1 || 0
+  this.print_after_move = true //note later I'm just keeping this as 1 || 0
 
   this.players = ["white", "black"]
-  this.player_i = 0
-  this.current_player = this.players[this.player_i]
+  this.player_i = 0                   //used as the index for this.players[]
 
   //little helper functions...cause i'm lazy
   this.get_current_player = function() {
@@ -489,9 +372,8 @@ var Game = function() {
                 `It's ${this.get_current_player()}'s turn`)
     return true
   }
+  //stuff we want outputed at the start of the game
   this.instructions()
-  //put something in to tell them about the different commands besides move and jump
-  //maybe include this?? ->              //it's oriented to the piece itself so if black is top m left goes down the board
   this.board.print_board()
 
   this.play = function(input){
@@ -499,11 +381,12 @@ var Game = function() {
     if (input == undefined){
       this.instructions()
     }
+    var s = input.toLowerCase().split(" ")
     //input will always be one char for m/j
     //then two numbers
     //then at least one word, but possibly more
 
-    var s = input.toLowerCase().split(" ")
+
       //call the pieces appropriate function
       //first check for inputs that don't specify coordinates
     if (s[0].length > 1){
@@ -542,8 +425,7 @@ var Game = function() {
       console.log(`I'm sorry but that's ${piece.color}'s piece'`)
       return true //remember not to execute the rest of the turn
     }
-    //var direction = s[3]
-    var direction = s.slice(3)    //make sure to get all the args for the multiple jumps
+    var direction = s.slice(3)    //make sure to get all the args in case there are multiple jumps
     switch (s[0]) {
       case "m":
         piece.move(direction)
@@ -563,8 +445,6 @@ var Game = function() {
       if (this.print_after_move){
         this.board.print_board()
       }
-      //TODO: test this later
-      //check the board to see if anyone won yet
       if(this.board.dead_white_pieces.length == 12){
         //black won
         this.you_won("black")
@@ -580,21 +460,13 @@ var Game = function() {
 
   }
   this.you_won = function(winner){
-    //console log something , maybe some stats too
-    //TODO: WRITE THIS
     console.log(`Congratulations ${winner}, you won!`)
+    console.log("Here's some stats from the game:\n")
+    this.display_score()
+    this.display_turn()
+    this.display_best_units()
   }
-
-  this.move = function(input){
-    //parse the input
-    //then two numbers
-    //then one word
-  }
-  this.jump = function(input){
-    //parse the input
-    //then two numbers
-    //then at least one word, but possibly more
-  }
+  //the rest of the functions are non-essential but nifty
   this.display_score = function(){
     //update score
     this.white_score = this.board.dead_black_pieces.length
@@ -608,6 +480,7 @@ var Game = function() {
     var best_black_piece = null
     var b_w_k = -1
     var b_b_k = -1
+    //search through the living pieces
     for (i = 0; i < 8; i++)     {
       for(j = 0; j < 8; j++){
           //is there a piece there?
@@ -623,12 +496,38 @@ var Game = function() {
           }
       }
     }
+    //search through the dead pieces
+    for(i = 0; i < this.board.dead_white_pieces.length; i++){
+      var piece = this.board.dead_white_pieces[i]
+      if (piece.kill_count > b_w_k){
+        best_white_piece = piece
+        b_w_k = piece.kill_count
+      }
+    }
+    for(i = 0; i < this.board.dead_black_pieces.length; i++){
+      var piece = this.board.dead_black_pieces[i]
+      if (piece.kill_count > b_b_k){
+        best_black_piece = piece
+        b_b_k = piece.kill_count
+      }
+    }
 
-    //TODO: add if it's a king, it's current location, and favorite beverage?
-    console.log(`White's best unit is ${best_white_piece.name}, has jumped ${best_white_piece.kill_count} pieces ` +
-                ` and has moved ${best_white_piece.times_moved} times.\n` +
-                `Black's best unit is ${best_black_piece.name}, has jumped ${best_black_piece.kill_count} pieces ` +
-                ` and has moved ${best_black_piece.times_moved} times.\n`)
+    var w_type = (best_white_piece.king) ? "king" : "checker"
+    var b_type = (best_black_piece.king) ? "king" : "checker"
+
+    var current_location_w = (best_white_piece.alive) ? ` [currently at row:${best_white_piece.position[0]},` : ` [tragically died at row:${best_white_piece.position[0]},`
+    var current_location_b = (best_black_piece.alive) ? ` [currently at row:${best_black_piece.position[0]},` : ` [tragically died at row:${best_black_piece.position[0]},`
+
+    console.log(`White's best unit is ${best_white_piece.name}` + ` who's a ${w_type}` +
+      current_location_w +
+      `column:${best_white_piece.position[1]}] ` +
+      `has jumped ${best_white_piece.kill_count} pieces` +
+      ` and has moved ${best_white_piece.times_moved} times.\n` +
+    `Black's best unit is ${best_black_piece.name}` +  ` who's a ${b_type}` +
+      current_location_b +
+      `column:${best_black_piece.position[1]}] ` +
+      `, has jumped ${best_black_piece.kill_count} pieces` +
+      ` and has moved ${best_black_piece.times_moved} times.\n`)
   }
   //consider later passing an arg to options or something if you want multiple options
   this.options = function() {
@@ -648,9 +547,12 @@ var Game = function() {
   }
 }
 
+/*
+//TEST CODE, runs through a full game
+
 var p = new Game()
 p.play("m 6 1 right")
-p.play("options")
+p.play("best_unit")
 p.play("print")
 p.play("m 3 2 left")
 p.play("m 6 3 right")
@@ -664,46 +566,31 @@ p.play("m 2 1 right")
 p.play("j 4 3 left")
 p.play("m 2 3 left")
 p.play("m 8 1 right")
-//king me
 p.play("m 1 2 right")
-p.play("m 3 4 left")
-
-
-
-/* squirrely output
-White Pieces = 'O'; Black Pieces = 'X'
-VM5789:332 White King = 'Q'; Black King = 'Y'
-VM5789:367     1   2   3   4   5   6   7   8
-1 |   | Q |   | X |   | X |   | X |
-2 |   |   | X |   | X |   | X |   |
-3 |   | X |   |   |   | O |   | X |
-4 |   |   | X |   |   |   |   |   |
-5 |   |   |   |   |   |   |   |   |
-6 |   |   |   |   | O |   | O |   |
-7 |   | O |   | O |   | O |   | O |
-8 |   |   | O |   | O |   | O |   |
-
-VM5789:542 It's white's turn.
-undefined
-p.play("j 1 2 right left")
-VM5789:104 Can't move pieces off the board!!
-VM5789:331 White Pieces = 'O'; Black Pieces = 'X'
-VM5789:332 White King = 'Q'; Black King = 'Y'
-VM5789:367     1   2   3   4   5   6   7   8
-1 |   | Q |   | X |   | X |   | X |
-2 |   |   | X |   | X |   | X |   |
-3 |   | X |   |   |   | O |   | X |
-4 |   |   | X |   |   |   |   |   |
-5 |   |   |   |   |   |   |   |   |
-6 |   |   |   |   | O |   | O |   |
-7 |   | O |   | O |   | O |   | O |
-8 |   |   | O |   | O |   | O |   |
-
-VM5789:526 The piece at row 1, column 2 has become a KING!
-I can see the black pieces shaking in their boots.
-VM5789:542 It's black's turn.
-undefined
-p.play("j 1 2 bright bleft")
-VM5789:502 I'm sorry but that's white's piece'
-true
+//king me
+p.play("m 2 1 right")
+//trying to end the game
+p.play("j 2 5 right")
+p.play("m 6 5 left")
+p.play("m 3 4 right")
+p.play("j 1 2 bright bright")
+p.play("j 4 7 left")
+p.play("m 6 7 right")
+p.play("m 1 4 right")
+p.play("j 7 4 right")
+p.play("m 3 8 left")
+p.play("j 5 8 left left")
+p.play("m 2 7 left")
+p.play("m 7 2 left")
+p.play("m 1 6 left")
+p.play("m 7 6 left")
+p.play("m 2 5 left")
+p.play("m 1 4 bleft")
+p.play("m 1 8 left")
+p.play("j 2 3 bleft")
+p.play("m 3 6 left")
+p.play("j 5 4 right right")
+p.play("m 3 4 right")
+//end of game, white wins
+p.play("j 5 6 left")
 */

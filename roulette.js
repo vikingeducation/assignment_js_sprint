@@ -30,7 +30,6 @@ function Roulette(bankroll){
   //print out the results of the spin
   this.print_spin = function(win, payout){
     console.log(`The winning_slot is ${this.winning_slot}`)
-    /*WHO'S PASSING ME A STRING!!????!!!!*/
     payout = Number(payout)
     if (win) {
       this.cash += payout
@@ -49,7 +48,8 @@ function Roulette(bankroll){
                 "Possible bets:\n"+
                 "A slot number (1-36)\n"+
                 "A range of slots ('1st 12', '2nd 12', '3rd 12', 'low' (the first 1-18 slots), or high (the last 19-36 slots))\n"+
-                "Whether the winning slot is even or odd"
+                "Whether the winning slot is even or odd\n"+
+                "Whether the winning slot is black or red\n"
                )
   }
   //run this so the player knows how to play the game
@@ -80,7 +80,6 @@ function Roulette(bankroll){
     //the winning conditions logics
     if (+bet > 0){
       //if bet is a string of a num >= operator will convert and compare it
-      //console.log(`Taking bet on ${bet} for ${amount}`)
       if(this.winning_slot == bet){
         //you win
         this.print_spin(true, amount * 36)

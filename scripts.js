@@ -1,4 +1,3 @@
-// FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
   largestEl: function(array){
