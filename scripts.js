@@ -21,6 +21,8 @@ for (var i = 0; i < wordsArray.length; i++) {
 if (i != wordsArray.length - 1){newString += "_";}else{}
 
 }
+if(newString.charAt(newString.length - 1) === "_")
+{newString = newString.slice(0,newString.length - 1);}
 return  newString
   },
 
