@@ -1,32 +1,56 @@
 // FILL IN THE FUNCTIONS BELOW
 
+var numbers = [2,4,2,1,5,2,5];
+
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
-  },
-  
-  reversed: function(){  
-    // your code here
-  },
+	largestEl: function(){  
+		// numbers.sort(function(a,b) {
+		// 	return (b-a)
+		// });
+		// return numbers[0];
+		
 
-  loudSnakeCase: function(){  
-    // your code here
-  },
+		// for (var index = 0; index < numbers.length; index++) {
+		// 	for (var subIndex = 0; subIndex < numbers.length; subIndex++) {
+		// 		if (numbers[index] > numbers[subIndex]) {
+		// 			console.log(numbers[index] + ' > ' + numbers[subIndex]);
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
-  },
+		// 		}
+		// 	}
+		// }
+	},
 
-  fizzBuzz: function(){  
-    // your code here
-  },
+	reversed: function(){  
+		var string = "I am a special string!";
+		var newArray = [];
 
-  myMap: function(){  
-    // your code here
-  },
+		for (var i = 0; i < string.length; i++) {
+			newArray.unshift(string[i]);
+		}
 
-  primes: function(){  
-    // your code here
-  },
+		var newString = newArray.join("");
+		
+		return newString;
+	},
+
+	loudSnakeCase: function(){  
+	// your code here
+	},
+
+	compareArrays: function(){ 
+	// your code here (replace the return)
+	return "Finish compareArrays first!" 
+	},
+
+	fizzBuzz: function(){  
+	// your code here
+	},
+
+	myMap: function(){  
+	// your code here
+	},
+
+	primes: function(){  
+	// your code here
+	},
 }
