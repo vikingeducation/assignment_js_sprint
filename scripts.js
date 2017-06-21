@@ -8,16 +8,17 @@ var sprintFunctions = {
 		// 	return (b-a)
 		// });
 		// return numbers[0];
-		
 
-		// for (var index = 0; index < numbers.length; index++) {
-		// 	for (var subIndex = 0; subIndex < numbers.length; subIndex++) {
-		// 		if (numbers[index] > numbers[subIndex]) {
-		// 			console.log(numbers[index] + ' > ' + numbers[subIndex]);
+		var largest = 0;
 
-		// 		}
-		// 	}
-		// }
+		for (var i = 0; i <= largest; i++) {
+			if (numbers[i] > largest) {
+				var largest = numbers[i];
+			} 
+		}
+
+		return largest;
+
 	},
 
 	reversed: function(){  
@@ -28,13 +29,32 @@ var sprintFunctions = {
 			newArray.unshift(string[i]);
 		}
 
-		var newString = newArray.join("");
-		
+		var newString = newArray.join('');
+
 		return newString;
 	},
 
 	loudSnakeCase: function(){  
-	// your code here
+		var string = "I am a strange code. I like it though!";
+		var array = [];
+
+		for (var i = 0; i < string.length; i++) {
+			if (string[i] === " ") {
+				array.push("_");
+			} else if ((string[i] !== ".") && (string[i] !== "!") && (string[i] !== " ")) {
+				array.push(string[i]);
+			} 
+		}
+
+		for (var i = 1; i < array.length; i++) {
+			if (array[i -1] === "_") {
+				array[i] = array[i].toUpperCase();
+			}
+		}
+
+		var newString = array.join('');
+
+		return newString;
 	},
 
 	compareArrays: function(){ 
