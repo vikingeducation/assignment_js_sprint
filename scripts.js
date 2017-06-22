@@ -1,13 +1,9 @@
 // FILL IN THE FUNCTIONS BELOW
 
-var numbers = [2,4,2,1,5,2,5];
-
 var sprintFunctions = {
 	largestEl: function(){  
-		// numbers.sort(function(a,b) {
-		// 	return (b-a)
-		// });
-		// return numbers[0];
+
+		var numbers = [2,4,2,1,5,2,5];
 
 		var largest = 0;
 
@@ -18,7 +14,7 @@ var sprintFunctions = {
 		}
 
 		return largest;
-
+ 
 	},
 
 	reversed: function(){  
@@ -57,20 +53,81 @@ var sprintFunctions = {
 		return newString;
 	},
 
-	compareArrays: function(){ 
-	// your code here (replace the return)
-	return "Finish compareArrays first!" 
+	compareArrays: function(array1, array2){ 
+
+		console.log("array1 = " + array1);
+		console.log("array2 = " + array2);
+
+		if (array1.join() === array2.join()) {
+			console.log("match");
+			return true;
+		} else {
+			console.log("mo match");
+			return false;
+		}
+
 	},
 
-	fizzBuzz: function(){  
-	// your code here
+	fizzBuzz: function(input){  
+
+		var array = [];
+
+		for (var i = 1; i <= input; i++) {
+			array.push(i);
+		}
+
+		for (var x = 0; x < array.length; x++) {
+			if ((array[x] % 3 == 0) && (array[x] % 5 == 0)) {
+				array[x] = "FIZZBUZZ";
+			} else if (array[x] % 3 === 0) {
+				array[x] = "FIZZ";
+			} else if (array[x] % 5 === 0) {
+				array[x] = "BUZZ";
+			} else {
+				array[x] = array[x];
+			}
+		}
+		
+		return array;
+
 	},
 
-	myMap: function(){  
-	// your code here
+	myMap: function(arr, fun){  
+
+		var returnedArray = [];
+		
+		for (var i = arr.length - 1; i >= 0; i--) {
+			var arrayInput = fun(arr[i]);
+			returnedArray.unshift(arrayInput);
+		}
+
+		return returnedArray;
+
 	},
 
 	primes: function(){  
 	// your code here
 	},
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
