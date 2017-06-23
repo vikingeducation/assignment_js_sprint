@@ -1,28 +1,24 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-	largestEl: function(){  
-
-		var numbers = [2,4,2,1,5,2,5];
+	largestEl: function(num){  
 
 		var largest = 0;
 
 		for (var i = 0; i <= largest; i++) {
-			if (numbers[i] > largest) {
-				var largest = numbers[i];
+			
+			if (num[i] > largest) {
+				var largest = num[i];
 			} 
 		}
-
 		return largest;
- 
 	},
 
-	reversed: function(){  
-		var string = "I am a special string!";
+	reversed: function(input){  
 		var newArray = [];
 
-		for (var i = 0; i < string.length; i++) {
-			newArray.unshift(string[i]);
+		for (var i = 0; i < input.length; i++) {
+			newArray.unshift(input[i]);
 		}
 
 		var newString = newArray.join('');
@@ -30,21 +26,29 @@ var sprintFunctions = {
 		return newString;
 	},
 
-	loudSnakeCase: function(){  
-		var string = "I am a strange code. I like it though!";
+	loudSnakeCase: function(str){  
 		var array = [];
+		var i;
 
-		for (var i = 0; i < string.length; i++) {
-			if (string[i] === " ") {
+		for (i = 0; i < str.length; i++) {
+			if (str[i] === " ") {
 				array.push("_");
-			} else if ((string[i] !== ".") && (string[i] !== "!") && (string[i] !== " ")) {
-				array.push(string[i]);
+			} else if ((str[i] !== ".") && (str[i] !== "!") && (str[i] !== " ")) {
+				array.push(str[i]);
 			} 
 		}
 
-		for (var i = 1; i < array.length; i++) {
+		for (i = 1; i < array.length; i++) {
 			if (array[i -1] === "_") {
 				array[i] = array[i].toUpperCase();
+			} else if (array[i] === "_" && array[i - 1] === "_") {
+				array.splice(i - 1, 1);
+			}
+		}
+
+		for (i = 1; i < array.length; i++) {
+			if (array[i] === "_" && array[i - 1] === "_") {
+				array.splice(i - 1, 1);
 			}
 		}
 
@@ -79,17 +83,18 @@ var sprintFunctions = {
 		for (var x = 0; x < array.length; x++) {
 			if ((array[x] % 3 == 0) && (array[x] % 5 == 0)) {
 				array[x] = "FIZZBUZZ";
-			} else if (array[x] % 3 === 0) {
+			} 
+			else if (array[x] % 3 === 0) {
 				array[x] = "FIZZ";
-			} else if (array[x] % 5 === 0) {
+			} 
+			else if (array[x] % 5 === 0) {
 				array[x] = "BUZZ";
-			} else {
+			} 
+			else {
 				array[x] = array[x];
 			}
 		}
-		
 		return array;
-
 	},
 
 	myMap: function(arr, fun){  
@@ -100,13 +105,26 @@ var sprintFunctions = {
 			var arrayInput = fun(arr[i]);
 			returnedArray.unshift(arrayInput);
 		}
-
 		return returnedArray;
-
 	},
 
-	primes: function(){  
-	// your code here
+	primes: function(input){  
+		var primeArray = [];
+		var sieve = [];
+		var i;
+		var j;
+
+		for (i = 2; i < input; i++) {
+
+			if (sieve[i] !== true) {
+				primeArray.push(i);
+
+				for (j = i << 1; j <= input; j += i){
+					sieve[j] = true;
+				}
+			}
+		}
+		return primeArray;
 	},
 }
 
