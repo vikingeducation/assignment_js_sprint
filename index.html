@@ -13,6 +13,14 @@
         margin: 20px auto;
         border: 1px solid black;
       }
+      #roulette-game {
+        text-align: center;
+        border: 2px solid blue;
+        padding: 20px;
+        width: 300px;
+        margin: 20px auto;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -70,6 +78,9 @@
     </h3>
     <div class="output" id="primes">
       Pending...
+    </div>
+    <div id="roulette-game" onclick="roulette.main()">
+      play Roulette game!
     </div>
   </body>
 </html>
