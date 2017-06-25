@@ -13,6 +13,14 @@
         margin: 20px auto;
         border: 1px solid black;
       }
+      #roulette-game {
+        text-align: center;
+        transition: background .5s;
+      }
+      #roulette-game:hover {
+        cursor: pointer;
+        background: lightgreen;
+      }
     </style>
   </head>
   <body>
@@ -70,6 +78,13 @@
     </h3>
     <div class="output" id="primes">
       Pending...
+    </div>
+
+    <h3>
+      Roulette Game:
+    </h3>
+    <div id="roulette-game" class="output" onclick="roulette.main()">
+      Click here to play!
     </div>
   </body>
 </html>
