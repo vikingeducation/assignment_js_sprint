@@ -128,156 +128,201 @@ var sprintFunctions = {
 	},
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var roulette = {
 
-	newBalance: function(currentAccount, bet, spinner){
-		// var balance = 100;
-		// return balance;
+	// Player guesses results of spin
+	guess: function(){
+		do {
+			var guessInput = prompt("The possible wagers and odds are as follows:\n" + 
+				"Input 1 for '0' (35:1),\nInput 2 for 'Even' (1:1),\nInput 3 for 'Odd' (1:1),\nInput 4 for '1 to 18' (1:1),\n" +
+				"Input 5 for '19 to 36' (1:1),\nInput 6 for '1 to 12' (2:1),\nInput 7 for '13 to 24' (2:1), or\nInput 8 for '25 to 36' (2:1).\n\n" + 
+				"What do you think the ball will land on?");
+			var guessCheck = this.guessCheck(guessInput);
+		} while (guessCheck === false)
+		return guessInput;
+	},
 
-		console.log("Current account is " + currentAccount);
-		console.log("Wager was " + bet);
-		if (spinner === bet) {
-			alert("Congratualtions! Your wager was correct! Try again to increase your earnings!");
-			return currentAccount + bet;
+	guessCheck: function(wagerInput){
+		if ((wagerInput >= 1) && (wagerInput <= 8)) {
+			return true
 		} else {
-			alert("Sorry, your wager was incorrect. Better luck next time! Try again to win that money back.");
-			return currentAccount - bet;
+			alert("Please input a number between 1 and 8.")
+			return false;
 		}
 	},
+	// End player guess
 
-	// Player places wager on spin results
-	wager: function(){
-		var wagerInput = prompt("The possible wagers and odds are as follows:\n" + 
-			"'0' (35:1),\n'00' (35:1),\n'Even' (1:1),\n'Odd' (1:1),\n'1 to 18' (1:1),\n" +
-			"'19 to 36' (1:1),\n'1st 12' (2:1),\n'2nd 12' (2:1), or\n'3rd 12' (2:1).\n\n" + 
-			"What do you think the ball will land on?");
-		return wagerInput;
-	},
-
-	// Place your bets
-	bet: function() {
-		var betInput = prompt("How much do you bet?");
+	// Start Betting
+	bet: function(account) {
+		do {
+			var betInput = prompt("How much do you bet? The minimum is $1.");
+			var betCheck = this.betCheck(betInput, account);
+		} while (betCheck === false);
 		return betInput;
 	},
 
-	// spin function - calculates a number between 1 and 36
+	betCheck: function(betInput, account){
+		if ((betInput >= 1) && (betInput <= account)) {
+			return true;
+		} else {
+			alert("You cannot bet less that $1 or more than you have in your account.\n" + 
+				"Remember, your account balance is $" + account);
+			return false;
+		}
+	},
+	// End Betting 
+
+	// Check to see if a number is odd or even
+	oddOrEven: function(guess){
+		if (guess % 2 === 0) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	// Start Odds Calculations
+	oneTOone: function(account, bet){
+		return +account + +bet;
+	},
+
+	twoTOone: function(account, bet){
+		return +account + (2 * +bet);
+	},
+	thirty5TOone: function(account, bet){
+		return +account + (35 * +bet);
+	},
+	// End Odds Calculations
+
 	spin: function(){
 		var spinResult = Math.floor(Math.random() * 36); 
 		return spinResult;
 	},
 
+	goodGuess: function(){
+		alert("Congratualtions! Your guess was correct! Try again to increase your earnings!");
+		return;
+	},
+
+	spinVSguess: function(account, bet, guess, spinner){
+		var newBalance;
+
+		if ((guess === 1) && (spinner === 0)) {
+			this.goodGuess();
+			newBalance = this.thirty5TOone(account, bet);
+			return newBalance;
+		}
+		else if ((guess === 2) && (this.oddOrEven(spinner) === true)) {
+			this.goodGuess();
+			newBalance = this.oneTOone(account, bet);
+			return newBalance;
+		}
+		else if ((guess === 3) && (this.oddOrEven(spinner) === false)) {
+			this.goodGuess();
+			newBalance = this.oneTOone(account, bet);
+			return newBalance;
+		}
+		else if ((guess === 4) && (spinner >= 1 && spinner <= 18)) {
+			this.goodGuess();
+			newBalance = this.oneTOone(account, bet);
+			return newBalance;
+		}
+		else if ((guess === 5) && (spinner >= 19 && spinner <= 36)) {
+			this.goodGuess();
+			newBalance = this.oneTOone(account, bet);
+			return newBalance;
+		}
+		else if ((guess === 6) && (spinner >= 1 && spinner <= 12)) {
+			this.goodGuess();
+			newBalance = this.twoTOone(account, bet);
+			return newBalance;
+		}
+		else if ((guess === 7) && (spinner >= 13 && spinner <= 24)) {
+			this.goodGuess();
+			newBalance = this.twoTOone(account, bet);
+			return newBalance;
+		}
+		else if ((guess === 8) && (spinner >= 25 && spinner <= 36)) {
+			this.goodGuess();
+			newBalance = this.twoTOone(account, bet);
+			return newBalance;
+		}
+		else {
+			alert("Sorry, your guess was incorrect. Better luck next time! Try again to win that money back.");
+			return account = account - bet
+		}
+
+	},
+
+	// Guess Reminder on console
+	guessReminder: function(guess){
+		switch(guess) {
+			case 1: 
+				console.log("You guess was 1: spinner will land on '0'.");
+				break;
+			case 2: 
+				console.log("You guess was 2: spinner will land on an even number.");
+				break;
+			case 3: 
+				console.log("You guess was 3: spinner will land on an odd number.");
+				break;
+			case 4: 
+				console.log("You guess was 4: spinner will land on '1 to 18'.");
+				break;
+			case 5: 
+				console.log("You guess was 5: spinner will land on '19 to 36'.");
+				break;
+			case 6: 
+				console.log("You guess was 6: spinner will land on '1 to 12'.");
+				break;
+			case 7: 
+				console.log("You guess was 7: spinner will land on '13 to 24'.");
+				break;
+			case 8: 
+				console.log("You guess was 8: spinner will land on '25 to 36'.");
+				break;
+		}
+		return;
+	},
 
 	main: function(){
 
 		var account = 100;
-		var wager;
+		var guess;
 		var bet;
-		var spinResults;
-		var newBalance = function(){
-								console.log("made it this far");
-								console.log(account());
-								console.log("the bet was " + bet);
-								return account() - bet;
-							};
+		var spinner;
+		var results;
 
 		// Welcome
-		// alert("Hello and welcome to this very entertaining game of Roulette.");
+		alert("Hello and welcome to this very entertaining game of Roulette.");
 
 		// Intro
-		// alert("Roulette is French for 'little wheel.'\n" + 
-		// 	"On this wheel are numbers 1 through 36, a '0', and a '00'.\n" + 
-		// 	"Bets are placed on the table, correlating with the slots \n" + 
-		// 	"the ball can possibly land in.");
+		alert("Roulette is French for 'little wheel.'\n" + 
+			"On this wheel are numbers 0 through 36.\n" + 
+			"Bets are placed on the table, correlating with the slots the ball can possibly land in.");
 
 		// Starting Account Balance
 		alert("Before we start the betting, your current account is $" + account + ".");
 
+		do {
 
-		while (confirm("Play game?") === true) {
+			guess = +(this.guess());
+			this.guessReminder(guess);
 
-			wager = +(this.wager());
-			console.log("The wager was " + wager);
-
-			bet = this.bet();
+			bet = this.bet(account);
 			console.log("The bet was " + bet);
 
 			alert("And the wheel is spinning!");
 
-
-			// Spin Results
-			var spinner = this.spin();
+			spinner = this.spin();
 			alert("The spinner landed on " + spinner);
 
-
-
-			// Calculate NEW account balance
-			account = this.newBalance(account, bet, spinner);
+			account = this.spinVSguess(account, bet, guess, spinner);
 
 			alert("Your current account is $" + account + ".");
 
-		}
+		} while (confirm("Continue game?") === true);
 
-		
+		alert("Thanks for playing!");
 	}
-
 }
-
-
-// The starting balance is 100
-// var account = 100;
-
-// 1st time through: when the user makes a bet, the less is subtracted from the startBalance
-// account = account - bet;
-
-// 2nd time through: when the user makes a bet the loss is subtracted from the current balance
-// account = account - bet
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
