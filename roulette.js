@@ -1,7 +1,7 @@
 'use strict'
 
 function Roulette(startCash) {
-    this.cashAvailable = startCash;
+    this.cashAvailable = sanitze(startCash);
 
     this.spin = function(betAmount, betNumber) {
         return null;
@@ -12,6 +12,15 @@ function Roulette(startCash) {
     };
 
     this.buyIn = function(newCash) {
-        this.cashAvailable += newCash;
+        this.cashAvailable += sanitize(newCash);
     }
-}
+};
+
+// Ensure that the cash given is a number
+var sanitize = function(inputCash) {
+    if (isNaN(inputCash) || (inputCash < 0)) {
+        return 0;
+    } else {
+        return inputCash;
+    };
+};
