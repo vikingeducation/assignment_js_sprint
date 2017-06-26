@@ -17,8 +17,16 @@ var sprintFunctions = {
     return submission.split("").reverse().join("");
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  loudSnakeCase: function(submission){  
+    let response = [];
+    prepped = submission.replace(/[^\w\ ]/gi, '');
+    prepped.split(' ').forEach( function(element) {
+      if (element.length > 0) {
+        response.push(element[0].toUpperCase() + element.substring(1));
+      };
+    });
+
+    return response.join('_');
   },
 
   compareArrays: function(){ 
