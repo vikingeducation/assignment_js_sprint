@@ -1,18 +1,19 @@
 'use strict'
 
 function Roulette(startCash) {
-    this.cashAvailable = sanitze(startCash);
+    this.cashAvailable = sanitize(startCash);
 
     this.spin = function(betAmount, betNumber) {
         return null;
     };
 
     this.bankroll = function() {
-        return null;
+        console.log(`You have $${this.cashAvailable} available`);
     };
 
     this.buyIn = function(newCash) {
         this.cashAvailable += sanitize(newCash);
+        this.bankroll()
     }
 };
 
