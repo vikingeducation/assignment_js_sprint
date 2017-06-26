@@ -29,9 +29,16 @@ var sprintFunctions = {
     return response.join('_');
   },
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
+  compareArrays: function(first, second){ 
+    if (first.length === second.length) {
+      for (i = 0; i < first.length; i++) {
+        if (first[i] != second[i]) {
+          return false;
+        };
+      };
+      return true;
+    };
+    return false;
   },
 
   fizzBuzz: function(){  
