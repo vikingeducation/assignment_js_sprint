@@ -4,7 +4,24 @@ function Roulette(startCash) {
     this.cashAvailable = sanitize(startCash);
 
     this.spin = function(betAmount, betNumber) {
-        return null;
+        if ( !(sanitize(betAmount)) ) {
+            console.log(`Sorry, $${betAmount} is not a valid bet amount.`);
+        } else if (betAmount > this.cashAvailable) {
+            console.log(`Sorry, $${betAmount} is more than you can bet`);
+        } else if ( isNaN(betNumber) || (betNumber < 1) || (betNumber > 36) ) {
+            console.log(`Sorry, ${betNumber} is not a valid bet (1-36)`);
+        } else {
+            let roll = Math.floor(Math.random() * (37 - 1)) + 1;
+            if (roll === betNumber) {
+                let winnings = 35 * betAmount;
+                this.cashAvailable += winnings;
+                console.log(`Congratulations! You win $${winnings}`);
+            } else {
+                this.cashAvailable -= betAmount;
+                console.log(`Sorry! You spun ${roll}`);
+            }
+        }
+        this.bankroll();
     };
 
     this.bankroll = function() {
@@ -13,7 +30,7 @@ function Roulette(startCash) {
 
     this.buyIn = function(newCash) {
         this.cashAvailable += sanitize(newCash);
-        this.bankroll()
+        this.bankroll();
     }
 };
 
