@@ -1,8 +1,16 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(submission){  
+    let largest;
+
+    submission.forEach( function(element) {
+      if ((largest === undefined) || (element > largest)) {
+        largest = element;
+      };
+    });
+
+    return largest;
   },
   
   reversed: function(){  
