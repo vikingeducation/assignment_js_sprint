@@ -58,8 +58,12 @@ var sprintFunctions = {
     return response;
   },
 
-  myMap: function(){  
-    // your code here
+  myMap: function(list, toCall){  
+    let response = [];
+    list.forEach(function(element) {
+      response.push(toCall(element));
+    });
+    return response;
   },
 
   primes: function(){  
