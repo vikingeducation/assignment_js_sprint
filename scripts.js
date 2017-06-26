@@ -13,8 +13,8 @@ var sprintFunctions = {
     return largest;
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(submission){  
+    return submission.split("").reverse().join("");
   },
 
   loudSnakeCase: function(){  
