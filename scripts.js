@@ -54,7 +54,6 @@ var sprintFunctions = {
         response.push(i);
       }
     }
-    console.log(response);
     return response;
   },
 
@@ -66,7 +65,30 @@ var sprintFunctions = {
     return response;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(submission){  
+    let candidates = [];
+    let results = [];
+
+    for (i = 0; i < submission; i++) {
+      if (i < 2) {
+        candidates[i] = false;
+      } else {
+        candidates[i] = true;
+      }
+    }
+
+    for (interval = 2; interval < submission * submission; interval++) {
+      for (sieve = interval * 2; sieve < submission; sieve += interval) {
+        candidates[sieve] = false;
+      }
+    }
+
+    candidates.forEach(function(isPrime, number) {
+      if (isPrime) {
+        results.push(number);
+      }
+    })
+
+    return results;
   },
 }
