@@ -1,32 +1,88 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
+  largestEl: function(numbers){  
     // your code here
+    function descending( a, b ) {
+  		return b - a;
+	}
+		numbers.sort(descending);
+		return numbers[0];
   },
   
-  reversed: function(){  
+  reversed: function(string){  
     // your code here
+   var result = "";
+	var index = string.length;
+		for(var i = 0; i <= string.length; i++){
+			index -= 1;
+			result += string.charAt(index);
+		}
+	return result;
   },
 
-  loudSnakeCase: function(){  
+  loudSnakeCase: function(string){  
     // your code here
-  },
+   var result = "";
+		for(var i = 0; i <= string.length; i++) {
+					if(string[i] == " "){
+ 							result += "_";
+					} else {
+							result += string[i];
+						}
+		}
+		return result;	
+},
 
-  compareArrays: function(){ 
+  compareArrays: function(array1, array2){ 
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    var number = 0;
+	for(var i = 0; i <= array1.length; i++){
+		number += 1;
+				if(array1[number + 1] == array2[number + 1]) {
+					return true;
+				} else {
+						return false;
+				}
+	}
+},
+
+  fizzBuzz: function(x){  
+    // your code here
+    var array = [];
+    	for(var i = 1;i <= x; i++) {
+			if (i % 5 === 0 && i % 3 === 0){
+					array.push("FIZZBUZZ");
+			} else if(i % 5 === 0){
+							array.push("BUZZ");
+					} else if(i % 3 === 0){
+								array.push("FIZZ");
+							} else {
+									array.push(i);
+							}
+		}
+		  return array;
+    },
+
+  myMap: function(array){  
+    // your code here
+    var newArray = [];
+		array.forEach( function(el){ return newArray.push(el * 2); } );
+			return newArray;
   },
 
-  fizzBuzz: function(){  
+  primes: function(number){  
     // your code here
-  },
-
-  myMap: function(){  
-    // your code here
-  },
-
-  primes: function(){  
-    // your code here
+      var newArray = [], a, b, primes = [];
+    for (a = 2; a <= number; i++) {
+        if (!newArray[a]) {
+            // a has not been marked -- it is prime
+            primes.push(a);
+            for (b = a << 1; b <= number; b += a) {
+                newArray[b] = true;
+            }
+        }
+    }
+    return primes
   },
 }
