@@ -40,9 +40,12 @@ function Roulette(bankroll) {
 
 // Run the above code in your console or jsbin.com
 
-// playerName = new Roulette(enter your bankroll here) ==> you only need to do this one; see it as a login function.
+// playerName = new Roulette(enter your bankroll here i.e: 200 ) ==> you only need to do this one; see it as a login function.
 
-// playername.spin(amount you would like to bet, number you're betting on)
+//Note: you can only bet on numbers between 1 and 36
+
+
+// playerName.spin(amount you would like to bet, number you're betting on)
 
 // repeat till bankroll == 0
 
