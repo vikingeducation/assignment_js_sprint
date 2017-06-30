@@ -23,15 +23,21 @@ var sprintFunctions = {
 
   loudSnakeCase: function(string){  
     // your code here
-   var result = "";
-		for(var i = 0; i <= string.length; i++) {
-					if(string[i] == " "){
- 							result += "_";
-					} else {
-							result += string[i];
-						}
-		}
-		return result;	
+		 var finalAnswer = "";
+     for(i = 0; i < string.length; i++){
+   	 var finalAnswer = string[0].toUpperCase();
+     for(i = 1; i < string.length; i++){
+        if (string[i] === " ") {
+           finalAnswer = finalAnswer + "_";
+          	 i++;
+         		finalAnswer = finalAnswer + string[i].to_UpperCase();
+          			finalAnswer = finalAnswer + string[i].toUpperCase();
+        } else if ( string[i].match(/\w/) ) {
+           finalAnswer = finalAnswer + string[i];
+        }
+     }
+     return finalAnswer;
+   }	
 },
 
   compareArrays: function(array1, array2){ 

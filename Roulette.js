@@ -38,7 +38,9 @@ function Roulette(bankroll) {
 
 // GAMEPLAY
 
-// playerName = new Roulette(enter your bankroll here)
+// Run the above code in your console or jsbin.com
+
+// playerName = new Roulette(enter your bankroll here) ==> you only need to do this one; see it as a login function.
 
 // playername.spin(amount you would like to bet, number you're betting on)
 

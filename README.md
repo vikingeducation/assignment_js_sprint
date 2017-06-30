@@ -5,7 +5,7 @@ while(1){ go() };
 
 
 
-Roulette_game_instructions
+Roulette_game_instructions By Oluwatimiehin Omoyeni
 ===========
 
 // GAMEPLAY
