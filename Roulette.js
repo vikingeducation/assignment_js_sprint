@@ -42,7 +42,7 @@ function Roulette(bankroll) {
 
 // playerName = new Roulette(enter your bankroll here i.e: 200 ) ==> you only need to do this one; see it as a login function.
 
-//Note: you can only bet on numbers between 1 and 36
+// Note: you can only bet on numbers between 1 and 36(1 & 36 inclusive)
 
 
 // playerName.spin(amount you would like to bet, number you're betting on)
