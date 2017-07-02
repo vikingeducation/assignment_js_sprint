@@ -12,7 +12,9 @@ Roulette_game_instructions By Oluwatimiehin Omoyeni
 
 // playerName = new Roulette(enter your bankroll here)
 
-// playername.spin(amount you would like to bet, number you're betting on)
+//NOTE: you can only bet on numbers between 1 and 36(1 & 36 inclusive)
+
+// playerName.spin(amount you would like to bet, number you're betting on)
 
 // repeat till bankroll == 0
 
