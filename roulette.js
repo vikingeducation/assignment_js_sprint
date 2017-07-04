@@ -120,3 +120,5 @@ function Roulette(startCash) {
     };
 
 };
+
+module.exports = Roulette;
