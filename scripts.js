@@ -53,8 +53,13 @@ var sprintFunctions = {
     return fizzyNumbers;
   },
 
-  myMap: function(){
-    // your code here
+  myMap: function(inputArr, inputFunc){
+    outputArr = [];
+    inputArr.forEach(function(item){
+      outputArr.push(inputFunc(item));
+    });
+
+    return outputArr;
   },
 
   primes: function(){
