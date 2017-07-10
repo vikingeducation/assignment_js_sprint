@@ -31,9 +31,8 @@ var sprintFunctions = {
     return modified;
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(array1, array2){
+    return array1 === array2;
   },
 
   fizzBuzz: function(){
