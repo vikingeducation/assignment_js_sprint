@@ -62,7 +62,32 @@ var sprintFunctions = {
     return outputArr;
   },
 
-  primes: function(){
-    // your code here
+  primes: function(input){
+    //generate list possible divisors excluding 1 and the input
+    var possibleDivisors = [];
+    for(i = 2; i < input; i++){
+      possibleDivisors.push(i);
+    }
+
+    //define isPrime
+    var isPrime = function(num) {
+      for (var i = 2; i < num; i++) {
+        if(num%i==0)
+          return false;
+      }
+      return true;
+    }
+
+    //create primes array placeholder
+    var primesOutput = [];
+
+    //determine if each divisor is prime and push into placeholder
+    possibleDivisors.forEach(function(divisor){
+      if(isPrime(divisor)){
+        primesOutput.push(divisor);
+      }
+    });
+
+    return primesOutput;
   },
 }
