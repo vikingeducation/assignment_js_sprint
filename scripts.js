@@ -6,10 +6,7 @@ var sprintFunctions = {
   },
 
   reversed: function(input){
-    var holder = input.split("");
-    holder = holder.reverse();
-    holder = holder.join("");
-    return holder;
+    return input.split("").reverse().join("");
   },
 
   loudSnakeCase: function(){
