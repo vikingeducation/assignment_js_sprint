@@ -32,7 +32,7 @@ var sprintFunctions = {
   },
 
   compareArrays: function(array1, array2){
-    return array1 === array2;
+    return array1.toString() === array2.toString();
   },
 
   fizzBuzz: function(input){
