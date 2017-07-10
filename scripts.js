@@ -35,8 +35,22 @@ var sprintFunctions = {
     return array1 === array2;
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(input){
+    var fizzyNumbers = [];
+
+    for(i = 1; i <= input; i++){
+      if((i % 3 === 0) && (i % 5 === 0)){
+        fizzyNumbers.push("FIZZBUZZ");
+      }else if(i % 3 === 0){
+        fizzyNumbers.push("FIZZ");
+      }else if(i % 5 === 0){
+        fizzyNumbers.push("BUZZ");
+      }else{
+        fizzyNumbers.push(i);
+      }
+    }
+
+    return fizzyNumbers;
   },
 
   myMap: function(){
