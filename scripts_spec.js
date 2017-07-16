@@ -100,5 +100,11 @@ var tester = {
 }
 
 
-$(document).ready( function(){ tester.init( sprintFunctions )});
+$(document).ready( function(){ tester.init( sprintFunctions )
+	var r = new Roulette(100);
+	r.spin(10, 24);
+	r.spin(50, 13);
+	r.bankroll();
+	r.buyIn(1000);
+});
 
