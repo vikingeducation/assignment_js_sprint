@@ -100,3 +100,148 @@ var sprintFunctions = {
     return primeArray;
   },
 }
+
+console.log("Initiate a game with the format var r = new Roulette(money); where money is a number representing your initial buy in.")
+
+function Roulette(money) {
+  this.bank = money;
+  this.bankroll = function() {
+    console.log(this.bank);
+  };
+
+  this.buyIn = function(newMoney){
+    this.bank += newMoney;
+    console.log('You now have ' + this.bank);
+  };
+
+  this.spin = function(bet, spot) {
+    var spinResult = Math.floor(Math.random()*37);
+
+    if(spinResult == 37) {
+      spinResult = "00";
+    };
+
+    if(spot == "00") {
+      this.bank -= bet;
+      if (spinResult == "00") {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet*35);
+        this.bank += bet*35;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (0 <= spot && spot <= 36) {
+      this.bank -= bet;
+      if (spinResult == spot) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet*35);
+        this.bank += bet*35;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (spot == "Even") {
+      this.bank -= bet;
+      if (spinResult != 0 && spinResult % 2 == 0) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet);
+        this.bank += bet;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (spot == "Odd") {
+      this.bank -= bet;
+      if (spinResult != 0 && spinResult % 2 == 1) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet);
+        this.bank += bet;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (spot == "1 to 18") {
+      this.bank -= bet;
+      if (spinResult >= 1 && spinResult <= 18) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet);
+        this.bank += bet;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (spot == "19 to 36") {
+      this.bank -= bet;
+      if (spinResult >= 19 && spinResult <= 36) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet);
+        this.bank += bet;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (spot == "1st 12") {
+      this.bank -= bet;
+      if (spinResult >= 1 && spinResult <= 12) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet);
+        this.bank += bet;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (spot == "2nd 12") {
+      this.bank -= bet;
+      if (spinResult >= 13 && spinResult <= 24) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet);
+        this.bank += bet;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else if (spot == "3rd 12") {
+      this.bank -= bet;
+      if (spinResult >= 25 && spinResult <= 36) {
+        console.log("You win! The spin was " + spinResult + ". Winnings are $" + bet);
+        this.bank += bet;
+        console.log("You now have $" + this.bank);
+      }
+      else {
+        console.log("You lose! The spin was " + spinResult + ". Try again");
+        console.log("You now have $" + this.bank);
+      }
+    }
+
+    else {
+      console.log("Please choose a valid option. Bet on a spot between 0 and 36, 00, Even, Odd, 1 to 18, 19 to 36, 1st 12, 2nd 12, or 3rd 12");
+    }
+
+  };
+
+}
