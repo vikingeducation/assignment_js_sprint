@@ -51,20 +51,86 @@ var sprintFunctions = {
     return stringSnakeCased ;
   },
 
-  compareArrays: function(){
+  compareArrays: function(array1, array2){
     // your code here (replace the return)
-    return "Finish compareArrays first!"
+    //Check if lengths are the same
+    if (array1.length != array2.length){
+      return false;
+    }
+    //Check if content is the same
+    else {
+      var equal = true;
+      for (var i = 0; i < array1.length; i++) {
+        if (array1[i] != array2[i])
+        {
+          equal = false;
+        }
+      }
+    }
+    return equal;
   },
 
-  fizzBuzz: function(){
+  fizzBuzz: function(number){
     // your code here
+    if (number<0) {
+      return false;
+    }
+    else {
+      var array1 = [];
+      for (var i = 0; i < number; i++) {
+        if ( ((1+i)%5)===0 && ((1+i)%3)===0 ) {
+          array1[i] = "FIZZBUZZ";
+        }
+        else if ((1+i)%3===0) {
+          array1[i] = "FIZZ";
+        }
+        else if ((1+i)%5==0){
+          array1[i] = "BUZZ";
+        }
+        else {
+          array1[i] = i+1;
+        }
+      }
+    }
+    return array1;
   },
 
-  myMap: function(){
+  myMap: function(array1, function1){
     // your code here
+    if (array1.length < 0) {
+      return false;
+    }
+    else {
+      for (var i = 0; i < array1.length; i++){
+        array1[i] = function1(array1[i]);
+      }
+    }
+    return array1;
   },
 
-  primes: function(){
+  primes: function(number){
     // your code here
+    if (number < 1) {
+      return false;
+    }
+    else {
+      var array1 = [];
+      array1Index = -1;
+      var bool = true;
+      for (var i = 2; i <= number; i++) {
+        bool = true;
+        for (var j = i-1; j > 1; j--){
+          if (!(i%j)) {
+            bool = false;
+            console.log(i);
+          }
+        }
+        if (bool) {
+          array1Index++;
+          array1[array1Index] = i;
+        }
+      }
+    }
+    return array1;
   },
 }
