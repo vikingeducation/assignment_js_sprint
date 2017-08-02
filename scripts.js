@@ -122,7 +122,6 @@ var sprintFunctions = {
         for (var j = i-1; j > 1; j--){
           if (!(i%j)) {
             bool = false;
-            console.log(i);
           }
         }
         if (bool) {
@@ -134,3 +133,187 @@ var sprintFunctions = {
     return array1;
   },
 }
+
+//Roulette Game
+Roulette = function(startingMoney) {
+  //Starting bank
+  this.bank = startingMoney;
+  //Spinning Wheel
+  this.spinWheel = function () {
+    var spinningNumber = Math.floor(Math.random() * 38);
+    if (spinningNumber === 37) {
+      spinningNumber = "00";
+    }
+    return spinningNumber;
+  };
+  //Win
+  this.lose = function(spunNumber,bet) {
+    console.log("You Lose, the spin was" + " " + spunNumber +  ":(");
+    this.bank = this.bank - bet;
+    this.bankroll();
+    return true;
+  };
+  //Lose
+  this.win = function(spunNumber, bet, winFactor) {
+    console.log ("You Win $" + (bet * winFactor) + ", the spin was" + " " + spunNumber + "!!!");
+    this.bank = this.bank + (bet * winFactor);
+    this.bankroll();
+    return true;
+  }
+  //Checking bet input
+  this.betCheck = function (bet) {
+    if (bet < 0) {
+      console.log ("You have to bet something");
+      return false;
+    }
+    else if (bet > this.bank) {
+      console.log("You don't have that much money, try betting under $" + this.bank);
+        if (this.bank === 0){
+          console.log("Try adding money with .buyIn()");
+        }
+      return false;
+    }
+    //Checks if not a number
+    else if (isNaN(bet) || ("00")) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  };
+  //Checking bet on number input
+  this.betOnCheck = function (betOn) {
+    //Betting above board
+    if (betOn > 36) {
+      console.log ("You have to bet on a space under 36");
+      return false;
+    }
+    //Betting below board
+    else if (betOn < 0) {
+      console.log("You have to bet on a space above 0");
+      return false;
+    }
+    else {
+      return true;
+    }
+  };
+  //Spinning the wheel after betting 1 number
+  this.spin = function (betOn, bet) {
+    //Input check
+    if ((this.betCheck (bet))&&(this.betOnCheck (betOn)) ) {
+      //Spinning
+      var spinningNumber = this.spinWheel();
+      //Winning
+      if (spinningNumber === betOn){
+        console.log ("You Win $" + (bet * 35) + ", the spin was" + " " + spinningNumber + "!!!");
+        this.bank = this.bank + (bet*35);
+        this.bankroll();
+      }
+      //Losing
+      else if (spinningNumber != betOn){
+        console.log("You Lose, the spin was" + " " + spinningNumber +  ":(");
+        this.bank = this.bank - bet;
+        this.bankroll();
+
+      }
+    }
+  };
+  //Betting on Odd or Even
+  this.betOddOrEven = function (section, bet) {
+    //Check input
+    if (this.betCheck(bet)){
+      if ( (section === "Odd") || (section === "Even") )
+      {
+        var spunNumber = this.spinWheel();
+        //If 0
+        if ((spunNumber === 0) || (spunNumber === "00")) {
+          this.lose(spunNumber, bet);
+        }
+        //If odd win and lose
+        else if (section === "Odd"){
+          if (spunNumber%2) {
+            this.win(spunNumber,bet,1);
+          }
+          else {
+            this.lose(spunNumber,bet);
+          }
+        }
+        //if even win and lose
+        else {
+          if (spunNumber%2) {
+            this.lose(spunNumber,bet);
+          }
+          else {
+            this.win(spunNumber,bet,1);
+          }
+        }
+      }
+      //Wrong input
+      else {
+       console.log("Please pick a side (Odd or Even)");
+     }
+   }
+  };
+  //Bet on top or bottom half
+  this.betHalf = function (section, bet) {
+    //Input check
+    if (this.betCheck(bet)){
+      if ( (section === "Top") || (section === "Bottom") ) {
+        var spunNumber = this.spinWheel();
+        if ( (spunNumber === 0) || (spunNumber === "00") ) {
+          this.lose(spunNumber,bet);
+        }
+        else if ( (section === "Top") && (spunNumber <= 18) ) {
+          this.win(spunNumber,bet,1);
+        }
+        else if ( (section === "Bottom") && (spunNumber > 18) ) {
+          this.win(spunNumber,bet,1);
+        }
+        else {
+          this.lose(spunNumber,bet);
+        }
+      }
+      else {
+        console.log("Please enter Top or Bottom");
+      }
+    }
+
+  };
+  this.betThird = function (section, bet) {
+    //Input check
+    if (this.betCheck(bet)){
+      if ( (section === "Top") || (section ==="Middle") (section === "Bottom") ) {
+        var spunNumber = this.spinWheel();
+        if ( (spunNumber === 0) || (spunNumber === "00") ) {
+          this.lose(spunNumber,bet);
+        }
+        else if ( (section === "Top") && (spunNumber <= 12) ) {
+          this.win(spunNumber,bet,2);
+        }
+        else if ( (spunNumber < 12) || (section === "Middle") && (spunNumber <= 18) ) {
+          this.win(spunNumber,bet,2);
+        }
+        else if ( (spunNumber > 18) || (section === "Bottom") ) {
+          this.win(spunNumber,bet,2);
+        }
+        else {
+          this.lose(spunNumber,bet);
+        }
+      }
+      else {
+        console.log("Please enter Top, Middle or Bottom");
+      }
+    }
+  };
+  //Checking money
+  this.bankroll = function () {
+    console.log("You now have $" + this.bank);
+  };
+  //Adding money
+  this.buyIn = function (amountMoney) {
+    console.log("You bought in $" + amountMoney);
+    this.bank = this.bank + amountMoney;
+    console.log("You now have $" + this.bank);
+  };
+  return console.log ("Welcome, starting bank roll is $" + this.bank + "\n try .spin(bet,betOn {00-36}) \n or .bankroll() to check your balance");
+};
