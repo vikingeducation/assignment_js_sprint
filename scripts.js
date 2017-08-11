@@ -1,9 +1,15 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){
-
-  },
+  largestEl: function(array) {
+  let bigEl = [0];
+  for(let i = 0; i <= (array.length-1); i++) {
+     if(array[i] > bigEl[0]) {
+      bigEl[0] = array[i];
+    }
+  }
+  return bigEl[0];
+},
 
   reversed: function(string) {
     let newString = "";
@@ -60,11 +66,29 @@ var sprintFunctions = {
       return newArray;
     },
 
-  myMap: function(){
-    // your code here
+  myMap: function(array, passedFunction) {
+      let newArray = [];
+      for(i = array.length - 1; i >= 0; i--) {
+        let result = passedFunction(array[i]);
+        let totalElements = newArray.push(result);
+      }
+    return newArray.reverse();
   },
 
-  primes: function(){
-    // your code here
-  },
+  primes: function(number){
+    var notPrime = 0;
+    var primeArray = [];
+      for(i = number; i >= 2; i--) {
+        notPrime = 0;
+        for(j = (i - 1); j >=2; j--) {
+          if((i % j === 0)) {
+            notPrime++;
+          }
+        }
+        if(notPrime === 0) {
+          primeArray.push(i);
+        }
+      }
+      return(primeArray.reverse());
+    },
 }
