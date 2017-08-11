@@ -19,9 +19,22 @@ var sprintFunctions = {
     return newString;
   },
 
-  loudSnakeCase: function(){
-    // your code here
-  },
+  loudSnakeCase: function(inputString) {
+        let outputString = "";
+      	for(let i = 0; i <= inputString.length -1; i++) {
+      		if ((inputString[i+1] !== " ") && (inputString[i] === " ")) {
+      			outputString += "_";
+      		} else if (inputString[i-1] === " ") {
+      			outputString += inputString[i].toUpperCase();
+      		} else if(i === 0) {
+      			outputString += inputString[i].toUpperCase();
+      		} else if((inputString.charCodeAt(i) >= 97 && inputString.charCodeAt(i) <= 122) ||
+      		 (inputString.charCodeAt(i) >= 65 && inputString.charCodeAt(i) <= 90)) {
+      			outputString += inputString[i].toLowerCase();
+      		}
+      	}
+      	return(outputString);
+      },
 
   compareArrays: function(array1, array2) {
     let sameArrayNum = 0;
