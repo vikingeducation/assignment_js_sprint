@@ -120,3 +120,82 @@ var sprintFunctions = {
 }
 
 };
+
+function Roulette(startingBank) {
+  this.bank = startingBank;
+
+  this.spin = function(wager, guess) {
+    var guessString = guess.toString();
+    
+    console.log("You guessed '" + guessString + "', with a wager of $" + wager);
+    
+    var roll = (Math.floor(Math.random() * 38)).toString();
+    if (roll === "37") {
+      roll = "00";
+    }
+    
+    switch (guessString) {
+      case "Even":
+        if (parseInt(roll)%2===0) {
+          this.bank = this.bank + (wager*2);
+        }
+        break;
+      case "Odd":
+        if (parseInt(roll)%2!==0) {
+          this.bank = this.bank + (wager*2);
+        }
+        break;
+      case "1 to 18":
+        if (parseInt(roll)<=18 && parseInt(roll)!==0) {
+          this.bank = this.bank + (wager*2);
+        }
+        break;
+      case "19 to 36":
+        if (parseInt(roll)>18 && parseInt(roll)<=36) {
+          this.bank = this.bank + (wager*2);
+        }
+        break;
+      case "1st 12":
+        if (parseInt(roll)<=12 && parseInt(roll)!==0) {
+          this.bank = this.bank + (wager * 3);
+        }
+        break;
+      case "2nd 12":
+        if (parseInt(roll)>12 && parseInt(roll)<=24) {
+          this.bank = this.bank + (wager * 3);
+        }
+        break;
+      case "3rd 12":
+        if (parseInt(roll)>24 && parseInt(roll)<=36) {
+          this.bank = this.bank + (wager * 3);
+        }
+        break;
+      default:
+        break;
+    };
+
+    console.log("Roll was " + roll);
+    
+    if (guessString === roll) {
+      this.bank = this.bank + (wager * 36);
+    } else {
+      this.bank = this.bank - wager;
+    };
+    
+    console.log("You now have $" + this.bank);
+
+  };
+
+  this.bankroll = function() {
+    console.log("You have $" + this.bank);
+  };
+
+  this.buyIn = function(buyInAmount) {
+    this.bank = this.bank + buyInAmount;
+    console.log("You bought in $" + buyInAmount);
+    console.log("You now have $" + this.bank);
+  }
+};
+  
+var r = new Roulette(100);
+r.spin(10, 12);
