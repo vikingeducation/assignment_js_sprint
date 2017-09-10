@@ -11,8 +11,23 @@ var sprintFunctions = {
     return string.split("").reverse().join("")
   },
 
-  loudSnakeCase: function(){
+  loudSnakeCase: function(string){
     // your code here
+    var i = 0
+    while(true){
+      string = string.replace(/[.!@#$%^&*()<>,.?]/,"")
+      i += 1
+      if (i > 100) {break}
+    }
+    while(true){
+      string = string.replace(" ", "_")
+      i += 1
+      if (i > 200) {break}
+    }
+    string = string.replace("__", "_")
+    return string.split("_").map(function(str){
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    }).join("_");
   },
 
   compareArrays: function(){
@@ -20,8 +35,15 @@ var sprintFunctions = {
     return "Finish compareArrays first!"
   },
 
-  fizzBuzz: function(){
+  fizzBuzz: function(number){
     // your code here
+    var arr = []
+    var i = 1
+    while(true){
+      arr << i
+      i += 1
+      if(i > number){break}
+    }
   },
 
   myMap: function(){
