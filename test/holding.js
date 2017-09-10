@@ -1,5 +1,3 @@
-// FILL IN THE FUNCTIONS BELOW
-
 var sprintFunctions = {
   allNum: function(num){
     var n = 1
@@ -100,3 +98,5 @@ var sprintFunctions = {
     return array
   },
 }
+
+console.log(sprintFunctions.primes(12));
