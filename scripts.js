@@ -1,51 +1,46 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    var largestNum = arguments[0][0];
-    for(var i = 1; i < arguments[0].length; i++) {
-      if(arguments[0][i] > largestNum) {
-        largestNum = arguments[0][i];
-      }
+  largestEl: function(arr){  
+    var largestNum = arr[0];
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > largestNum) { largestNum = arr[i] };
     }
     return largestNum;
   },
   
-  reversed: function(){  
-    return arguments[0].split("").reverse().join("");
+  reversed: function(str){  
+    return str.split("").reverse().join("");
   },
 
-  loudSnakeCase: function(){
-    var str = arguments[0].replace(/\s\s+/g, " ");
-    var arr = str.split(" ");
-    for(var i = 0; i < arr.length; i++) {
-      arr[i] = arr[i][0].toUpperCase() + arr[i].slice(1);
-    }
-    var newStr = arr.join(" ");
-    var strUnderScore = newStr.replace(/\s/g, "_");
-    return strUnderScore.replace(/\W/g, "");
-  },
-
-  compareArrays: function(){
-    var arr1 = arguments[0];
-    var arr2 = arguments[1];
-    for(var i = 0; i < arr1.length; i++) {
-      if(arr1[i] !== arr2[i]) {
-        return false;
+  loudSnakeCase: function(sentence){
+    return sentence.replace(/[^a-z A-Z]|\s+/g, function(firstMatch, secondMatch) {
+      if (!!firstMatch.match(/[^a-z A-Z]/g)) {
+        return "";
+      } else {
+        return "_";
       }
+    }).replace(/_[a-z]/g, function(match) {
+      return match.toUpperCase();
+    })
+  },
+
+  compareArrays: function(arr1, arr2){
+    if (arr1.length !== arr2.length) { return false };    
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) { return false };
     }
     return true;
   },
 
-  fizzBuzz: function(){  
+  fizzBuzz: function(num){  
     var arr = [];
-    var num = arguments[0];
-    for( var i = 1; i <= num; i++) {
-      if(i % 3 === 0 && i % 5 === 0) {
+    for (var i = 1; i <= num; i++) {
+      if (i % 15 === 0 ) {
         arr.push("FIZZBUZZ");
-      } else if(i % 5 === 0 && i % 3 !== 0) {
+      } else if (i % 5 === 0 && i % 3 !== 0) {
         arr.push("BUZZ");
-      } else if(i % 3 === 0 && i % 5 !== 0) {
+      } else if (i % 3 === 0 && i % 5 !== 0) {
         arr.push("FIZZ");
       } else {
         arr.push(i);
@@ -54,28 +49,25 @@ var sprintFunctions = {
     return arr;
   },
 
-  myMap: function(){  
-    var arr = arguments[0];
-    var func = arguments[1];
+  myMap: function(arr, func){  
     var newArr = [];
-    for(var i = 0; i < arr.length; i++) {
-      newArr.push(func(arr[i]));  
+    for (var i = 0; i < arr.length; i++) {
+      newArr.push(func(arr[i]));
     }
     return newArr;
   },
 
-  primes: function(){  
-    function isPrime(num) {
-      for(var i = 2; i < num; i++) {
-        if(num % i === 0) {
+  primes: function(num){  
+    function isPrime(n) {
+      for(var i = 2; i < n; i++) {
+        if(n % i === 0) {
           return false;
         }
       }
       return true;
     }
     var arr = [];
-    var input = arguments[0];
-    for(var i = 2; i <= input; i++) {
+    for(var i = 2; i <= num; i++) {
       if(isPrime(i)) {
         arr.push(i);
       }
