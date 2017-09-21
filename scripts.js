@@ -1,8 +1,14 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(arr){
+  	largestNumber = arr[0]  
+    for(var i = 1; i < arr.length; i++){
+    	if(arr[i] > largestNumber){
+    		largestNumber = arr[i];
+    	}
+    }
+    return largestNumber;
   },
   
   reversed: function(){  
