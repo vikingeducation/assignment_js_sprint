@@ -18,8 +18,23 @@ var sprintFunctions = {
     return joinArray;
   },
 
-  loudSnakeCase: function(){  
-    // your code here
+  loudSnakeCase: function(sentence){  
+	var stripNonCharElements = sentence.replace(/[^A-Za-z ]/g, '');
+    var splitString = stripNonCharElements.split(" ");
+    var answer = []
+  	var newWord;
+    
+    for(var i = 0; i < splitString.length; i++){
+      
+      var firstLetter = splitString[i][0];
+      var restOfWord = splitString[i].slice(1);
+      
+      if(splitString[i] !== ""){
+        newWord = firstLetter.toUpperCase() + restOfWord;
+        answer.push(newWord);
+      }
+    }
+    return answer.join("_");
   },
 
   compareArrays: function(){ 
