@@ -80,7 +80,26 @@ var sprintFunctions = {
     return newArray;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(number){  
+    var newArray = [];
+    var isPrime = function(number){
+    	if(number < 2){
+    		return false;
+    	}
+    	
+    	for(var i = 2; i < number; i++){
+    		if(number % i === 0){
+    			return false;
+    		}
+    	}
+
+    	return true;
+    }
+    for(var i = 2; i <= number; i++){
+    	if(isPrime(i)){
+    		newArray.push(i);
+    	}
+    }
+    return newArray;
   },
 }
