@@ -2,6 +2,7 @@
 
 var sprintFunctions = {
   largestEl: function(arr){
+  	// Takes an array and returns the largest element.
   	largestNumber = arr[0]  
     for(var i = 1; i < arr.length; i++){
     	if(arr[i] > largestNumber){
@@ -12,6 +13,7 @@ var sprintFunctions = {
   },
   
   reversed: function(str){  
+  	// Takes a string and reverses it.
     var splitString = str.split("");
     var reverseArray = splitString.reverse();
     var joinArray = reverseArray.join("");
@@ -19,6 +21,7 @@ var sprintFunctions = {
   },
 
   loudSnakeCase: function(sentence){  
+  	// Takes a full sentence and puts it into "Loud_Snake_Case" format but strips out any non-character elements (like punctuation).
 	var stripNonCharElements = sentence.replace(/[^A-Za-z ]/g, '');
     var splitString = stripNonCharElements.split(" ");
     var answer = []
@@ -38,6 +41,7 @@ var sprintFunctions = {
   },
 
   compareArrays: function(arr1, arr2){ 
+  	// Takes two arrays and checks to see if they are equal (same contents in the same order). Assumes they're not nested.
   	lengthCheck = 0;
   	for(var i = 0; i < arr1.length; i++){
   		if(arr1[i] === arr2[i]){
@@ -54,6 +58,11 @@ var sprintFunctions = {
   },
 
   fizzBuzz: function(number){  
+  	// Takes an input of a number and returns an array containing all elements from 1 to that number.
+  	// Each element divisible by 3 is replaced by "FIZZ"
+  	// Each element divisible by 5 is replaced by "BUZZ"
+  	// Each element divisible by 3 AND 5 is replaced by "FIZZBUZZ"
+  	// e.g. fizzBuzz(6) => [1, 2, "FIZZ", 4, "BUZZ", "FIZZ"]
   	numberArray = [];
   	for(var i = 1; i <= number; i++){
   		if(i%3 === 0 & i%5 === 0){
@@ -73,6 +82,9 @@ var sprintFunctions = {
   },
 
   myMap: function(arr, fun){
+  	// Takes an array and a function. 
+  	// It passes every element from the array into that function, in turn, running the function. 
+  	// The returned array should be filled with each of the return statements from that function.
   	var newArray = [];
     for(i = 0; i < arr.length; i++){
     	newArray.push(fun(arr[i]));
@@ -81,6 +93,8 @@ var sprintFunctions = {
   },
 
   primes: function(number){  
+  	// Takes a number and outputs an array containing all prime numbers that occur prior to that number. 
+  	// e.g. primes(8) => [2,3,5,7]
     var newArray = [];
     var isPrime = function(number){
     	if(number < 2){
