@@ -53,8 +53,23 @@ var sprintFunctions = {
   	}
   },
 
-  fizzBuzz: function(){  
-    // your code here
+  fizzBuzz: function(number){  
+  	numberArray = [];
+  	for(var i = 1; i <= number; i++){
+  		if(i%3 === 0 & i%5 === 0){
+  			numberArray.push("FIZZBUZZ");
+  		}
+  		else if(i%3 === 0){
+  			numberArray.push("FIZZ");
+  		}
+  		else if(i%5 === 0){
+  			numberArray.push("BUZZ");
+  		}
+  		else{
+  			numberArray.push(i);
+  		}
+  	}
+  	return numberArray;
   },
 
   myMap: function(){  
