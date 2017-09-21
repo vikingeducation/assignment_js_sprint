@@ -65,7 +65,7 @@ var sprintFunctions = {
   	// e.g. fizzBuzz(6) => [1, 2, "FIZZ", 4, "BUZZ", "FIZZ"]
   	numberArray = [];
   	for(var i = 1; i <= number; i++){
-  		if(i%3 === 0 & i%5 === 0){
+  		if(i%3 === 0 && i%5 === 0){
   			numberArray.push("FIZZBUZZ");
   		}
   		else if(i%3 === 0){
