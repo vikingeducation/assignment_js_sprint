@@ -5,7 +5,7 @@ assignment_js_sprint
 
 To play Roulette, set up with:
 
-var r = new Roulette(x);  //Where x = Your starting money
+var r = new Roulette(x);  // Where x = Your starting money
 
 r.spin(x,y) // Where x = how much to bet on and y = a number from 1-36 if you're betting on single number.
 
