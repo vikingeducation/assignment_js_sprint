@@ -11,8 +11,11 @@ var sprintFunctions = {
     return largestNumber;
   },
   
-  reversed: function(){  
-    // your code here
+  reversed: function(str){  
+    var splitString = str.split("");
+    var reverseArray = splitString.reverse();
+    var joinArray = reverseArray.join("");
+    return joinArray;
   },
 
   loudSnakeCase: function(){  
