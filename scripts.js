@@ -14,7 +14,7 @@ var sprintFunctions = {
     return current;
   },
 
-  
+
   reversed: function(str) {
     var retVal = '';
     for (var i = str.length - 1; i > -1; i--) {
@@ -122,11 +122,11 @@ var sprintFunctions = {
 
   mergeSort: function(array) {
     if (array.length < 2) return array;
-    
+
     var middle = Math.floor(array.length / 2);
     var left = this.mergeSort(array.slice(0, middle));
     var right = this.mergeSort(array.slice(middle));
-    
+
     var result = [];
     while (left.length > 0 && right.length > 0) {
       result.push(left[0] < right[0] ? left.shift() : right.shift());
@@ -161,7 +161,7 @@ var sprintFunctions = {
     var b = array[hi];
     array[i] = b;
     array[hi] = a;
-    return i;    
+    return i;
   },
 
 
