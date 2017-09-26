@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/roulette.js"></script>
+    <style>
+      body {
+        max-width: 960px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      input {
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Roulette</h1>
+    <p>
+      Bank: $<span id="bankroll"></1span>
+    </p>
+    <p id="result"></p>
+    <pre id="message"></pre>
+
+    <form id="buy-in">
+      <input id="buy-in-amount" type="number" placeholder="Buy In">
+      <button type="submit">Buy In</button>
+    </form>
+
+    <form id="spin">
+      <input id="bet" class="number" name="number" type="number" placeholder="Bet">
+      <br>
+      <input id="number" class="exact" name="number" type="number" placeholder="Number">
+      <br>
+      <input id="zero" class="exact" name="number" type="radio" value="0"> 0
+      <input id="double-zero" class="exact" name="number" type="radio" value="00"> 00
+      <br>
+      <input id="even" class="quality" name="number" type="radio" value="even"> Even
+      <input id="odd" class="quality" name="number" type="radio" value="odd"> Odd
+      <br>
+      <input id="first-half" class="halves" name="number" type="radio" value="1-18"> 1-18
+      <input id="second-half" class="halves" name="number" type="radio" value="19-36"> 19-36
+      <br>
+      <input id="first-third" class="thirds" name="number" type="radio" value="1-12"> 1-12
+      <input id="second-third" class="thirds" name="number" type="radio" value="13-24"> 13-24
+      <input id="third-third" class="thirds" name="number" type="radio" value="25-36"> 25-36
+      <br>
+      <button type="submit">Spin</button>
+    </form>
+
+    <script>
+      var r = new Roulette(100);
+      
+      $('#bankroll').html(r.bankroll);
+
+      $('#buy-in').on('submit', function(e) {
+        e.preventDefault();
+
+        var message = r.buyIn(~~$('#buy-in-amount').val());
+
+        $('#message').html(message);
+        $('#bankroll').html(r.bankroll);
+        $('#buy-in-amount').val('');
+
+        return false;
+      });
+
+      var bet,
+          number,
+          betType;
+
+      $('#number').on('focus', function(e) {
+        $('input:checked').attr('checked', false);
+      });
+
+      $('input[type="radio"]').on('click', function(e) {
+        $('#number').val('');
+      });
+
+      $('#spin').on('change', function(e) {
+        bet = ~~$('#bet').val();
+        if ($('#number').val() != '') {
+          betType = 'exact';
+          number = $('#number').val();
+        } else {
+          betType = $('input:checked', '#spin').attr('class');
+          number = $('input:checked', '#spin').val();
+        }
+        console.log(bet, number, betType);
+      });
+
+      $('#spin').on('submit', function(e) {
+        e.preventDefault();
+
+        var message = r.spin(bet, number, betType);
+
+        $('#message').html(message);
+        $('#bankroll').html(r.bankroll);
+        $('#result').html(r.result);
+
+        return false;
+      });
+    </script>
+  </body>
+</html>
+
+
+
