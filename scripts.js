@@ -64,7 +64,28 @@ var sprintFunctions = {
     return new_arr;
   },
 
-  primes: function(){
-    // your code here
-  },
+  primes: function(num){
+
+    // Sieve of Eratosthenes Algorithm
+
+    var sieve = [];
+
+    for(var i = 2; i < num; i++)
+      sieve[i] = true;
+
+    var limit = Math.sqrt(num);
+
+    for(var i = 2; i < limit; i++) {
+      if(sieve[i]) {
+        for(var j = i * i; j < num; j += i)
+          sieve[j] = false;
+      }
+    }
+    var prime_arr = [];
+    sieve.forEach(function (isPrime, index) {
+      if(isPrime)
+        prime_arr.push(index);
+    })
+    return prime_arr;
+  }
 }
