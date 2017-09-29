@@ -9,8 +9,11 @@ var sprintFunctions = {
     return largest
   },
 
-  reversed: function(){
-    // your code here
+  reversed: function(str){
+    var rev_str = ""
+    for(i = str.length - 1; i >= 0 ; i--)
+      rev_str += str[i]
+    return rev_str
   },
 
   loudSnakeCase: function(){
