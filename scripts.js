@@ -1,32 +1,36 @@
 // FILL IN THE FUNCTIONS BELOW
 
 var sprintFunctions = {
-  largestEl: function(){  
-    // your code here
+  largestEl: function(arr){
+    var largest = arr[0]
+    for(i = 1; i < arr.length; i++)
+      if(largest < arr[i])
+        largest = arr[i]
+    return largest
   },
-  
-  reversed: function(){  
+
+  reversed: function(){
     // your code here
   },
 
-  loudSnakeCase: function(){  
+  loudSnakeCase: function(){
     // your code here
   },
 
-  compareArrays: function(){ 
+  compareArrays: function(){
     // your code here (replace the return)
-    return "Finish compareArrays first!" 
+    return "Finish compareArrays first!"
   },
 
-  fizzBuzz: function(){  
+  fizzBuzz: function(){
     // your code here
   },
 
-  myMap: function(){  
+  myMap: function(){
     // your code here
   },
 
-  primes: function(){  
+  primes: function(){
     // your code here
   },
 }
