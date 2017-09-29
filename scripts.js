@@ -16,8 +16,15 @@ var sprintFunctions = {
     return rev_str
   },
 
-  loudSnakeCase: function(){
-    // your code here
+  loudSnakeCase: function (sentence){
+    return sentence
+          .replace(/[^A-Za-z ]/g,"")
+          .replace(/\s+/g, " ")
+          .split(" ")
+          .map(function(word) {
+            return word[0].toUpperCase() + word.substr(1);
+          })
+          .join("_");
   },
 
   compareArrays: function(){
