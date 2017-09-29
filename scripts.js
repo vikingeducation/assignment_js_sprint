@@ -27,13 +27,33 @@ var sprintFunctions = {
           .join("_");
   },
 
-  compareArrays: function(){
-    // your code here (replace the return)
-    return "Finish compareArrays first!"
+  compareArrays: function(arr1, arr2){
+    if(arr1.length != arr2.length)
+      return false;
+    else {
+      for(var i = 0; i < arr1.length; i++)
+        if(arr1[i] != arr2[i])
+          return false;
+    }
+    return true;
   },
 
-  fizzBuzz: function(){
-    // your code here
+  fizzBuzz: function(max){
+    var result = [];
+    for(var i = 1; i <= max; i++){
+      var output = "";
+      if(i % 3 == 0)
+        output += "FIZZ";
+
+      if(i % 5 == 0)
+        output += "BUZZ";
+
+      if(output=="")
+        output = i;
+
+      result.push(output);
+    }
+    return result;
   },
 
   myMap: function(){
