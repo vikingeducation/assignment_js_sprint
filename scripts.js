@@ -11,13 +11,13 @@ var sprintFunctions = {
     return largest;
   },
   
-  reversed: function(str){  
+  reversed: function(str) {  
     var array = str.split('');
     array.reverse();
     return array.join('');
   },
 
-  loudSnakeCase: function(s){
+  loudSnakeCase: function(s) {
     // first remove punctuation
     s = s.replace(/[.!]/g, "");
     // replace whitespace groups > 1 with just 1 whitespace
@@ -34,7 +34,7 @@ var sprintFunctions = {
     
   },
 
-  compareArrays: function(arrayA, arrayB){ 
+  compareArrays: function(arrayA, arrayB) { 
     // your code here (replace the return)
     var arraysEqual = true;
     if (arrayA.length !== arrayB.length) { arraysEqual = false; }
@@ -49,7 +49,7 @@ var sprintFunctions = {
     
   },
 
-  fizzBuzz: function(size){
+  fizzBuzz: function(size) {
     var result = [];
     for (var i = 1; i <= size; i++) {
       var divisibleBy3 = i % 3 === 0;
@@ -67,14 +67,38 @@ var sprintFunctions = {
     return result;
   },
 
-  myMap: function(arr, func){  
+  myMap: function(arr, func) {  
     for (var i = 0; i < arr.length; i++) {
       arr[i] = func(arr[i]);
     }
     return arr;
   },
 
-  primes: function(){  
-    // your code here
+  primes: function(n) {
+    // Eratosthenes algorithm to find all primes under n
+    var array = [], upperLimit = Math.sqrt(n), output = [];
+
+    // Make an array from 2 to (n - 1)
+    for (var i = 0; i < n; i++) {
+        array.push(true);
+    }
+
+    // Remove multiples of primes starting from 2, 3, 5,...
+    for (var i = 2; i <= upperLimit; i++) {
+        if (array[i]) {
+            for (var j = i * i; j < n; j += i) {
+                array[j] = false;
+            }
+        }
+    }
+
+    // All array[i] set to true are primes
+    for (var i = 2; i < n; i++) {
+        if(array[i]) {
+            output.push(i);
+        }
+    }
+
+    return output;
   },
 }
