@@ -1,3 +1,5 @@
+// to be continued at a later date!!!
+
 var tester = {
 	init: function(rouletteObj){
 		this.rouletteObj = rouletteObj;
