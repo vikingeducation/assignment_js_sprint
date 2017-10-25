@@ -87,7 +87,7 @@ var tester = {
 
   displayResults: function(){
     console.log("Displaying results...");
-    console.log(this.results)
+    console.log(this.results);
     $("#largest-el").html(String(this.results.largestEl));
     $("#reversed").html(String(this.results.reversed));
     $("#loud-snake-case").html(String(this.results.loudSnakeCase));
@@ -101,4 +101,3 @@ var tester = {
 
 
 $(document).ready( function(){ tester.init( sprintFunctions )});
-
