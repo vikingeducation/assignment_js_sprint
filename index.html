@@ -1,10 +1,13 @@
 <html>
   <head>
+    <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="scripts.js"></script>
     <script src="scripts_spec.js"></script>
+    <script src="roulette.js"></script>
+    <script src="checkers.js"></script>
     <style>
-      h1,h2,h3,p{
+      h1,h2,h3,p,section{
         text-align: center;
       }
       .output{
@@ -12,6 +15,44 @@
         width: 300px;
         margin: 20px auto;
         border: 1px solid black;
+      }
+      .noDisplay{
+      	display:none;
+      }
+      .even{
+      	background:red;
+      }
+      .odd{
+      	background:#000000;
+      	color:#FFFFFF;
+      }
+      .zeros{
+      	background:green;
+      	color:#c2c2c2;
+      }
+      .bet{
+      	height:50px;
+      	width:50px;
+	font-size:20px;
+	font-weight:bold;
+      }
+      .bet-half, .bet-third{
+      	height:50px;
+      	width:100px;
+      	background:blue;
+      	color:#c2c2c2;
+      }
+      .check{
+	      height:75px;
+	      width:75px;
+	      margin:0;
+	      padding:0;
+	}
+      .red{
+	      background:red;
+      }
+      .black{
+	      background:#000000;
       }
     </style>
   </head>
@@ -71,5 +112,182 @@
     <div class="output" id="primes">
       Pending...
     </div>
+
+    <h3>
+	    Roulette
+    </h3>
+    <p>
+    <script>let r = new roulette();</script>
+    <button id="play" onclick="r.startRoulette()">Play</button>
+   </p>
+    <section class="noDisplay" id="betBlock">
+	    <section>
+		    <button onclick="r.bet = 0" class="bet zeros">0</button>
+		    <button onclick="r.bet = '00'" class="bet zeros">00</button>
+	    <section>
+		    <button onclick="r.bet = 1" class="bet even">1</button>
+		    <button onclick="r.bet = 2" class="bet odd">2</button>
+		    <button onclick="r.bet = 3" class="bet even">3</button>
+		    <button onclick="r.bet = 4" class="bet odd">4</button>
+		    <button onclick="r.bet = 5" class="bet even">5</button>
+		    <button onclick="r.bet = 6" class="bet odd">6</button>
+	    </section>
+	    <section>
+		    <button onclick="r.bet = 7" class="bet even">7</button>
+		    <button onclick="r.bet = 8" class="bet odd">8</button>
+		    <button onclick="r.bet = 9" class="bet even">9</button>
+		    <button onclick="r.bet = 10" class="bet odd">10</button>
+		    <button onclick="r.bet = 11" class="bet even">11</button>
+		    <button onclick="r.bet = 12" class="bet odd">12</button>
+	    </section>
+	    <section>
+		    <button onclick="r.bet = 13" class="bet even">13</button>
+		    <button onclick="r.bet = 14" class="bet odd">14</button>
+		    <button onclick="r.bet = 15" class="bet even">15</button>
+		    <button onclick="r.bet = 16" class="bet odd">16</button>
+		    <button onclick="r.bet = 17" class="bet even">17</button>
+		    <button onclick="r.bet = 18" class="bet odd">18</button>
+	    </section>
+	    <section>
+		    <button onclick="r.bet = 19" class="bet even">19</button>
+		    <button onclick="r.bet = 20" class="bet odd">20</button>
+		    <button onclick="r.bet = 21" class="bet even">21</button>
+		    <button onclick="r.bet = 22" class="bet odd">22</button>
+		    <button onclick="r.bet = 23" class="bet even">23</button>
+		    <button onclick="r.bet = 24" class="bet odd">24</button>
+	    </section>
+	    <section>
+		    <button onclick="r.bet = 25" class="bet even">25</button>
+		    <button onclick="r.bet = 26" class="bet odd">26</button>
+		    <button onclick="r.bet = 27" class="bet even">27</button>
+		    <button onclick="r.bet = 28" class="bet odd">28</button>
+		    <button onclick="r.bet = 29" class="bet even">29</button>
+		    <button onclick="r.bet = 30" class="bet odd">30</button>
+	    </section>
+	    <section>
+		    <button onclick="r.bet = 31" class="bet even">31</button>
+		    <button onclick="r.bet = 32" class="bet odd">32</button>
+		    <button onclick="r.bet = 33" class="bet even">33</button>
+		    <button onclick="r.bet = 34" class="bet odd">34</button>
+		    <button onclick="r.bet = 35" class="bet even">35</button>
+		    <button onclick="r.bet = 36" class="bet odd">36</button>
+	    </section>
+	    <section>
+		    <button onclick="r.bet = 'Even'" class="bet bet-half">Even</button>
+		    <button onclick="r.bet = 'Odd'" class="bet bet-half">Odd</button>
+		    <button onclick="r.bet = '1 to 18'" class="bet bet-half">1-18</button>
+		    <button onclick="r.bet = '19 to 36'" class="bet bet-half">19-36</button>
+	    </section>
+	    <section>
+		    <button onclick="r.bet = '1st 12'" class="bet bet-third">1st 12</button>
+		    <button onclick="r.bet = '2nd 12'" class="bet bet-third">2nd 12</button>
+		    <button onclick="r.bet = '3rd 12'" class="bet bet-third">3rd 12</button>
+	    </section>
+    </section>
+    </section>
+    <p class="noDisplay" id="buttonBlock">
+	    <button id="bet" onclick="r.placeBet()">Bet Size</button>
+	    <button id="spin" onclick="r.spinFromWeb(r.amount,r.bet)">Spin</button>
+	    <button id="buy" onclick="r.buy()">Buy In</button>
+    </p>
+
+    <!-- I really wish I had time to do this optional part, but trying to get everything perfect is making me fall behind. My apologies. 
+    <h3>
+	    Checkers
+    </h3>
+	    <p>
+	    <button id = "checkPlay" onclick="">Play</button>
+	    </p>
+    <section>
+	    <section id="rowA">
+		    <button class="check red" onclick="">
+		    	<svg height = "70" width = "70">
+				<circle cx="36" cy="35" r="28" stroke = "black" stroke-width = "3" fill = #FFFFFF/>
+			</svg>
+		    </button>
+		    <button class="check black" onclick="">
+		    	<svg height = "70" width = "70">
+				<circle cx="36" cy="35" r="28" stroke = "black" stroke-width = "3" fill = #FFFFFF/>
+			</svg>
+		    </button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+	    </section>
+	    <section id="rowB">
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+	    </section>
+	    <section id="rowC">
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+	    </section>
+	    <section id="rowD">
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+	    </section>
+	    <section id="rowE">
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+	    </section>
+	    <section id="rowF">
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+	    </section>
+	    <section id="rowG">
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+	    </section>
+	    <section id="rowH">
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+		    <button class="check black" onclick=""></button>
+		    <button class="check red" onclick=""></button>
+	    </section>
+    </section>
+    -->
   </body>
 </html>
