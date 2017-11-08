@@ -74,35 +74,36 @@ var sprintFunctions = {
   return arr;
   },
 
-/*takes an array and a function.
-passes every element from the array into that function, in turn, running the function
-returned array should be filled with each of the return statements from that function.*/
-  myMap: function(arr, fun){
+  /*takes an array and a function.
+  passes every element from the array into that function, in turn, running the function
+  returned array should be filled with each of the return statements from that function.*/
+    myMap: function(arr, fun){
 
-  var newArr = arr.map(function(el){
-    return fun(el);
-  });
+    var newArr = arr.map(function(el){
+      return fun(el);
+    });
 
-  return newArr;
-  },
+    return newArr;
+    },
 
-//takes a number and outputs an array containing all prime numbers that occur prior to that number
-  primes: function(limit){
-    var arr = new Array();
+  //takes a number and outputs an array containing all prime numbers that occur prior to that number
+    primes: function(limit){
+      var arr = new Array();
 
-    for (var counter = 2; counter <= limit; counter++) {
+      for (var counter = 2; counter <= limit; counter++) {
 
-        var notPrime = false;
-        for (var i = 2; i <= counter; i++) {
-            if (counter%i===0 && i!==counter) {
-                notPrime = true;
-            }
-        }
-        if (notPrime === false) {
-              arr.push(counter);
-        }
-    }
+          var notPrime = false;
+          for (var i = 2; i <= counter; i++) {
+              if (counter%i===0 && i!==counter) {
+                  notPrime = true;
+              }
+          }
+          if (notPrime === false) {
+                arr.push(counter);
+          }
+      }
 
-    return arr;
-  },
-}
+      return arr;
+    },
+
+  }
