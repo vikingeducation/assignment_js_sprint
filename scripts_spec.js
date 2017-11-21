@@ -61,10 +61,10 @@ var tester = {
     var input = 16;
     var exp = [1,2,"FIZZ",4,"BUZZ","FIZZ",7,8,"FIZZ","BUZZ",11,"FIZZ",13,14,"FIZZBUZZ",16];
     var actual = this.sprintObj.fizzBuzz(16);
+    console.log("actul is",actual)
     if (typeof actual === 'undefined') { actual = [] };
     this.results.fizzBuzz = ( this.sprintObj.compareArrays(exp,actual) );
   },
-
 
   testMyMap: function(){
     var inputArr = [1,2,3,4,5];
@@ -101,4 +101,3 @@ var tester = {
 
 
 $(document).ready( function(){ tester.init( sprintFunctions )});
-
