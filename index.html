@@ -1,5 +1,6 @@
 <html>
   <head>
+    <link rel = 'stylesheet' type ="text/css" href = "index.css">
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="scripts.js"></script>
     <script src="scripts_spec.js"></script>
@@ -40,7 +41,6 @@
     <div class="output" id="loud-snake-case">
       Pending...
     </div>
-
     <h3>
       Compare Arrays:
     </h3>
@@ -64,12 +64,56 @@
     <div class="output" id="my-map">
       Pending...
     </div>
-
     <h3>
       Primes:
     </h3>
     <div class="output" id="primes">
       Pending...
     </div>
+
+
+    <div class = "form green">
+<div class = "form orange">
+    <form>
+    <ul>
+      <li class = "inline">
+        <label for = "betAmount">set bet amount</label>
+        <input type = "text" id = "betAmount" class = "playeraction"></input></li>
+      <li class = "inline"> <label for = "betNumber">set bet number</label>
+        <input type = "text" id = "betNumber" class = "playeraction"></input></li>
+      <li class = "inline"><label for = "betType">set bet type</label>
+        <input type = "text" id = "betType" class = "playeraction"></input></li>
+      <li class = "inline"><label for = "buyInAmount">set buyin amount</label>
+        <input type = "text" id = "buyInAmount" class = "playeraction"></input></li>
+      <li class = "inline"><div id = "setAll" class = "playeraction">Set All</div></li>
+    </ul>
+    </form>
+    </div>
+   
+    
+<div class= "form orange" >
+    <ul>
+      <li class = "inline"><div id = "roll" class = "playeraction">roll</div></li>
+      <li class = "inline"><div id = "showcash" class = "playeraction">showcash</div></li>
+    </ul>
+</div>
+
+<div class= "form orange" >
+    <div id = "player1stats" >
+      <div id = "player1money" class = "playeraction inline"></div>
+      <div id = "player1lastbet" class = "playeraction inline"></div>
+      <div id = "player1lastresult" class = "playeraction inline"></div>
+    </div>
+    <div id = "player2stats">
+      <div id = "player2money" class = "playeraction inline"></div>
+      <div id = "player2lastbet" class = "playeraction inline"></div>
+      <div id = "player2lastresult" class = "playeraction inline"></div>
+    </div>
+</div>
+</div>
+
+
+
+    <script src = "roulette.js"></script>
   </body>
 </html>
