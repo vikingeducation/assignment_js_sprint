@@ -22,7 +22,12 @@ var sprintFunctions = {
 /*takes a full sentence and puts it into "Loud_Snake_Case" format but strips
 out any non-character elements (like punctuation).*/
   loudSnakeCase: function(sentence) {
-    return sentence.replace(/[^A-Za-z ]/g,"").replace(/  /g," ").replace(/\b./g, function(firstletter){ return firstletter.toUpperCase(); }).replace(/ /g,"_");
+    var lowered = sentence.toLowerCase();
+    var onlySpacesAndLetters = lowered.replace(/[^A-Za-z ]/g,"");
+    var singleSpace = onlySpacesAndLetters.replace(/ +/g," ");
+    var capFirstLetter = singleSpace.replace(/\b./g, function(firstletter){ return firstletter.toUpperCase(); });
+    var spaceToUnderscore = capFirstLetter.replace(/ /g,"_");
+    return spaceToUnderscore;
   },
 
 /*takes two arrays and checks to see if they are equal (same contents in the
