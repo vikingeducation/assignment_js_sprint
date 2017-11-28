@@ -99,9 +99,5 @@ var tester = {
 
 }
 
-
 $(document).ready( function(){ tester.init( sprintFunctions )});
-<<<<<<< HEAD
-=======
 
->>>>>>> 63a083b10bcff0e809922c129ad1e145698cf785
