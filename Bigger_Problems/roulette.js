@@ -31,16 +31,21 @@ while (bankroll > 0) {
   var betSize;
   var wagerTarget;
 
-  function getBet() {
+  function cleanInput(inputy) {
+    inputy = Number(inputy.replace(/\D/g, ""));
+    return inputy;
+  }
+
+  function getBetSize() {
     betSize = prompt(
       "Please enter how much you'd like to bet.\n(Note: that negatives and decimals will be stripped so -10.0 will become 100)\nCurrent bankroll is $" +
         bankroll +
         "."
     );
-    betSize = Number(betSize.replace(/\D/g, ""));
+    betSize = cleanInput(betSize);
     if (betSize === 0) {
       alert("Please enter your bet in number form and or above zero.");
-      getBet();
+      getBetSize();
     } else if (bankroll < betSize) {
       betSize = bankroll;
       alert(
@@ -52,19 +57,19 @@ while (bankroll > 0) {
     return betSize;
   }
 
-  function wagerOn() {
+  function setWagerTarget() {
     wagerTarget = prompt(
       "Enter what number you'd like to bet on between 1 and 36."
     );
-    wagerTarget = Number(wagerTarget.replace(/\D/g, ""));
+    wagerTarget = cleanInput(wagerTarget);
     if (wagerTarget === 0) {
       alert(
         "Please enter what to bet on above zero and or formatted as a number."
       );
-      wagerOn();
+      setWagerTarget();
     } else if (wagerTarget > 36) {
       alert("Please bet on a number equal to or between 36 and 1.");
-      wagerOn();
+      setWagerTarget();
     }
     return wagerTarget;
   }
@@ -75,8 +80,8 @@ while (bankroll > 0) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  getBet();
-  wagerOn();
+  getBetSize();
+  setWagerTarget();
 
   var spinResult = spinning(1, 36);
   if (wagerTarget === spinResult) {
@@ -103,6 +108,6 @@ while (bankroll > 0) {
   var buyIn = prompt(
     "If you'd like to increase your bankroll enter by how much.\n(Note: that decimals and negatives will be stripped so -23.4 will become 234)"
   );
-  buyIn = Number(buyIn.replace(/\D/g, ""));
+  buyIn = cleanInput(buyIn);
   bankroll = bankroll + buyIn;
 }
