@@ -23,16 +23,47 @@ r.buyIn( 1000 )
 "1st 12" (2:1), "2nd 12" (2:1), or "3rd 12" (2:1).
 */
 
-// in addition to part 2, need to do something about incorrect user input, limiting bets to bankroll, and add comments
+// in addition to part 2, need to do something about incorrect user input, limiting bets to bankroll/roulette values, and add comments
 
 var bankroll = 100;
 
 while (bankroll > 0) {
-var betSize = Number(prompt("Please enter how much you'd like to bet,\n current bankroll is $" + bankroll));
-//console.log("You bet $" + betSize);
 
-var betTarget = Number(prompt("Now enter what number you'd like to bet on,\n between 1 and 36"));
-//console.log("The bet was on " + betTarget);
+/*1*/
+var betSize;
+
+function getBet() {
+  betSize = prompt("Please enter how much you'd like to bet.\n(Note: that negatives and decimals will be striped so -10.0 will become 100)\nCurrent bankroll is $" + bankroll + ".");
+  betSize = Number(betSize.replace(/\D/g, ''));
+  if (betSize === 0) {
+    alert("Please enter your bet in number form and or above zero.");
+    getBet();
+  } else if (bankroll < betSize) {
+    betSize = bankroll
+    alert("Since you can't bet above bankroll your bet has been set to $" + bankroll + ".");
+  }
+  return betSize;
+}
+
+getBet();
+/*1*/
+
+/*2*/
+var wagerTarget;
+
+function wagerOn() {
+  wagerTarget = prompt("Enter what number you'd like to bet on between 1 and 36.\n(Note: that negatives and decimals will be striped so -10.0 will become 100)");
+  wagerTarget = Number(wagerTarget.replace(/\D/g, ''));
+  if (wagerTarget === 0) {
+    alert("Please enter your bet in number form and or above zero.");
+    wagerOn();
+  } else if (
+
+  return wagerTarget;
+}
+
+wagerOn();
+/*2*/
 
 function spinning(min, max) {
   min = Math.ceil(min);
@@ -41,23 +72,17 @@ function spinning(min, max) {
 }
 
 var spinResult = spinning(1, 36);
-//console.log("The spin result was " + spinResult);
 
-if (betTarget === spinResult) {
+if (wagerTarget === spinResult) {
   bankroll = (bankroll - betSize) + (betSize * 35);
-  //console.log("You won!");
 } else {
-  bankroll = bankroll - betSize
-  //console.log("You lost");
+  bankroll = bankroll - betSize;
 }
-//console.log("Your bankroll is now $" + bankroll);
 
-alert("You bet $" + betSize + ".\n" + "The bet was on " + betTarget + ".\n" + "The spin result was " + spinResult + ".\n" + "Your bankroll is now $" + bankroll + "\nPress ok to continue")
+alert("You bet $" + betSize + ".\n" + "The bet was on " + wagerTarget + ".\n" + "The spin result was " + spinResult + ".\n" + "Your bankroll is now $" + bankroll + ".");
 
-var buyIn = Number(prompt("If you'd like to increase your bankroll enter by how much,\n enter 0 otherwise"));
+var buyIn = Number(prompt("If you'd like to increase your bankroll enter by how much."));
 bankroll = bankroll + buyIn;
-//console.log("You bought in $" + buyIn);
-//console.log("So your bankroll is now $" + bankroll)
 
 if (confirm("Do you want to keep playing?") == false) {
   bankroll = 0;
