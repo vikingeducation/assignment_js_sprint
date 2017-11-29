@@ -31,18 +31,13 @@ while (bankroll > 0) {
   var bet;
   var target;
 
-  function convert(inputy) {
-    inputy = Number(inputy.replace(/\D/g, ""));
-    return inputy;
-  }
-
   function betting() {
     bet = prompt(
       "Please enter how much you'd like to bet.\n(Note: that negatives and decimals will be stripped so -10.0 will become 100)\nCurrent bankroll is $" +
         bankroll +
         "."
     );
-    bet = convert(bet);
+    bet = Number(bet.replace(/\D/g, ""));
     if (bet === 0) {
       alert("Please enter your bet in number form and or above zero.");
       betting();
@@ -61,28 +56,29 @@ while (bankroll > 0) {
     target = prompt(
       "Enter what number you'd like to bet on between 1 and 36."
     );
-    target = convert(target);
-    if (target === 0) {
+    EnableBreak:
+    if (target === "00" || target === "even" || target === "Even" || target === "odd" || target === "Odd" || target === "1 to 18" || target === "19 to 36" || target === "1st 12" || target === "2nd 12" || target === "3rd 12") {
+      break EnableBreak;
+    } else if (target.replace(/\D/g, "") === "") {
       alert(
-        "Please enter what to bet on above zero and or formatted as a number."
+        "Please enter what you'd like to bet on as a number such as 10 or use one of the special bet types like even."
       );
       targetting();
-    } else if (target > 36) {
-      alert("Please bet on a number equal to or between 36 and 1.");
+    } else if (target.replace(/\-/, "") !== target || target.replace(/\./, "") !== target) {
+      alert(
+        "Please enter a whole number equal to or above 0 and below 37."
+      );
       targetting();
+    } else if (target.replace(/\D/g, "") > "36") {
+      alert(
+        "Please enter a number below 37."
+      );
+      targetting();
+    } else {
+      target = Number(target.replace(/\D/g, ""));
     }
     return target;
   }
-
-// starting to work out the logic for part 2's special bets
-  function otherBets() {
-    if (target === "even" || target === "Even" || target ===) {
-      break;
-    } else if ()
-
-
-  }
-// starting to work out the logic for part 2's special bets
 
   function spinning(min, max) {
     min = Math.ceil(min);
@@ -118,6 +114,6 @@ while (bankroll > 0) {
   var buyIn = prompt(
     "If you'd like to increase your bankroll enter by how much.\n(Note: that decimals and negatives will be stripped so -23.4 will become 234)"
   );
-  buyIn = convert(buyIn);
+  buyIn = Number(buyIn.replace(/\D/g, ""));
   bankroll = bankroll + buyIn;
 }
