@@ -28,51 +28,61 @@ r.buyIn( 1000 )
 var bankroll = 100;
 
 while (bankroll > 0) {
-  var betSize;
-  var wagerTarget;
+  var bet;
+  var target;
 
-  function cleanInput(inputy) {
+  function convert(inputy) {
     inputy = Number(inputy.replace(/\D/g, ""));
     return inputy;
   }
 
-  function getBetSize() {
-    betSize = prompt(
+  function betting() {
+    bet = prompt(
       "Please enter how much you'd like to bet.\n(Note: that negatives and decimals will be stripped so -10.0 will become 100)\nCurrent bankroll is $" +
         bankroll +
         "."
     );
-    betSize = cleanInput(betSize);
-    if (betSize === 0) {
+    bet = convert(bet);
+    if (bet === 0) {
       alert("Please enter your bet in number form and or above zero.");
-      getBetSize();
-    } else if (bankroll < betSize) {
-      betSize = bankroll;
+      betting();
+    } else if (bankroll < bet) {
+      bet = bankroll;
       alert(
         "Since you can't bet above bankroll your bet has been set to $" +
           bankroll +
           "."
       );
     }
-    return betSize;
+    return bet;
   }
 
-  function setWagerTarget() {
-    wagerTarget = prompt(
+  function targetting() {
+    target = prompt(
       "Enter what number you'd like to bet on between 1 and 36."
     );
-    wagerTarget = cleanInput(wagerTarget);
-    if (wagerTarget === 0) {
+    target = convert(target);
+    if (target === 0) {
       alert(
         "Please enter what to bet on above zero and or formatted as a number."
       );
-      setWagerTarget();
-    } else if (wagerTarget > 36) {
+      targetting();
+    } else if (target > 36) {
       alert("Please bet on a number equal to or between 36 and 1.");
-      setWagerTarget();
+      targetting();
     }
-    return wagerTarget;
+    return target;
   }
+
+// starting to work out the logic for part 2's special bets
+  function otherBets() {
+    if (target === "even" || target === "Even" || target ===) {
+      break;
+    } else if ()
+
+
+  }
+// starting to work out the logic for part 2's special bets
 
   function spinning(min, max) {
     min = Math.ceil(min);
@@ -80,25 +90,25 @@ while (bankroll > 0) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  getBetSize();
-  setWagerTarget();
+  betting();
+  targetting();
 
-  var spinResult = spinning(1, 36);
-  if (wagerTarget === spinResult) {
-    bankroll = bankroll - betSize + betSize * 35;
+  var spin = spinning(1, 36);
+  if (target === spin) {
+    bankroll = bankroll - bet + bet * 35;
   } else {
-    bankroll = bankroll - betSize;
+    bankroll = bankroll - bet;
   }
 
   alert(
     "You bet $" +
-      betSize +
+      bet +
       ".\n" +
       "The bet was on " +
-      wagerTarget +
+      target +
       ".\n" +
       "The spin result was " +
-      spinResult +
+      spin +
       ".\n" +
       "Your bankroll is now $" +
       bankroll +
@@ -108,6 +118,6 @@ while (bankroll > 0) {
   var buyIn = prompt(
     "If you'd like to increase your bankroll enter by how much.\n(Note: that decimals and negatives will be stripped so -23.4 will become 234)"
   );
-  buyIn = cleanInput(buyIn);
+  buyIn = convert(buyIn);
   bankroll = bankroll + buyIn;
 }
