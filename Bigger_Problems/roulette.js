@@ -23,68 +23,86 @@ r.buyIn( 1000 )
 "1st 12" (2:1), "2nd 12" (2:1), or "3rd 12" (2:1).
 */
 
-// in addition to part 2, need to do something about incorrect user input, limiting bets to bankroll/roulette values, and add comments
+// in addition to part 2, need to add comments, and re-beautify
 
 var bankroll = 100;
 
 while (bankroll > 0) {
+  var betSize;
+  var wagerTarget;
 
-/*1*/
-var betSize;
-
-function getBet() {
-  betSize = prompt("Please enter how much you'd like to bet.\n(Note: that negatives and decimals will be striped so -10.0 will become 100)\nCurrent bankroll is $" + bankroll + ".");
-  betSize = Number(betSize.replace(/\D/g, ''));
-  if (betSize === 0) {
-    alert("Please enter your bet in number form and or above zero.");
-    getBet();
-  } else if (bankroll < betSize) {
-    betSize = bankroll
-    alert("Since you can't bet above bankroll your bet has been set to $" + bankroll + ".");
+  function getBet() {
+    betSize = prompt(
+      "Please enter how much you'd like to bet.\n(Note: that negatives and decimals will be stripped so -10.0 will become 100)\nCurrent bankroll is $" +
+        bankroll +
+        "."
+    );
+    betSize = Number(betSize.replace(/\D/g, ""));
+    if (betSize === 0) {
+      alert("Please enter your bet in number form and or above zero.");
+      getBet();
+    } else if (bankroll < betSize) {
+      betSize = bankroll;
+      alert(
+        "Since you can't bet above bankroll your bet has been set to $" +
+          bankroll +
+          "."
+      );
+    }
+    return betSize;
   }
-  return betSize;
-}
 
-getBet();
-/*1*/
+  function wagerOn() {
+    wagerTarget = prompt(
+      "Enter what number you'd like to bet on between 1 and 36."
+    );
+    wagerTarget = Number(wagerTarget.replace(/\D/g, ""));
+    if (wagerTarget === 0) {
+      alert(
+        "Please enter what to bet on above zero and or formatted as a number."
+      );
+      wagerOn();
+    } else if (wagerTarget > 36) {
+      alert("Please bet on a number equal to or between 36 and 1.");
+      wagerOn();
+    }
+    return wagerTarget;
+  }
 
-/*2*/
-var wagerTarget;
+  function spinning(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-function wagerOn() {
-  wagerTarget = prompt("Enter what number you'd like to bet on between 1 and 36.\n(Note: that negatives and decimals will be striped so -10.0 will become 100)");
-  wagerTarget = Number(wagerTarget.replace(/\D/g, ''));
-  if (wagerTarget === 0) {
-    alert("Please enter your bet in number form and or above zero.");
-    wagerOn();
-  } else if (
+  getBet();
+  wagerOn();
 
-  return wagerTarget;
-}
+  var spinResult = spinning(1, 36);
+  if (wagerTarget === spinResult) {
+    bankroll = bankroll - betSize + betSize * 35;
+  } else {
+    bankroll = bankroll - betSize;
+  }
 
-wagerOn();
-/*2*/
+  alert(
+    "You bet $" +
+      betSize +
+      ".\n" +
+      "The bet was on " +
+      wagerTarget +
+      ".\n" +
+      "The spin result was " +
+      spinResult +
+      ".\n" +
+      "Your bankroll is now $" +
+      bankroll +
+      "."
+  );
 
-function spinning(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-var spinResult = spinning(1, 36);
-
-if (wagerTarget === spinResult) {
-  bankroll = (bankroll - betSize) + (betSize * 35);
-} else {
-  bankroll = bankroll - betSize;
-}
-
-alert("You bet $" + betSize + ".\n" + "The bet was on " + wagerTarget + ".\n" + "The spin result was " + spinResult + ".\n" + "Your bankroll is now $" + bankroll + ".");
-
-var buyIn = Number(prompt("If you'd like to increase your bankroll enter by how much."));
-bankroll = bankroll + buyIn;
-
-if (confirm("Do you want to keep playing?") == false) {
-  bankroll = 0;
-}
+  var buyIn = prompt(
+    "If you'd like to increase your bankroll enter by how much.\n(Note: that decimals and negatives will be stripped so -23.4 will become 234)"
+  );
+  buyIn = Number(buyIn.replace(/\D/g, ""));
+  bankroll = bankroll + buyIn;
 }
