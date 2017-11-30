@@ -27,8 +27,8 @@ out any non-character elements (like punctuation).*/
       .toLowerCase()
       .replace(/[^A-Za-z ]/g, "")
       .replace(/ +/g, " ")
-      .replace(/\b./g, function(firstletter) {
-        return firstletter.toUpperCase();
+      .replace(/\b./g, function(firstLetter) {
+        return firstLetter.toUpperCase();
       })
       .replace(/ /g, "_");
   },
@@ -81,7 +81,7 @@ prior to that number, e.g. primes(8) => [2,3,5,7]*/
         }
         increment += 1;
       }
-      function primeFind(integer) {
+      function findPrime(integer) {
         var check = integer - 1,
           primey = true;
         while (check > 1) {
@@ -93,7 +93,7 @@ prior to that number, e.g. primes(8) => [2,3,5,7]*/
         }
         return primey;
       }
-      var primes = options.filter(primeFind);
+      var primes = options.filter(findPrime);
       return primes;
     } else {
       return options;
