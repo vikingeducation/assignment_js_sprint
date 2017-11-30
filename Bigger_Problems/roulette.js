@@ -23,57 +23,108 @@ r.buyIn( 1000 )
 "1st 12" (2:1), "2nd 12" (2:1), or "3rd 12" (2:1).
 */
 
-// implement better user input management in betting that's similar to that of targetting, need to add comments, and re-beautify
-
 var bankroll = 100;
 
 while (bankroll > 0) {
   var bet;
   var target;
+  var wheel = [
+    "00",
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ];
 
+  // this function asks users to input how much they'd like to bet, processes that input to make sure its valid and returns the result in the bet variable
   function betting() {
     bet = prompt(
-      "Please enter how much you'd like to bet.\n(Note: that negatives and decimals will be stripped so -10.0 will become 100)\nCurrent bankroll is $" +
+      "Please enter how much you'd like to bet.\nCurrent bankroll is $" +
         bankroll +
         "."
     );
-    bet = Number(bet.replace(/\D/g, ""));
-    if (bet === 0) {
+    if (Number(bet.replace(/\D/g, "")) === 0) {
       alert("Please enter your bet in number form and or above zero.");
       betting();
-    } else if (bankroll < bet) {
+    } else if (bet.replace(/\-/, "") !== bet || bet.replace(/\./, "") !== bet) {
+      alert("Please enter a positive number without a decimal.");
+      betting();
+    } else if (bankroll < Number(bet.replace(/\D/g, ""))) {
       bet = bankroll;
       alert(
         "Since you can't bet above bankroll your bet has been set to $" +
           bankroll +
           "."
       );
+    } else {
+      bet = Number(bet.replace(/\D/g, ""));
     }
     return bet;
   }
 
+  // this function requests what the user wants to bet on, again makes some input checks to ensure validity, and returns the result in the target variable
   function targetting() {
     target = prompt(
       "Enter what number you'd like to bet on between 0 and 36, winners get 35 times their bet.\nAlternatively you can bet on the following options to potentially double your bet.\n00\nEven\nOdd\n1 to 18\n19 to 36\n1st 12\n2nd 12\n3rd 12"
     );
     target = target.toLowerCase();
-    EnableBreak:
-    if (target === "00" || target === "even" || target === "odd" || target === "1 to 18" || target === "19 to 36" || target === "1st 12" || target === "2nd 12" || target === "3rd 12") {
+    EnableBreak: if (
+      target === "00" ||
+      target === "even" ||
+      target === "odd" ||
+      target === "1 to 18" ||
+      target === "19 to 36" ||
+      target === "1st 12" ||
+      target === "2nd 12" ||
+      target === "3rd 12"
+    ) {
       break EnableBreak;
     } else if (target.replace(/\D/g, "") === "") {
       alert(
         "Please enter what you'd like to bet on as a number such as 10 or use one of the special bet types like even."
       );
       targetting();
-    } else if (target.replace(/\-/, "") !== target || target.replace(/\./, "") !== target) {
-      alert(
-        "Please enter a whole number equal to or above 0 and below 37."
-      );
+    } else if (
+      target.replace(/\-/, "") !== target ||
+      target.replace(/\./, "") !== target
+    ) {
+      alert("Please enter a whole number equal to or above 0 and below 37.");
       targetting();
-    } else if (target.replace(/\D/g, "") > "36") {
-      alert(
-        "Please enter a number below 37."
-      );
+    } else if (36 < Number(target.replace(/\D/g, ""))) {
+      alert("Please enter a number below 37.");
       targetting();
     } else {
       target = Number(target.replace(/\D/g, ""));
@@ -81,51 +132,73 @@ while (bankroll > 0) {
     return target;
   }
 
-  betting();
-  targetting();
+  /* this function processes the actual bet's result so it generates a random value to compare against their bet target,
+modifies their bankroll based on the result, and provides a summary of the entire bet cycle*/
+  function spinning() {
+    var spin = wheel[Math.floor(Math.random() * wheel.length)];
 
-  var wheel = ["00", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
-  var spin =  wheel[Math.floor(Math.random() * wheel.length)];
+    if (target === spin) {
+      bankroll = bankroll - bet + bet * 35;
+    } else if (target === "even" && spin % 2 === 0) {
+      bankroll = bankroll - bet + bet * 2;
+    } else if (target === "odd" && spin % 2 !== 0) {
+      bankroll = bankroll - bet + bet * 2;
+    } else if (target === "1 to 18" && spin < 19) {
+      bankroll = bankroll - bet + bet * 2;
+    } else if (target === "19 to 36" && spin > 18) {
+      bankroll = bankroll - bet + bet * 2;
+    } else if (target === "1st 12" && spin < 13) {
+      bankroll = bankroll - bet + bet * 2;
+    } else if (target === "3rd 12" && spin > 23) {
+      bankroll = bankroll - bet + bet * 2;
+    } else if (target === "2nd 12" && spin > 11 && spin < 25) {
+      bankroll = bankroll - bet + bet * 2;
+    } else {
+      bankroll = bankroll - bet;
+    }
 
-  spun:
-  if (target === spin) {
-    bankroll = bankroll - bet + bet * 35;
-  } else if (target === "even" && spin % 2 === 0) {
-    bankroll = bankroll - bet + bet * 2;
-  } else if (target === "odd" && spin % 2 !== 0) {
-    bankroll = bankroll - bet + bet * 2;
-  } else if (target === "1 to 18" && spin < 19) {
-    bankroll = bankroll - bet + bet * 2;
-  } else if (target === "19 to 36" && spin > 18) {
-    bankroll = bankroll - bet + bet * 2;
-  } else if (target === "1st 12" && spin < 13) {
-    bankroll = bankroll - bet + bet * 2;
-  } else if (target === "3rd 12" && spin > 23) {
-    bankroll = bankroll - bet + bet * 2;
-  } else if (target === "2nd 12" && spin > 11 && spin < 25) {
-    bankroll = bankroll - bet + bet * 2;
-  } else {
-    bankroll = bankroll - bet;
+    alert(
+      "You bet $" +
+        bet +
+        ".\n" +
+        "The bet was on " +
+        target +
+        ".\n" +
+        "The spin result was " +
+        spin +
+        ".\n" +
+        "Your bankroll is now $" +
+        bankroll +
+        "."
+    );
+    return bankroll;
   }
 
-  alert(
-    "You bet $" +
-      bet +
-      ".\n" +
-      "The bet was on " +
-      target +
-      ".\n" +
-      "The spin result was " +
-      spin +
-      ".\n" +
-      "Your bankroll is now $" +
-      bankroll +
-      "."
-  );
+  // this function simply asks a user if they'd like to raise their bankroll, does some checks to confirm their input is good, and processes the result on their bankroll
+  function buyingIn() {
+    var buyIn = prompt(
+      "If you'd like to increase your bankroll enter by how much.\nOtherwise enter 0."
+    );
+    if (buyIn.replace(/\D/g, "") === "") {
+      alert(
+        "Please enter how much you'd like to increase your bankroll by as a number such as 500."
+      );
+      buyingIn();
+    } else if (
+      buyIn.replace(/\-/, "") !== buyIn ||
+      buyIn.replace(/\./, "") !== buyIn
+    ) {
+      alert("Please enter a positive number without a decimal.");
+      buyingIn();
+    } else {
+      buyIn = Number(buyIn.replace(/\D/g, ""));
+      bankroll = bankroll + buyIn;
+    }
+    return bankroll;
+  }
 
-  var buyIn = prompt(
-    "If you'd like to increase your bankroll enter by how much.\n(Note: that decimals and negatives will be stripped so -23.4 will become 234)"
-  );
-  buyIn = Number(buyIn.replace(/\D/g, ""));
-  bankroll = bankroll + buyIn;
+  betting();
+  targetting();
+  spinning();
+  buyingIn();
 }
