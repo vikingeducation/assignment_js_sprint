@@ -23,7 +23,7 @@ r.buyIn( 1000 )
 "1st 12" (2:1), "2nd 12" (2:1), or "3rd 12" (2:1).
 */
 
-// in addition to part 2, need to add comments, and re-beautify
+// implement better user input management in betting that's similar to that of targetting, need to add comments, and re-beautify
 
 var bankroll = 100;
 
@@ -54,10 +54,11 @@ while (bankroll > 0) {
 
   function targetting() {
     target = prompt(
-      "Enter what number you'd like to bet on between 1 and 36."
+      "Enter what number you'd like to bet on between 0 and 36, winners get 35 times their bet.\nAlternatively you can bet on the following options to potentially double your bet.\n00\nEven\nOdd\n1 to 18\n19 to 36\n1st 12\n2nd 12\n3rd 12"
     );
+    target = target.toLowerCase();
     EnableBreak:
-    if (target === "00" || target === "even" || target === "Even" || target === "odd" || target === "Odd" || target === "1 to 18" || target === "19 to 36" || target === "1st 12" || target === "2nd 12" || target === "3rd 12") {
+    if (target === "00" || target === "even" || target === "odd" || target === "1 to 18" || target === "19 to 36" || target === "1st 12" || target === "2nd 12" || target === "3rd 12") {
       break EnableBreak;
     } else if (target.replace(/\D/g, "") === "") {
       alert(
@@ -80,18 +81,29 @@ while (bankroll > 0) {
     return target;
   }
 
-  function spinning(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   betting();
   targetting();
 
-  var spin = spinning(1, 36);
+  var wheel = ["00", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
+  var spin =  wheel[Math.floor(Math.random() * wheel.length)];
+
+  spun:
   if (target === spin) {
     bankroll = bankroll - bet + bet * 35;
+  } else if (target === "even" && spin % 2 === 0) {
+    bankroll = bankroll - bet + bet * 2;
+  } else if (target === "odd" && spin % 2 !== 0) {
+    bankroll = bankroll - bet + bet * 2;
+  } else if (target === "1 to 18" && spin < 19) {
+    bankroll = bankroll - bet + bet * 2;
+  } else if (target === "19 to 36" && spin > 18) {
+    bankroll = bankroll - bet + bet * 2;
+  } else if (target === "1st 12" && spin < 13) {
+    bankroll = bankroll - bet + bet * 2;
+  } else if (target === "3rd 12" && spin > 23) {
+    bankroll = bankroll - bet + bet * 2;
+  } else if (target === "2nd 12" && spin > 11 && spin < 25) {
+    bankroll = bankroll - bet + bet * 2;
   } else {
     bankroll = bankroll - bet;
   }
