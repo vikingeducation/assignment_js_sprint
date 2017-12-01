@@ -28,46 +28,6 @@ var bankroll = 100;
 while (bankroll > 0) {
   var bet;
   var target;
-  var wheel = [
-    "00",
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23,
-    24,
-    25,
-    26,
-    27,
-    28,
-    29,
-    30,
-    31,
-    32,
-    33,
-    34,
-    35,
-    36
-  ];
 
   // this function asks users to input how much they'd like to bet, processes that input to make sure its valid and returns the result in the bet variable
   function betting() {
@@ -101,7 +61,7 @@ while (bankroll > 0) {
       "Enter what number you'd like to bet on between 0 and 36, winners get 35 times their bet.\nAlternatively you can bet on the following options to potentially double your bet.\n00\nEven\nOdd\n1 to 18\n19 to 36\n1st 12\n2nd 12\n3rd 12"
     );
     target = target.toLowerCase();
-    EnableBreak: if (
+    if (
       target === "00" ||
       target === "even" ||
       target === "odd" ||
@@ -111,7 +71,6 @@ while (bankroll > 0) {
       target === "2nd 12" ||
       target === "3rd 12"
     ) {
-      break EnableBreak;
     } else if (target.replace(/\D/g, "") === "") {
       alert(
         "Please enter what you'd like to bet on as a number such as 10 or use one of the special bet types like even."
@@ -135,6 +94,46 @@ while (bankroll > 0) {
   /* this function processes the actual bet's result so it generates a random value to compare against their bet target,
 modifies their bankroll based on the result, and provides a summary of the entire bet cycle*/
   function spinning() {
+    var wheel = [
+      "00",
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+    ];
     var spin = wheel[Math.floor(Math.random() * wheel.length)];
 
     if (target === spin) {
