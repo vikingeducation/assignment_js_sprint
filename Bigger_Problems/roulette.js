@@ -136,6 +136,14 @@ modifies their bankroll based on the result, and provides a summary of the entir
     ];
     var spin = wheel[Math.floor(Math.random() * wheel.length)];
 
+    //
+    /*
+    */
+    console.log("ba " + bankroll + " be " + bet + " ta " + target + " spin " + spin);
+    /*
+    */
+    //
+
     if (target === spin) {
       bankroll = bankroll - bet + bet * 35;
     } else if (target === "even" && spin % 2 === 0) {
@@ -153,7 +161,7 @@ modifies their bankroll based on the result, and provides a summary of the entir
     } else if (target === "2nd 12" && spin > 11 && spin < 25) {
       bankroll = bankroll - bet + bet * 2;
     } else {
-      bankroll = bankroll - bet;
+      bankroll -= bet;
     }
 
     alert(
@@ -191,7 +199,7 @@ modifies their bankroll based on the result, and provides a summary of the entir
       buyingIn();
     } else {
       buyIn = Number(buyIn.replace(/\D/g, ""));
-      bankroll = bankroll + buyIn;
+      bankroll += buyIn;
     }
     return bankroll;
   }
