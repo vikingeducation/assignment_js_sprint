@@ -1,75 +1,60 @@
+<!doctype html>
 <html>
-  <head>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="scripts.js"></script>
-    <script src="scripts_spec.js"></script>
-    <style>
-      h1,h2,h3,p{
-        text-align: center;
-      }
-      .output{
-        padding: 20px;
-        width: 300px;
-        margin: 20px auto;
-        border: 1px solid black;
-      }
-    </style>
-  </head>
-  <body>
-    <h1> 
-      Javascript Sprint Test Suite
+<head>
+  <script type="text/javascript" src="jquery-3.2.1.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script type="text/javascript" src="scripts.js"></script>
+  <script type="text/javascript" src="document.ready.js"></script>
+</head>
+<body>
+  <header>
+    <h1>
+      Traverse and Manipulate
     </h1>
-
-    <h3>
-      Largest Element:
-    </h3>
-    <div class="output" id="largest-el">
-      Pending...
-    </div>
-
-    <h3>
-      Reversed String:
-    </h3>
-    <div class="output" id="reversed">
-      Pending...
-    </div>
-
-    <h3>
-      Loud Snake Case:
-    </h3>
-    <div class="output" id="loud-snake-case">
-      Pending...
-    </div>
-
-    <h3>
-      Compare Arrays:
-    </h3>
     <p>
-      <em>Note: The rest of the test suite depends on getting this right!</em>
+      <em>Admirable objectives for a jQuery Padwan</em>
     </p>
-    <div class="output" id="compare-arrays">
-      Pending...
-    </div>
+  </header>
 
-    <h3>
-      Fizz Buzz:
-    </h3>
-    <div class="output" id="fizz-buzz">
-      Pending...
-    </div>
+  <div class="info-box sad">
+    <h4>
+      Upcoming traversals:
+    </h4>
+  </div>
 
-    <h3>
-      My Map:
-    </h3>
-    <div class="output" id="my-map">
-      Pending...
+  <main>
+    <h2>
+      Input your Story
+    </h2>
+    <div class="input-form">
+      <form action="/uh-oh">
+        <input type="text" placeholder="Tell me a story!">
+        <input type="submit" value="Submit!">
+      </form>
     </div>
+    <div class="suggested-topics">
+      <h3>
+        Suggested Topics
+      </h3>
+      <ul>
+        <li>Funny functions</li>
+        <li>Terrible traversals</li>
+        <li class="sad">Cogent collisions</li>
+        <li class="super-duper sad">Super selections</li>
+        <li>Massive manipulations</li>
+        <li>Admirable alterations</li>
+        <li>...</li>
+        <li>Killer klicks</li>
+      </ul>
+    </div>
+  </main>
 
-    <h3>
-      Primes:
-    </h3>
-    <div class="output" id="primes">
-      Pending...
-    </div>
-  </body>
+  <div id="annoying-popup" class="blink">
+    <a href="http://www.evilwebsite.com">
+      Click me to get free stuff!!!!
+    </a>
+  </div>
+
+</body>
+
 </html>

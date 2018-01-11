@@ -1,4 +1,4 @@
-assignment_js_sprint
-====================
+assignment_jq_dom_sprint
+========================
 
-while(1){ go() };
+...that DOM, D-DOM DOM DOOOOM...
