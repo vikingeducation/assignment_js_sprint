@@ -62,7 +62,6 @@ while(true){
     7: 1 to 12 -> (2:1)
     8: 13 to 24 -> (2:1)
     9: 25 to 36 -> (2:1)
-
     "));
 
 
@@ -106,7 +105,19 @@ while(true){
     break;
   }
 
-  player.bankroll = player.bet * betMultiple
+    // if(spin === 37 ) {
+
+  if(betMultiple > 0) {
+    player.bankroll += (player.bet * betMultiple)
+    alert("You Win "+player.bankroll+" the spin was "+spin+"!")
+  }
+  else{
+    player.bankroll -= (player.bet * betMultiple)
+    alert("You Lose "+player.bankroll+" the spin was "+spin+"!")
+  }
+
+    // }
+
 
 
 
