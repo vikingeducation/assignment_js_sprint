@@ -99,6 +99,5 @@ var tester = {
 
 }
 
-
 $(document).ready( function(){ tester.init( sprintFunctions )});
 
