@@ -1,4 +1,4 @@
-assignment_js_sprint
+basic_js_challenges_and_roulette_game
 ====================
 
 while(1){ go() };
