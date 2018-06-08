@@ -2,6 +2,7 @@
 
 var sprintFunctions = {
   largestEl: function(array){
+    //this also works: return arr.sort().pop();
     return array.reduce(function(a, b) {
         return Math.max(a, b);
     });
