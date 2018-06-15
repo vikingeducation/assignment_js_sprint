@@ -2,7 +2,7 @@
 
 var sprintFunctions = {
   largestEl: function(){  
-    // your code here
+    console.log(Math.max.apply(null, input));
   },
   
   reversed: function(){  

@@ -22,6 +22,7 @@ var tester = {
     var exp = 5;
     var actual = this.sprintObj.largestEl(input);
     this.results.largestEl = (actual == exp);
+    console.log(Math.max.apply(null, input));
   },
 
 
