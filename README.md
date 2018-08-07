@@ -26,7 +26,7 @@ Select what to bet on by selecting one of the following:
 
 ```r.theBetOn; // To see what your current bet on is.
 
-r.bankroll // To check how much money you currently have`
+r.bankroll // To check how much money you currently have
 
 r.buyin(x) // Where x is the amount of money to add to your bankroll
 ```
