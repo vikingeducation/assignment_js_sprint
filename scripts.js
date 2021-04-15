@@ -21,52 +21,102 @@ var sprintFunctions = {
     // turn string into an array
     let array = string.split(" ");
 
-    // remove empty elements from the array
-    let nonEmpty = array.filter(Boolean);
-
     // for every word in the array, keep only alphanumeric
-    nonEmpty.forEach(word => {
-      let charArray = word.split("");
-
-      charArray.filter(function(char) {
-        if (
-          !(char in "abcdefghijklmnopqrstuvxywz".split("")) &&
-          !(char in "ABCDEFGHIJKLMNOPQRSTUVXYWZ".split("")) &&
-          !(char in "0123456789")) {
-            char.replace(char, "");
-          }
-      )
-      }
-      };
-    );
-    
     let isalnum = function(char) {
+      if (
+        (char >= '0' && char <= '9') ||
+        (char >= 'a' && char <= 'z') ||
+        (char >= 'A' && char <= 'Z')) {
+          return true;
+        }
     }
 
-    // write every word in loud case
-    let makeLoud = function(word) {
-      let alnumWord = word.filter(isalnum(c));
-      return alnumWord[0].toUpperCase() + alnumWord.slice(1, alnumWord.length);
+    // transform the array with the new conditions
+    for (let i = 0; i < array.length; i++) {
+      // filter array
+      if (array[i] == "") {
+        array.splice(i, 1);
+        continue;
+      }
+
+      // turn strings to array
+      let charsArray = array[i].split("");
+
+      // filter these charsArrays
+      for (let j = 0; j < charsArray.length; j++) {
+        if (!isalnum(charsArray[j])) {
+          charsArray.splice(j, 1);
+        }
+      }
+
+      // capitalize the first letter
+      charsArray[0] = charsArray[0].toUpperCase();
+
+      // turn it to string
+      array[i] = charsArray.join("");
+    }
+   
+    // return the array as a string joined by underscore 
+    return array.join("_");
+  },
+
+  compareArrays: function(arrayA, arrayB){
+    if (arrayA.length != arrayB.length) {
+      return false;
+    } else {
+      let len = arrayA.length;
+      for (let i = 0; i < len; i++) {
+        if (arrayA[i] != arrayB[i]) {
+          return false;
+        }
+      }
+      return true;
+    }
+  },
+
+  fizzBuzz: function(n){ 
+    let array = new Array;
+    for (let i = 1; i <= n; i++) {
+      if (i % 3 == 0 && i % 5 == 0) {
+        array.push("FIZZBUZZ");
+      }
+      else if (i % 3 == 0) {
+        array.push("FIZZ");
+      }
+      else if (i % 5 == 0) {
+        array.push("BUZZ");
+      } else {
+        array.push(i);
+      }
+    }
+    return array;
+  },
+
+  myMap: function(array, transform){
+    for (let i = 0; i < array.length; i++) {
+      array[i] = transform(array[i]);
+    }
+    return array;
+  },
+
+  primes: function(n){
+    let array = new Array;
+    
+    for (let i = 2; i <= n; i++) {
+      array.push(i);
     }
     
-    // return the array as a string joined by underscore 
-    return loud.join("_");
-  },
+    let isComposite = function(i) {
+      for (let k of array) {
+        if (k >= i) {
+          continue;
+        }
+        else if (i % k == 0) {
+          return true;
+        }
+      };
+    }
 
-  compareArrays: function(){ 
-    // your code here (replace the return)
-    return "Finish compareArrays first!" 
-  },
-
-  fizzBuzz: function(){  
-    // your code here
-  },
-
-  myMap: function(){  
-    // your code here
-  },
-
-  primes: function(){  
-    // your code here
+    return array.filter(e => !isComposite(e));
   },
 }
